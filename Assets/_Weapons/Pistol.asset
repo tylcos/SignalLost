@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849315f31b8715046879063a64ed30ba, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  name: Pistol
+  description: Pew Pew
+  sprite: {fileID: 21300000, guid: 0b7e8b39726351f4c951f888727d73fe, type: 3}
+  damage: 10
+  bulletSpeed: 25
+  cycleTime: 1
+  reloadTime: 2
+  numberOfProjectiles: 1
+  spread: 0
+  penetrates: 0

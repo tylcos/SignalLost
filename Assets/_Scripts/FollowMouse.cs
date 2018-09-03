@@ -4,7 +4,6 @@
 
 public class FollowMouse : MonoBehaviour 
 {
-    public Camera camera;
     public SpriteRenderer sr;
 
     public Texture2D cursorTexture;
