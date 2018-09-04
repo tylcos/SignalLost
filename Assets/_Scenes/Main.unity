@@ -2245,7 +2245,7 @@ CharacterController:
   m_Height: 0.77
   m_Radius: 0.175
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -2287,11 +2287,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 903898977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1891328383}
-  - {fileID: 1446199989}
+  - {fileID: 1278186288}
   m_Father: {fileID: 686826328}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2320,7 +2320,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 1891328384}
+  bulletSpawnPoint: {fileID: 1278186288}
   weapon: {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
+  currentWeapon: 0
+  weapons:
+  - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
+  - {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
 --- !u!114 &903898981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,32 +2338,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 903898980}
-  bulletPrefab: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5,
-    type: 2}
-  bulletSpawnPoint: {fileID: 1446199989}
---- !u!1 &1446199988
+  bulletSpawnPoint: {fileID: 1278186288}
+--- !u!1 &1278186287
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1446199989}
+  - component: {fileID: 1278186288}
   m_Layer: 0
-  m_Name: Barrel Position
+  m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1446199989
+--- !u!4 &1278186288
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1446199988}
+  m_GameObject: {fileID: 1278186287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 0.016, z: -30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903898978}
@@ -2387,7 +2390,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1891328382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.205, y: -0.037, z: -10}
+  m_LocalPosition: {x: 0.205, y: -0.037, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903898978}

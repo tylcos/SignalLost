@@ -12,6 +12,6 @@ public class FollowPlayer : MonoBehaviour
 
 	void Update()
 	{
-        transform.position = player.position + MouseWrapper.GetMouseDirection() * mouseWeight;
+        transform.position = player.position + MouseWrapper.GetMouseVector() * mouseWeight + new Vector3(0,0,-100);
     }
 }

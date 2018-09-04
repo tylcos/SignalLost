@@ -8,7 +8,8 @@ public class Weapon : ScriptableObject
     public new string name;
     public string description;
 
-    public Sprite sprite;
+    public Sprite weaponSprite;
+    public GameObject bullet;
 
     public double damage;
     public float bulletSpeed;
@@ -19,4 +20,6 @@ public class Weapon : ScriptableObject
     public double spread;
 
     public bool penetrates;
+
+    public Vector3 bulletSpawnOffset;
 }

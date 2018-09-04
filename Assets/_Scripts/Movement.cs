@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
 
 
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 move = new Vector3();
 

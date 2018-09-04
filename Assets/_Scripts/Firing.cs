@@ -5,8 +5,6 @@
 public class Firing : MonoBehaviour 
 {
     public WeaponManager weaponManager;
-
-    public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
 
 
@@ -17,19 +15,23 @@ public class Firing : MonoBehaviour
 	
 	void Update() 
 	{
-		if (Input.GetMouseButton(0))
+		if (Input.GetMouseButton(0) && Time.time - timeLastFired > weaponManager.weapon.cycleTime)
         {
-            if (Time.time - timeLastFired > weaponManager.weapon.cycleTime)
-            {
-                timeLastFired = Time.time;
+            timeLastFired = Time.time;
 
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            GameObject bullet = Instantiate(
+                weaponManager.weapon.bullet,
+                bulletSpawnPoint.position,
+                transform.rotation);
 
-                rb.velocity = MouseWrapper.GetMouseDirection() * weaponManager.weapon.bulletSpeed;
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-                Destroy(bullet, 2.0f);
-            }
+
+
+            // Need to use atan instead of mouseDirection
+            rb.velocity = MouseWrapper.GetMouseDirection() * weaponManager.weapon.bulletSpeed;
+
+            Destroy(bullet, 2.0f);
         }
 	}
 }
