@@ -4,19 +4,20 @@
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed;
 
-    public CharacterController cc;
+    public Rigidbody2D rb2d;
 
 
 
     void FixedUpdate()
     {
-        Vector3 move = new Vector3();
+        Vector2 move = new Vector2();
 
-        move += Vector3.up    * Input.GetAxisRaw("Vertical");
-        move += Vector3.right * Input.GetAxisRaw("Horizontal");
+        move += Vector2.up    * Input.GetAxisRaw("Vertical");
+        move += Vector2.right * Input.GetAxisRaw("Horizontal");
 
-        cc.Move(move.normalized * speed * Time.deltaTime);
+        rb2d.velocity = move * speed;
+
     }
 }
