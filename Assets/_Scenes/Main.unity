@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  rb2d: {fileID: 686826329}
+  rb: {fileID: 686826329}
 --- !u!61 &686826331
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2368,7 +2368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 903898980}
   bulletSpawnPoint: {fileID: 1278186288}
-  cc: {fileID: 686826329}
+  rb: {fileID: 686826329}
 --- !u!1 &1278186287
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Firing : MonoBehaviour
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
 
-    public CharacterController cc;
+    public Rigidbody2D rb;
 
 
 
@@ -32,8 +32,7 @@ public class Firing : MonoBehaviour
 
             // Need to use atan instead of mouseDirection
             float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
-            Vector2 playerVelocity = (Vector2)(cc.velocity * Time.deltaTime);
-            rb.velocity = (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) - playerVelocity) * weaponManager.weapon.bulletSpeed;
+            rb.velocity = (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) - (rb.velocity * Time.deltaTime)) * weaponManager.weapon.bulletSpeed;
 
             Destroy(bullet, 2.0f);
         }

@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float speed;
 
-    public Rigidbody2D rb2d;
+    public Rigidbody2D rb;
 
 
 
@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
         move += Vector2.up    * Input.GetAxisRaw("Vertical");
         move += Vector2.right * Input.GetAxisRaw("Horizontal");
 
-        rb2d.velocity = move * speed;
-
+        rb.velocity = move * speed;
     }
 }
