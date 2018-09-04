@@ -7,6 +7,8 @@ public class Firing : MonoBehaviour
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
 
+    public Rigidbody2D rb;
+
 
 
     private float timeLastFired;
@@ -22,14 +24,15 @@ public class Firing : MonoBehaviour
             GameObject bullet = Instantiate(
                 weaponManager.weapon.bullet,
                 bulletSpawnPoint.position,
-                transform.rotation);
+                bulletSpawnPoint.rotation);
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-
+            Debug.Log(bulletSpawnPoint.rotation.eulerAngles);
 
             // Need to use atan instead of mouseDirection
-            rb.velocity = MouseWrapper.GetMouseDirection() * weaponManager.weapon.bulletSpeed;
+            float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
+            rb.velocity = (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) - (rb.velocity * Time.deltaTime)) * weaponManager.weapon.bulletSpeed;
 
             Destroy(bullet, 2.0f);
         }
