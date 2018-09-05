@@ -17,7 +17,9 @@ public class Firing : MonoBehaviour
 	
 	void Update() 
 	{
-		if (Input.GetMouseButton(0) && Time.time - timeLastFired > weaponManager.weapon.cycleTime)
+        Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+
+        if ((Input.GetMouseButton(0) || shootDir.sqrMagnitude != 0) && Time.time - timeLastFired > weaponManager.weapon.cycleTime)
         {
             timeLastFired = Time.time;
 
@@ -28,9 +30,8 @@ public class Firing : MonoBehaviour
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-            Debug.Log(bulletSpawnPoint.rotation.eulerAngles);
 
-            // Need to use atan instead of mouseDirection
+
             float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
             rb.velocity = (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) - (rb.velocity * Time.deltaTime)) * weaponManager.weapon.bulletSpeed;
 

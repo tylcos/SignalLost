@@ -3899,7 +3899,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4097,7 +4097,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 903898977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: -5}
+  m_LocalPosition: {x: 0, y: 0.1, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1891328383}
@@ -4116,7 +4116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0e5cc2b6c1f84bbcda717fb4075d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 1891328384}
   cursorTexture: {fileID: 2800000, guid: 25a7ac3adde18cd4b9e0537848655795, type: 3}
 --- !u!114 &903898980
 MonoBehaviour:
@@ -4134,8 +4133,8 @@ MonoBehaviour:
   weapon: {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
   currentWeapon: 0
   weapons:
-  - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
   - {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
+  - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
 --- !u!114 &903898981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4227,7 +4226,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 10
+  m_CameraDistance: 90
   m_DeadZoneWidth: 0.1
   m_DeadZoneHeight: 0.1
   m_DeadZoneDepth: 0
@@ -4330,7 +4329,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1814215812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347403481}

@@ -12,10 +12,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 move = new Vector2();
-
-        move += Vector2.up    * Input.GetAxisRaw("Vertical");
-        move += Vector2.right * Input.GetAxisRaw("Horizontal");
+        Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         rb.velocity = move * speed;
     }
