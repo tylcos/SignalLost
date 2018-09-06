@@ -4132,8 +4132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 1891328384}
   bulletSpawnPoint: {fileID: 1278186288}
-  weapon: {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
-  currentWeapon: 0
+  weapon: {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
+  currentWeapon: -1
   weapons:
   - {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
   - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}

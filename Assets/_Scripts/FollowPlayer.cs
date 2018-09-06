@@ -8,7 +8,7 @@ public class FollowPlayer : MonoBehaviour
 
     public float mouseWeight = 2f;
 	
-
+    
 
 	void Update()
 	{
