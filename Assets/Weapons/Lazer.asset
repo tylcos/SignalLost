@@ -21,5 +21,6 @@ MonoBehaviour:
   reloadTime: 5
   numberOfProjectiles: 1
   inaccuracy: 0
+  range: 0
   penetrates: 0
   bulletSpawnOffset: {x: 0.2, y: 0, z: 5}

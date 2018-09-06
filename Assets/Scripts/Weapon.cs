@@ -14,11 +14,11 @@ public class Weapon : ScriptableObject
     public double damage;
     public float bulletSpeed;
 
-    public double cycleTime;
-    public double reloadTime;
+    public float cycleTime;
+    public float reloadTime;
 
     public int numberOfProjectiles;
-    public double inaccuracy;
+    public float inaccuracy; // Angle of inaccuracy measured
 
     public float range;
     public bool penetrates;
