@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 
 
 
@@ -35,7 +35,7 @@ public class Firing : MonoBehaviour
             float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
             rb.velocity = (new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) - (rb.velocity * Time.deltaTime)) * weaponManager.weapon.bulletSpeed;
 
-            Destroy(bullet, 2.0f);
+            //Destroy(bullet, 2.0f);
         }
 	}
 }
