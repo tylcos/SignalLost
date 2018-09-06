@@ -5,6 +5,7 @@ using UnityEngine;
 public class bulletCollider : MonoBehaviour {
 
     private float time;
+    public float life;
 	// Use this for initialization
 	void Start () {
         time = Time.time;
@@ -12,7 +13,7 @@ public class bulletCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		if (Time.time - time >= 2.0f)
+		if (Time.time - time >= life)
         {
             Destroy(gameObject);
         }

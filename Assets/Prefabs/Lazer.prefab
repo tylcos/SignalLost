@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4382301338398726}
   - component: {fileID: 50213873227144802}
   - component: {fileID: 212531600905228698}
+  - component: {fileID: 70159375921985578}
+  - component: {fileID: 114866144140433808}
   m_Layer: 0
   m_Name: Lazer
   m_TagString: Untagged
@@ -59,8 +61,35 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!70 &70159375921985578
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599505205951956}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.18, y: 0.06}
+  m_Direction: 1
+--- !u!114 &114866144140433808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599505205951956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4a35435a77255418be48694f276c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 2
 --- !u!212 &212531600905228698
 SpriteRenderer:
   m_ObjectHideFlags: 1
