@@ -1,26 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class bulletCollider : MonoBehaviour {
+public class BulletCollider : MonoBehaviour
+{
+    public float lifeTime;
+
+
 
     private float time;
-    public float life;
-	// Use this for initialization
-	void Start () {
+
+
+
+    void Start()
+    {
         time = Time.time;
 	}
+
+
 	
-	// Update is called once per frame
-	void LateUpdate () {
-		if (Time.time - time >= life)
-        {
+	void LateUpdate()
+    {
+		if (Time.time - time >= lifeTime)
             Destroy(gameObject);
-        }
 	}
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnCollisionEnter2D(Collision2D collEvent)
     {
-        Destroy(gameObject);
+        if (collEvent.gameObject.tag != "Projectile")
+            Destroy(gameObject);
     }
 }

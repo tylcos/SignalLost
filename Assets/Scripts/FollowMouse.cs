@@ -28,7 +28,6 @@ public class FollowMouse : MonoBehaviour
         Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
 
         float angleDifference;
-
         if (shootDir.sqrMagnitude == 0)
         {
             Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - parentPos;

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114866144140433808}
   m_Layer: 0
   m_Name: Lazer
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4a35435a77255418be48694f276c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 2
+  lifeTime: 5
 --- !u!212 &212531600905228698
 SpriteRenderer:
   m_ObjectHideFlags: 1
