@@ -10,10 +10,19 @@ public class Movement : MonoBehaviour
 
 
 
+    private float internalSpeed;
+
+
+
+    void Start()
+    {
+        internalSpeed = speed / 100;
+    }
+
     void FixedUpdate()
     {
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        rb.velocity = move.normalized * speed * Time.deltaTime ;
+        rb.velocity = move.normalized * internalSpeed * Time.deltaTime ;
     }
 }
