@@ -25,7 +25,7 @@ public class BulletCollider : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collEvent)
     {
-        if (collEvent.gameObject.tag != "Projectile")
+        if (collEvent.gameObject.tag != "NoDestroy")
             Destroy(gameObject);
     }
 }
