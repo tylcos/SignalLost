@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletCollider : MonoBehaviour
+public class bulletCollider : MonoBehaviour
 {
     public float lifeTime;
 
@@ -25,7 +25,7 @@ public class BulletCollider : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collEvent)
     {
-        if (collEvent.gameObject.tag != "Projectile")
+        if (!collEvent.gameObject.tag.Equals("Projectile"))
             Destroy(gameObject);
     }
 }
