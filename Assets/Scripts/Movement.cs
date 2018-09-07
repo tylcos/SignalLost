@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        internalSpeed = speed / 100;
+        internalSpeed = speed * 100;
     }
 
     void FixedUpdate()

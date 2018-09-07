@@ -13,7 +13,8 @@ public class bulletCollider : MonoBehaviour
     void Start()
     {
         time = Time.time;
-	}
+
+    }
 
 
 	
@@ -25,7 +26,6 @@ public class bulletCollider : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collEvent)
     {
-        if (!collEvent.gameObject.tag.Equals("Projectile"))
             Destroy(gameObject);
     }
 }

@@ -8,6 +8,7 @@ public class Firing : MonoBehaviour
     public Transform bulletSpawnPoint;
 
     public Rigidbody2D rbPlayer;
+    public GameObject player;
 
 
 
@@ -30,6 +31,9 @@ public class Firing : MonoBehaviour
                 weaponManager.weapon.bullet,
                 bulletSpawnPoint.position,
                 bulletSpawnPoint.rotation * randomQuaternion);
+
+
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
 
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
 
