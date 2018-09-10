@@ -4084,6 +4084,10 @@ GameObject:
   - component: {fileID: 903898978}
   - component: {fileID: 903898979}
   - component: {fileID: 903898981}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 903898980}
+>>>>>>> parent of 4b21d91... Added random inaccuracy for weapons and improved the Weapon object
   m_Layer: 0
   m_Name: Weapon Holder
   m_TagString: Untagged

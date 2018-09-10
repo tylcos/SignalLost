@@ -14,7 +14,11 @@ public class Weapon : ScriptableObject
     public double damage;
     public float bulletSpeed;
 
+<<<<<<< HEAD
     public float fireRate;
+=======
+    public float cycleTime;
+>>>>>>> parent of 4b21d91... Added random inaccuracy for weapons and improved the Weapon object
     public float reloadTime;
 
     public int numberOfProjectiles;

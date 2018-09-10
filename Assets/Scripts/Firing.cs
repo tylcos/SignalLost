@@ -25,7 +25,11 @@ public class Firing : MonoBehaviour
         {
             timeLastFired = Time.time;
 
+<<<<<<< HEAD
             float halfAngle = weapon.inaccuracy / 2;
+=======
+            float halfAngle = weaponManager.weapon.inaccuracy / 2;
+>>>>>>> parent of 4b21d91... Added random inaccuracy for weapons and improved the Weapon object
             Quaternion randomQuaternion = Quaternion.Euler(0, 0, Random.Range(-halfAngle, halfAngle));
 
             GameObject bullet = Instantiate(
@@ -40,6 +44,12 @@ public class Firing : MonoBehaviour
 
 
 
+<<<<<<< HEAD
+=======
+
+            float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
+            Vector2 directionVector = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+>>>>>>> parent of 4b21d91... Added random inaccuracy for weapons and improved the Weapon object
 
             float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
             Vector2 directionVector = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));

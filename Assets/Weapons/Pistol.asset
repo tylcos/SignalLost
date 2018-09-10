@@ -17,10 +17,17 @@ MonoBehaviour:
   bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 2}
   damage: 10
   bulletSpeed: 25
+<<<<<<< HEAD
   fireRate: 0.5
   reloadTime: 2
   numberOfProjectiles: 1
   inaccuracy: 0
   range: 0
+=======
+  cycleTime: 0.5
+  reloadTime: 2
+  numberOfProjectiles: 1
+  spread: 0
+>>>>>>> parent of 4b21d91... Added random inaccuracy for weapons and improved the Weapon object
   penetrates: 0
   bulletSpawnOffset: {x: 0.2, y: 0, z: 5}
