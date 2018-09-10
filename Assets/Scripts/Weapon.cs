@@ -14,7 +14,7 @@ public class Weapon : ScriptableObject
     public double damage;
     public float bulletSpeed;
 
-    public float cycleTime;
+    public float fireRate;
     public float reloadTime;
 
     public int numberOfProjectiles;

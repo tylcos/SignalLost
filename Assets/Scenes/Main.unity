@@ -3878,7 +3878,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3901,7 +3901,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4084,7 +4084,6 @@ GameObject:
   - component: {fileID: 903898978}
   - component: {fileID: 903898979}
   - component: {fileID: 903898981}
-  - component: {fileID: 903898980}
   m_Layer: 0
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -4118,24 +4117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: 25a7ac3adde18cd4b9e0537848655795, type: 3}
---- !u!114 &903898980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 903898977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a0ac9962273c4469135e5b550a2c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 1891328384}
-  bulletSpawnPoint: {fileID: 1278186288}
-  weapon: {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
-  currentWeapon: -1
-  weapons:
-  - {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
-  - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
 --- !u!114 &903898981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4147,10 +4128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addd9c55ba7958249b1773cf8b962aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponManager: {fileID: 903898980}
   bulletSpawnPoint: {fileID: 1278186288}
-  rbPlayer: {fileID: 0}
   player: {fileID: 686826326}
+  weapon: {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
 --- !u!1 &1278186287
 GameObject:
   m_ObjectHideFlags: 0
