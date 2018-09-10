@@ -23,6 +23,6 @@ public class Movement : MonoBehaviour
     {
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        rb.velocity = move.normalized * internalSpeed * Time.deltaTime;
+        rb.velocity = move.normalized * internalSpeed * Time.deltaTime ;
     }
 }

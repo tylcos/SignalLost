@@ -24,22 +24,24 @@ public class Firing : MonoBehaviour
         {
             timeLastFired = Time.time;
 
-            float halfAngle = weaponManager.weapon.inaccuracy / 2f;
-            Quaternion randomQuaternion = bulletSpawnPoint.rotation 
-                * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
+            float halfAngle = weaponManager.weapon.inaccuracy / 2;
+            Quaternion randomQuaternion = Quaternion.Euler(0, 0, Random.Range(-halfAngle, halfAngle));
 
             GameObject bullet = Instantiate(
                 weaponManager.weapon.bullet,
                 bulletSpawnPoint.position,
-                randomQuaternion);
+                bulletSpawnPoint.rotation * randomQuaternion);
+
+
+            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
 
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
-            bullet.GetComponent<BulletCollider>().lifeTime = weaponManager.weapon.bulletLifeTime;
 
 
 
-            float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
-            Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
+
+            float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
+            Vector2 directionVector = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             rbBullet.velocity = directionVector * weaponManager.weapon.bulletSpeed; // + rbPlayer.velocity;
         }

@@ -1,31 +1,31 @@
 ﻿using UnityEngine;
 
-public class BulletCollider : MonoBehaviour
+public class bulletCollider : MonoBehaviour
 {
-    [HideInInspector]
     public float lifeTime;
 
 
 
-    private float startTime;
+    private float time;
 
 
 
     void Start()
     {
-        startTime = Time.time;
+        time = Time.time;
+
     }
 
 
 	
 	void LateUpdate()
     {
-		if (Time.time - startTime >= lifeTime)
+		if (Time.time - time >= lifeTime)
             Destroy(gameObject);
 	}
 
     void OnCollisionEnter2D(Collision2D collEvent)
     {
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
 }
