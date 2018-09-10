@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 21300000, guid: bf6b6fda6febf494999d3260c8394aa5, type: 3}
   bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 2}
   damage: 10
-  bulletSpeed: 25
+  bulletSpeed: 30
   cycleTime: 0.1
   clipSize: 10
   reloadTime: 5
