@@ -14,9 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - Walls
-  - Player
-  - Enemy
+
+  - walls
+  - bullets
+  - player
+  - enemies
+  - 
   - 
   - Player Fired
   - Enemy Fired
