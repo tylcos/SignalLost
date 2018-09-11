@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour
 
     public Weapon weapon;
 
+    [HideInInspector]
     public int currentWeapon = -1;
     public Weapon[] weapons;
 

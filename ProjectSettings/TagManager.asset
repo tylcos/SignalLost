@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
-  - bullet
   layers:
   - Default
   - TransparentFX
@@ -15,12 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - walls
-  - bullets
+  - Walls
+  - Player
+  - Enemy
   - 
-  - 
-  - 
-  - 
+  - Player Fired
+  - Enemy Fired
   - 
   - 
   - 

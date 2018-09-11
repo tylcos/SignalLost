@@ -4,12 +4,11 @@
 
 public class Firing : MonoBehaviour
 {
-    //public WeaponManager weaponManager;
+    public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
 
-    //public Rigidbody2D rbPlayer;
+    public Rigidbody2D rbPlayer;
     public GameObject player;
-    public Weapon weapon;
 
 
 
@@ -21,30 +20,28 @@ public class Firing : MonoBehaviour
     {
         Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
 
-        if ((Input.GetMouseButton(0) || shootDir.sqrMagnitude != 0) && Time.time - timeLastFired > weapon.fireRate)
+        if ((Input.GetMouseButton(0) || shootDir.sqrMagnitude != 0) && Time.time - timeLastFired > weaponManager.weapon.cycleTime)
         {
             timeLastFired = Time.time;
 
-            float halfAngle = weapon.inaccuracy / 2;
-            Quaternion randomQuaternion = Quaternion.Euler(0, 0, Random.Range(-halfAngle, halfAngle));
+            float halfAngle = weaponManager.weapon.inaccuracy / 2f;
+            Quaternion randomQuaternion = bulletSpawnPoint.rotation 
+                * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
 
             GameObject bullet = Instantiate(
-                weapon.bullet,
+                weaponManager.weapon.bullet,
                 bulletSpawnPoint.position,
-                bulletSpawnPoint.rotation * randomQuaternion);
-
-
-            Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+                randomQuaternion);
 
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
+            bullet.GetComponent<BulletCollider>().lifeTime = weaponManager.weapon.bulletLifeTime;
 
 
 
+            float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
+            Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
 
-            float angle = bulletSpawnPoint.rotation.eulerAngles.z * Mathf.Deg2Rad;
-            Vector2 directionVector = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-
-            rbBullet.velocity = directionVector * weapon.bulletSpeed; // + rbPlayer.velocity;
+            rbBullet.velocity = directionVector * weaponManager.weapon.bulletSpeed; // + rbPlayer.velocity;
         }
     }
 }
