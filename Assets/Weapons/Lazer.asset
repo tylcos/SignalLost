@@ -16,11 +16,12 @@ MonoBehaviour:
   weaponSprite: {fileID: 21300000, guid: bf6b6fda6febf494999d3260c8394aa5, type: 3}
   bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 2}
   damage: 10
-  bulletSpeed: 5
-  fireRate: 0.1
+  bulletSpeed: 30
+  cycleTime: 0.1
+  clipSize: 10
   reloadTime: 5
   numberOfProjectiles: 1
-  inaccuracy: 0
-  range: 0
+  inaccuracy: 2
+  bulletLifeTime: 5
   penetrates: 0
-  bulletSpawnOffset: {x: 0.2, y: 0, z: 5}
+  bulletSpawnOffset: {x: 0.2, y: 0.035, z: 5}
