@@ -3878,7 +3878,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3901,7 +3901,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3951,7 +3951,7 @@ GameObject:
   - component: {fileID: 686826329}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4272,7 +4272,7 @@ GameObject:
   - component: {fileID: 1487882911}
   m_Layer: 10
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4288,11 +4288,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663aee413c62f154f819f758a67f9dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   damage: 1
   health: 2
   aggroRange: 100
   rb2d: {fileID: 1487882912}
+  stunLength: 4
 --- !u!50 &1487882912
 Rigidbody2D:
   serializedVersion: 4
@@ -4300,15 +4301,15 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1487882910}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 1
+  m_Mass: 1.078
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
+  m_Material: {fileID: 6200000, guid: 6ff1956814a27f64295af17b959fb0f9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -4321,8 +4322,8 @@ BoxCollider2D:
   m_GameObject: {fileID: 1487882910}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4664,7 +4665,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
