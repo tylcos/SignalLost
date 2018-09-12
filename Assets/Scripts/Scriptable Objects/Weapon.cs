@@ -15,7 +15,7 @@ public class Weapon : ScriptableObject
     [Space(20)]
     [Tooltip("The sprite for the weapon.")]
     public Sprite weaponSprite;
-    [Tooltip("The sprite for the projectile fired.")]
+    [Tooltip("The prefab for the projectile fired.")]
     public GameObject bullet;
 
 
