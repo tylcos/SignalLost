@@ -61,8 +61,14 @@ public class EnemyController : MonoBehaviour
             Vector2 v = move.normalized * speed;
             rb2d.MovePosition((Vector2)gameObject.transform.position + v);
         }
+        else
+            rb2d.velocity = Vector2.zero;
 
+<<<<<<< HEAD
         /*if(inStunAnimation && Time.time - stunStart >= stunAnimationLength)
+=======
+        if (inStunAnimation && Time.time - stunStart >= stunAnimationLength)
+>>>>>>> 2ac65282cdaae3202f4e910b4aa7f30dd5e7cac4
         {
             rb2d.velocity = Vector2.zero;
             inStunAnimation = false;
