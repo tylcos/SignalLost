@@ -11,10 +11,13 @@ public class EnemyController : MonoBehaviour {
     public Rigidbody2D rb2d;
     public float stunLength;
 
-    private GameObject target = null;
+    private static float stunAnimationLength = 0.1f;
+    private const float knockbackVelocity = 30;
 
+    private GameObject target = null;
     private float internalSpeed;
     private bool stunned;
+    private bool inStunAnimation;
     private float stunStart;
 
     // Use this for initialization
@@ -47,15 +50,21 @@ public class EnemyController : MonoBehaviour {
             Vector2 move = new Vector2(target.transform.position.x - gameObject.transform.position.x, target.transform.position.y - gameObject.transform.position.y);
             rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
         }
+        if(inStunAnimation && Time.time - stunStart >= stunAnimationLength)
+        {
+            rb2d.velocity = Vector2.zero;
+            inStunAnimation = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collEvent)
     {
         if (collEvent.gameObject.tag == "Player")
         {
-            rb2d.velocity = -rb2d.velocity;
+            rb2d.velocity = -rb2d.velocity.normalized * knockbackVelocity;
             stunStart = Time.time;
             stunned = true;
+            inStunAnimation = true;
         }
     }
 

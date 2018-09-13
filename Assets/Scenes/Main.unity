@@ -4293,7 +4293,7 @@ MonoBehaviour:
   health: 2
   aggroRange: 100
   rb2d: {fileID: 1487882912}
-  stunLength: 4
+  stunLength: 3
 --- !u!50 &1487882912
 Rigidbody2D:
   serializedVersion: 4
