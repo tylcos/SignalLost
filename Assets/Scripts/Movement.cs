@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float speed;
 
-    public Rigidbody2D rb;
+    public Rigidbody2D rb2d;
 
 
 
@@ -23,6 +23,8 @@ public class Movement : MonoBehaviour
     {
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        rb.velocity = move.normalized * internalSpeed * Time.deltaTime;
+        //rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
+        Vector2 v = move.normalized * speed;
+        rb2d.MovePosition((Vector2)gameObject.transform.position + v);
     }
 }
