@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
 
+
+public class EnemyController : MonoBehaviour
+{
     public float speed;
     public int damage;
     public int health;
@@ -11,31 +11,38 @@ public class EnemyController : MonoBehaviour {
     public Rigidbody2D rb2d;
     public float stunLength;
 
+
+
     private static float stunAnimationLength = 0.1f;
     private const float knockbackVelocity = 30;
 
     private GameObject target = null;
     private float internalSpeed;
+    private float internalAggroRange;
     private bool stunned;
     private bool inStunAnimation;
     private float stunStart;
+    
 
-    // Use this for initialization
+
     void Start()
     {
         internalSpeed = speed * 100;
+        internalAggroRange = aggroRange * aggroRange;
     }
+    
 
-    // Update is called once per frame
+
     void Update()
     {
-        if(stunned && Time.time-stunStart > stunLength)
+        if(stunned && Time.time - stunStart > stunLength)
         {
             stunned = false;
         }
+
         if (target != null)
         {
-            CheckForTarget(target);
+            CheckForTarget();
         }
         else
         {
@@ -43,19 +50,24 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
+
+
     private void FixedUpdate()
     {
         if (target != null && !stunned)
         {
-            Vector2 move = new Vector2(target.transform.position.x - gameObject.transform.position.x, target.transform.position.y - gameObject.transform.position.y);
+            Vector2 move = target.transform.position - gameObject.transform.position;
             rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
         }
+
         if(inStunAnimation && Time.time - stunStart >= stunAnimationLength)
         {
             rb2d.velocity = Vector2.zero;
             inStunAnimation = false;
         }
     }
+
+
 
     void OnTriggerEnter2D(Collider2D collEvent)
     {
@@ -68,21 +80,19 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void CheckForTarget(GameObject target)
+
+
+    private void CheckForTarget()
     {
-        float x = target.transform.position.x;
-        float y = target.transform.position.y;
-        if (Mathf.Sqrt((Mathf.Pow(x, 2) + Mathf.Pow(y, 2))) > aggroRange)
-        {
+        if ((transform.position - target.transform.position).sqrMagnitude > internalAggroRange)
             target = null;
-        }
     }
+
+
 
     private void AttemptFindNewTarget()
     {
         Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, aggroRange, LayerMask.GetMask("Player"));
         target = overlap.gameObject;
     }
-
-
 }
