@@ -16,31 +16,30 @@ public class MovementController : MonoBehaviour {
 
     protected void Move(Rigidbody2D rb2d, Vector2 origin, Vector2 moveVector)
     {
-        // recode this so that it first calculates how far the x goes then how far the y goes so that
-        // if there's a wall right in front of me but i'm pressing w and d i still move to the right, just not forward
+        Vector2 bcSize = rb2d.gameObject.GetComponent<BoxCollider2D>().size;
 
-        float vert = 0f;
-        float horz = 0f;
+        float vert = moveVector.y;
+        float horz = moveVector.x;
 
-        RaycastHit2D hitVert = Physics2D.Raycast(origin, new Vector2(0, moveVector.y), moveVector.magnitude, LayerMask.GetMask("Walls"));
+        
+        RaycastHit2D hitVert = Physics2D.Raycast(origin, new Vector2(0, moveVector.y), moveVector.magnitude + bcSize.y, LayerMask.GetMask("Walls"));
         if (hitVert.collider != null)
         {
-            RaycastHit2D hitBack = Physics2D.Raycast(hitVert.point, -moveVector, moveVector.magnitude, LayerMask.GetMask("Player"));
-            vert = hitBack.distance;
+            vert = hitVert.distance - bcSize.y;
+            if(vert < 0)
+            {
+                vert = 0;
+            }
         }
-        else
-        {
-            vert = moveVector.y;
-        }
-        RaycastHit2D hitHorz = Physics2D.Raycast(origin, new Vector2(moveVector.x, 0), moveVector.magnitude, LayerMask.GetMask("Walls"));
+
+        RaycastHit2D hitHorz = Physics2D.Raycast(origin, new Vector2(moveVector.x, 0), moveVector.magnitude + bcSize.x, LayerMask.GetMask("Walls"));
         if (hitHorz.collider != null)
         {
-            RaycastHit2D hitBack = Physics2D.Raycast(hitHorz.point, -moveVector, moveVector.magnitude, LayerMask.GetMask("Player"));
-            horz = hitBack.distance;
-        }
-        else
-        {
-            horz = moveVector.x;
+            horz = hitHorz.distance - bcSize.x;
+            if (horz < 0)
+            {
+                horz = 0;
+            }
         }
 
         Vector2 finalMoveVector = new Vector2(horz, vert);
