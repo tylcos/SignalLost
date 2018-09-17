@@ -34,10 +34,13 @@ public class Firing : MonoBehaviour
                 randomQuaternion);
 
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
-            bullet.GetComponent<BulletCollider>().lifeTime = weaponManager.weapon.bulletLifeTime;
+            BulletManager bm = bullet.GetComponent<BulletManager>();
 
 
 
+            bm.lifeTime = weaponManager.weapon.bulletLifeTime;
+            bm.damage = weaponManager.weapon.damage;
+            
             float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
             Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
 

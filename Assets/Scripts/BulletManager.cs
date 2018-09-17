@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-public class BulletCollider : MonoBehaviour
+public class BulletManager : MonoBehaviour
 {
     public float lifeTime;
+    public float damage;
 
 
     
@@ -23,7 +24,7 @@ public class BulletCollider : MonoBehaviour
             Destroy(gameObject);
 	}
 
-    void OnCollisionEnter2D(Collision2D collEvent)
+    void OnTriggerEnter2D(Collider2D collEvent)
     {
         Destroy(gameObject);
     }
