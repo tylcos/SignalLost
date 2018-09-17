@@ -22,7 +22,7 @@ public class Weapon : ScriptableObject
 
     [Space(20)]
     [Tooltip("The damage done to enemies when hit.")]
-    public double damage;
+    public float damage;
     [Tooltip("The speed of the bullet in units per second.")]
     public float bulletSpeed;
 

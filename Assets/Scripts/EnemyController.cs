@@ -6,8 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public float speed;
     public int damage;
-    public int health;
-    public float aggroRange;
+    public EnemyData data;
     public Rigidbody2D rb2d;
     public float stunLength;
 
@@ -17,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private const float knockbackDistance = 2;
 
     private GameObject target = null;
+    private float health;
     private float internalSpeed;
     private float internalAggroRange;
     private bool stunned;
@@ -27,8 +27,9 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        health = data.health;
         internalSpeed = speed * 100;
-        internalAggroRange = aggroRange * aggroRange;
+        internalAggroRange = data.aggroRange * data.aggroRange;
     }
     
 
@@ -78,6 +79,16 @@ public class EnemyController : MonoBehaviour
             stunned = true;
             //inStunAnimation = true;
         }
+        else if (collEvent.gameObject.tag == "Projectile")
+        {
+            BulletManager bm = collEvent.gameObject.GetComponent<BulletManager>();
+
+            health -= bm.damage;
+            if (health <= 0)
+                Die();
+
+            // hit();
+        }
     }
 
 
@@ -92,7 +103,14 @@ public class EnemyController : MonoBehaviour
 
     private void AttemptFindNewTarget()
     {
-        Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, aggroRange, LayerMask.GetMask("Player"));
-        target = overlap.gameObject;
+        Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, data.aggroRange, LayerMask.GetMask("Player"));
+        target = (overlap == null) ? null : overlap.gameObject;
+    }
+
+
+
+    private void Die() // Implement later for death animation / loot
+    {
+        Destroy(gameObject);
     }
 }
