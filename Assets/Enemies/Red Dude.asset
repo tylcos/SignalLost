@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Red Dude
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 0}
-  health: 0
-  aggroRange: 0
+  health: 100
+  aggroRange: 5

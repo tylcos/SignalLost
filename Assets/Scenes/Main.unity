@@ -4290,8 +4290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   damage: 1
-  health: 2
-  aggroRange: 100
+  data: {fileID: 11400000, guid: c829673201c74ef44b57d442fc10c2da, type: 2}
   rb2d: {fileID: 1487882912}
   stunLength: 3
 --- !u!50 &1487882912
