@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 0}
   health: 100
-  aggroRange: 5
+  aggroRange: 15

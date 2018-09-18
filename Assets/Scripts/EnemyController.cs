@@ -2,7 +2,7 @@
 
 
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MovementController
 {
     public float speed;
     public int damage;
@@ -60,7 +60,8 @@ public class EnemyController : MonoBehaviour
             Vector2 move = target.transform.position - gameObject.transform.position;
             //rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
             Vector2 v = move.normalized * speed;
-            rb2d.MovePosition((Vector2)gameObject.transform.position + v);
+            //rb2d.MovePosition((Vector2)gameObject.transform.position + v);
+            Move(rb2d, gameObject.transform.position, v);
         }
         else
             rb2d.velocity = Vector2.zero;
@@ -74,7 +75,8 @@ public class EnemyController : MonoBehaviour
         {
             //rb2d.velocity = -rb2d.velocity.normalized * knockbackVelocity;
             Vector2 normalToTarget = (target.transform.position - gameObject.transform.position).normalized;
-            rb2d.MovePosition((Vector2)gameObject.transform.position - (normalToTarget*knockbackDistance));
+            //rb2d.MovePosition((Vector2)gameObject.transform.position - (normalToTarget*knockbackDistance));
+            Move(rb2d, gameObject.transform.position, normalToTarget * -knockbackDistance);
             stunStart = Time.time;
             stunned = true;
             //inStunAnimation = true;
