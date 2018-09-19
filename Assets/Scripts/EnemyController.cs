@@ -22,6 +22,7 @@ public class EnemyController : MovementController
     private bool stunned;
     //private bool inStunAnimation;
     private float stunStart;
+    private bool displayHealth = false;
     
 
 
@@ -49,18 +50,19 @@ public class EnemyController : MovementController
         {
             AttemptFindNewTarget();
         }
+
+        if(health != data.health && !displayHealth)
+        {
+            displayHealth = true;
+        }
     }
-
-
 
     private void FixedUpdate()
     {
         if (target != null && !stunned)
         {
             Vector2 move = target.transform.position - gameObject.transform.position;
-            //rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
             Vector2 v = move.normalized * speed;
-            //rb2d.MovePosition((Vector2)gameObject.transform.position + v);
             Move(rb2d, gameObject.transform.position, v);
         }
         else
@@ -73,9 +75,7 @@ public class EnemyController : MovementController
     {
         if (collEvent.gameObject.tag == "Player")
         {
-            //rb2d.velocity = -rb2d.velocity.normalized * knockbackVelocity;
             Vector2 normalToTarget = (target.transform.position - gameObject.transform.position).normalized;
-            //rb2d.MovePosition((Vector2)gameObject.transform.position - (normalToTarget*knockbackDistance));
             Move(rb2d, gameObject.transform.position, normalToTarget * -knockbackDistance);
             stunStart = Time.time;
             stunned = true;
