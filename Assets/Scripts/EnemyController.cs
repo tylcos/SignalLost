@@ -24,7 +24,15 @@ public class EnemyController : MovementController
     private float stunStart;
     private bool displayHealth = false;
     
+    public float getCurrentHealth()
+    {
+        return health;
+    }
 
+    public float getMaxHealth()
+    {
+        return data.health;
+    }
 
     void Start()
     {
