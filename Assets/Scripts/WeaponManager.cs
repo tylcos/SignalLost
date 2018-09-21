@@ -35,8 +35,8 @@ public class WeaponManager : MonoBehaviour
 
     void Update() 
 	{
-        scrollWheelPos += Mathf.Abs(Input.GetAxis("ScrollWheel")) / 8f;
-        scrollWheelPos %= Weapons.Length; Debug.Log(scrollWheelPos);
+        scrollWheelPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
+        scrollWheelPos %= Weapons.Length;
 
         if (currentWeapon != (int)scrollWheelPos)
         {
