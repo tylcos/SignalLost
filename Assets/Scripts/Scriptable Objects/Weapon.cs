@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-    
+
 
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
-public class Weapon : ScriptableObject 
+public class Weapon : ScriptableObject
 {
     [Tooltip("The ingame name of the weapon.")]
     public new string name;
@@ -32,7 +32,10 @@ public class Weapon : ScriptableObject
     [Tooltip("The time in seconds inbetween shots.")]
     public float cycleTime;
     [Tooltip("The number of bullets in each clip.")]
-    public float clipSize;
+    public int clipSize;
+    [HideInInspector]
+    [Tooltip("The current number of bullets in the clip.")]
+    public int ammo;
     [Tooltip("The time in seconds inbetween reloads.")]
     public float reloadTime;
 

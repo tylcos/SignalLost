@@ -10,22 +10,13 @@ public class Movement : MovementController
 
 
 
-    private float internalSpeed;
-
-
-
-    void Start()
-    {
-        internalSpeed = speed * 100;
-    }
-
     void FixedUpdate()
     {
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if(move == Vector2.zero) { return;  }
-
-        //rb2d.velocity = move.normalized * internalSpeed * Time.deltaTime;
-        Vector2 v = move.normalized * speed;
-        Move(rb2d, gameObject.transform.position, v);
+        if (move.sqrMagnitude == 0)
+            return;
+        
+        move = move.normalized * speed;
+        Move(rb2d, gameObject.transform.position, move);
     }
 }

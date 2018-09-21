@@ -18,7 +18,8 @@ MonoBehaviour:
   damage: 25
   bulletSpeed: 15
   cycleTime: 0.4
-  clipSize: 0
+  clipSize: 6
+  ammo: 6
   reloadTime: 2
   numberOfProjectiles: 1
   inaccuracy: 10
