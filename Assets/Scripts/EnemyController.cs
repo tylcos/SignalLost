@@ -2,7 +2,7 @@
 
 
 
-public class EnemyController : MovementController
+public class EnemyController : Character
 {
     public float speed;
     public int damage;
@@ -16,27 +16,17 @@ public class EnemyController : MovementController
     private const float knockbackDistance = 2;
 
     private GameObject target = null;
-    private float health;
     private float internalSpeed;
     private float internalAggroRange;
     private bool stunned;
     //private bool inStunAnimation;
     private float stunStart;
     private bool displayHealth = false;
-    
-    public float getCurrentHealth()
-    {
-        return health;
-    }
-
-    public float getMaxHealth()
-    {
-        return data.health;
-    }
 
     void Start()
     {
-        health = data.health;
+        MaxHealth = data.health;
+        CurrentHealth = data.health;
         internalSpeed = speed * 100;
         internalAggroRange = data.aggroRange * data.aggroRange;
     }
@@ -59,7 +49,7 @@ public class EnemyController : MovementController
             AttemptFindNewTarget();
         }
 
-        if(health != data.health && !displayHealth)
+        if(CurrentHealth != MaxHealth && !displayHealth)
         {
             displayHealth = true;
         }
@@ -93,8 +83,8 @@ public class EnemyController : MovementController
         {
             BulletManager bm = collEvent.gameObject.GetComponent<BulletManager>();
 
-            health -= bm.damage;
-            if (health <= 0)
+            CurrentHealth -= bm.damage;
+            if (CurrentHealth <= 0)
                 Die();
 
             // hit();

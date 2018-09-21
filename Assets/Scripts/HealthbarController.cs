@@ -9,7 +9,7 @@ public class HealthbarController : MonoBehaviour {
     public GameObject foreground;
     private Sprite fgSprite;
     private Sprite bgSprite;
-    public EnemyController boundEnemy;
+    public Character boundCharacter;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +22,8 @@ public class HealthbarController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        current = boundEnemy.getCurrentHealth();
-        max = boundEnemy.getMaxHealth();
+        current = boundCharacter.CurrentHealth;
+        max = boundCharacter.MaxHealth;
         foreground.transform.localScale = new Vector3(current / max, foreground.transform.localScale.y, foreground.transform.localScale.z);
 	}
 }
