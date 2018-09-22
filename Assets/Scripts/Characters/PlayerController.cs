@@ -2,23 +2,21 @@
 
 
 
-public class PlayerController : Character
+public class PlayerController : MovementController
 {
     public float speed;
-    public float health;
 
     public Rigidbody2D rb2d;
+    public Character characterData;
+    
 
-    private void Start()
-    {
-        CurrentHealth = health;
-        MaxHealth = health;
-    }
 
     void FixedUpdate()
     {
         Movement();
     }
+
+
 
     void Movement()
     {
@@ -30,19 +28,21 @@ public class PlayerController : Character
         Move(rb2d, gameObject.transform.position, move);
     }
 
+
+
     public void DealDamage(float damage)
     {
-        CurrentHealth -= damage;
-        if(CurrentHealth <= 0)
+        characterData.Health -= damage;
+        if(characterData.Health <= 0)
         {
             Die();
         }
     }
 
+
+
     private void Die()
     {
-        //die
+
     }
-
-
 }

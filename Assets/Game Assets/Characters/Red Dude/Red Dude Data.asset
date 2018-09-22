@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e771e5e31516c0d4f81a1d0bf5f4b6af, type: 3}
-  m_Name: Red Dude
+  m_Name: Red Dude Data
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  health: 100
-  aggroRange: 15
+  characterPrefab: {fileID: 0}
+  Health: 40
+  MaxHealth: 100

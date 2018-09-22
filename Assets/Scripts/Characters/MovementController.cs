@@ -2,18 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-    }
-
+public class MovementController : MonoBehaviour
+{
     /// <summary>
     ///     Moves the rigidbody to position with wall collision.
     /// </summary>

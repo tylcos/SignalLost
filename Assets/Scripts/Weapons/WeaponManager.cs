@@ -10,37 +10,40 @@ public class WeaponManager : MonoBehaviour
 
     public Weapon Weapon
     {
-        get { return Weapons[currentWeapon]; }
+        get { return Weapons[CurrentWeapon]; }
     }
 
     [HideInInspector]
-    public int currentWeapon = -1;
+    public int CurrentWeapon = -1;
     public Weapon[] Weapons;
 
+    public float WeaponSwitchTime = .1f;
 
 
-    private float scrollWheelPos;
+
+    private float weaponPos;
     private bool reloading = false;
     private int weaponBeingReloaded;
 
+    private float timeLastSwitched;
 
+    
 
-    void Start()
+    void Update()
     {
-        foreach (Weapon weapon in Weapons)
-            weapon.ammo = weapon.clipSize;
-    }
+        weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
-
-
-    void Update() 
-	{
-        scrollWheelPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
-        scrollWheelPos %= Weapons.Length;
-
-        if (currentWeapon != (int)scrollWheelPos)
+        if (Input.GetKey(KeyCode.Tab) && Time.time - timeLastSwitched > WeaponSwitchTime)
         {
-            currentWeapon = (int)scrollWheelPos;
+            ++weaponPos;
+            timeLastSwitched = Time.time;
+        }
+
+
+        weaponPos %= Weapons.Length;
+        if (CurrentWeapon != (int)weaponPos)
+        {
+            CurrentWeapon = (int)weaponPos;
 
             sr.sprite = Weapon.weaponSprite;
             bulletSpawnPoint.localPosition = Weapon.bulletSpawnOffset;
@@ -51,13 +54,21 @@ public class WeaponManager : MonoBehaviour
             if (Weapon.ammo == 0)
                 Reload();
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Weapon.ammo = 0;
+            Reload();
+        }
     }
 
+
+
     public void Reload()
-    {   
+    {
         if (!reloading)
         {
-            weaponBeingReloaded = currentWeapon;
+            weaponBeingReloaded = CurrentWeapon;
             StartCoroutine(ReloadInternal());
         }
 
@@ -68,7 +79,7 @@ public class WeaponManager : MonoBehaviour
     {
         yield return new WaitForSeconds(Weapon.reloadTime);
 
-        if (currentWeapon == weaponBeingReloaded)
+        if (CurrentWeapon == weaponBeingReloaded)
         {
             Weapon.ammo = Weapon.clipSize;
             reloading = false;

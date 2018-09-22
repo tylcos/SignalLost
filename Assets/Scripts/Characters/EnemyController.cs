@@ -2,20 +2,21 @@
 
 
 
-public class EnemyController : Character
+public class EnemyController : MovementController
 {
     public float speed;
+    public float aggroRange;
     public int damage;
-    public EnemyData data;
-    public Rigidbody2D rb2d;
     public float stunLength;
+    public Character characterData;
+    public Rigidbody2D rb2d;
 
 
 
     //private static float stunAnimationLength = 0.1f;
     private const float knockbackDistance = 2;
 
-    private GameObject target = null;
+    private GameObject target;
     private float internalSpeed;
     private float internalAggroRange;
     private bool stunned;
@@ -23,12 +24,12 @@ public class EnemyController : Character
     private float stunStart;
     private bool displayHealth = false;
 
+
+
     void Start()
     {
-        MaxHealth = data.health;
-        CurrentHealth = data.health;
         internalSpeed = speed * 100;
-        internalAggroRange = data.aggroRange * data.aggroRange;
+        internalAggroRange = aggroRange * aggroRange;
     }
     
 
@@ -49,19 +50,23 @@ public class EnemyController : Character
             AttemptFindNewTarget();
         }
 
-        if(CurrentHealth != MaxHealth && !displayHealth)
+
+
+        if(characterData.Health != characterData.MaxHealth && !displayHealth)
         {
             displayHealth = true;
         }
     }
 
+
+
     private void FixedUpdate()
     {
         if (target != null && !stunned)
         {
-            Vector2 move = target.transform.position - gameObject.transform.position;
+            Vector2 move = target.transform.position - transform.position;
             Vector2 v = move.normalized * speed;
-            Move(rb2d, gameObject.transform.position, v);
+            Move(rb2d, transform.position, v);
         }
         else
             rb2d.velocity = Vector2.zero;
@@ -73,8 +78,8 @@ public class EnemyController : Character
     {
         if (collEvent.gameObject.tag == "Player")
         {
-            Vector2 normalToTarget = (target.transform.position - gameObject.transform.position).normalized;
-            Move(rb2d, gameObject.transform.position, normalToTarget * -knockbackDistance);
+            Vector2 normalToTarget = (target.transform.position - transform.position).normalized;
+            Move(rb2d, transform.position, normalToTarget * -knockbackDistance);
             stunStart = Time.time;
             stunned = true;
             //inStunAnimation = true;
@@ -83,8 +88,8 @@ public class EnemyController : Character
         {
             BulletManager bm = collEvent.gameObject.GetComponent<BulletManager>();
 
-            CurrentHealth -= bm.damage;
-            if (CurrentHealth <= 0)
+            characterData.Health -= bm.damage;
+            if (characterData.Health <= 0)
                 Die();
 
             // hit();
@@ -103,7 +108,7 @@ public class EnemyController : Character
 
     private void AttemptFindNewTarget()
     {
-        Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, data.aggroRange, LayerMask.GetMask("Player"));
+        Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, aggroRange, LayerMask.GetMask("Player"));
         target = (overlap == null) ? null : overlap.gameObject;
     }
 

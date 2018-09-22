@@ -57,4 +57,11 @@ public class Weapon : ScriptableObject
     [Space(20)]
     [Tooltip("A position offset from the Weapon gameObject to spawn bullets at.")]
     public Vector3 bulletSpawnOffset;
+
+
+
+    public void OnEnable()
+    {
+        ammo = clipSize;
+    }
 }
