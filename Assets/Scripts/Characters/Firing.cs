@@ -6,6 +6,7 @@ public class Firing : MonoBehaviour
 {
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
+    public ParticleSystem ps;
 
 
 
@@ -49,6 +50,10 @@ public class Firing : MonoBehaviour
             Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
 
             rbBullet.velocity = directionVector * weaponManager.Weapon.bulletSpeed; // + rbPlayer.velocity;
+
+            ps.Play();
+
+
 
             if (weaponManager.Weapon.ammo == 0)
                 weaponManager.Reload();

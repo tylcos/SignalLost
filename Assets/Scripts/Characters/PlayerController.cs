@@ -2,20 +2,13 @@
 
 
 
-public class PlayerController : MovementController
-{
-    public float speed;
-
-    public Rigidbody2D rb2d;
-    public Character characterData;
-    
-
-
+public class PlayerController : CharacterController
+{ 
     void FixedUpdate()
     {
         Movement();
     }
-
+    
 
 
     void Movement()
@@ -23,8 +16,8 @@ public class PlayerController : MovementController
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (move.sqrMagnitude == 0)
             return;
-
-        move = move.normalized * speed;
+        
+        move = move.normalized * Speed;
         Move(rb2d, gameObject.transform.position, move);
     }
 
@@ -32,17 +25,6 @@ public class PlayerController : MovementController
 
     public void DealDamage(float damage)
     {
-        characterData.Health -= damage;
-        if(characterData.Health <= 0)
-        {
-            Die();
-        }
-    }
-
-
-
-    private void Die()
-    {
-
+        Health -= damage;
     }
 }

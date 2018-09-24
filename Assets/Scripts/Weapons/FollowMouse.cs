@@ -15,7 +15,7 @@ public class FollowMouse : MonoBehaviour
 
     
     
-    void Update() 
+    void FixedUpdate() 
 	{
         Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
 

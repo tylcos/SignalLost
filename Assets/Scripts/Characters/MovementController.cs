@@ -1,9 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MovementController : MonoBehaviour
+
+
+public class CharacterController : MonoBehaviour
 {
+    public float MaxHealth;
+    public float Speed;
+
+    public Rigidbody2D rb2d;
+
+    [HideInInspector]
+    private float health;
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+            if (health <= 0)
+                Die();
+        }
+    }
+
+
+
+    public virtual void OnEnable()
+    {
+        health = MaxHealth;
+    }
+
+
+
     /// <summary>
     ///     Moves the rigidbody to position with wall collision.
     /// </summary>
@@ -15,6 +45,10 @@ public class MovementController : MonoBehaviour
     ///     <param name="moveVector">The movement vector to use.</param>
     protected void Move(Rigidbody2D rb2d, Vector2 origin, Vector2 moveVector)
     {
+        rb2d.MovePosition(moveVector + origin);
+
+
+        /*
         Vector2 bcSize = rb2d.gameObject.GetComponent<BoxCollider2D>().size;
 
         float vert = moveVector.y;
@@ -70,8 +104,7 @@ public class MovementController : MonoBehaviour
             }
         }
 
-        Vector2 finalMoveVector = new Vector2(horz, vert);
-        rb2d.MovePosition(finalMoveVector + origin);
+        Vector2 finalMoveVector = new Vector2(horz, vert); */
 
         /*
         RaycastHit2D hit = Physics2D.Raycast(origin, moveVector, moveVector.magnitude, LayerMask.GetMask("Walls"));
@@ -84,5 +117,12 @@ public class MovementController : MonoBehaviour
         {
             rb2d.MovePosition(moveVector + origin);
         }*/
+    }
+
+
+
+    protected virtual void Die() // Implement later for death animation / loot
+    {
+        Destroy(gameObject);
     }
 }

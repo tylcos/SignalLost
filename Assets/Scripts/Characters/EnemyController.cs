@@ -2,14 +2,11 @@
 
 
 
-public class EnemyController : MovementController
+public class EnemyController : CharacterController
 {
-    public float speed;
     public float aggroRange;
     public int damage;
     public float stunLength;
-    public Character characterData;
-    public Rigidbody2D rb2d;
 
 
 
@@ -17,18 +14,15 @@ public class EnemyController : MovementController
     private const float knockbackDistance = 2;
 
     private GameObject target;
-    private float internalSpeed;
     private float internalAggroRange;
     private bool stunned;
     //private bool inStunAnimation;
     private float stunStart;
-    private bool displayHealth = false;
 
 
 
     void Start()
     {
-        internalSpeed = speed * 100;
         internalAggroRange = aggroRange * aggroRange;
     }
     
@@ -49,23 +43,16 @@ public class EnemyController : MovementController
         {
             AttemptFindNewTarget();
         }
-
-
-
-        if(characterData.Health != characterData.MaxHealth && !displayHealth)
-        {
-            displayHealth = true;
-        }
     }
 
 
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (target != null && !stunned)
         {
             Vector2 move = target.transform.position - transform.position;
-            Vector2 v = move.normalized * speed;
+            Vector2 v = move.normalized * Speed; 
             Move(rb2d, transform.position, v);
         }
         else
@@ -88,9 +75,7 @@ public class EnemyController : MovementController
         {
             BulletManager bm = collEvent.gameObject.GetComponent<BulletManager>();
 
-            characterData.Health -= bm.damage;
-            if (characterData.Health <= 0)
-                Die();
+            Health -= bm.damage;
 
             // hit();
         }
@@ -110,12 +95,5 @@ public class EnemyController : MovementController
     {
         Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, aggroRange, LayerMask.GetMask("Player"));
         target = (overlap == null) ? null : overlap.gameObject;
-    }
-
-
-
-    private void Die() // Implement later for death animation / loot
-    {
-        Destroy(gameObject);
     }
 }
