@@ -2,7 +2,7 @@
 
 
 
-public class EnemyController : CharacterController
+public class EnemyController : MovementController
 {
     public float aggroRange;
     public int damage;
@@ -65,6 +65,8 @@ public class EnemyController : CharacterController
     {
         if (collEvent.gameObject.tag == "Player")
         {
+            PlayerController pc = collEvent.gameObject.GetComponent<PlayerController>();
+            pc.DealDamage(this.damage);
             Vector2 normalToTarget = (target.transform.position - transform.position).normalized;
             Move(rb2d, transform.position, normalToTarget * -knockbackDistance);
             stunStart = Time.time;

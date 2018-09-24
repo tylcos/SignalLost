@@ -2,7 +2,7 @@
 
 
 
-public class PlayerController : CharacterController
+public class PlayerController : MovementController
 { 
     void FixedUpdate()
     {
@@ -26,5 +26,9 @@ public class PlayerController : CharacterController
     public void DealDamage(float damage)
     {
         Health -= damage;
+        if(Health <= 0)
+        {
+            Die();
+        }
     }
 }

@@ -5,7 +5,7 @@ public class HealthbarController : MonoBehaviour
     public GameObject background;
     public GameObject foreground;
 
-    public CharacterController boundCharacter;
+    public MovementController boundCharacter;
 
 
 

@@ -2,7 +2,7 @@
 
 
 
-public class CharacterController : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
     public float MaxHealth;
     public float Speed;
@@ -45,10 +45,10 @@ public class CharacterController : MonoBehaviour
     ///     <param name="moveVector">The movement vector to use.</param>
     protected void Move(Rigidbody2D rb2d, Vector2 origin, Vector2 moveVector)
     {
-        rb2d.MovePosition(moveVector + origin);
+        //rb2d.MovePosition(moveVector + origin);
 
 
-        /*
+        
         Vector2 bcSize = rb2d.gameObject.GetComponent<BoxCollider2D>().size;
 
         float vert = moveVector.y;
@@ -104,7 +104,8 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        Vector2 finalMoveVector = new Vector2(horz, vert); */
+        Vector2 finalMoveVector = new Vector2(horz, vert);
+        rb2d.MovePosition(finalMoveVector + origin);
 
         /*
         RaycastHit2D hit = Physics2D.Raycast(origin, moveVector, moveVector.magnitude, LayerMask.GetMask("Walls"));
