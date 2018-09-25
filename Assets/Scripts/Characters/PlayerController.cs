@@ -26,9 +26,5 @@ public class PlayerController : MovementController
     public void DealDamage(float damage)
     {
         Health -= damage;
-        if(Health <= 0)
-        {
-            Die();
-        }
     }
 }
