@@ -318,6 +318,16 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
+    - target: {fileID: 114682690192684830, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: knockbackTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682690192684830, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: stunLength
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d575f7607164f48b727524d3edcea2, type: 2}
   m_IsPrefabAsset: 0
@@ -579,11 +589,6 @@ Transform:
 --- !u!4 &1992675925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4118150958136508, guid: 91994bd4b61a9f64694a29cd798367b6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1372666134}
---- !u!4 &2040240562 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4609380961413886, guid: 91994bd4b61a9f64694a29cd798367b6,
     type: 2}
   m_PrefabInternal: {fileID: 1372666134}
 --- !u!1 &2110787938

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 
@@ -11,13 +12,17 @@ public class EnemyController : MovementController
 
 
     //private static float stunAnimationLength = 0.1f;
-    private const float knockbackDistance = 2;
+    public float knockbackDistance = 3;
 
     private GameObject target;
     private float internalAggroRange;
     private bool stunned;
     //private bool inStunAnimation;
     private float stunStart;
+    public float knockbackTime;
+    private bool knockingBack = false;
+    private float knockbackStartTime;
+    //private Knockback knockback;
 
 
 
@@ -30,7 +35,7 @@ public class EnemyController : MovementController
 
     void Update()
     {
-        if(stunned && Time.time - stunStart > stunLength)
+        if(stunned && Time.time - stunStart >= stunLength)
         {
             stunned = false;
         }
@@ -49,7 +54,13 @@ public class EnemyController : MovementController
 
     void FixedUpdate()
     {
-        if (target != null && !stunned)
+        if(knockingBack)
+        {
+            if(Time.time - knockbackStartTime >= knockbackTime)
+            {
+                knockingBack = false;
+            }
+        } else if (target != null && !stunned)
         {
             Vector2 move = target.transform.position - transform.position;
             Vector2 v = move.normalized * Speed; 
@@ -68,10 +79,9 @@ public class EnemyController : MovementController
             PlayerController pc = collEvent.gameObject.GetComponent<PlayerController>();
             pc.DealDamage(this.damage);
             Vector2 normalToTarget = (target.transform.position - transform.position).normalized;
-            Move(rb2d, transform.position, normalToTarget * -knockbackDistance);
+            Knockback(knockbackTime, -normalToTarget, knockbackDistance);
             stunStart = Time.time;
             stunned = true;
-            //inStunAnimation = true;
         }
         else if (collEvent.gameObject.tag == "Projectile")
         {
@@ -81,6 +91,29 @@ public class EnemyController : MovementController
 
             // hit();
         }
+    }
+
+    protected void Knockback(float duration, Vector2 unitVector, float distance)
+    {
+        knockbackStartTime = Time.time;
+        knockingBack = true;
+
+        StartCoroutine(MoveOverSeconds(gameObject, unitVector * distance, duration));
+
+        
+    }
+
+    public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector2 end, float seconds)
+    {
+        float elapsedTime = 0;
+        Vector2 startingPos = objectToMove.transform.position;
+        while (elapsedTime < seconds)
+        {
+            transform.position = Vector2.Lerp(startingPos, end, (elapsedTime / seconds));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = end;
     }
 
 
