@@ -5190,6 +5190,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe,
     type: 2}
   m_PrefabInternal: {fileID: 1677383646}
+--- !u!1 &944179256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1034339912}
 --- !u!1001 &1034339912
 Prefab:
   m_ObjectHideFlags: 0
@@ -5703,7 +5708,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
-      m_ColliderType: 1
+      m_ColliderType: 0
   - first: {x: -4, y: 5, z: 0}
     second:
       m_TileIndex: 0
@@ -5712,7 +5717,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
-      m_ColliderType: 1
+      m_ColliderType: 0
   - first: {x: -9, y: 6, z: 0}
     second:
       m_TileIndex: 0
@@ -5721,7 +5726,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
-      m_ColliderType: 1
+      m_ColliderType: 0
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 3
@@ -5836,6 +5841,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1981559808}
+  characters:
+  - {fileID: 944179256}
+  numberToSpawn: 2
 --- !u!1 &2118539679
 GameObject:
   m_ObjectHideFlags: 0

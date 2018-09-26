@@ -9,29 +9,43 @@ public class SpawnEnemies : MonoBehaviour
 {
     public Tilemap map;
 
-    public Dictionary<string, GameObject> characters;
+    public GameObject[] characters;
 
     public int numberToSpawn;
 
 
 
+    private Dictionary<string, int> nameToIndex;
+
+
+
     void Start()
     {
-        var tiles = map.GetTilesBlock(map.cellBounds).Where(t => t != null)
-            .OrderBy(x => Random.value).Take(numberToSpawn);
+        for (int i = 0; i < characters.Length; i++)
+            nameToIndex.Add(characters[i].name, i);
+
+        
+
+        var tiles = map.GetTilesBlock(map.cellBounds).Where(t => t != null);
 
 
 
-        foreach (TileBase tile in tiles)
+        TileBase[] differentTiles = new TileBase[characters.Length];
+        int numberOfDifferentTiles = map.GetUsedTilesNonAlloc(differentTiles);
+
+        for (int i = 0; i < numberOfDifferentTiles; i++)
         {
-            SpawnCharacter(characters[tile.name]);
+            var spawnTiles = tiles.Where(x => x.name == differentTiles[i].name).OrderBy(x => Random.value).Take(numberToSpawn);
+
+            foreach (Tile tile in spawnTiles)
+                SpawnCharacter(nameToIndex[tile.name], tile.gameObject.transform);
         }
     }
 
 
 
-    public void SpawnCharacter(GameObject a)
+    public void SpawnCharacter(int index, Transform transform)
     {
-
+        Instantiate(characters[index], transform.position, transform.rotation);
     }
 }
