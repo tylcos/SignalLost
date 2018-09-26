@@ -5264,6 +5264,26 @@ Prefab:
       propertyPath: stunLength
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50032802451872066, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50032802451872066, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50032802451872066, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d575f7607164f48b727524d3edcea2, type: 2}
   m_IsPrefabAsset: 0
