@@ -1,39 +1,124 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 
 public class MovementController : MonoBehaviour
 {
-    public float MaxHealth;
-    public float Speed;
+    public float speed;
 
     public Rigidbody2D rb2d;
-
-    [HideInInspector]
-    private float health;
-    public float Health
+    [SerializeField]
+    private float maxHitPoints;
+    private float currentHitPoints;
+    public float CurrentHitPoints
     {
         get
         {
-            return health;
+            return currentHitPoints;
         }
+
         set
         {
-            health = value;
-            if (health <= 0)
-                Die();
+            currentHitPoints = value;
         }
     }
 
+    public float MaxHitPoints
+    {
+        get
+        {
+            return maxHitPoints;
+        }
 
+        set
+        {
+            maxHitPoints = value;
+        }
+    }
 
     public virtual void OnEnable()
     {
-        health = MaxHealth;
+        currentHitPoints = maxHitPoints;
+    }
+    
+    /// <summary>
+     ///     Deals <c>damage</c> damage to the enemy's health.
+     /// </summary>
+     /// <returns>
+     ///     Returns <c>true</c> if the enemy is killed by the damage, false otherwise.
+     /// </returns>
+     ///     <param name="damage">The quantity of damage to deal</param>
+    public bool Damage(float damage)
+    {
+        this.CurrentHitPoints -= damage;
+        if (this.CurrentHitPoints <= 0)
+        {
+            Die();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
+    /// <summary>
+    ///     Deals <c>damage</c> damage per second to the enemy's health over <c>duration</c> seconds.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>true</c> if the enemy is killed by the damage dealt in the frame this function is called, false otherwise.
+    /// </returns>
+    ///     <param name="damage">The damage per second to deal</param>
+    ///     <param name="duration">The duration over which to deal damage</param>
+    public bool Damage(float damage, float duration)
+    {
+        StartCoroutine(DamageOverTime(damage, duration));
+        return false;
+    }
 
+    /// <summary>
+    ///      Deals <c>damage</c> damage to the enemy's health over <c>duration</c> seconds, then knocks them back along the given vector.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>true</c> if the enemy is killed by the damage dealt in the frame this function is called, false otherwise.
+    /// </returns>
+    ///     <param name="damage">The damage per second to deal</param>
+    ///     <param name="duration">The duration over which to deal damage</param>
+    ///     <param name="knockbackVector">The vector to move the enemy along</param>
+    public bool Damage(float damage, float duration, Vector2 knockbackVector)
+    {
+        Move(rb2d, transform.position, knockbackVector);
+        return Damage(damage, duration);
+    }
 
+    /// <summary>
+    ///      Deals <c>damage</c> damage to the enemy's health., then knocks them back along the given vector.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>true</c> if the enemy is killed by the damage, false otherwise.
+    /// </returns>
+    ///     <param name="damage">The damage per second to deal</param>
+    ///     <param name="knockbackVector">The vector to move the enemy along</param>
+    public bool Damage(float damage, Vector2 knockbackVector)
+    {
+        Move(rb2d, transform.position, knockbackVector);
+        return Damage(damage);
+    }
+
+    public IEnumerator DamageOverTime(float dps, float duration)
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            float damageThisTick = dps / (1 / Time.deltaTime);
+            Damage(damageThisTick);
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    // !!!!!!!!!!!!!!!THIS NEEDS OPTIMIZATION!!!!!!!!!!!!!!!!!!!!
     /// <summary>
     ///     Moves the rigidbody to position with wall collision.
     /// </summary>

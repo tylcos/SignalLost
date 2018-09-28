@@ -6,138 +6,115 @@ using UnityEngine;
 public class EnemyController : MovementController
 {
     public float aggroRange;
-    public int damage;
-    public float stunLength;
+    public float retreatDistance;
+    public float damage;
 
+    public float attackRange;
+    //public GameObject weapon;
+    public float attackLength;
+    private float lastAttackTime;
 
+    public string[] targetLayers;
+    private int targetLayerMask;
 
-    //private static float stunAnimationLength = 0.1f;
-    public float knockbackDistance = 3;
+    public string[] collideLayers;
+    private int collideLayerMask;
 
-    private GameObject target;
-    private float internalAggroRange;
-    private bool stunned;
-    //private bool inStunAnimation;
-    private float stunStart;
-    public float knockbackTime;
-    private bool knockingBack = false;
-    private float knockbackStartTime;
-    //private Knockback knockback;
+    //private bool attacking = false;
+    private GameObject target = null;
 
-
-
-    void Start()
+    private void Start()
     {
-        internalAggroRange = aggroRange * aggroRange;
+        targetLayerMask = LayerMask.GetMask(targetLayers);
+        collideLayerMask = LayerMask.GetMask(collideLayers);
+        lastAttackTime = -attackLength;
     }
-    
-
 
     void Update()
     {
-        if(stunned && Time.time - stunStart >= stunLength)
+        if(target != null)
         {
-            stunned = false;
-        }
-
-        if (target != null)
+            if(!IsGameObjectInRadius(transform.position, target, aggroRange)) {
+                target = null;
+            }
+        } else
         {
-            CheckForTarget();
-        }
-        else
-        {
-            AttemptFindNewTarget();
+            target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
     }
-
-
 
     void FixedUpdate()
     {
-        if(knockingBack)
+        if(target != null)
         {
-            if(Time.time - knockbackStartTime >= knockbackTime)
+            Vector2 vectorToTarget = Vector2.zero;
+            RaycastHit2D[] hits = new RaycastHit2D[2];
+            Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
+            foreach(RaycastHit2D hit in hits)
             {
-                knockingBack = false;
-            }
-        } else if (target != null && !stunned)
-        {
-            Vector2 move = target.transform.position - transform.position;
-            Vector2 v = move.normalized * Speed;
-            RaycastHit2D[] hitM = new RaycastHit2D[2];
-            int hitCount = Physics2D.RaycastNonAlloc(transform.position, v, hitM, v.magnitude, LayerMask.GetMask("Walls", "Player", "Enemy"));
-            foreach (RaycastHit2D hit in hitM)
-            {
-                if (hit.collider != null && hit.fraction != 0)
+                if(hit.collider != null && hit.fraction != 0)
                 {
-                    v = hit.point - (Vector2) transform.position;
+                    vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
-            Move(rb2d, transform.position, v);
+            if(!vectorToTarget.Equals(Vector2.zero))
+            {
+                if(vectorToTarget.magnitude > attackRange)
+                {
+                    Move(rb2d, transform.position, vectorToTarget.normalized * speed);
+                } else if(Time.time - lastAttackTime > attackLength)
+                {
+                    Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
+                    foreach(Collider2D col in overlap)
+                    {
+                        col.gameObject.GetComponent<MovementController>().Damage(damage);
+                        lastAttackTime = Time.time;
+                    }
+                }
+            }
         }
     }
-
-
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
-            pc.DealDamage(this.damage);
-            Vector2 normalToTarget = (collision.gameObject.transform.position - gameObject.transform.position).normalized;
-            Knockback(knockbackTime, -normalToTarget, knockbackDistance);
-            stunStart = Time.time;
-            stunned = true;
-        }
-        else if (collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.CompareTag("Projectile"))
         {
             BulletManager bm = collision.gameObject.GetComponent<BulletManager>();
-
-            Health -= bm.damage;
-
-            // hit();
+            Damage(bm.damage);
         }
     }
 
-
-
-    protected void Knockback(float duration, Vector2 unitVector, float distance)
+    /// <summary>
+    ///     Looks for the target within a circle defined by center and radius
+    /// </summary>
+    /// <returns>
+    /// A boolean representing the presence of the target
+    /// </returns>
+    ///     <param name="center">The center of the circle</param>
+    ///     <param name="target">The target to look for</param>
+    ///     <param name="radius">The radius of the circle</param>
+    protected static bool IsGameObjectInRadius(Vector3 center, GameObject target, float radius)
     {
-        knockbackStartTime = Time.time;
-        knockingBack = true;
-
-        StartCoroutine(MoveOverSeconds(gameObject, unitVector * distance, duration));
-
-        
-    }
-
-    public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector2 end, float seconds)
-    {
-        float elapsedTime = 0;
-        Vector2 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
-        {
-            transform.position = Vector2.Lerp(startingPos, end, (elapsedTime / seconds));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        transform.position = end;
+        return (center - target.transform.position).sqrMagnitude <= radius;
     }
 
 
 
-    private void CheckForTarget()
+    /// <summary>
+    ///     Looks for and returns first enemy found within a circle defined by center and radius
+    /// </summary>
+    /// <remark>
+    ///    Uses OverlapCircle
+    /// </remark>
+    /// <returns>
+    /// The gameobject found or null
+    /// </returns>
+    ///     <param name="center">The center of the circle</param>
+    ///     <param name="radius">The radius of the circle</param>
+    ///     <param name="layerMask">The layer mask to use</param>
+    protected static GameObject AttemptFindNewSingleTarget(Vector3 center, float radius, int layerMask)
     {
-        if ((transform.position - target.transform.position).sqrMagnitude > internalAggroRange)
-            target = null;
-    }
-
-
-
-    private void AttemptFindNewTarget()
-    {
-        Collider2D overlap = Physics2D.OverlapCircle(gameObject.transform.position, aggroRange, LayerMask.GetMask("Player"));
-        target = (overlap == null) ? null : overlap.gameObject;
+        Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
+        return (overlap == null) ? null : overlap.gameObject;
     }
 }

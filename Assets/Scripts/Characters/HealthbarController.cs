@@ -7,15 +7,11 @@ public class HealthbarController : MonoBehaviour
 
     public MovementController boundCharacter;
 
-
-
     private float current;
     private float max;
 
     private Sprite fgSprite;
     private Sprite bgSprite;
-
-
 
     void Start ()
     {
@@ -25,15 +21,13 @@ public class HealthbarController : MonoBehaviour
         Vector3 pos = background.transform.position;
         foreground.transform.position = new Vector3(pos.x - bgSprite.bounds.size.x, pos.y, pos.z);
 
-        max = boundCharacter.MaxHealth;
+        max = boundCharacter.MaxHitPoints;
         background.SetActive(false);
     }
 
-
-
 	void Update ()
     {
-        current = boundCharacter.Health / max;
+        current = boundCharacter.CurrentHitPoints / max;
 
         if (Mathf.Abs(current - 1f) > .01f)
         {

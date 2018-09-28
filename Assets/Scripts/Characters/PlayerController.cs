@@ -3,13 +3,13 @@
 
 
 public class PlayerController : MovementController
-{ 
+{
+
+
     void FixedUpdate()
     {
         Movement();
     }
-    
-
 
     void Movement()
     {
@@ -17,14 +17,7 @@ public class PlayerController : MovementController
         if (move.sqrMagnitude == 0)
             return;
         
-        move = move.normalized * Speed;
+        move = move.normalized * speed;
         Move(rb2d, gameObject.transform.position, move);
-    }
-
-
-
-    public void DealDamage(float damage)
-    {
-        Health -= damage;
     }
 }

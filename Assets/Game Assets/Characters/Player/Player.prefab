@@ -234,12 +234,12 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298569208637172}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 1000
-  m_LinearDrag: 1000
+  m_Mass: 10000
+  m_LinearDrag: 10000
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
@@ -259,18 +259,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0039827228, y: -0.011948109}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.35, y: 0.77}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.35, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.77}
+  m_Size: {x: 0.7562406, y: 0.95320654}
   m_EdgeRadius: 0
 --- !u!114 &114350363689108480
 MonoBehaviour:
@@ -341,9 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c562fd58ee28ade44bd99eafdaa26de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 200
-  Speed: 0.2
+  speed: 0.25
   rb2d: {fileID: 50099131067445070}
+  maxHitPoints: 100
 --- !u!135 &135339620901660538
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -5065,7 +5065,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b8e3c04bb0dc07f4089f00bf93f2460d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dce1eea5d01bc544ead19cc7ecdb70c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
