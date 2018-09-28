@@ -5794,7 +5794,7 @@ Tilemap:
   m_GameObject: {fileID: 1981559805}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -8, y: 2, z: 0}
+  - first: {x: -2, y: -5, z: 0}
     second:
       m_TileIndex: 0
       m_TileSpriteIndex: 0
@@ -5803,7 +5803,7 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 0
-  - first: {x: -4, y: 5, z: 0}
+  - first: {x: 7, y: 5, z: 0}
     second:
       m_TileIndex: 0
       m_TileSpriteIndex: 0
@@ -5852,8 +5852,8 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -9, y: 2, z: 0}
-  m_Size: {x: 6, y: 5, z: 1}
+  m_Origin: {x: -9, y: -5, z: 0}
+  m_Size: {x: 17, y: 12, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -5937,7 +5937,7 @@ MonoBehaviour:
   map: {fileID: 1981559808}
   characters:
   - {fileID: 944179256}
-  numberToSpawn: 2
+  numberToSpawn: 1
 --- !u!1 &2118539679
 GameObject:
   m_ObjectHideFlags: 0
