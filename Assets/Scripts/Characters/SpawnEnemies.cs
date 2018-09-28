@@ -15,7 +15,7 @@ public class SpawnEnemies : MonoBehaviour
 
 
 
-    private Dictionary<string, int> nameToIndex;
+    private Dictionary<string, int> nameToIndex = new Dictionary<string, int>();
 
 
 
@@ -23,29 +23,62 @@ public class SpawnEnemies : MonoBehaviour
     {
         for (int i = 0; i < characters.Length; i++)
             nameToIndex.Add(characters[i].name, i);
-
         
 
-        var tiles = map.GetTilesBlock(map.cellBounds).Where(t => t != null);
+
+        var tiles = TilePos.GetAllTiles(map);
 
 
 
         TileBase[] differentTiles = new TileBase[characters.Length];
         int numberOfDifferentTiles = map.GetUsedTilesNonAlloc(differentTiles);
-
+            
         for (int i = 0; i < numberOfDifferentTiles; i++)
         {
-            var spawnTiles = tiles.Where(x => x.name == differentTiles[i].name).OrderBy(x => Random.value).Take(numberToSpawn);
+            var spawnTiles = tiles.Where(x => x.Tile.name == differentTiles[i].name).OrderBy(x => Random.value).Take(numberToSpawn);
 
-            foreach (Tile tile in spawnTiles)
-                SpawnCharacter(nameToIndex[tile.name], tile.gameObject.transform);
+            foreach (TilePos tile in spawnTiles)
+                SpawnCharacter(nameToIndex[tile.Tile.name], map.CellToWorld(tile.Pos));
         }
     }
 
 
 
-    public void SpawnCharacter(int index, Transform transform)
+    public void SpawnCharacter(int index, Vector3 pos)
     {
-        Instantiate(characters[index], transform.position, transform.rotation);
+        Instantiate(characters[index], pos, transform.rotation);
+    }
+}
+
+
+
+public class TilePos
+{
+    public TileBase Tile;
+    public Vector3Int Pos;
+
+
+
+    public TilePos(TileBase tile, Vector3Int pos)
+    {
+        Tile = tile;
+        Pos = pos;
+    }
+
+
+
+    public static List<TilePos> GetAllTiles(Tilemap map)
+    {
+        var tiles = new List<TilePos>();
+
+        foreach (var pos in map.cellBounds.allPositionsWithin)
+        {
+            TileBase tile = map.GetTile(pos);
+
+            if (tile != null)
+                tiles.Add(new TilePos(tile, pos));
+        }
+
+        return tiles;
     }
 }
