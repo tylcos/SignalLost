@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 
@@ -10,7 +9,6 @@ public class EnemyController : MovementController
     public float damage;
 
     public float attackRange;
-    //public GameObject weapon;
     public float attackLength;
     private float lastAttackTime;
 
@@ -21,7 +19,9 @@ public class EnemyController : MovementController
     private int collideLayerMask;
 
     //private bool attacking = false;
-    private GameObject target = null;
+    private GameObject target;
+
+
 
     private void Start()
     {
@@ -30,6 +30,8 @@ public class EnemyController : MovementController
         lastAttackTime = -attackLength;
     }
 
+
+
     void Update()
     {
         if(target != null)
@@ -37,7 +39,8 @@ public class EnemyController : MovementController
             if(!IsGameObjectInRadius(transform.position, target, aggroRange)) {
                 target = null;
             }
-        } else
+        }
+        else
         {
             target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
@@ -57,12 +60,14 @@ public class EnemyController : MovementController
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
-            if(!vectorToTarget.Equals(Vector2.zero))
+
+            if(!(vectorToTarget == Vector2.zero))
             {
                 if(vectorToTarget.magnitude > attackRange)
                 {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
-                } else if(Time.time - lastAttackTime > attackLength)
+                }
+                else if(Time.time - lastAttackTime > attackLength)
                 {
                     Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
                     foreach(Collider2D col in overlap)
@@ -75,6 +80,8 @@ public class EnemyController : MovementController
         }
     }
 
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
@@ -83,6 +90,8 @@ public class EnemyController : MovementController
             Damage(bm.damage);
         }
     }
+
+
 
     /// <summary>
     ///     Looks for the target within a circle defined by center and radius

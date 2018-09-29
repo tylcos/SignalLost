@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,51 +7,52 @@ using UnityEngine.Tilemaps;
 
 public class SpawnEnemies : MonoBehaviour
 {
-    public Tilemap map;
-
-    public GameObject[] characters;
-
     public int numberToSpawn;
-
-
-
-    private Dictionary<string, int> nameToIndex = new Dictionary<string, int>();
 
 
 
     void Start()
     {
-        for (int i = 0; i < characters.Length; i++)
-            nameToIndex.Add(characters[i].name, i);
-        
-
-
-        var tiles = TilePos.GetAllTiles(map);
+        /*
+        List<TilePos> tiles = TilePos.GetAllTiles(map);
 
 
 
         TileBase[] differentTiles = new TileBase[characters.Length];
-        int numberOfDifferentTiles = map.GetUsedTilesNonAlloc(differentTiles);
-            
-        for (int i = 0; i < numberOfDifferentTiles; i++)
-        {
-            var spawnTiles = tiles.Where(x => x.Tile.name == differentTiles[i].name).OrderBy(x => Random.value).Take(numberToSpawn);
+        map.GetUsedTilesNonAlloc(differentTiles);
 
+        for (int i = 0; i < differentTiles.Length; i++)
+        {
+            Stopwatch sss = Stopwatch.StartNew();
+            var spawnTiles = tiles.Where(x => x.Tile.name == differentTiles[i].name).OrderBy(x => Random.value).Take(numberToSpawn);
+            UnityEngine.Debug.Log("Inner   " + sss.Elapsed);
             foreach (TilePos tile in spawnTiles)
                 SpawnCharacter(nameToIndex[tile.Tile.name], map.CellToWorld(tile.Pos));
+
+            UnityEngine.Debug.Log("Inner   " + sss.Elapsed);
+        } */
+
+
+
+        var randomList = Enumerable.Range(0, transform.childCount).OrderBy(x => Random.value).Take(numberToSpawn);
+        foreach (int i in randomList)
+        {
+            Transform child = transform.GetChild(i);
+
+            SpawnCharacter(child.GetComponent<SpawnPoint>().spawnCharacter, child, transform.parent);
         }
     }
 
 
 
-    public void SpawnCharacter(int index, Vector3 pos)
+    public void SpawnCharacter(GameObject spawnObject, Transform spawnTransform, Transform parent)
     {
-        Instantiate(characters[index], pos, transform.rotation);
+        Instantiate(spawnObject, spawnTransform.position, spawnTransform.rotation, parent);
     }
 }
 
 
-
+/*
 public class TilePos
 {
     public TileBase Tile;
@@ -71,7 +72,7 @@ public class TilePos
     {
         var tiles = new List<TilePos>();
 
-        foreach (var pos in map.cellBounds.allPositionsWithin)
+        foreach (Vector3Int pos in map.cellBounds.allPositionsWithin)
         {
             TileBase tile = map.GetTile(pos);
 
@@ -82,3 +83,4 @@ public class TilePos
         return tiles;
     }
 }
+*/

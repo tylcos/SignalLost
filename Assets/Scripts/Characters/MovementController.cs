@@ -8,39 +8,24 @@ public class MovementController : MonoBehaviour
     public float speed;
 
     public Rigidbody2D rb2d;
+
+    public float CurrentHitPoints { get; set; }
+    public float MaxHitPoints { get; private set; }
+
+
+
     [SerializeField]
-    private float maxHitPoints;
-    private float currentHitPoints;
-    public float CurrentHitPoints
-    {
-        get
-        {
-            return currentHitPoints;
-        }
+    private float _MaxHitPoints;
 
-        set
-        {
-            currentHitPoints = value;
-        }
-    }
 
-    public float MaxHitPoints
-    {
-        get
-        {
-            return maxHitPoints;
-        }
-
-        set
-        {
-            maxHitPoints = value;
-        }
-    }
 
     public virtual void OnEnable()
     {
-        currentHitPoints = maxHitPoints;
+        MaxHitPoints = _MaxHitPoints;
+        CurrentHitPoints = _MaxHitPoints;
     }
+
+
     
     /// <summary>
      ///     Deals <c>damage</c> damage to the enemy's health.
@@ -51,8 +36,8 @@ public class MovementController : MonoBehaviour
      ///     <param name="damage">The quantity of damage to deal</param>
     public bool Damage(float damage)
     {
-        this.CurrentHitPoints -= damage;
-        if (this.CurrentHitPoints <= 0)
+        CurrentHitPoints -= damage;
+        if (CurrentHitPoints <= 0)
         {
             Die();
             return true;
@@ -62,6 +47,8 @@ public class MovementController : MonoBehaviour
             return false;
         }
     }
+
+
 
     /// <summary>
     ///     Deals <c>damage</c> damage per second to the enemy's health over <c>duration</c> seconds.
@@ -76,6 +63,8 @@ public class MovementController : MonoBehaviour
         StartCoroutine(DamageOverTime(damage, duration));
         return false;
     }
+
+
 
     /// <summary>
     ///      Deals <c>damage</c> damage to the enemy's health over <c>duration</c> seconds, then knocks them back along the given vector.
@@ -92,6 +81,8 @@ public class MovementController : MonoBehaviour
         return Damage(damage, duration);
     }
 
+
+
     /// <summary>
     ///      Deals <c>damage</c> damage to the enemy's health., then knocks them back along the given vector.
     /// </summary>
@@ -106,6 +97,8 @@ public class MovementController : MonoBehaviour
         return Damage(damage);
     }
 
+
+
     public IEnumerator DamageOverTime(float dps, float duration)
     {
         float elapsedTime = 0;
@@ -117,6 +110,8 @@ public class MovementController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+
 
     // !!!!!!!!!!!!!!!THIS NEEDS OPTIMIZATION!!!!!!!!!!!!!!!!!!!!
     /// <summary>

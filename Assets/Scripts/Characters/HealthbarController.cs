@@ -13,6 +13,8 @@ public class HealthbarController : MonoBehaviour
     private Sprite fgSprite;
     private Sprite bgSprite;
 
+
+
     void Start ()
     {
         fgSprite = foreground.GetComponent<SpriteRenderer>().sprite;
@@ -24,6 +26,8 @@ public class HealthbarController : MonoBehaviour
         max = boundCharacter.MaxHitPoints;
         background.SetActive(false);
     }
+
+
 
 	void Update ()
     {
