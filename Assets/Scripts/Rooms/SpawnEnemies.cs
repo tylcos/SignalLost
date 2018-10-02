@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 
@@ -32,9 +31,9 @@ public class SpawnEnemies : MonoBehaviour
             UnityEngine.Debug.Log("Inner   " + sss.Elapsed);
         } */
 
+		
 
-
-        var randomList = Enumerable.Range(0, transform.childCount).OrderBy(x => Random.value).Take(numberToSpawn);
+        var randomList = RandomRangeNoRepeat(0, transform.childCount, numberToSpawn);
         foreach (int i in randomList)
         {
             Transform child = transform.GetChild(i);
@@ -48,6 +47,29 @@ public class SpawnEnemies : MonoBehaviour
     public void SpawnCharacter(GameObject spawnObject, Transform spawnTransform, Transform parent)
     {
         Instantiate(spawnObject, spawnTransform.position, spawnTransform.rotation, parent);
+    }
+
+
+
+    public IEnumerable<int> RandomRangeNoRepeat(int start, int length, int number)
+    {
+        if (number > length)
+            throw new System.ArgumentOutOfRangeException();
+
+
+
+        int[] intList = Enumerable.Range(start, length).ToArray();
+        
+        for (int i = 0; i < number; i++)
+        {
+            int random = Random.Range(i, length);
+
+            int swap = intList[i];
+            intList[i] = intList[random];
+            intList[random] = swap;
+        }
+
+        return intList.Take(number);
     }
 }
 
