@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 212010294477221350}
   - component: {fileID: 61395319042165888}
   - component: {fileID: 50032802451872066}
-  - component: {fileID: 114682690192684830}
+  - component: {fileID: 114683862728167450}
   - component: {fileID: 114007684564531466}
   m_Layer: 10
   m_Name: Red Dude
@@ -162,8 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1925563837247518}
   foreground: {fileID: 1005570173256740}
-  boundCharacter: {fileID: 114682690192684830}
---- !u!114 &114682690192684830
+  boundCharacter: {fileID: 0}
+--- !u!114 &114683862728167450
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,17 +171,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1840001185029764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663aee413c62f154f819f758a67f9dcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5591d40fcf35787429876a7e863db59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.15
   rb2d: {fileID: 50032802451872066}
-  maxHitPoints: 100
+  _MaxHitPoints: 100
   aggroRange: 30
-  retreatDistance: 5
-  damage: 5
+  retreatDistance: 8
+  waitTime: 2
+  damage: 10
   attackRange: 1
-  attackLength: 1
+  attackCooldownLength: 2
   targetLayers:
   - Player
   collideLayers:

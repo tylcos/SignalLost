@@ -6,20 +6,21 @@ public class EnemyController : MovementController
 {
     public float aggroRange;
     public float retreatDistance;
+    public float waitTime;
     public float damage;
 
     public float attackRange;
-    public float attackLength;
-    private float lastAttackTime;
+    public float attackCooldownLength;
+    protected float lastAttackTime;
 
     public string[] targetLayers;
-    private int targetLayerMask;
+    protected int targetLayerMask;
 
     public string[] collideLayers;
-    private int collideLayerMask;
+    protected int collideLayerMask;
 
     //private bool attacking = false;
-    private GameObject target;
+    protected GameObject target;
 
 
 
@@ -27,7 +28,7 @@ public class EnemyController : MovementController
     {
         targetLayerMask = LayerMask.GetMask(targetLayers);
         collideLayerMask = LayerMask.GetMask(collideLayers);
-        lastAttackTime = -attackLength;
+        lastAttackTime = -attackCooldownLength;
     }
 
 
@@ -46,39 +47,8 @@ public class EnemyController : MovementController
         }
     }
 
-    void FixedUpdate()
-    {
-        if(target != null)
-        {
-            Vector2 vectorToTarget = Vector2.zero;
-            RaycastHit2D[] hits = new RaycastHit2D[2];
-            Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
-            foreach(RaycastHit2D hit in hits)
-            {
-                if(hit.collider != null && hit.fraction != 0)
-                {
-                    vectorToTarget = hit.point - (Vector2)transform.position;
-                }
-            }
+    
 
-            if(!(vectorToTarget == Vector2.zero))
-            {
-                if(vectorToTarget.magnitude > attackRange)
-                {
-                    Move(rb2d, transform.position, vectorToTarget.normalized * speed);
-                }
-                else if(Time.time - lastAttackTime > attackLength)
-                {
-                    Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
-                    foreach(Collider2D col in overlap)
-                    {
-                        col.gameObject.GetComponent<MovementController>().Damage(damage);
-                        lastAttackTime = Time.time;
-                    }
-                }
-            }
-        }
-    }
 
 
 
