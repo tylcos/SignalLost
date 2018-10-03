@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
 {
+    public int numberToSpawn;
+
+
+
     void Start()
     {
         /*
@@ -27,15 +31,14 @@ public class SpawnEnemies : MonoBehaviour
             UnityEngine.Debug.Log("Inner   " + sss.Elapsed);
         } */
 
+		
 
-
-        foreach (Transform child in transform)
+        var randomList = RandomRangeNoRepeat(0, transform.childCount, numberToSpawn);
+        foreach (int i in randomList)
         {
-            CharacterSpawner sp = child.GetComponent<CharacterSpawner>();
+            Transform child = transform.GetChild(i);
 
-            var randomList = RandomRangeNoRepeat(0, child.childCount, sp.numberToSpawn);
-            foreach (int i in randomList)
-                SpawnCharacter(sp.spawnCharacter, child.GetChild(i), transform.parent); // Spawn character with the room as the parent
+            SpawnCharacter(child.GetComponent<SpawnPoint>().spawnCharacter, child, transform.parent);
         }
     }
 
@@ -51,9 +54,7 @@ public class SpawnEnemies : MonoBehaviour
     public IEnumerable<int> RandomRangeNoRepeat(int start, int length, int number)
     {
         if (number > length)
-            throw new System.ArgumentOutOfRangeException("Number to return must not be greater than the length of the range.");
-        else if (number == 0)
-            return Enumerable.Empty<int>();
+            throw new System.ArgumentOutOfRangeException();
 
 
 
@@ -70,27 +71,6 @@ public class SpawnEnemies : MonoBehaviour
 
         return intList.Take(number);
     }
-
-
-    /*
-    public Dictionary<string, int> ParseNumberToSpawn()
-    {
-        Dictionary<string, int> characters = new Dictionary<string, int>();
-        
-        foreach (string line in charactersToSpawn.Split('\n'))
-        {
-            string[] splitLine = line.Split(' ');
-            int charactersToSpawn;
-
-            bool validParse = int.TryParse(splitLine[1], out charactersToSpawn);
-            if (!validParse || splitLine.Length > 2)
-                throw new System.ArgumentException("Invalid room spawn arguments.");
-
-            characters.Add(splitLine[0], charactersToSpawn);
-        }
-
-        return characters;
-    } */
 }
 
 

@@ -1,19 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-<<<<<<< HEAD
 public class MeleeEnemy : EnemyController {
-=======
->>>>>>> c21cdfe69d8a64523529934d70bda0651150d5cd
 
     public GameObject weapon;
 
-public class MeleeEnemy : EnemyController
-{
     void FixedUpdate()
     {
-        if (Time.time - lastAttackTime < waitTime)
-            return;
-
+        if(Time.time - lastAttackTime < waitTime) { return; }
         if (target != null)
         {
             Vector2 vectorToTarget = Vector2.zero;

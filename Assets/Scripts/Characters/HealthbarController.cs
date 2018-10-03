@@ -7,8 +7,6 @@ public class HealthbarController : MonoBehaviour
 
     public MovementController boundCharacter;
 
-
-
     private float current;
     private float max;
 
