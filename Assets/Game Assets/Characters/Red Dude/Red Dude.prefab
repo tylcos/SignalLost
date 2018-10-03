@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1925563837247518}
   foreground: {fileID: 1005570173256740}
-  boundCharacter: {fileID: 114683862728167450}
+  boundCharacter: {fileID: 0}
 --- !u!114 &114683862728167450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,7 +181,7 @@ MonoBehaviour:
   retreatDistance: 8
   waitTime: 2
   damage: 10
-  attackRange: 0.5
+  attackRange: 1
   attackCooldownLength: 2
   targetLayers:
   - Player
