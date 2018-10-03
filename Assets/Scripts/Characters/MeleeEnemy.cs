@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : EnemyController {
+    
 
-    public GameObject weapon;
 
     void FixedUpdate()
     {
@@ -30,31 +30,18 @@ public class MeleeEnemy : EnemyController {
                 }
                 else if (Time.time - lastAttackTime > attackCooldownLength)
                 {
-                    //OverlapAttack(vectorToTarget);
-                    SwordAttack(vectorToTarget);
-                    OverlapAttack(vectorToTarget);
+                    Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
+                    foreach (Collider2D col in overlap)
+                    {
+                        col.gameObject.GetComponent<MovementController>().Damage(damage);
+                        lastAttackTime = Time.time;
+                    }
+                    if(lastAttackTime == Time.time)
+                    {
+                        rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
+                    }
                 }
             }
         }
-    }
-
-    private void OverlapAttack(Vector2 vectorToTarget)
-    {
-        Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
-        foreach (Collider2D col in overlap)
-        {
-            col.gameObject.GetComponent<MovementController>().Damage(damage);
-            lastAttackTime = Time.time;
-        }
-        if (lastAttackTime == Time.time)
-        {
-            rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
-        }
-    }
-
-    private void SwordAttack(Vector2 vectorToTarget)
-    {
-        Quaternion look = Quaternion.LookRotation(vectorToTarget, Vector3.up); ;
-        weapon.transform.rotation = look;
     }
 }
