@@ -5789,6 +5789,11 @@ Prefab:
       propertyPath: Weapons.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114714410810140362, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: WeaponInfos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5821,6 +5826,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114714410810140362, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: WeaponInfos.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093,
+        type: 2}
+    - target: {fileID: 114714410810140362, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: WeaponInfos.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
   m_IsPrefabAsset: 0
