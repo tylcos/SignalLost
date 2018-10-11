@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 
@@ -8,56 +9,66 @@ public class WeaponManager : MonoBehaviour
     public SpriteRenderer sr;
     public Transform bulletSpawnPoint;
 
+    public WeaponInfo[] WeaponInfos;
+
+
+
+    [HideInInspector]
     public Weapon Weapon
     {
         get { return Weapons[CurrentWeapon]; }
     }
-
     [HideInInspector]
-    public int CurrentWeapon = -1;
     public Weapon[] Weapons;
+    [HideInInspector]
+    public int CurrentWeapon = 0;
 
-    public float WeaponSwitchTime = .1f;
 
 
-
-    private float weaponPos;
+    private float weaponPos = 1f;
     private bool reloading = false;
     private int weaponBeingReloaded;
 
-    private float timeLastSwitched;
 
-    
+
+    private void Start()
+    {
+        if (WeaponInfos.Length == 0)
+            throw new System.ArgumentOutOfRangeException("No weapon infos selected.");
+
+        Weapons = WeaponInfos.Select(w => new Weapon(w)).ToArray();
+    }
+
+
 
     void Update()
     {
         weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
-        if (Input.GetKey(KeyCode.Tab) && Time.time - timeLastSwitched > WeaponSwitchTime)
-        {
+        if (Input.GetKeyDown(KeyCode.Tab))
             ++weaponPos;
-            timeLastSwitched = Time.time;
-        }
 
 
+        
         weaponPos %= Weapons.Length;
-        if (CurrentWeapon != (int)weaponPos)
+        int flooredWeaponPos = Mathf.FloorToInt(weaponPos); 
+        if (CurrentWeapon != flooredWeaponPos)
         {
-            CurrentWeapon = (int)weaponPos;
+            CurrentWeapon = flooredWeaponPos;
 
-            sr.sprite = Weapon.weaponSprite;
-            bulletSpawnPoint.localPosition = Weapon.bulletSpawnOffset;
+            sr.sprite = Weapon.Info.weaponSprite;
+            bulletSpawnPoint.localPosition = Weapon.Info.bulletSpawnOffset;
             reloading = false;
 
 
 
-            if (Weapon.ammo == 0)
+            if (Weapon.CurrentAmmo == 0)
                 Reload();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Weapon.ammo = 0;
+            Weapon.CurrentAmmo = 0;
             Reload();
         }
     }
@@ -77,11 +88,11 @@ public class WeaponManager : MonoBehaviour
 
     private IEnumerator ReloadInternal()
     {
-        yield return new WaitForSeconds(Weapon.reloadTime);
+        yield return new WaitForSeconds(Weapon.Info.reloadTime);
 
         if (CurrentWeapon == weaponBeingReloaded)
         {
-            Weapon.ammo = Weapon.clipSize;
+            Weapon.CurrentAmmo = Weapon.Info.clipSize;
             reloading = false;
         }
     }

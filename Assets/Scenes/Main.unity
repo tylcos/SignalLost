@@ -5776,7 +5776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e1869e3e6484a468b82b1286b792cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 1
+  numberToSpawn: 4
 --- !u!1001 &1677383646
 Prefab:
   m_ObjectHideFlags: 0
@@ -5784,6 +5784,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114714410810140362, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: Weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5815,16 +5820,6 @@ Prefab:
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
-        type: 2}
-      propertyPath: maxHitPoints
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
-        type: 2}
-      propertyPath: _MaxHitPoints
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}

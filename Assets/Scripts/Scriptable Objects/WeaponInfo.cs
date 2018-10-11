@@ -3,7 +3,7 @@
 
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
-public class Weapon : ScriptableObject
+public class WeaponInfo : ScriptableObject
 {
     [Tooltip("The ingame name of the weapon.")]
     public new string name;
@@ -33,9 +33,6 @@ public class Weapon : ScriptableObject
     public float cycleTime;
     [Tooltip("The number of bullets in each clip.")]
     public int clipSize;
-    [HideInInspector]
-    [Tooltip("The current number of bullets in the clip.")]
-    public int ammo;
     [Tooltip("The time in seconds inbetween reloads.")]
     public float reloadTime;
 
@@ -57,11 +54,4 @@ public class Weapon : ScriptableObject
     [Space(20)]
     [Tooltip("A position offset from the Weapon gameObject to spawn bullets at.")]
     public Vector3 bulletSpawnOffset;
-
-
-
-    public void OnEnable()
-    {
-        ammo = clipSize;
-    }
 }
