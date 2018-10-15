@@ -290,6 +290,8 @@ MonoBehaviour:
   attackCooldownLength: 2
   targetLayers:
   - Player
+  targetTags:
+  - Player
   collideLayers:
   - Player
   - Enemy
@@ -297,9 +299,9 @@ MonoBehaviour:
   attackIndicator: {fileID: 1227678452590240}
   weaponHolder: {fileID: 1735258238636906}
   weapon: {fileID: 1104184525536968}
-  attackChargeTime: 0.8
+  attackChargeTime: 0.6
   attackColliderEnableLength: 0.15
-  attackAfterPauseDuration: 0.9
+  attackAfterPauseDuration: 0.8
   attackAfterRetreatDistance: 0.2
 --- !u!212 &212010294477221350
 SpriteRenderer:

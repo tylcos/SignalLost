@@ -16,6 +16,8 @@ public class EnemyController : MovementController
     public string[] targetLayers;
     protected int targetLayerMask;
 
+    public string[] targetTags;
+
     public string[] collideLayers;
     protected int collideLayerMask;
 

@@ -19,24 +19,33 @@ public class MeleeEnemy : EnemyController {
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[2];
             Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
-            string blah = null;
+            string hitTag = null;
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider != null && hit.fraction != 0)
                 {
-                    blah = hit.collider.tag;
+                    hitTag = hit.collider.tag;
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
 
-            if (!(vectorToTarget == Vector2.zero) && blah == "Player")
+            bool hitIsTarget = false;
+            foreach(string tag in targetTags)
+            {
+                if(tag == hitTag)
+                {
+                    hitIsTarget = true;
+                }
+            }
+
+            if (!(vectorToTarget == Vector2.zero))
             {
                 if (vectorToTarget.magnitude < aggroRange)
                 {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
                     SwordAim(vectorToTarget);
                 }
-                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange)
+                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                 {
                     //OverlapAttack(vectorToTarget);
                     attacking = true;
