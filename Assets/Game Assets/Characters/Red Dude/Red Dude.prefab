@@ -68,7 +68,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4804073597899912}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: weaponholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ MonoBehaviour:
   rb2d: {fileID: 50032802451872066}
   _MaxHitPoints: 100
   aggroRange: 30
-  retreatDistance: 3
+  retreatDistance: 1
   waitTime: 2
   damage: 15
   attackRange: 1.5

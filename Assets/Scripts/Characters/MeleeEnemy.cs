@@ -19,15 +19,17 @@ public class MeleeEnemy : EnemyController {
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[2];
             Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
+            string blah = null;
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider != null && hit.fraction != 0)
                 {
+                    blah = hit.collider.tag;
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
 
-            if (!(vectorToTarget == Vector2.zero))
+            if (!(vectorToTarget == Vector2.zero) && blah == "Player")
             {
                 if (vectorToTarget.magnitude < aggroRange)
                 {
