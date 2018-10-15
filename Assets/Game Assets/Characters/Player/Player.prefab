@@ -311,11 +311,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 212856325067432018}
   bulletSpawnPoint: {fileID: 4453064393674552}
-  CurrentWeapon: -1
-  Weapons:
+  WeaponInfos:
   - {fileID: 11400000, guid: 6c7a010765968c44cace37d957660093, type: 2}
   - {fileID: 11400000, guid: 4c6fdc6265d903d429686b80b18ce2ba, type: 2}
   WeaponSwitchTime: 0.1
+  CurrentWeapon: -1
 --- !u!114 &114887874564137588
 MonoBehaviour:
   m_ObjectHideFlags: 1

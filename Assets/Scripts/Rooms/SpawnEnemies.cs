@@ -54,7 +54,7 @@ public class SpawnEnemies : MonoBehaviour
     public IEnumerable<int> RandomRangeNoRepeat(int start, int length, int number)
     {
         if (number > length)
-            throw new System.ArgumentOutOfRangeException();
+            throw new System.ArgumentOutOfRangeException("To many enemies");
 
 
 
