@@ -20,4 +20,12 @@ public class PlayerController : MovementController
         move = move.normalized * speed;
         Move(rb2d, gameObject.transform.position, move);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "EnemyWeapon")
+        {
+            collision.GetComponentInParent<EnemyController>().OnHitOpponent(gameObject);
+        }
+    }
 }

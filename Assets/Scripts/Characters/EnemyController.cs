@@ -19,8 +19,12 @@ public class EnemyController : MovementController
     public string[] collideLayers;
     protected int collideLayerMask;
 
+    public GameObject attackIndicator;
+
     //private bool attacking = false;
     protected GameObject target;
+    protected bool attacking = false;
+    
 
 
 
@@ -33,7 +37,7 @@ public class EnemyController : MovementController
 
 
 
-    void Update()
+    protected virtual void Update()
     {
         if(target != null)
         {
@@ -48,7 +52,10 @@ public class EnemyController : MovementController
     }
 
     
-
+    public virtual void OnHitOpponent(GameObject entityHit)
+    {
+        entityHit.GetComponent<MovementController>().Damage(damage);
+    }
 
 
 
