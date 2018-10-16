@@ -20,7 +20,7 @@ public class RoomSpawner : MonoBehaviour
         {
             int ratio = rooms / ((iterations - i) * startRoom.GetChildCountAtLevel(1 + iterations));
 
-            int numberOfRooms = x
+            int numberOfRooms;
         }
     }
 }
