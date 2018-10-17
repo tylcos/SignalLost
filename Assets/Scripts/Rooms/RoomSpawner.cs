@@ -5,23 +5,54 @@ using System.Collections.Generic;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public Room startRoom;
+    public Room startRoom = new Room();
 
     public int iterations = 3;
     public int rooms = 6;
 
-    
+
+
+    private const float randomThreshold = .2f;
+    private const float randomRoomChance = .5f;
+
+
+
+    private void Start()
+    {
+        SpawnRooms();
+    }
+
+
 
     public void SpawnRooms()
     {
         startRoom.Children.Add(new Room(Room.GetDirection()));
-
+        
         for (int i = 0; i < iterations; i++)
         {
-            int ratio = rooms / ((iterations - i) * startRoom.GetChildCountAtLevel(1 + iterations));
+            float ratio = rooms / ((iterations - i) * startRoom.GetChildCountAtLevel(i + 1));
 
-            int numberOfRooms;
-        }
+            foreach (Room child in startRoom.GetChildrenAtLevel(i + 1))
+            {
+                int numberOfRooms = GetRandom(ratio);
+
+                child.Children.Add(new Room(Room.GetDirection()));
+
+                Debug.Log(i + "    "  + child.Children.Count + "  Ratio :  " + ratio + "   Rooms :  " + numberOfRooms + "    Children " + startRoom.GetChildCountAtLevel(1 + i));
+            }
+        } 
+    }
+
+
+
+    public int GetRandom(float baseNumber)
+    {
+        float decimalPart = Mathf.Round(baseNumber) - baseNumber;
+
+        if (Mathf.Abs(decimalPart) > randomThreshold && 1 - Mathf.Abs(decimalPart) > randomThreshold)
+            return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
+        else
+            return Mathf.FloorToInt(baseNumber) + (Random.value < randomRoomChance ? Random.Range(0, 2) - 1 : 0);
     }
 }
 
@@ -34,6 +65,11 @@ public class Room
 
 
 
+    public Room()
+    {
+
+    }
+
     public Room(Vector2Int position)
     {
         Position = position;
@@ -41,14 +77,14 @@ public class Room
     
 
 
-    public List<Room> GetChildAtLevel(int level)
+    public List<Room> GetChildrenAtLevel(int level)
     {
         List<Room> currentChildren = new List<Room>();
 
         if (level > 1)
         {
             foreach (Room room in Children)
-                currentChildren.AddRange(room.GetChildAtLevel(level - 1));
+                currentChildren.AddRange(room.GetChildrenAtLevel(level - 1));
 
             return currentChildren;
         }
