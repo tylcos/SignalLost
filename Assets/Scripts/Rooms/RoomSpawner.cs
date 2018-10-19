@@ -6,10 +6,16 @@ using System.Linq;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public Room startRoom = new Room();
+    public GameObject roomPrefab;
+
+
+
+    public Room startRoom = new Room(Vector2Int.zero);
+    public DictonaryGrid pathways = new DictonaryGrid();
 
     public int iterations = 3;
     public int rooms = 6;
+    public int scale = 40;
 
 
 
@@ -20,38 +26,79 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
+        CreateRoomTree();
         SpawnRooms();
+    }
+
+
+
+    public void CreateRoomTree()
+    {
+        if (rooms / iterations < 1 + randomThreshold)
+        {
+            Debug.LogError("Unsafe number of iterations for the specified number of rooms.");
+            return;
+        }
+
+
+        startRoom.Children.Add(new Room(Room.GetDirectionVector()));
+        
+        for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
+        {
+            float ratio = rooms / ((iterations - currentIteration) * startRoom.GetChildCountAtLevel(currentIteration + 1));
+
+            foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
+            {
+                int numberOfRooms = GetRandom(ratio);
+
+                for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
+                {
+                    byte direction;
+                    Vector2Int resultVector;
+                    byte i = 0;
+
+                    do
+                    {
+                        direction = (byte)Random.Range(0, 8);
+                        resultVector = child.Position + Room.GetDirectionVector(direction);
+
+                        if (Room.takenPositions.Contains(resultVector))
+                        {
+                            var possibleDirections = child.GetAvailableSpawnDirections();
+                            direction = possibleDirections[Random.Range(0, possibleDirections.Count)];
+                        }
+                    }
+                    while (pathways.GetPathway(child.Position, direction) && i++ < 8);
+
+                    if (i < 8) // Valid room position
+                    {
+                        pathways.SetPathway(resultVector, direction);
+                        Room.takenPositions.Add(resultVector);
+
+
+
+                        child.Children.Add(new Room(resultVector));
+                    }
+                }
+                
+
+                Debug.Log(currentIteration + "    " + child.Position);
+            }
+        } 
     }
 
 
 
     public void SpawnRooms()
     {
-        startRoom.Children.Add(new Room(Room.GetDirectionVector()));
-        
-        for (int i = 0; i < iterations; i++)
+        for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
         {
-            float ratio = rooms / ((iterations - i) * startRoom.GetChildCountAtLevel(i + 1));
-
-            foreach (Room child in startRoom.GetChildrenAtLevel(i + 1))
+            foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
             {
-                int numberOfRooms = GetRandom(ratio);
-
-                for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
-                {
-                    byte direction = (byte) Random.Range(0, 8);
-                    Vector2Int directionVector = Room.GetDirectionVector(direction);
-
-                    if (Room.takenPositions.Contains(directionVector))
-                        child.GetAvailableSpawnLocations().Take(1);
-
-                    child.Children.Add(new Room());
-                }
-                
-
-                Debug.Log(i + "    "  + child.Children.Count + "  Ratio :  " + ratio + "   Rooms :  " + numberOfRooms + "    Children " + startRoom.GetChildCountAtLevel(1 + i));
+                Vector3 position = new Vector3(child.Position.x * scale, child.Position.y * scale);
+                Instantiate(roomPrefab, position, transform.rotation, transform);
             }
-        } 
+        }
     }
 
 
@@ -78,13 +125,8 @@ public class Room
     public static Vector2Int[] Directions = 
         { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
             new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1) };
+    
 
-
-
-    public Room()
-    {
-
-    }
 
     public Room(Vector2Int position)
     {
@@ -94,15 +136,15 @@ public class Room
 
 
 
-    public List<byte> GetAvailableSpawnLocations()
+    public List<byte> GetAvailableSpawnDirections()
     {
-        List<byte> validLocations = new List<byte>(8);
+        List<byte> validDirection = new List<byte>(8);
 
         for (byte i = 0; i < 8; i++)
             if (!takenPositions.Contains(Position + Directions[i]))
-                validLocations.Add(i);
+                validDirection.Add(i);
 
-        return validLocations;
+        return validDirection;
     }
 
 
@@ -182,24 +224,51 @@ public class DictonaryGrid
 
 
 
-    public void SetPosition(Vector2Int pos, byte value)
+    public bool GetPathway(Vector2Int position, int direction)
     {
-        grid[pos] = value;
+        switch (direction)
+        {
+            case 4:
+            case 5:
+                position += Vector2Int.left;
+                break;
+            case 6:
+                position += new Vector2Int(-1, -1);
+                break;
+            case 7:
+            case 8:
+                position += Vector2Int.down;
+                break;
+        }
+
+        direction %= 4;
+
+
+
+        return (GetPosition(position) & (1 << direction)) > 0;
     }
 
 
 
-    public void UpdatePosition(Vector2Int pos, byte value)
+    public void SetPathway(Vector2Int position, byte direction)
     {
-        grid[pos] |= value;
-    }
+        switch (direction)
+        {
+            case 4:
+            case 5:
+                position += Vector2Int.left;
+                break;
+            case 6:
+                position += new Vector2Int(-1, -1);
+                break;
+            case 7:
+            case 8:
+                position += Vector2Int.down;
+                break;
+        }
 
+        direction %= 4;
 
-
-    public static byte GetPathway(Vector2Int position, Vector2Int direction)
-    {
-        byte pathway = 0;
-
-        return pathway;
+        grid[position] = 1;
     }
 }
