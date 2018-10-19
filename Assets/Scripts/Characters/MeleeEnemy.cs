@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyController {
 
-    public GameObject weaponHolder;
-    public GameObject weapon;
     public float attackChargeTime;
     public float attackColliderEnableLength;
     public float attackAfterPauseDuration;
@@ -13,8 +11,9 @@ public class MeleeEnemy : EnemyController {
 
     void FixedUpdate()
     {
-        if(Time.time - lastAttackTime <= waitTime) { return; }
-        if (target != null && !attacking)
+        if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
+
+        if (target != null && !attacking) // if the enemy is not attacking, do movement and try to attack
         {
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[2];
@@ -29,6 +28,7 @@ public class MeleeEnemy : EnemyController {
                 }
             }
 
+            // This checks if the raycast hit the target
             bool hitIsTarget = false;
             foreach(string tag in targetTags)
             {
@@ -40,20 +40,19 @@ public class MeleeEnemy : EnemyController {
 
             if (!(vectorToTarget == Vector2.zero))
             {
-                if (vectorToTarget.magnitude < aggroRange)
+                if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
-                    SwordAim(vectorToTarget);
+                    AimWeaponAtTarget(vectorToTarget);
                 }
-                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
+                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
-                    //OverlapAttack(vectorToTarget);
-                    attacking = true;
                     StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableLength, attackAfterPauseDuration, attackAfterRetreatDistance));
                 }
             }
         }
     }
+
 
     public override void OnHitOpponent(GameObject entityHit)
     {
@@ -79,49 +78,49 @@ public class MeleeEnemy : EnemyController {
         }
     }
 
+    /// <summary>
+    ///     Times the attacking cycle for a sword style attack
+    /// </summary>
+    /// <remark>
+    ///    The total time this coroutine takes to execute is equal to chargeTime+enableLength+pauseTime+retreatLength
+    /// </remark>
+    ///     <param name="vectorToTarget">The vector from the center of this gameObject's transform to the target</param>
+    ///     <param name="chargeTime">The time this enemy waits before attacking</param>
+    ///     <param name="enableLength">How long to enable the weapon's collider for</param>
+    ///     <param name="pauseTime">The time after turning off the collider this enemy waits before retreating</param>
+    ///     <param name="retreatLength">The length of time over which this enemy retreats</param>
     private IEnumerator SwordAttack(Vector2 vectorToTarget, float chargeTime, float enableLength, float pauseTime, float retreatLength)
     {
-        SwordAim(vectorToTarget);
+        attacking = true;
+        AimWeaponAtTarget(vectorToTarget);
         float startTime = Time.time;
-        // maybe keep flag booleans here in case of heavy lag so that the enemy still does EVEYTHING in this function
         while(Time.time < startTime + chargeTime + pauseTime + enableLength + retreatLength)
         {
-            //print("Start:" + startTime + " now: " + Time.time);
             Vector3 startingPosition = transform.position;
-            if(Time.time < startTime + chargeTime)
+            if(Time.time < startTime + chargeTime) // CHARGING ATTACK
             {
                 attackIndicator.SetActive(true);
+                // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time < startTime + chargeTime + enableLength)
+            } else if(Time.time < startTime + chargeTime + enableLength) // ATTACKING
             {
                 attackIndicator.SetActive(false);
                 weapon.GetComponent<Collider2D>().enabled = true;
+                // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if (Time.time < startTime + chargeTime + enableLength + pauseTime)
+            } else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
             {
                 weapon.GetComponent<Collider2D>().enabled = false;
+                // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time < startTime+chargeTime+enableLength+pauseTime+retreatLength)
+            } else if(Time.time < startTime+chargeTime+enableLength+pauseTime+retreatLength) // RETREATING (jumping backwards)
             {
                 transform.position = Vector3.Lerp(startingPosition, -vectorToTarget.normalized * retreatLength, Time.deltaTime / retreatLength);
+                // do animations here
                 yield return new WaitForFixedUpdate();
             }
         }
         attacking = false;
-        //rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
-        // turn on collider, check for collision, turn off collider
-    }
-
-    private void SwordAim(Vector2 vectorToTarget)
-    {
-        var xd = Quaternion.LookRotation(vectorToTarget, Vector3.up);
-        xd.z = xd.x;
-        xd.x = 0;
-        xd.y = 0;
-        weaponHolder.transform.rotation = xd;
-        float angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(vectorToTarget.y, vectorToTarget.x)) - weaponHolder.transform.eulerAngles.z;
-
-        weaponHolder.transform.RotateAround(weaponHolder.transform.position, Vector3.forward, 180 + angleDifference);
     }
 
     

@@ -4,6 +4,9 @@
 
 public class EnemyController : MovementController
 {
+    public GameObject weaponHolder;
+    public GameObject weapon;
+
     public float aggroRange;
     public float retreatDistance;
     public float waitTime;
@@ -26,9 +29,6 @@ public class EnemyController : MovementController
     //private bool attacking = false;
     protected GameObject target;
     protected bool attacking = false;
-    
-
-
 
     private void Start()
     {
@@ -104,5 +104,21 @@ public class EnemyController : MovementController
     {
         Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
         return (overlap == null) ? null : overlap.gameObject;
+    }
+
+    /// <summary>
+    ///     Aims this enemy's weapon towards the vector given by rotating the weapon holder
+    /// </summary>
+    ///     <param name="vectorToTarget">The vector from the center of this gameObject's transform to the target</param>
+    protected void AimWeaponAtTarget(Vector2 vectorToTarget)
+    {
+        var xd = Quaternion.LookRotation(vectorToTarget, Vector3.up);
+        xd.z = xd.x;
+        xd.x = 0;
+        xd.y = 0;
+        weaponHolder.transform.rotation = xd;
+        float angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(vectorToTarget.y, vectorToTarget.x)) - weaponHolder.transform.eulerAngles.z;
+
+        weaponHolder.transform.RotateAround(weaponHolder.transform.position, Vector3.forward, 180 + angleDifference);
     }
 }
