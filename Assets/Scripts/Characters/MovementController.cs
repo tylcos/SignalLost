@@ -12,10 +12,17 @@ public class MovementController : MonoBehaviour
     public float CurrentHitPoints { get; set; }
     public float MaxHitPoints { get; private set; }
 
-
-
     [SerializeField]
     private float _MaxHitPoints;
+
+
+    public float invincibilityDuration;
+    private float lastDamageTime;
+
+    private void Start()
+    {
+        lastDamageTime = Time.time - invincibilityDuration;
+    }
 
 
 
@@ -23,6 +30,11 @@ public class MovementController : MonoBehaviour
     {
         MaxHitPoints = _MaxHitPoints;
         CurrentHitPoints = _MaxHitPoints;
+    }
+
+    public bool IsInvincible()
+    {
+        return Time.time - lastDamageTime > invincibilityDuration;
     }
 
 
@@ -36,6 +48,7 @@ public class MovementController : MonoBehaviour
      ///     <param name="damage">The quantity of damage to deal</param>
     public bool Damage(float damage)
     {
+        if(IsInvincible()) { return false; }
         CurrentHitPoints -= damage;
         if (CurrentHitPoints <= 0)
         {
@@ -60,6 +73,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="duration">The duration over which to deal damage</param>
     public bool Damage(float damage, float duration)
     {
+        if (IsInvincible()) { return false; }
         StartCoroutine(DamageOverTime(damage, duration));
         return false;
     }
@@ -77,6 +91,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="knockbackVector">The vector to move the enemy along</param>
     public bool Damage(float damage, float duration, Vector2 knockbackVector)
     {
+        if (IsInvincible()) { return false; }
         Move(rb2d, transform.position, knockbackVector);
         return Damage(damage, duration);
     }
@@ -93,6 +108,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="knockbackVector">The vector to move the enemy along</param>
     public bool Damage(float damage, Vector2 knockbackVector)
     {
+        if (IsInvincible()) { return false; }
         Move(rb2d, transform.position, knockbackVector);
         return Damage(damage);
     }

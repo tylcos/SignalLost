@@ -5,7 +5,6 @@
 public class PlayerController : MovementController
 {
 
-
     void FixedUpdate()
     {
         Movement();

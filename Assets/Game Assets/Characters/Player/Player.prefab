@@ -343,6 +343,7 @@ MonoBehaviour:
   speed: 0.25
   rb2d: {fileID: 50099131067445070}
   _MaxHitPoints: 200
+  invincibilityDuration: 0.5
 --- !u!135 &135339620901660538
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : EnemyController {
+public class MeleeEnemyController : EnemyController {
 
     public float attackChargeTime;
     public float attackColliderEnableLength;
