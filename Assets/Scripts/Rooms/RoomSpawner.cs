@@ -27,7 +27,7 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         CreateRoomTree();
-        SpawnRooms();
+        InstantiateRooms();
     }
 
 
@@ -50,46 +50,41 @@ public class RoomSpawner : MonoBehaviour
             foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
             {
                 int numberOfRooms = GetRandom(ratio);
+                var possibleDirections = child.GetAvailableSpawnDirections();
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
-                    byte direction;
-                    Vector2Int resultVector;
-                    byte i = 0;
-
-                    do
+                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
                     {
-                        direction = (byte)Random.Range(0, 8);
-                        resultVector = child.Position + Room.GetDirectionVector(direction);
-
-                        if (Room.takenPositions.Contains(resultVector))
+                        if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
-                            var possibleDirections = child.GetAvailableSpawnDirections();
-                            direction = possibleDirections[Random.Range(0, possibleDirections.Count)];
+                            Vector2Int resultVector = child.Position + Room.GetDirectionVector(direction);
+
+                            possibleDirections.Remove(direction);
+
+                            pathways.SetPathway(child.Position, direction);
+                            Room.takenPositions.Add(resultVector);
+                            child.Children.Add(new Room(resultVector));
+
+                            break;
                         }
                     }
-                    while (pathways.GetPathway(child.Position, direction) && i++ < 8);
-
-                    if (i < 8) // Valid room position
-                    {
-                        pathways.SetPathway(resultVector, direction);
-                        Room.takenPositions.Add(resultVector);
-
-
-
-                        child.Children.Add(new Room(resultVector));
-                    }
                 }
-                
-
-                Debug.Log(currentIteration + "    " + child.Position);
             }
-        } 
+        }
+    }
+
+    public int SpawnRooms(Room room, int roomsToSpawn)
+    {
+        if (roomsToSpawn == 0)
+            return room.Children.Count;
+
+        
     }
 
 
 
-    public void SpawnRooms()
+    public void InstantiateRooms()
     {
         for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
         {
@@ -194,7 +189,7 @@ public class Room
 
 
 
-    public static Vector2Int GetDirectionVector(byte value)
+    public static Vector2Int GetDirectionVector(int value)
     {
         return Directions[value];
     }
@@ -224,51 +219,42 @@ public class DictonaryGrid
 
 
 
-    public bool GetPathway(Vector2Int position, int direction)
+    public bool GetPathwayValid(Vector2Int position, byte direction)
     {
-        switch (direction)
-        {
-            case 4:
-            case 5:
-                position += Vector2Int.left;
-                break;
-            case 6:
-                position += new Vector2Int(-1, -1);
-                break;
-            case 7:
-            case 8:
-                position += Vector2Int.down;
-                break;
-        }
+        CorrectPosition(ref position, ref direction);
 
-        direction %= 4;
-
-
-
-        return (GetPosition(position) & (1 << direction)) > 0;
+        return (GetPosition(position) & (1 << direction)) == 0;
     }
 
 
 
     public void SetPathway(Vector2Int position, byte direction)
     {
+        CorrectPosition(ref position, ref direction);
+
+        grid[position] |= (byte)(1 << direction);
+    }
+
+
+
+
+    private static void CorrectPosition(ref Vector2Int position, ref byte direction)
+    {
         switch (direction)
         {
+            case 3:
             case 4:
-            case 5:
                 position += Vector2Int.left;
                 break;
-            case 6:
+            case 5:
                 position += new Vector2Int(-1, -1);
                 break;
+            case 6:
             case 7:
-            case 8:
                 position += Vector2Int.down;
                 break;
         }
 
         direction %= 4;
-
-        grid[position] = 1;
     }
 }

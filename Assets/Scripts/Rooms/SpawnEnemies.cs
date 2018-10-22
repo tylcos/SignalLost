@@ -33,7 +33,7 @@ public class SpawnEnemies : MonoBehaviour
 
 		
 
-        var randomList = RandomRangeNoRepeat(0, transform.childCount, numberToSpawn);
+        var randomList = RandomHelper.RandomRangeNoRepeat(0, transform.childCount, numberToSpawn);
         foreach (int i in randomList)
         {
             Transform child = transform.GetChild(i);
@@ -47,29 +47,6 @@ public class SpawnEnemies : MonoBehaviour
     public void SpawnCharacter(GameObject spawnObject, Transform spawnTransform, Transform parent)
     {
         Instantiate(spawnObject, spawnTransform.position, spawnTransform.rotation, parent);
-    }
-
-
-
-    public IEnumerable<int> RandomRangeNoRepeat(int start, int length, int number)
-    {
-        if (number > length)
-            throw new System.ArgumentOutOfRangeException("To many enemies");
-
-
-
-        int[] intList = Enumerable.Range(start, length).ToArray();
-        
-        for (int i = 0; i < number; i++)
-        {
-            int random = Random.Range(i, length);
-
-            int swap = intList[i];
-            intList[i] = intList[random];
-            intList[random] = swap;
-        }
-
-        return intList.Take(number);
     }
 }
 
