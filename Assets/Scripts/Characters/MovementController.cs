@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
-        lastDamageTime = Time.time - invincibilityDuration;
+        lastDamageTime = invincibilityDuration;
     }
 
 
@@ -34,7 +34,7 @@ public class MovementController : MonoBehaviour
 
     public bool IsInvincible()
     {
-        return Time.time - lastDamageTime > invincibilityDuration;
+        return Time.time - lastDamageTime < invincibilityDuration;
     }
 
 
