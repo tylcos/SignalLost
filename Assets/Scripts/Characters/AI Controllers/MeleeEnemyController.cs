@@ -8,7 +8,7 @@ public class MeleeEnemyController : EnemyController {
     public float attackColliderEnableLength;
     public float attackAfterPauseDuration;
     public float attackAfterRetreatDistance;
-
+    
     void FixedUpdate()
     {
         if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
@@ -38,7 +38,7 @@ public class MeleeEnemyController : EnemyController {
                 }
             }
 
-            if (!(vectorToTarget == Vector2.zero))
+            if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {

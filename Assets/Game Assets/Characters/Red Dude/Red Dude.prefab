@@ -282,6 +282,9 @@ MonoBehaviour:
   speed: 0.15
   rb2d: {fileID: 50032802451872066}
   _MaxHitPoints: 100
+  invincibilityDuration: 0.05
+  weaponHolder: {fileID: 1735258238636906}
+  weapon: {fileID: 1104184525536968}
   aggroRange: 30
   retreatDistance: 1
   waitTime: 2
@@ -297,8 +300,6 @@ MonoBehaviour:
   - Enemy
   - Walls
   attackIndicator: {fileID: 1227678452590240}
-  weaponHolder: {fileID: 1735258238636906}
-  weapon: {fileID: 1104184525536968}
   attackChargeTime: 0.6
   attackColliderEnableLength: 0.15
   attackAfterPauseDuration: 0.8

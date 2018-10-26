@@ -25,8 +25,7 @@ public class EnemyController : MovementController
     protected int collideLayerMask;
 
     public GameObject attackIndicator;
-
-    //private bool attacking = false;
+    
     protected GameObject target;
     protected bool attacking = false;
 
@@ -37,8 +36,7 @@ public class EnemyController : MovementController
         lastAttackTime = -attackCooldownLength;
     }
 
-
-
+    
     protected virtual void Update()
     {
         if(target != null)
@@ -53,15 +51,14 @@ public class EnemyController : MovementController
         }
     }
 
-    
+    // Override this in child
     public virtual void OnHitOpponent(GameObject entityHit)
     {
         entityHit.GetComponent<MovementController>().Damage(damage);
     }
 
-
-
-    void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
@@ -70,8 +67,7 @@ public class EnemyController : MovementController
         }
     }
 
-
-
+    
     /// <summary>
     ///     Looks for the target within a circle defined by center and radius
     /// </summary>
@@ -86,8 +82,7 @@ public class EnemyController : MovementController
         return (center - target.transform.position).sqrMagnitude <= radius;
     }
 
-
-
+    
     /// <summary>
     ///     Looks for and returns first enemy found within a circle defined by center and radius
     /// </summary>
@@ -105,6 +100,7 @@ public class EnemyController : MovementController
         Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
         return (overlap == null) ? null : overlap.gameObject;
     }
+
 
     /// <summary>
     ///     Aims this enemy's weapon towards the vector given by rotating the weapon holder
