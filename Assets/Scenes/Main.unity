@@ -230,11 +230,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4371554955868518, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.61
       objectReference: {fileID: 0}
     - target: {fileID: 4371554955868518, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4371554955868518, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 2}
       propertyPath: m_LocalPosition.z
@@ -531,6 +531,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1298569208637172, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198463017788404892, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198463017788404892, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: NoiseModule.enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
