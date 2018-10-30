@@ -21,8 +21,7 @@ public class RandomHelper
             int swap = intList[i];
             intList[i] = intList[random];
             intList[random] = swap;
-
-            Debug.Log("Swap boi");
+            
             yield return intList[i];   // Only swap the required amount of times to save performance
         }
     }
@@ -43,8 +42,7 @@ public class RandomHelper
             T swap = list[i];
             list[i] = list[random];
             list[random] = swap;
-
-            Debug.Log("Swap boi");
+            
             yield return list[i];   // Only swap the required amount of times to save performance
         }
     }

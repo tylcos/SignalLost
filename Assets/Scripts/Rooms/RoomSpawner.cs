@@ -7,6 +7,7 @@ using System.Linq;
 public class RoomSpawner : MonoBehaviour
 {
     public GameObject roomPrefab;
+    public GameObject pathwayPrefab;
 
 
 
@@ -28,6 +29,7 @@ public class RoomSpawner : MonoBehaviour
     {
         CreateRoomTree();
         InstantiateRooms();
+        //InstantiatePathways();
     }
 
 
@@ -61,7 +63,7 @@ public class RoomSpawner : MonoBehaviour
                             Vector2Int resultVector = child.Position + Room.GetDirectionVector(direction);
 
                             possibleDirections.Remove(direction);
-
+                            
                             pathways.SetPathway(child.Position, direction);
                             Room.takenPositions.Add(resultVector);
                             child.Children.Add(new Room(resultVector));
@@ -73,17 +75,7 @@ public class RoomSpawner : MonoBehaviour
             }
         }
     }
-
-    public int SpawnRooms(Room room, int roomsToSpawn)
-    {
-        if (roomsToSpawn == 0)
-            return room.Children.Count;
-
-        
-    }
-
-
-
+    
     public void InstantiateRooms()
     {
         for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
@@ -92,6 +84,20 @@ public class RoomSpawner : MonoBehaviour
             {
                 Vector3 position = new Vector3(child.Position.x * scale, child.Position.y * scale);
                 Instantiate(roomPrefab, position, transform.rotation, transform);
+            }
+        }
+    }
+
+    public void InstantiatePathways()
+    {
+        foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
+        {
+            foreach (Vector3 direction in GetDirectionVectors(entry.Value))
+            {
+                Vector3 position = new Vector3(entry.Key.x, entry.Key.y) * scale;
+                Vector3 rotation = new Vector3(0, 0, Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
+
+                Instantiate(pathwayPrefab, position, Quaternion.Euler(rotation), transform);
             }
         }
     }
@@ -106,6 +112,22 @@ public class RoomSpawner : MonoBehaviour
             return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
         else
             return Mathf.FloorToInt(baseNumber) + (Random.value < randomRoomChance ? Random.Range(0, 2) - 1 : 0);
+    }
+
+    public List<Vector3> GetDirectionVectors(byte direction)
+    {
+        List<Vector3> directions = new List<Vector3>(4);
+
+        if ((direction & 1) > 0)
+            directions.Add((Vector2)Room.GetDirectionVector(0));
+        if ((direction & 2) > 0)
+            directions.Add((Vector2)Room.GetDirectionVector(1));
+        if ((direction & 4) > 0)
+            directions.Add((Vector2)Room.GetDirectionVector(2));
+        if ((direction & 8) > 0)
+            directions.Add((Vector2)Room.GetDirectionVector(3));
+
+        return directions;
     }
 }
 
@@ -204,7 +226,7 @@ public class Room
 
 public class DictonaryGrid
 {
-    private Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>();
+    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>();
 
     
 
@@ -232,7 +254,10 @@ public class DictonaryGrid
     {
         CorrectPosition(ref position, ref direction);
 
-        grid[position] |= (byte)(1 << direction);
+        if (grid.ContainsKey(position))
+            grid[position] |= (byte)(1 << direction);
+        else
+            grid.Add(position, (byte)(1 << direction));
     }
 
 

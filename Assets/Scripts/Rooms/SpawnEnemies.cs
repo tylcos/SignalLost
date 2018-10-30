@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 
@@ -32,9 +30,8 @@ public class SpawnEnemies : MonoBehaviour
         } */
 
 		
-
-        var randomList = RandomHelper.RandomRangeNoRepeat(0, transform.childCount, numberToSpawn);
-        foreach (int i in randomList)
+        
+        foreach (int i in RandomHelper.RandomRangeNoRepeat(0, transform.childCount, numberToSpawn))
         {
             Transform child = transform.GetChild(i);
 
