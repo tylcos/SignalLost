@@ -29,8 +29,8 @@ public class SpawnEnemies : MonoBehaviour
             UnityEngine.Debug.Log("Inner   " + sss.Elapsed);
         } */
 
-		
-        
+
+
         foreach (int i in RandomHelper.RandomRangeNoRepeat(0, transform.childCount, numberToSpawn))
         {
             Transform child = transform.GetChild(i);

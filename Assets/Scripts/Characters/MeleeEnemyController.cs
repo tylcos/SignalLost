@@ -1,13 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemyController : EnemyController {
 
+
+public class MeleeEnemyController : EnemyController
+{
     public float attackChargeTime;
     public float attackColliderEnableLength;
     public float attackAfterPauseDuration;
     public float attackAfterRetreatDistance;
+
+
 
     void FixedUpdate()
     {
@@ -120,8 +123,7 @@ public class MeleeEnemyController : EnemyController {
                 yield return new WaitForFixedUpdate();
             }
         }
+
         attacking = false;
     }
-
-    
 }
