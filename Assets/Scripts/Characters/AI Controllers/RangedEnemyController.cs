@@ -12,10 +12,13 @@ public class RangedEnemyController : EnemyController {
     public float attackPauseDuration;
 
     private bool runningAway = false;
-    
-	void FixedUpdate () {
+    [HideInInspector]
+    public bool shooting = false;
+
+    void FixedUpdate () {
 		if(target != null && !attacking && !runningAway)
         {
+            print("doing fixedupdate");
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[2];
             Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
@@ -38,33 +41,42 @@ public class RangedEnemyController : EnemyController {
                     hitIsTarget = true;
                 }
             }
-
+            print("hit target: " + hitIsTarget);
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range
                 {
                     if (vectorToTarget.magnitude > attackRange || vectorToTarget.magnitude > tooFarThreshold)
                     {
+                        print("too far");
                         Move(rb2d, transform.position, vectorToTarget.normalized * speed);
                         AimWeaponAtTarget(vectorToTarget);
                     } else if (vectorToTarget.magnitude < tooCloseThreshold && hitIsTarget)
                     {
+                        print("too close");
+                        //Move(rb2d, transform.position, -vectorToTarget.normalized * speed);
                         StartCoroutine(RunAway(-vectorToTarget.normalized * (followDistance - vectorToTarget.magnitude)));
                         AimWeaponAtTarget(-vectorToTarget);
                     } else if(Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                     {
-                        StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, attackPauseDuration));
+                        print("TARGET LOCATED");
+                        if (weapon.GetComponent<RangedWeapon>().CanFire())
+                        {
+                            StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, attackPauseDuration));
+                        }
                     }
                 }
             }
         }
 	}
 
+
     private IEnumerator ShootAttack(Vector2 vectorToTarget, float chargeTime, float pauseTime)
     {
         attacking = true;
         AimWeaponAtTarget(vectorToTarget);
         float startTime = Time.time;
+        bool shot = false;
         while (Time.time < startTime + chargeTime + pauseTime)
         {
             Vector3 startingPosition = transform.position;
@@ -74,13 +86,24 @@ public class RangedEnemyController : EnemyController {
                 // do animations here
                 yield return new WaitForSeconds(.05f);
             }
-            else if (Time.time >= startTime + chargeTime) // ATTACKING
+            else if (Time.time < startTime + chargeTime + pauseTime && !shot) // ATTACKING
             {
                 attackIndicator.SetActive(false);
                 // shoot gun
+                StartCoroutine(weapon.GetComponent<RangedWeapon>().Shoot(vectorToTarget));
+                while (shooting)
+                {
+                    yield return new WaitForSeconds(.05f);
+                }
+                shot = true;
+                startTime = Time.time - chargeTime;
                 // call an IEnumerator that makes a flag that is true while running, then wait for that to complete (just yield while its true)
                 // then keep on completing this IEnumerator
                 // do animations here
+                yield return new WaitForSeconds(.05f);
+            }
+            else if(Time.time < startTime + chargeTime + pauseTime && shot) // PLAYER RIPOSTE OPPORTUNITY
+            {
                 yield return new WaitForSeconds(.05f);
             }
         }
@@ -89,12 +112,17 @@ public class RangedEnemyController : EnemyController {
 
     private IEnumerator RunAway(Vector2 vectorToDestination)
     {
+        // :point_right: https://gamedev.stackexchange.com/questions/100535/coroutine-to-move-to-position-passing-the-movement-speed
         runningAway = true;
         Vector3 startingPosition = transform.position;
         float timeToRun = vectorToDestination.magnitude / speed;
         float startTime = Time.time;
+        transform.position = startingPosition + (Vector3)vectorToDestination;
         do
         {
+            print("running");
+            print(timeToRun);
+            print(vectorToDestination.magnitude);
             transform.position = Vector3.Lerp(startingPosition, vectorToDestination, Time.deltaTime / timeToRun);
             yield return new WaitForFixedUpdate();
         } while (Time.time < startTime + timeToRun);

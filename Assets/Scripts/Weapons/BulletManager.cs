@@ -4,11 +4,18 @@ public class BulletManager : MonoBehaviour
 {
     public float lifeTime;
     public float damage;
+    public float maxCollisions;
+    private float currentPenetration = 0;
+
+    //public string[] collideLayers;
+    //protected int collideLayerMask;
+    //public string[] targetTags = { "Player", "Enemy", "Walls" };
 
     private float startTime;
 
     void Start()
     {
+        //collideLayerMask = LayerMask.GetMask(collideLayers);
         startTime = Time.time;
     }
 	
@@ -20,10 +27,19 @@ public class BulletManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collEvent)
     {
-        if (collEvent.gameObject.CompareTag("Enemy"))
+        /*foreach(string tag in targetTags)
         {
-            collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
+            if (collEvent.gameObject.CompareTag(tag))
+            {
+                //collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
+                currentPenetration++;
+                break;
+            }
+        }*/
+        currentPenetration++;
+        if(currentPenetration >= maxCollisions)
+        {
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

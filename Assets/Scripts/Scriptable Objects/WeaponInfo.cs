@@ -39,6 +39,8 @@ public class WeaponInfo : ScriptableObject
 
 
     [Space(20)]
+    [Tooltip("The way the gun fires i.e shotgun or burst.")]
+    public string firingType;
     [Tooltip("The total number of projectiles fired per shot.")]
     public int numberOfProjectiles;
     [Range(0f, 90f)]
@@ -48,6 +50,8 @@ public class WeaponInfo : ScriptableObject
     public float bulletLifeTime;
     [Tooltip("Does the bullet continue after hitting an enemy.")]
     public bool penetrates;
+    [Tooltip("How many colliders can bullets hit before being destroyed (1 disabled penetration).")]
+    public float penetrationDepth;
 
 
 

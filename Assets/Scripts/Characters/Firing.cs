@@ -7,12 +7,8 @@ public class Firing : MonoBehaviour
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;
-
-
-
+    
     private float timeLastFired;
-
-
 
     void Update()
     {
@@ -40,11 +36,11 @@ public class Firing : MonoBehaviour
             
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
             BulletManager bm = bullet.GetComponent<BulletManager>();
-
-
-
+            
             bm.lifeTime = weaponManager.Weapon.Info.bulletLifeTime;
             bm.damage = weaponManager.Weapon.Info.damage;
+            bm.maxCollisions = weaponManager.Weapon.Info.penetrationDepth;
+            //bm.targetTags = new string[] {"Enemy"};
             
             float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
             Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;

@@ -9,20 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 849315f31b8715046879063a64ed30ba, type: 3}
-  m_Name: Pistol
+  m_Name: shooty shooty man gun
   m_EditorClassIdentifier: 
-  name: Pistol
-  description: Pew Pew
-  weaponSprite: {fileID: 21300000, guid: 0b7e8b39726351f4c951f888727d73fe, type: 3}
+  name: shooty shooty man gun
+  description: aiaiai
+  weaponSprite: {fileID: 21300000, guid: bf6b6fda6febf494999d3260c8394aa5, type: 3}
   bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 2}
-  damage: 25
+  damage: 15
   bulletSpeed: 20
-  cycleTime: 0.4
-  clipSize: 6
-  reloadTime: 2
+  cycleTime: 0.1
+  clipSize: 10
+  reloadTime: 1
   firingType: single
   numberOfProjectiles: 1
-  inaccuracy: 20
+  inaccuracy: 0
   bulletLifeTime: 5
   penetrates: 0
   penetrationDepth: 1
