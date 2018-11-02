@@ -27,32 +27,41 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
-        CreateRoomTree();
-        InstantiateRooms();
+        StartCoroutine(CreateRoomTree());
         //InstantiatePathways();
     }
 
 
 
-    public void CreateRoomTree()
+    public IEnumerator<WaitForSeconds> CreateRoomTree()
     {
         if (rooms / iterations < 1 + randomThreshold)
         {
             Debug.LogError("Unsafe number of iterations for the specified number of rooms.");
-            return;
+            //return;
         }
 
 
         startRoom.Children.Add(new Room(Room.GetDirectionVector()));
-        
+        SpawnRoom(startRoom.Children[0]);
+
+
         for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
         {
-            float ratio = rooms / ((iterations - currentIteration) * startRoom.GetChildCountAtLevel(currentIteration + 1));
+            int spawnedChildCount = startRoom.GetChildCountAtLevel(currentIteration + 1);
+
+
+
+
+            Debug.Log((iterations - currentIteration + "   Spawned chidren " + spawnedChildCount));
+
+            float ratio = rooms / ((iterations - currentIteration) * spawnedChildCount);
 
             foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
             {
                 int numberOfRooms = GetRandom(ratio);
-                var possibleDirections = child.GetAvailableSpawnDirections();
+                List<byte> possibleDirections = child.GetAvailableSpawnDirections();
+                Print(possibleDirections);
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
@@ -60,41 +69,57 @@ public class RoomSpawner : MonoBehaviour
                     {
                         if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
-                            Vector2Int resultVector = child.Position + Room.GetDirectionVector(direction);
+                            Vector2Int resultPosition = child.Position + Room.GetDirectionVector(direction);
+                            Debug.Log("Direction Vecotor " + Room.GetDirectionVector(direction));
 
                             possibleDirections.Remove(direction);
-                            
-                            pathways.SetPathway(child.Position, direction);
-                            Room.takenPositions.Add(resultVector);
-                            child.Children.Add(new Room(resultVector));
+                            pathwayPrefab.transform.position = (Vector3)((Vector2)resultPosition) * scale + new Vector3(0, 0, -20);
+                            Debug.Log("Chosen direction " + direction + "    Chosen Position  " + resultPosition);
+                            Print(possibleDirections);
 
-                            break;
+                            pathways.SetPathway(child.Position, direction);
+                            Room newRoom = new Room(resultPosition);
+                            child.Children.Add(newRoom);
+
+
+
+                            SpawnRoom(newRoom);
+
+                            yield return new WaitForSeconds(4);
                         }
                     }
                 }
             }
         }
     }
-    
-    public void InstantiateRooms()
+
+    public void Print<T>(List<T> a)
     {
-        for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
-        {
-            foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
-            {
-                Vector3 position = new Vector3(child.Position.x * scale, child.Position.y * scale);
-                Instantiate(roomPrefab, position, transform.rotation, transform);
-            }
-        }
+        System.Text.StringBuilder sb = new System.Text.StringBuilder(128);
+
+        int i = 0;
+        foreach (T item in a)
+            sb.Append("(" + i++ + "): " + item.ToString() + "  ");
+
+        Debug.Log(sb.ToString());
+    }
+
+    public void SpawnRoom(Room room)
+    {
+        Debug.Log("Spawning room at (" + room.Position.x + ", " + room.Position.y + ")");
+        Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
+        Instantiate(roomPrefab, position, transform.rotation, transform);
     }
 
     public void InstantiatePathways()
     {
+        Vector3 pathwayOffset = new Vector3(.5f,.5f) * scale;
+
         foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
         {
             foreach (Vector3 direction in GetDirectionVectors(entry.Value))
             {
-                Vector3 position = new Vector3(entry.Key.x, entry.Key.y) * scale;
+                Vector3 position = new Vector3(entry.Key.x, entry.Key.y) * scale + pathwayOffset;
                 Vector3 rotation = new Vector3(0, 0, Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
 
                 Instantiate(pathwayPrefab, position, Quaternion.Euler(rotation), transform);
@@ -139,10 +164,10 @@ public class Room
     public Vector2Int Position;
 
     public static HashSet<Vector2Int> takenPositions = new HashSet<Vector2Int>();
-    public static Vector2Int[] Directions = 
+    public static Vector2Int[] Directions =
         { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
             new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1) };
-    
+
 
 
     public Room(Vector2Int position)
@@ -192,7 +217,7 @@ public class Room
         return children;
     }
 
-    
+
 
     public int GetChildCountAtLevel(int level)
     {
@@ -226,9 +251,9 @@ public class Room
 
 public class DictonaryGrid
 {
-    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>();
+    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>(32);
 
-    
+
 
     public byte GetPosition(Vector2Int pos)
     {
