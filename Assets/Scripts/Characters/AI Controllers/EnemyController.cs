@@ -29,6 +29,8 @@ public class EnemyController : MovementController
     protected GameObject target;
     protected bool attacking = false;
 
+    public bool isAggro = false;
+
     private void Start()
     {
         targetLayerMask = LayerMask.GetMask(targetLayers);

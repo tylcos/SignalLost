@@ -44,6 +44,7 @@ public class MeleeEnemyController : EnemyController {
                 {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
                     AimWeaponAtTarget(vectorToTarget);
+                    isAggro = true;
                 }
                 if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
