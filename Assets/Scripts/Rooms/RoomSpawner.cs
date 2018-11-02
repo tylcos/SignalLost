@@ -28,7 +28,7 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CreateRoomTree());
-        InstantiatePathways();
+        //InstantiatePathways();
     }
 
 
@@ -43,45 +43,72 @@ public class RoomSpawner : MonoBehaviour
 
 
         startRoom.Children.Add(new Room(Room.GetDirectionVector()));
-        
+        SpawnRoom(startRoom.Children[0]);
+
+
         for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
         {
-            float ratio = rooms / ((iterations - currentIteration) * startRoom.GetChildCountAtLevel(currentIteration + 1));
+            int spawnedChildCount = startRoom.GetChildCountAtLevel(currentIteration + 1);
+
+
+
+
+            Debug.Log((iterations - currentIteration + "   Spawned chidren " + spawnedChildCount);
+
+            float ratio = rooms / ((iterations - currentIteration) * spawnedChildCount);
 
             foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
             {
                 int numberOfRooms = GetRandom(ratio);
                 List<byte> possibleDirections = child.GetAvailableSpawnDirections();
+                Print(possibleDirections);
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
-                    Debug.Log(possibleDirections[0]
-
                     foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
                     {
                         if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
-                            Vector2Int resultVector = child.Position + Room.GetDirectionVector(direction);
+                            Vector2Int resultPosition = child.Position + Room.GetDirectionVector(direction);
+                            Debug.Log("Direction Vecotor " + Room.GetDirectionVector(direction));
 
                             possibleDirections.Remove(direction);
-                            
+                            pathwayPrefab.transform.position = (Vector3)((Vector2)resultPosition) * scale + new Vector3(0, 0, -20);
+                            Debug.Log("Chosen direction " + direction + "    Chosen Position  " + resultPosition);
+                            Print(possibleDirections);
+
                             pathways.SetPathway(child.Position, direction);
-                            Room.takenPositions.Add(resultVector);
-                            child.Children.Add(new Room(resultVector));
+                            Room newRoom = new Room(resultPosition);
+                            child.Children.Add(newRoom);
 
 
 
-                            Vector3 position = new Vector3(child.Position.x * scale, child.Position.y * scale);
-                            Instantiate(roomPrefab, position, transform.rotation, transform);
+                            SpawnRoom(newRoom);
 
                             yield return new WaitForSeconds(4);
-
-                            break;
                         }
                     }
                 }
             }
         }
+    }
+
+    public void Print<T>(List<T> a)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder(128);
+
+        int i = 0;
+        foreach (T item in a)
+            sb.Append("(" + i++ + "): " + item.ToString() + "  ");
+
+        Debug.Log(sb.ToString());
+    }
+
+    public void SpawnRoom(Room room)
+    {
+        Debug.Log("Spawning room at (" + room.Position.x + ", " + room.Position.y + ")");
+        Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
+        Instantiate(roomPrefab, position, transform.rotation, transform);
     }
 
     public void InstantiatePathways()
@@ -224,7 +251,7 @@ public class Room
 
 public class DictonaryGrid
 {
-    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>();
+    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>(32);
 
     
 
@@ -252,7 +279,6 @@ public class DictonaryGrid
     {
         CorrectPosition(ref position, ref direction);
 
-        Debug.Log("Corrected direction" + direction + "     " + position);
         if (grid.ContainsKey(position))
             grid[position] |= (byte)(1 << direction);
         else
