@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 
 
@@ -17,11 +16,14 @@ public class RoomSpawner : MonoBehaviour
     public int iterations = 3;
     public int rooms = 6;
     public int scale = 40;
+    public float spawnSpeed = 1f;
 
 
 
     private const float randomThreshold = .2f;
-    private const float randomRoomChance = .5f;
+    private const float randomRoomChance = .75f;
+
+    private int spawnedRoomCount = -1; // Offset the inital spawned room
 
 
 
@@ -35,33 +37,28 @@ public class RoomSpawner : MonoBehaviour
 
     public IEnumerator<WaitForSeconds> CreateRoomTree()
     {
-        if (rooms / iterations < 1 + randomThreshold)
-        {
-            Debug.LogError("Unsafe number of iterations for the specified number of rooms.");
-            //return;
-        }
-
-
         startRoom.Children.Add(new Room(Room.GetDirectionVector()));
         SpawnRoom(startRoom.Children[0]);
 
 
+
         for (int currentIteration = 0; currentIteration < iterations; currentIteration++)
         {
-            int spawnedChildCount = startRoom.GetChildCountAtLevel(currentIteration + 1);
+            int spawnedChildCount = startRoom.GetChildrenCountAtLevel(currentIteration + 1);
+            if (spawnedChildCount == 0) // Spawn rooms on last iteration rooms if no new rooms were spawned
+            {
+                --currentIteration;
+                spawnedChildCount = startRoom.GetChildrenCountAtLevel(currentIteration + 1);
+            }
 
 
 
-
-            Debug.Log((iterations - currentIteration + "   Spawned chidren " + spawnedChildCount));
-
-            float ratio = rooms / ((iterations - currentIteration) * spawnedChildCount);
+            float ratio = (rooms - spawnedRoomCount) / ((iterations - currentIteration) * spawnedChildCount);
 
             foreach (Room child in startRoom.GetChildrenAtLevel(currentIteration + 1))
             {
                 int numberOfRooms = GetRandom(ratio);
                 List<byte> possibleDirections = child.GetAvailableSpawnDirections();
-                Print(possibleDirections);
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
@@ -70,46 +67,47 @@ public class RoomSpawner : MonoBehaviour
                         if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
                             Vector2Int resultPosition = child.Position + Room.GetDirectionVector(direction);
-                            Debug.Log("Direction Vecotor " + Room.GetDirectionVector(direction));
 
                             possibleDirections.Remove(direction);
-                            pathwayPrefab.transform.position = (Vector3)((Vector2)resultPosition) * scale + new Vector3(0, 0, -20);
-                            Debug.Log("Chosen direction " + direction + "    Chosen Position  " + resultPosition);
-                            Print(possibleDirections);
-
                             pathways.SetPathway(child.Position, direction);
                             Room newRoom = new Room(resultPosition);
                             child.Children.Add(newRoom);
 
-
-
                             SpawnRoom(newRoom);
-
-                            yield return new WaitForSeconds(4);
+                            pathwayPrefab.transform.position = (Vector3)((Vector2)child.Position) * scale + new Vector3(0, 0, -20);
+                            break; // Exit once a valid direction is found
                         }
                     }
+
+                    yield return new WaitForSeconds(spawnSpeed);
                 }
             }
         }
-    }
 
-    public void Print<T>(List<T> a)
-    {
-        System.Text.StringBuilder sb = new System.Text.StringBuilder(128);
-
-        int i = 0;
-        foreach (T item in a)
-            sb.Append("(" + i++ + "): " + item.ToString() + "  ");
-
-        Debug.Log(sb.ToString());
+        Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
     }
 
     public void SpawnRoom(Room room)
     {
         Debug.Log("Spawning room at (" + room.Position.x + ", " + room.Position.y + ")");
+
+        ++spawnedRoomCount;
+
         Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
         Instantiate(roomPrefab, position, transform.rotation, transform);
     }
+
+    public int GetRandom(float baseNumber)
+    {
+        float decimalPart = Mathf.Round(baseNumber) - baseNumber;
+
+        if (Mathf.Abs(decimalPart) > randomThreshold && 1 - Mathf.Abs(decimalPart) > randomThreshold)
+            return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
+        else
+            return Mathf.FloorToInt(baseNumber) + (Random.value < randomRoomChance ? Random.Range(0, 2) - 1 : 0);
+    }
+
+
 
     public void InstantiatePathways()
     {
@@ -125,18 +123,6 @@ public class RoomSpawner : MonoBehaviour
                 Instantiate(pathwayPrefab, position, Quaternion.Euler(rotation), transform);
             }
         }
-    }
-
-
-
-    public int GetRandom(float baseNumber)
-    {
-        float decimalPart = Mathf.Round(baseNumber) - baseNumber;
-
-        if (Mathf.Abs(decimalPart) > randomThreshold && 1 - Mathf.Abs(decimalPart) > randomThreshold)
-            return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
-        else
-            return Mathf.FloorToInt(baseNumber) + (Random.value < randomRoomChance ? Random.Range(0, 2) - 1 : 0);
     }
 
     public List<Vector3> GetDirectionVectors(byte direction)
@@ -164,6 +150,7 @@ public class Room
     public Vector2Int Position;
 
     public static HashSet<Vector2Int> takenPositions = new HashSet<Vector2Int>();
+
     public static Vector2Int[] Directions =
         { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
             new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1) };
@@ -219,14 +206,14 @@ public class Room
 
 
 
-    public int GetChildCountAtLevel(int level)
+    public int GetChildrenCountAtLevel(int level)
     {
         int count = 0;
 
         if (level > 1)
         {
             foreach (Room room in Children)
-                count += room.GetChildCountAtLevel(level - 1);
+                count += room.GetChildrenCountAtLevel(level - 1);
 
             return count;
         }
@@ -269,8 +256,9 @@ public class DictonaryGrid
     public bool GetPathwayValid(Vector2Int position, byte direction)
     {
         CorrectPosition(ref position, ref direction);
+        byte value = GetPosition(position);
 
-        return (GetPosition(position) & (1 << direction)) == 0;
+        return (direction % 2 == 0) ? (value & (1 << direction)) != 0 : (value | 0xC) != 0; 
     }
 
 

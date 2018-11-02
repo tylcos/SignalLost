@@ -234,7 +234,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -257,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: -110}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1237663205}
@@ -334,10 +334,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 2118539679}
-  pathwayPrefab: {fileID: 0}
-  iterations: 3
-  rooms: 6
-  scale: 40
+  pathwayPrefab: {fileID: 113893295}
+  iterations: 4
+  rooms: 8
+  scale: 30
+  spawnSpeed: 0
 --- !u!4 &686826328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe,
@@ -497,22 +498,26 @@ Prefab:
         type: 2}
       propertyPath: spawnCharacter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
     - target: {fileID: 114596842991873138, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
       propertyPath: spawnCharacter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
     - target: {fileID: 114346265073414044, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
       propertyPath: spawnCharacter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
     - target: {fileID: 114753763899350420, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
       propertyPath: spawnCharacter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
     - target: {fileID: 114261952058311924, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
       propertyPath: numberToSpawn
@@ -611,7 +616,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1814215812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: -110}
+  m_LocalPosition: {x: 0.00000029802322, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347403481}

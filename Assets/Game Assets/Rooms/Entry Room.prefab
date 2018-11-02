@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e1869e3e6484a468b82b1286b792cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToSpawn: 4
+  numberToSpawn: 1
 --- !u!114 &114289946758049930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,7 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 2}
 --- !u!114 &114346265073414044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -404,7 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 2}
 --- !u!114 &114596842991873138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,7 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 2}
 --- !u!114 &114753763899350420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -428,7 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 2}
 --- !u!19719996 &2113883505545026762
 TilemapCollider2D:
   m_ObjectHideFlags: 1
