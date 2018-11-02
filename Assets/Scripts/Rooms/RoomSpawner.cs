@@ -20,8 +20,10 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-    private const float randomThreshold = .2f;
-    private const float randomRoomChance = .75f;
+    private const float lowerThreshhold = .2f;
+    private const float upperThreshhold = .3f;
+    private const float decreaseRandomChance = .2f;
+    private const float increaseRandomChance = .3f;
 
     private int spawnedRoomCount = -1; // Offset the inital spawned room
 
@@ -29,15 +31,44 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CreateRoomTree());
-        //InstantiatePathways();
+        CreateRoomTree();
+    }
+
+    private void OnDrawGizmos()
+    {
+        InstantiatePathways();
     }
 
 
 
-    public IEnumerator<WaitForSeconds> CreateRoomTree()
+    private void Update()
     {
-        startRoom.Children.Add(new Room(Room.GetDirectionVector()));
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            DeleteAllRooms();
+            spawnedRoomCount = -1;
+
+            startRoom = new Room(Vector2Int.zero);
+            pathways = new DictonaryGrid();
+            Room.takenPositions = new HashSet<Vector2Int>();
+
+            CreateRoomTree();
+        }
+    }
+
+    public void DeleteAllRooms()
+    {
+        foreach (Transform room in transform)
+            Destroy(room.gameObject);
+    }
+
+
+
+    public void CreateRoomTree()
+    {
+        int startDirection = Random.Range(0, 8);
+        startRoom.Children.Add(new Room(Room.GetDirectionVector(startDirection)));
+        pathways.SetPathway(startRoom.Position, (byte)startDirection);
         SpawnRoom(startRoom.Children[0]);
 
 
@@ -78,8 +109,6 @@ public class RoomSpawner : MonoBehaviour
                             break; // Exit once a valid direction is found
                         }
                     }
-
-                    yield return new WaitForSeconds(spawnSpeed);
                 }
             }
         }
@@ -101,42 +130,49 @@ public class RoomSpawner : MonoBehaviour
     {
         float decimalPart = Mathf.Round(baseNumber) - baseNumber;
 
-        if (Mathf.Abs(decimalPart) > randomThreshold && 1 - Mathf.Abs(decimalPart) > randomThreshold)
-            return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
-        else
-            return Mathf.FloorToInt(baseNumber) + (Random.value < randomRoomChance ? Random.Range(0, 2) - 1 : 0);
+        if (Mathf.Abs(decimalPart) < lowerThreshhold)
+            return Mathf.FloorToInt(baseNumber) + (Random.value < decreaseRandomChance ? -1 : 0);
+        else if (1 - Mathf.Abs(decimalPart) < upperThreshhold)
+            return Mathf.FloorToInt(baseNumber) + (Random.value < increaseRandomChance ? 1 : 0);
+
+        return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
     }
 
 
 
     public void InstantiatePathways()
     {
-        Vector3 pathwayOffset = new Vector3(.5f,.5f) * scale;
-
         foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
         {
-            foreach (Vector3 direction in GetDirectionVectors(entry.Value))
+            foreach (Vector2 direction in GetDirectionVectors(entry.Value))
             {
-                Vector3 position = new Vector3(entry.Key.x, entry.Key.y) * scale + pathwayOffset;
-                Vector3 rotation = new Vector3(0, 0, Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
-
-                Instantiate(pathwayPrefab, position, Quaternion.Euler(rotation), transform);
+                
+                if (direction.x == -1 && direction.y == 1)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine((Vector2)(entry.Key + Vector2Int.right) * scale, ((entry.Key + Vector2Int.right) + direction) * scale);
+                }
+                else
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine((Vector2)entry.Key * scale, (entry.Key + direction) * scale);
+                }
             }
         }
     }
 
-    public List<Vector3> GetDirectionVectors(byte direction)
+    public List<Vector2> GetDirectionVectors(byte direction)
     {
-        List<Vector3> directions = new List<Vector3>(4);
+        List<Vector2> directions = new List<Vector2>(4);
 
         if ((direction & 1) > 0)
-            directions.Add((Vector2)Room.GetDirectionVector(0));
+            directions.Add(Room.GetDirectionVector(0));
         if ((direction & 2) > 0)
-            directions.Add((Vector2)Room.GetDirectionVector(1));
+            directions.Add(Room.GetDirectionVector(1));
         if ((direction & 4) > 0)
-            directions.Add((Vector2)Room.GetDirectionVector(2));
+            directions.Add(Room.GetDirectionVector(2));
         if ((direction & 8) > 0)
-            directions.Add((Vector2)Room.GetDirectionVector(3));
+            directions.Add(Room.GetDirectionVector(3));
 
         return directions;
     }
@@ -227,11 +263,6 @@ public class Room
     {
         return Directions[value];
     }
-
-    public static Vector2Int GetDirectionVector()
-    {
-        return GetDirectionVector((byte)Random.Range(0, 8));
-    }
 }
 
 
@@ -258,7 +289,7 @@ public class DictonaryGrid
         CorrectPosition(ref position, ref direction);
         byte value = GetPosition(position);
 
-        return (direction % 2 == 0) ? (value & (1 << direction)) != 0 : (value | 0xC) != 0; 
+        return (direction % 2 == 0) ? (value & (1 << direction)) == 0 : (value & 0xA) == 0; 
     }
 
 
