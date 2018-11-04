@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
-
+using System.Linq;
 
 public class RoomSpawner : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class RoomSpawner : MonoBehaviour
     private const float decreaseRandomChance = .2f;
     private const float increaseRandomChance = .3f;
 
-    private int spawnedRoomCount = -1; // Offset the inital spawned room
+    private int spawnedRoomCount = -2; // Offset the inital two spawned rooms
 
 
 
@@ -48,9 +47,9 @@ public class RoomSpawner : MonoBehaviour
             DeleteAllRooms();
             spawnedRoomCount = -1;
 
-            startRoom = new Room(Vector2Int.zero);
             pathways = new DictonaryGrid();
             Room.takenPositions = new HashSet<Vector2Int>();
+            startRoom = new Room(Vector2Int.zero);
 
             CreateRoomTree();
         }
@@ -69,6 +68,8 @@ public class RoomSpawner : MonoBehaviour
         int startDirection = Random.Range(0, 8);
         startRoom.Children.Add(new Room(Room.GetDirectionVector(startDirection)));
         pathways.SetPathway(startRoom.Position, (byte)startDirection);
+
+        SpawnRoom(startRoom);
         SpawnRoom(startRoom.Children[0]);
 
 
@@ -93,7 +94,7 @@ public class RoomSpawner : MonoBehaviour
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
-                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
+                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections).Take(4))
                     {
                         if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
@@ -105,7 +106,6 @@ public class RoomSpawner : MonoBehaviour
                             child.Children.Add(newRoom);
 
                             SpawnRoom(newRoom);
-                            pathwayPrefab.transform.position = (Vector3)((Vector2)child.Position) * scale + new Vector3(0, 0, -20);
                             break; // Exit once a valid direction is found
                         }
                     }
@@ -118,8 +118,6 @@ public class RoomSpawner : MonoBehaviour
 
     public void SpawnRoom(Room room)
     {
-        Debug.Log("Spawning room at (" + room.Position.x + ", " + room.Position.y + ")");
-
         ++spawnedRoomCount;
 
         Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
@@ -146,7 +144,6 @@ public class RoomSpawner : MonoBehaviour
         {
             foreach (Vector2 direction in GetDirectionVectors(entry.Value))
             {
-                
                 if (direction.x == -1 && direction.y == 1)
                 {
                     Gizmos.color = Color.blue;
