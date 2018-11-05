@@ -19,6 +19,8 @@ public class RoomSpawner : MonoBehaviour
 
 
 
+    private const int maxConnections = 3;
+
     private const float lowerThreshhold = .2f;
     private const float upperThreshhold = .3f;
     private const float decreaseRandomChance = .2f;
@@ -42,7 +44,7 @@ public class RoomSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
             DeleteAllRooms();
             spawnedRoomCount = -1;
@@ -94,7 +96,7 @@ public class RoomSpawner : MonoBehaviour
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
-                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections).Take(4))
+                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
                     {
                         if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
                         {
@@ -127,33 +129,32 @@ public class RoomSpawner : MonoBehaviour
     public int GetRandom(float baseNumber)
     {
         float decimalPart = Mathf.Round(baseNumber) - baseNumber;
+        int numberToSpawn = 0;
 
         if (Mathf.Abs(decimalPart) < lowerThreshhold)
-            return Mathf.FloorToInt(baseNumber) + (Random.value < decreaseRandomChance ? -1 : 0);
+            numberToSpawn =  Mathf.FloorToInt(baseNumber) + (Random.value < decreaseRandomChance ? -1 : 0);
         else if (1 - Mathf.Abs(decimalPart) < upperThreshhold)
-            return Mathf.FloorToInt(baseNumber) + (Random.value < increaseRandomChance ? 1 : 0);
+            numberToSpawn =  Mathf.FloorToInt(baseNumber) + (Random.value < increaseRandomChance ? 1 : 0);
+        else
+            numberToSpawn = Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
 
-        return Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
+        return numberToSpawn > maxConnections ? maxConnections : numberToSpawn;
     }
 
 
 
     public void InstantiatePathways()
     {
+        Gizmos.color = Color.green;
+
         foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
         {
             foreach (Vector2 direction in GetDirectionVectors(entry.Value))
             {
                 if (direction.x == -1 && direction.y == 1)
-                {
-                    Gizmos.color = Color.blue;
                     Gizmos.DrawLine((Vector2)(entry.Key + Vector2Int.right) * scale, ((entry.Key + Vector2Int.right) + direction) * scale);
-                }
                 else
-                {
-                    Gizmos.color = Color.blue;
                     Gizmos.DrawLine((Vector2)entry.Key * scale, (entry.Key + direction) * scale);
-                }
             }
         }
     }
