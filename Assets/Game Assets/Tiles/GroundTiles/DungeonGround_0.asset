@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: DungeonGround_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 92f26d1d3fd1d3e4fb34a49898e601d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e3bf0351c7a29749b1ad6828ecb9509, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
