@@ -6,10 +6,11 @@ using System.Collections.Generic;
 public class RoomSpawner : MonoBehaviour
 {
     public GameObject roomPrefab; // TODO: Random room picking
+    public GameObject[] roomPrefabs;
 
 
 
-    public Room startRoom = new Room(Vector2Int.zero, 0);
+    public Room startRoom = new Room(Vector2Int.zero, -1);
     public DictonaryGrid pathways = new DictonaryGrid();
 
     public int iterations = 4;
@@ -64,7 +65,7 @@ public class RoomSpawner : MonoBehaviour
         Room.Initialize(iterations, roomsToSpawn);
 
         int startDirection = Random.Range(0, 8);
-        Room.rooms[0].Add(new Room(Room.GetDirectionVector(startDirection), 2));
+        Room.rooms[0].Add(new Room(Room.GetDirectionVector(startDirection), GetRandomRoom(-1)));
         pathways.SetPathway(startRoom.Position, (byte)startDirection);
 
         SpawnRoom(startRoom);
@@ -87,21 +88,21 @@ public class RoomSpawner : MonoBehaviour
             float ratio = (roomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
             int nextIteration = currentIteration + 1;
 
-            foreach (Room child in Room.rooms[currentIteration])
+            foreach (Room currentRoom in Room.rooms[currentIteration])
             {
                 int numberOfRooms = GetRandom(ratio);
-                List<byte> possibleDirections = child.GetAvailableSpawnDirections();
+                List<byte> possibleDirections = currentRoom.GetAvailableSpawnDirections();
 
                 for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
                 {
                     foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
                     {
-                        if (pathways.GetPathwayValid(child.Position, direction))    // Valid position found
+                        if (pathways.GetPathwayValid(currentRoom.Position, direction))    // Valid position found
                         {
                             possibleDirections.Remove(direction);
 
-                            pathways.SetPathway(child.Position, direction);
-                            Room newRoom = new Room(child.Position + Room.GetDirectionVector(direction), 2);
+                            pathways.SetPathway(currentRoom.Position, direction);
+                            Room newRoom = new Room(currentRoom.Position + Room.GetDirectionVector(direction), GetRandomRoom(currentRoom.roomType));
                             Room.rooms[nextIteration].Add(newRoom);
 
                             SpawnRoom(newRoom);
@@ -136,6 +137,15 @@ public class RoomSpawner : MonoBehaviour
             numberToSpawn = Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
 
         return numberToSpawn > maxConnections ? maxConnections : numberToSpawn;
+    }
+
+    public sbyte GetRandomRoom(int parentRoomType)
+    {
+        int randomRoom;
+
+        while ((randomRoom = Random.Range(0, roomPrefabs.Length)) == parentRoomType);
+
+        return (sbyte)randomRoom;
     }
 
 
@@ -186,7 +196,7 @@ public class RoomSpawner : MonoBehaviour
 public class Room
 {
     public Vector2Int Position;
-    public byte roomType;
+    public sbyte roomType;
 
 
 
@@ -200,7 +210,7 @@ public class Room
 
 
 
-    public Room(Vector2Int position, byte roomType)
+    public Room(Vector2Int position, sbyte roomType)
     {
         Position = position;
         takenPositions.Add(position);
