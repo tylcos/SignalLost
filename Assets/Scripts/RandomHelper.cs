@@ -4,11 +4,12 @@ using UnityEngine;
 
 
 
-public class RandomHelper
+public static class RandomHelper
 {
     public static IEnumerable<int> RandomRangeNoRepeat(int start, int length, int number)
     {
-        Debug.Assert(number <= length, "Number requested larger than range of random numbers.");
+        if (number == 0 || number > length)
+            yield break;
 
 
 
