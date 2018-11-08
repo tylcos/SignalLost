@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class WeaponAnimation : EnemyAnimation {
 
-	// Use this for initialization
-	void Start () {
+    private bool formationComplete = false;
+    private bool inRange = true;
+    private bool attackComplete = true;
+
+    // Use this for initialization
+    void Start () {
         meleeEnemyAccessor = meleeEnemy.GetComponent<MeleeEnemyController>();
 	}
 
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (meleeEnemyAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
@@ -36,6 +40,33 @@ public class WeaponAnimation : EnemyAnimation {
         if (meleeEnemyAccessor.isAggro == false)
         {
             animator.SetBool("PlayerInRange", false);
+        }*/
+
+
+
+        if (meleeEnemyAccessor.isAggro == true)
+        {
+            animator.SetBool("PlayerInRange", true);
+            inRange = true;
+        }
+        else
+        {
+            animator.SetBool("PlayerInRange", false);
+            animator.SetBool("Formation", false);
+            animator.SetBool("Shot", false);
+            inRange = false;
+        }
+
+        if (inRange)
+        {
+
+            animator.SetBool("Formation", true);
+            formationComplete = true;
+        }
+        if (formationComplete)
+        {
+            animator.SetBool("Shot", true);
+            attackComplete = true;
         }
     }   
 }

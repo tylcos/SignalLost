@@ -51,6 +51,8 @@ public class EnemyController : MovementController
         {
             target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
+        isAggro = target != null;
+        print("aggrostate: " + isAggro);
     }
 
     // Override this in child

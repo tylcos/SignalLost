@@ -38,13 +38,14 @@ public class MeleeEnemyController : EnemyController {
                 }
             }
 
+            
+
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
                     AimWeaponAtTarget(vectorToTarget);
-                    isAggro = true;
                 }
                 if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {

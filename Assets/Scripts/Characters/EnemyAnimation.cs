@@ -10,6 +10,8 @@ public class EnemyAnimation : MonoBehaviour {
     public MeleeEnemyController meleeEnemyAccessor;
 
     private bool formationComplete = false;
+    private bool inRange = true;
+    private bool attackComplete = true;
 
     // Use this for initialization
     void Start () {
@@ -30,13 +32,13 @@ public class EnemyAnimation : MonoBehaviour {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Formation_Animation"))
         {
             animator.SetBool("FormationComplete", true);
-            if(meleeEnemyAccessor.isAggro == true)
+            if(meleeEnemyAccessor.isAggro == true)1
             {
                 animator.SetBool("AttackComplete", true);
             }
         }*/
 
-        if (meleeEnemyAccessor.isAggro == true)
+        /*if (meleeEnemyAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             animator.SetBool("Formation", true);
@@ -54,6 +56,34 @@ public class EnemyAnimation : MonoBehaviour {
             animator.SetBool("PlayerInRange", false);
             animator.SetBool("Formation", false);
             animator.SetBool("Attack", true);
+        }*/
+
+
+
+        if (meleeEnemyAccessor.isAggro == true)
+        {
+            animator.SetBool("PlayerInRange", true);
+            inRange = true;
+            //Debug.Log("AGGROED");
+        }
+        else
+        {
+            animator.SetBool("PlayerInRange", false);
+            animator.SetBool("Formation", false);
+            animator.SetBool("Attack", false);
+            inRange = false;
+        }
+
+        if (inRange)
+        {
+    
+            animator.SetBool("Formation", true);
+            formationComplete = true;
+        }
+        if (formationComplete)
+        {
+            animator.SetBool("Attack", true);
+            attackComplete = true;
         }
     }
 }
