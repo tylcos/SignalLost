@@ -32,6 +32,9 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
+        if (roomPrefabs.Length == 0)
+            throw new System.ArgumentOutOfRangeException("roomPrefabs", "Must have at least two different room prefabs to choose from");
+
         CreateRoomTree();
     }
 
@@ -51,7 +54,6 @@ public class RoomSpawner : MonoBehaviour
 
             pathways = new DictonaryGrid();
             Room.takenPositions = new HashSet<Vector2Int>();
-            Room.Initialize(iterations, roomsToSpawn);
             startRoom = new Room(Vector2Int.zero, 0);
 
             CreateRoomTree();
