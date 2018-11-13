@@ -32,7 +32,7 @@ public class EnemyController : MovementController
     public bool isAggro = false;
 
     private void Start()
-    {
+    {   
         targetLayerMask = LayerMask.GetMask(targetLayers);
         collideLayerMask = LayerMask.GetMask(collideLayers);
         lastAttackTime = -attackCooldownLength;

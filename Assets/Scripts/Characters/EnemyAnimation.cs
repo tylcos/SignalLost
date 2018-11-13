@@ -7,7 +7,7 @@ public class EnemyAnimation : MonoBehaviour {
     public Animator animator;
     [HideInInspector]
     public GameObject meleeEnemy;
-    public MeleeEnemyController meleeEnemyAccessor;
+    public EnemyController enemyControllerAccessor;
 
     private bool formationComplete = false;
     private bool inRange = true;
@@ -15,7 +15,7 @@ public class EnemyAnimation : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        meleeEnemyAccessor = meleeEnemy.GetComponent<MeleeEnemyController>();
+        enemyControllerAccessor = meleeEnemy.GetComponent<EnemyController>();
     }
 	
 	// Update is called once per frame
@@ -58,13 +58,10 @@ public class EnemyAnimation : MonoBehaviour {
             animator.SetBool("Attack", true);
         }*/
 
-
-
-        if (meleeEnemyAccessor.isAggro == true)
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
-            //Debug.Log("AGGROED");
         }
         else
         {
@@ -72,11 +69,12 @@ public class EnemyAnimation : MonoBehaviour {
             animator.SetBool("Formation", false);
             animator.SetBool("Attack", false);
             inRange = false;
+            formationComplete = false;
+            attackComplete = false;
         }
 
         if (inRange)
         {
-    
             animator.SetBool("Formation", true);
             formationComplete = true;
         }
