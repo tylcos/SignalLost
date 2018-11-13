@@ -4,6 +4,8 @@
 
 public class EnemyController : MovementController
 {
+
+    public string namedebug = "default";
     public GameObject weaponHolder;
     public GameObject weapon;
 
@@ -43,7 +45,7 @@ public class EnemyController : MovementController
     {
         if(target != null)
         {
-            if(!IsGameObjectInRadius(transform.position, target, aggroRange)) {
+            if(!IsGameObjectInRadius(transform.position, target, aggroRange, targetLayerMask)) {
                 target = null;
             }
         }
@@ -52,7 +54,7 @@ public class EnemyController : MovementController
             target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
         isAggro = target != null;
-        print("aggrostate: " + isAggro);
+        print("aggrostate: " + namedebug + " , " + isAggro);
     }
 
     // Override this in child
@@ -81,9 +83,11 @@ public class EnemyController : MovementController
     ///     <param name="center">The center of the circle</param>
     ///     <param name="target">The target to look for</param>
     ///     <param name="radius">The radius of the circle</param>
-    protected static bool IsGameObjectInRadius(Vector3 center, GameObject target, float radius)
+    protected static bool IsGameObjectInRadius(Vector3 center, GameObject target, float radius, int layerMask)
     {
-        return (center - target.transform.position).sqrMagnitude <= radius;
+        return Mathf.Sqrt((center - target.transform.position).sqrMagnitude) <= radius;
+        //Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
+        //return (overlap == null);
     }
 
     
