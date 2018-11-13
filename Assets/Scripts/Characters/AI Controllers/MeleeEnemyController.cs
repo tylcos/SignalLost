@@ -47,7 +47,7 @@ public class MeleeEnemyController : EnemyController {
                     Move(rb2d, transform.position, vectorToTarget.normalized * speed);
                     AimWeaponAtTarget(vectorToTarget);
                 }
-                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
+                    if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
                     StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableLength, attackAfterPauseDuration, attackAfterRetreatDistance));
                 }

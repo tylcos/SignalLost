@@ -10,7 +10,7 @@ public class WeaponAnimation : EnemyAnimation {
 
     // Use this for initialization
     void Start () {
-        meleeEnemyAccessor = meleeEnemy.GetComponent<MeleeEnemyController>();
+        enemyControllerAccessor = meleeEnemy.GetComponent<EnemyController>();
 	}
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class WeaponAnimation : EnemyAnimation {
 
 
 
-        if (meleeEnemyAccessor.isAggro == true)
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
