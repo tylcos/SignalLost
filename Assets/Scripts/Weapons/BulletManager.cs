@@ -36,10 +36,9 @@ public class BulletManager : MonoBehaviour
                 break;
             }
         }*/
+
         currentPenetration++;
         if(currentPenetration >= maxCollisions)
-        {
             Destroy(gameObject);
-        }
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849315f31b8715046879063a64ed30ba, type: 3}
+  m_Name: New Weapon
+  m_EditorClassIdentifier: 
+  name: Machine Blat
+  description: blat blat sooka
+  weaponSprite: {fileID: 21300000, guid: bf6b6fda6febf494999d3260c8394aa5, type: 3}
+  bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 2}
+  damage: 0
+  bulletSpeed: 0
+  cycleTime: 0
+  clipSize: 0
+  reloadTime: 0
+  firingType: 
+  numberOfProjectiles: 0
+  inaccuracy: 0
+  bulletLifeTime: 0
+  penetrates: 0
+  penetrationDepth: 0
+  bulletSpawnOffset: {x: 0, y: 0, z: 0}
