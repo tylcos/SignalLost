@@ -7,6 +7,7 @@ public class RangedWeapon : MonoBehaviour {
     public RangedEnemyController parentController;
     public Transform bulletSpawnPoint;
     public WeaponInfo gunType;
+    public Transform weaponHolder;
 
     private float timeLastFired;
 
@@ -32,7 +33,7 @@ public class RangedWeapon : MonoBehaviour {
     public void SpawnBulletsTowards(Vector2 vector)
     {
         float halfAngle = gunType.inaccuracy / 2f;
-        Quaternion randomQuaternion = bulletSpawnPoint.rotation * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
+        Quaternion randomQuaternion = weaponHolder.rotation * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
         GameObject bullet = Instantiate(gunType.bullet, bulletSpawnPoint.position, randomQuaternion);
         Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
         BulletManager bm = bullet.GetComponent<BulletManager>();
