@@ -8,6 +8,7 @@ public class RangedWeapon : MonoBehaviour {
     public Transform bulletSpawnPoint;
     public WeaponInfo gunType;
     public Transform weaponHolder;
+    public string bulletLayer;
 
     private float timeLastFired;
 
@@ -41,10 +42,12 @@ public class RangedWeapon : MonoBehaviour {
         bm.lifeTime = gunType.bulletLifeTime;
         bm.damage = gunType.damage;
         bm.maxCollisions = gunType.penetrationDepth;
+        bm.sourceEnemy = parentController;
+        bm.gameObject.layer = 13;
         //bm.targetTags = parentController.targetTags;
 
         float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
-        Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
+        Vector2 directionVector = -new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
         rbBullet.velocity = directionVector * gunType.bulletSpeed;
     }
 

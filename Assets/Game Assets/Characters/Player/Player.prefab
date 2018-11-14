@@ -329,6 +329,7 @@ MonoBehaviour:
   weaponManager: {fileID: 114714410810140362}
   bulletSpawnPoint: {fileID: 4453064393674552}
   ps: {fileID: 198463017788404892}
+  bulletLayer: Player Fired
 --- !u!114 &114980250400258964
 MonoBehaviour:
   m_ObjectHideFlags: 1

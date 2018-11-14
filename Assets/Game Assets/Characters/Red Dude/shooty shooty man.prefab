@@ -283,6 +283,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 4141801489650144}
   gunType: {fileID: 11400000, guid: 0e3d8b0dffe09bd419fcebf8484ee0d2, type: 2}
   weaponHolder: {fileID: 4364458348216418}
+  bulletLayer: Enemy Fired
 --- !u!114 &114640785694825438
 MonoBehaviour:
   m_ObjectHideFlags: 1

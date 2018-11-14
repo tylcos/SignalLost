@@ -25,6 +25,9 @@ public class PlayerController : MovementController
         if(collision.tag == "EnemyWeapon")
         {
             collision.GetComponentInParent<EnemyController>().OnHitOpponent(gameObject);
+        } else if(collision.tag == "Projectile")
+        {
+            collision.GetComponentInParent<BulletManager>().sourceEnemy.OnHitOpponent(gameObject);
         }
     }
 }

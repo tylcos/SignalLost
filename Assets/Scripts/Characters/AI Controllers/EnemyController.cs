@@ -86,8 +86,6 @@ public class EnemyController : MovementController
     protected static bool IsGameObjectInRadius(Vector3 center, GameObject target, float radius, int layerMask)
     {
         return Mathf.Sqrt((center - target.transform.position).sqrMagnitude) <= radius;
-        //Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
-        //return (overlap == null);
     }
 
     

@@ -7,6 +7,7 @@ public class Firing : MonoBehaviour
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;
+    public string bulletLayer;
     
     private float timeLastFired;
 
@@ -40,8 +41,9 @@ public class Firing : MonoBehaviour
             bm.lifeTime = weaponManager.Weapon.Info.bulletLifeTime;
             bm.damage = weaponManager.Weapon.Info.damage;
             bm.maxCollisions = weaponManager.Weapon.Info.penetrationDepth;
+            bm.gameObject.layer = 12;
             //bm.targetTags = new string[] {"Enemy"};
-            
+
             float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
             Vector2 directionVector = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
 

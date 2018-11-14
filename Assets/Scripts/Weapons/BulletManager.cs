@@ -6,6 +6,8 @@ public class BulletManager : MonoBehaviour
     public float damage;
     public float maxCollisions;
     private float currentPenetration = 0;
+    public EnemyController sourceEnemy = null;
+    
 
     //public string[] collideLayers;
     //protected int collideLayerMask;
