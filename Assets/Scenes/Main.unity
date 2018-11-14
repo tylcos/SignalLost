@@ -4513,11 +4513,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114395788482646980, guid: 5b9e39121264e184181535c15791a84e,
-        type: 2}
-      propertyPath: bulletLayer
-      value: Enemy Fired
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9e39121264e184181535c15791a84e, type: 2}
   m_IsPrefabAsset: 0
@@ -4559,11 +4554,6 @@ Prefab:
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114887874564137588, guid: 74904ff051524d048a5a98912b5aafbe,
-        type: 2}
-      propertyPath: bulletLayer
-      value: Player Fired
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
