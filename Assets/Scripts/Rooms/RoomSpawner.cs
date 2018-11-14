@@ -24,7 +24,7 @@ public class RoomSpawner : MonoBehaviour
     private const float lowerThreshhold = .2f;
     private const float upperThreshhold = .3f;
     private const float decreaseRandomChance = .2f;
-    private const float increaseRandomChance = .3f;
+    private const float increaseRandomChance = .5f;
 
     private int spawnedRoomCount = -2; // Offset the inital two spawned rooms
 
@@ -114,6 +114,22 @@ public class RoomSpawner : MonoBehaviour
                 }
             }
         }
+
+
+
+        var iterationLevel = Room.rooms[Random.Range(1, iterations + 2)];
+        Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
+
+        foreach (byte direction in RandomHelper.ShuffleList(roomToBuildOffOf.GetAvailableSpawnDirections()))
+        {
+            if (pathways.GetPathwayValid(roomToBuildOffOf.Position, direction))
+            {
+                Room extraRoom = new Room(roomToBuildOffOf.Position + Room.GetDirectionVector(direction), -1);
+            }
+        }
+            
+
+
 
         Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
     }
