@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WeaponAnimation : EnemyAnimation {
 
-    private bool formation = false;
-    private bool inRange = false;
-    private bool shot = false;
-   
+    private bool formationComplete = false;
+    private bool inRange = true;
+    private bool attackComplete = true;
+
     // Use this for initialization
     void Start () {
         enemyControllerAccessor = meleeEnemy.GetComponent<EnemyController>();
@@ -44,7 +44,7 @@ public class WeaponAnimation : EnemyAnimation {
 
 
 
-        /*if (enemyControllerAccessor.isAggro == true)
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
@@ -67,53 +67,6 @@ public class WeaponAnimation : EnemyAnimation {
         {
             animator.SetBool("Shot", true);
             attackComplete = true;
-        }*/
-
-        if(enemyControllerAccessor.isAggro == true)
-        {
-            animator.SetBool("PlayerInRange", true);
-            inRange = true;
         }
-        if (inRange)
-        {
-            animator.SetBool("Formation", true);
-            formation = true;
-        }
-        if (formation)
-        {
-            animator.SetBool("Shot", true);
-        }
-        else
-        {
-            animator.SetBool("PlayerInRange", false);
-            shot = false;
-            inRange = false;
-        }
-
-        /*if (enemyControllerAccessor.isAggro == true)
-        {
-            animator.SetBool("PlayerInRange", true);
-            inRange = true;
-        }
-        else
-        {
-            animator.SetBool("PlayerInRange", false);
-            animator.SetBool("Formation", false);
-            animator.SetBool("Shot", false);
-            inRange = false;
-            formationComplete = false;
-            attackComplete = false;
-        }
-
-        if (inRange)
-        {
-            animator.SetBool("Formation", true);
-            formationComplete = true;
-        }
-        if (formationComplete)
-        {
-            animator.SetBool("Shot", true);
-            attackComplete = true;
-        }*/
     }   
 }
