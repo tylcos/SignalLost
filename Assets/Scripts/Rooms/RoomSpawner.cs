@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public GameObject roomPrefab; // TODO: Random room picking
+    [Tooltip("Starting, Shop, Boss, Extra Rooms...")]
     public GameObject[] roomPrefabs;
 
 
 
-    public Room startRoom = new Room(Vector2Int.zero, -1);
+    public Room startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
     public DictonaryGrid pathways = new DictonaryGrid();
 
     public int iterations = 4;
@@ -54,7 +54,7 @@ public class RoomSpawner : MonoBehaviour
 
             pathways = new DictonaryGrid();
             Room.takenPositions = new HashSet<Vector2Int>();
-            startRoom = new Room(Vector2Int.zero, 0);
+            startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
 
             CreateRoomTree();
         }
@@ -117,32 +117,47 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-        var iterationLevel = Room.rooms[Random.Range(1, iterations + 2)];
-        Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
-
-        foreach (byte direction in RandomHelper.ShuffleList(roomToBuildOffOf.GetAvailableSpawnDirections()))
-        {
-            if (pathways.GetPathwayValid(roomToBuildOffOf.Position, direction))
-            {
-                Room extraRoom = new Room(roomToBuildOffOf.Position + Room.GetDirectionVector(direction), -1);
-            }
-        }
-            
+        // Spawning the boss room and shop room
+        SpawnSpecialRoom(1, iterations + 2, Room.RoomType.ShopRoom);
+        SpawnSpecialRoom(iterations, iterations + 2, Room.RoomType.BossRoom);
 
 
 
         Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
     }
 
-    public void SpawnRoom(Room room)
+    
+
+    void SpawnRoom(Room room)
     {
         ++spawnedRoomCount;
 
         Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
-        Instantiate(roomPrefab, position, transform.rotation, transform);
+        Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
     }
 
-    public int GetRandom(float baseNumber)
+    void SpawnSpecialRoom(int iterationStart, int iterationEnd, Room.RoomType roomType)
+    {
+        var iterationLevel = Room.rooms[Random.Range(iterationStart, iterationEnd)];
+        int a = iterationLevel.Count; Debug.Log(a);
+        Room roomToBuildOffOf = iterationLevel[Random.Range(0, a)];
+
+        foreach (byte direction in RandomHelper.ShuffleList(roomToBuildOffOf.GetAvailableSpawnDirections()))
+        {
+            if (pathways.GetPathwayValid(roomToBuildOffOf.Position, direction))
+            {
+                Room specialRoom = new Room(roomToBuildOffOf.Position + Room.GetDirectionVector(direction), roomType);
+                pathways.SetPathway(roomToBuildOffOf.Position, direction);
+
+                SpawnRoom(specialRoom);
+                break;
+            }
+        }
+    }
+
+
+
+    int GetRandom(float baseNumber)
     {
         float decimalPart = Mathf.Round(baseNumber) - baseNumber;
         int numberToSpawn = 0;
@@ -157,18 +172,18 @@ public class RoomSpawner : MonoBehaviour
         return numberToSpawn > maxConnections ? maxConnections : numberToSpawn;
     }
 
-    public sbyte GetRandomRoom(int parentRoomType)
+    sbyte GetRandomRoom(sbyte parentRoomType)
     {
         int randomRoom;
 
-        while ((randomRoom = Random.Range(0, roomPrefabs.Length)) == parentRoomType);
+        while ((randomRoom = Random.Range(0, roomPrefabs.Length - 3)) == parentRoomType);
 
         return (sbyte)randomRoom;
     }
 
 
 
-    public void InstantiatePathways()
+    void InstantiatePathways()
     {
         Gizmos.color = Color.green;
 
@@ -184,7 +199,7 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
-    public void DeleteAllRooms()
+    void DeleteAllRooms()
     {
         foreach (Transform room in transform)
             Destroy(room.gameObject);
@@ -192,7 +207,7 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-    public List<Vector2> GetDirectionVectors(byte direction)
+    List<Vector2> GetDirectionVectors(byte direction)
     {
         List<Vector2> directions = new List<Vector2>(4);
 
@@ -226,6 +241,13 @@ public class Room
 
     public static List<Room>[] rooms;
 
+    public enum RoomType : sbyte
+    {
+        StartingRoom = -3,
+        ShopRoom = -2,
+        BossRoom = -1
+    }
+
 
 
     public Room(Vector2Int position, sbyte roomType)
@@ -234,6 +256,14 @@ public class Room
         takenPositions.Add(position);
 
         this.roomType = roomType;
+    }
+
+    public Room(Vector2Int position, RoomType roomType)
+    {
+        Position = position;
+        takenPositions.Add(position);
+
+        this.roomType = (sbyte)roomType;
     }
 
 
