@@ -64,6 +64,10 @@ public class RoomSpawner : MonoBehaviour
 
     public void CreateRoomTree()
     {
+        int correctedRoomsToSpawn = roomsToSpawn - 3; // Start, shop, and boss rooms
+
+
+
         Room.Initialize(iterations, roomsToSpawn);
 
         int startDirection = Random.Range(0, 8);
@@ -87,7 +91,7 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-            float ratio = (roomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
+            float ratio = (correctedRoomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
             int nextIteration = currentIteration + 1;
 
             foreach (Room currentRoom in Room.rooms[currentIteration])
@@ -118,8 +122,8 @@ public class RoomSpawner : MonoBehaviour
 
 
         // Spawning the boss room and shop room
-        SpawnSpecialRoom(1, iterations + 2, Room.RoomType.ShopRoom);
-        SpawnSpecialRoom(iterations, iterations + 2, Room.RoomType.BossRoom);
+        SpawnSpecialRoom(Room.MaxIterations - 1, Room.RoomType.ShopRoom);
+        SpawnSpecialRoom(Room.MaxIterations - 1, Room.RoomType.BossRoom);
 
 
 
@@ -136,11 +140,10 @@ public class RoomSpawner : MonoBehaviour
         Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
     }
 
-    void SpawnSpecialRoom(int iterationStart, int iterationEnd, Room.RoomType roomType)
+    void SpawnSpecialRoom(int iterationNumber, Room.RoomType roomType)
     {
-        var iterationLevel = Room.rooms[Random.Range(iterationStart, iterationEnd)];
-        int a = iterationLevel.Count; Debug.Log(a);
-        Room roomToBuildOffOf = iterationLevel[Random.Range(0, a)];
+        var iterationLevel = Room.rooms[iterationNumber];
+        Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
 
         foreach (byte direction in RandomHelper.ShuffleList(roomToBuildOffOf.GetAvailableSpawnDirections()))
         {
@@ -233,6 +236,8 @@ public class Room
 
 
 
+    public static int MaxIterations { get; private set; }
+
     public static HashSet<Vector2Int> takenPositions = new HashSet<Vector2Int>();
 
     public static readonly Vector2Int[] Directions =
@@ -270,13 +275,13 @@ public class Room
 
     public static void Initialize(int iterations, int roomsToSpawn)
     {
-        int maxIterations = iterations + 2; // One for the initial room and last spawned rooms
+        MaxIterations = iterations + 2; // One for the initial room and last spawned rooms
         int averageMaxRooms = (roomsToSpawn / iterations) * 2;
 
-        rooms = new List<Room>[maxIterations];
+        rooms = new List<Room>[MaxIterations];
 
         rooms[0] = new List<Room>(1);
-        for (int i = 1; i < maxIterations; i++)
+        for (int i = 1; i < MaxIterations; i++)
             rooms[i] = new List<Room>(averageMaxRooms);
     }
 
