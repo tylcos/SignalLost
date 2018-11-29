@@ -14,7 +14,7 @@ public class RoomSpawner : MonoBehaviour
     public DictonaryGrid pathways = new DictonaryGrid();
 
     public int iterations = 4;
-    public int roomsToSpawn = 8;
+    public int roomsToSpawn = 11;
     public int scale = 40;
 
 
@@ -122,8 +122,8 @@ public class RoomSpawner : MonoBehaviour
 
 
         // Spawning the boss room and shop room
-        SpawnSpecialRoom(Room.MaxIterations - 1, Room.RoomType.ShopRoom);
-        SpawnSpecialRoom(Room.MaxIterations - 1, Room.RoomType.BossRoom);
+        SpawnSpecialRoom(Room.RoomType.ShopRoom);
+        SpawnSpecialRoom(Room.RoomType.BossRoom);
 
 
 
@@ -140,9 +140,9 @@ public class RoomSpawner : MonoBehaviour
         Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
     }
 
-    void SpawnSpecialRoom(int iterationNumber, Room.RoomType roomType)
+    void SpawnSpecialRoom(Room.RoomType roomType)
     {
-        var iterationLevel = Room.rooms[iterationNumber];
+        var iterationLevel = Room.rooms[Room.MaxIterations - 1];
         Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
 
         foreach (byte direction in RandomHelper.ShuffleList(roomToBuildOffOf.GetAvailableSpawnDirections()))
