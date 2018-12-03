@@ -7,11 +7,12 @@ public class EnemyAnimation : MonoBehaviour {
     public Animator animator;
     [HideInInspector]
     public GameObject meleeEnemy;
+    [HideInInspector]
     public EnemyController enemyControllerAccessor;
 
-    private bool formationComplete = false;
-    private bool inRange = true;
-    private bool attackComplete = true;
+    private bool formation = false;
+    private bool inRange = false;
+    private bool attackComplete = false;
 
     // Use this for initialization
     void Start () {
@@ -26,25 +27,21 @@ public class EnemyAnimation : MonoBehaviour {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
         }
-        else
-        {
-            animator.SetBool("PlayerInRange", false);
-            animator.SetBool("Formation", false);
-            animator.SetBool("Attack", false);
-            inRange = false;
-            formationComplete = false;
-            attackComplete = false;
-        }
-
         if (inRange)
         {
             animator.SetBool("Formation", true);
-            formationComplete = true;
+            formation = true;
         }
-        if (formationComplete)
+        if (formation)
         {
             animator.SetBool("Attack", true);
-            attackComplete = true;
+            if (enemyControllerAccessor.isAggro == false)
+            {
+                animator.SetBool("PlayerInRange", false);
+                attackComplete = false;
+                inRange = false;
+                formation = false;
+            }
         }
     }
 }
