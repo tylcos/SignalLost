@@ -6,6 +6,8 @@ public class EnemyController : MovementController
 {
 
     public string namedebug = "default";
+    public string enemyType = "unknown"; //ADD IMPLEMENTATION AND FORCE REQUIRE
+    public string enemySubType = "unknown";
     public GameObject weaponHolder;
     public GameObject weapon;
 
@@ -54,7 +56,7 @@ public class EnemyController : MovementController
             target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
         isAggro = target != null;
-        print("aggrostate: " + namedebug + " , " + isAggro);
+        //print("aggrostate: " + namedebug + " , " + isAggro);
     }
 
     // Override this in child

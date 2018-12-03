@@ -5,33 +5,37 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public float speed;
-
-    public Rigidbody2D rb2d;
-
-    public float CurrentHitPoints { get; set; }
-    public float MaxHitPoints { get; private set; }
-
+    public float speed; // in units per second
+    public Rigidbody2D rb2d; // attached rigidbody
+    
+    // This is used for the inspector until we have compact data storage
     [SerializeField]
     private float _MaxHitPoints;
+    public float CurrentHitPoints { get; set; }
+    public float MaxHitPoints { get; private set; }
+    
+    public float invincibilityDuration; // length of invincibility frames
+    private float lastDamageTime; // last time took damage
+
+    protected bool moving = false; // is this character executing a coroutine move function?
+    private Coroutine activeCoroutine; // the active coroutine if there is one
 
 
-    public float invincibilityDuration;
-    private float lastDamageTime;
-
-    private void Start()
+    private void Awake()
     {
         lastDamageTime = invincibilityDuration;
-    }
-
-
-
-    public virtual void OnEnable()
-    {
         MaxHitPoints = _MaxHitPoints;
         CurrentHitPoints = _MaxHitPoints;
     }
 
+
+
+    /// <summary>
+    ///     Checks if the character is currently invincible.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>true</c> if the character is invincible.
+    /// </returns>
     public bool IsInvincible()
     {
         return Time.time - lastDamageTime < invincibilityDuration;
@@ -39,7 +43,7 @@ public class MovementController : MonoBehaviour
 
 
     
-    /// <summary>
+     /// <summary>
      ///     Deals <c>damage</c> damage to the enemy's health.
      /// </summary>
      /// <returns>
@@ -129,6 +133,73 @@ public class MovementController : MonoBehaviour
 
 
 
+    /// <summary>
+    ///      Cancels current movement allowing more movement functions to be called.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>false</c> if this object wasn't moving, <c>true</c> otherwise.
+    /// </returns>
+    protected bool CancelMovement()
+    {
+        if(moving)
+        {
+            moving = false;
+            StopCoroutine(activeCoroutine);
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    ///      Moves from the character's current position to the specified coordinates at the character's speed.
+    /// </summary>
+    ///     <param name="destination">The location to move to</param>
+    protected void MoveToLocation(Vector2 destination)
+    {
+        if (moving) return;
+        Vector2 source = transform.position;
+        float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
+        activeCoroutine = StartCoroutine(MoveFromAToB(source, source + destination, duration));
+    }
+
+    private IEnumerator MoveFromAToB(Vector2 a, Vector2 b, float duration) // thanks stackexchange
+    {
+        moving = true;
+        float step = (speed / (a - b).magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            rb2d.MovePosition(Vector2.Lerp(a, b, t)); // Move objectToMove closer to b
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
+        rb2d.MovePosition(b);
+        moving = false;
+    }
+
+
+    /// <summary>
+    ///      Moves the character in the direction of the specified vector at the character's speed.
+    /// </summary>
+    ///     <param name="direction">The direction to move in.</param>
+    protected void MoveTowards(Vector2 direction)
+    {
+        if (moving) return;
+        rb2d.MovePosition((Vector2)transform.position + (direction.normalized * (speed * Time.fixedDeltaTime)));
+    }
+
+    // This model of the function moves it a given distance. This is jank and would probably never be needed, but here it is just in case.
+    /*protected void MoveTowards(Vector2 direction, float distance)
+    {
+        if (moving) return;
+        rb2d.MovePosition((Vector2) transform.position + (direction.normalized * distance));
+    }*/
+
+
+
     // !!!!!!!!!!!!!!!THIS NEEDS OPTIMIZATION!!!!!!!!!!!!!!!!!!!!
     /// <summary>
     ///     Moves the rigidbody to position with wall collision.
@@ -139,6 +210,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="rb2d">The RigidBody2D object.</param>
     ///     <param name="origin">The origin of the movement vector.</param>
     ///     <param name="moveVector">The movement vector to use.</param>
+    [System.Obsolete("Move is deprecated. Use MoveTowards instead.")]
     protected void Move(Rigidbody2D rb2d, Vector2 origin, Vector2 moveVector)
     {
         //rb2d.MovePosition(moveVector + origin);

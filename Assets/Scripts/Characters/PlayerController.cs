@@ -16,8 +16,11 @@ public class PlayerController : MovementController
         if (move.sqrMagnitude == 0)
             return;
         
-        move = move.normalized * speed;
-        Move(rb2d, gameObject.transform.position, move);
+        //move = move.normalized * speed;
+        //Move(rb2d, gameObject.transform.position, move);
+        MoveTowards(move.normalized);
+        //CancelMovement();
+        //MoveToRelativeToSource(transform.position, move.normalized * 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

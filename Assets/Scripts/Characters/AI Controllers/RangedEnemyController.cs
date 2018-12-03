@@ -115,17 +115,50 @@ public class RangedEnemyController : EnemyController {
         // :point_right: https://gamedev.stackexchange.com/questions/100535/coroutine-to-move-to-position-passing-the-movement-speed
         runningAway = true;
         Vector3 startingPosition = transform.position;
-        float timeToRun = vectorToDestination.magnitude / speed;
+        float duration = vectorToDestination.magnitude / speed;
         float startTime = Time.time;
-        transform.position = startingPosition + (Vector3)vectorToDestination;
-        do
+        while (Time.time < startTime + duration)
         {
-            print("running");
-            print(timeToRun);
             print(vectorToDestination.magnitude);
-            transform.position = Vector3.Lerp(startingPosition, vectorToDestination, Time.deltaTime / timeToRun);
+            print(speed);
+            print("running duration = " + duration);
+            transform.position = Vector3.Lerp(startingPosition, vectorToDestination, (Time.time - startTime) / duration);
             yield return new WaitForFixedUpdate();
-        } while (Time.time < startTime + timeToRun);
+        }
+        transform.position = vectorToDestination;
         runningAway = false;
+    }
+
+    // for movement away from things, don't use raycast positions, actually calculate the vector between their transforms' positions
+
+    /*private IEnumerator RunAway(Vector2 vectorToDestination)
+    {
+        runningAway = true;
+        Vector3 start = transform.position;
+        float step = (vectorToDestination.magnitude / speed) * Time.fixedDeltaTime;
+        float t = 0;
+        while(t <= 1.0f)
+        {
+            print("running t = " + t);
+            print("step = " + step);
+            t += step;
+            transform.position = Vector3.Lerp(start, vectorToDestination, t);
+            yield return new WaitForFixedUpdate();
+        }
+        transform.position = vectorToDestination;
+        runningAway = false;
+    }*/
+
+    IEnumerator MoveFromTo(Transform objectToMove, Vector3 a, Vector3 b, float speed)
+    {
+        float step = (speed / (a - b).magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            objectToMove.position = Vector3.Lerp(a, b, t); // Move objectToMove closer to b
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
+        objectToMove.position = b;
     }
 }
