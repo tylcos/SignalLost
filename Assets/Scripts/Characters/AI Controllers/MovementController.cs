@@ -29,12 +29,6 @@ public class MovementController : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        print("move routine " + activeCoroutine != null);
-    }
-
-
     /// <summary>
     ///     Checks if the character is currently invincible.
     /// </summary>
@@ -103,7 +97,6 @@ public class MovementController : MonoBehaviour
         if (IsInvincible()) { return false; }
         CancelMovement();
         MoveTowards(knockbackVector, knockbackVector.magnitude);
-        //Move(rb2d, transform.position, knockbackVector);
         return Damage(damage, duration);
     }
 
@@ -122,7 +115,6 @@ public class MovementController : MonoBehaviour
         if (IsInvincible()) { return false; }
         CancelMovement();
         MoveTowards(knockbackVector, knockbackVector.magnitude);
-        //Move(rb2d, transform.position, knockbackVector);
         return Damage(damage);
     }
 
@@ -167,6 +159,12 @@ public class MovementController : MonoBehaviour
         return activeCoroutine == c && activeCoroutine != null;
     }
 
+    /* TO DO!!!!!!!!!
+     * PRVENT MOVING EACH OTHER BY CHECKING RAYCASTS
+     * IF THE RAYCAST HITS SOMETHING, ACCOUNT FOR THAT
+     * THERE MIGHT STILL BE COLLISION THOUGH, HOW DO I FIX THAT?
+     * 
+     * */
 
     /// <summary>
     ///      Moves from the character's current position to the specified coordinates at the character's speed.
