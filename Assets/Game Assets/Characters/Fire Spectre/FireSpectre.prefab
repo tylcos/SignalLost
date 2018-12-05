@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176214086741286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.12, y: 1.68, z: -10}
+  m_LocalPosition: {x: -2.61, y: 0.48, z: -10}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4172691916193958}
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95779693918079458}
   meleeEnemy: {fileID: 1176214086741286}
-  meleeEnemyAccessor: {fileID: 0}
+  enemyControllerAccessor: {fileID: 0}
 --- !u!114 &114362156729458064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,10 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5591d40fcf35787429876a7e863db59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.15
+  speed: 3
   rb2d: {fileID: 50889516469690704}
   _MaxHitPoints: 100
   invincibilityDuration: 0.05
+  namedebug: default
+  enemyType: unknown
+  enemySubType: unknown
   weaponHolder: {fileID: 0}
   weapon: {fileID: 0}
   aggroRange: 15
@@ -222,7 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95684105940195390}
   meleeEnemy: {fileID: 1176214086741286}
-  meleeEnemyAccessor: {fileID: 0}
+  enemyControllerAccessor: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!212 &212142620017327340
 SpriteRenderer:
   m_ObjectHideFlags: 1

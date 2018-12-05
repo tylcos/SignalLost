@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c562fd58ee28ade44bd99eafdaa26de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.25
+  speed: 6
   rb2d: {fileID: 50099131067445070}
   _MaxHitPoints: 200
   invincibilityDuration: 0.5

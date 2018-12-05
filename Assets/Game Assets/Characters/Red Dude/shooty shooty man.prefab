@@ -160,7 +160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411719202972802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.49, y: 2.34, z: -10}
+  m_LocalPosition: {x: 3.56, y: 3.87, z: -10}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4364458348216418}
@@ -295,11 +295,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a2e7fe6507e404b8441bf253bdb7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 3
   rb2d: {fileID: 50166492276897542}
   _MaxHitPoints: 60
   invincibilityDuration: 0.05
   namedebug: shooty fella
+  enemyType: unknown
+  enemySubType: unknown
   weaponHolder: {fileID: 1930892130316638}
   weapon: {fileID: 1460442571032554}
   aggroRange: 15
@@ -322,7 +324,7 @@ MonoBehaviour:
   tooCloseThreshold: 2
   tooFarThreshold: 6
   attackChargeTime: 1
-  attackPauseDuration: 3
+  attackPauseDuration: 2
   shooting: 0
 --- !u!114 &114664005140517220
 MonoBehaviour:
