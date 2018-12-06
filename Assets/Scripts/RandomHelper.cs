@@ -44,7 +44,7 @@ public static class RandomHelper
             list[i] = list[random];
             list[random] = swap;
             
-            yield return list[i];   // Only swap the required amount of times to save performance
+            yield return list[i]; // Only swap the required amount of times to save performance
         }
     }
 }

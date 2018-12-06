@@ -101,22 +101,19 @@ public class RoomSpawner : MonoBehaviour
                 int numberOfRooms = GetRandom(ratio);
                 List<byte> possibleDirections = currentRoom.GetAvailableSpawnDirections();
 
-                for (int roomNumber = 0; roomNumber < numberOfRooms; roomNumber++)
+                var validDirections = RandomHelper.ShuffleList(possibleDirections)
+                    .Where(d => pathways.GetPathwayValid(currentRoom.Position, d)).Take(numberOfRooms);
+
+                foreach (byte direction in validDirections)
                 {
-                    foreach (byte direction in RandomHelper.ShuffleList(possibleDirections))
-                    {
-                        if (pathways.GetPathwayValid(currentRoom.Position, direction))    // Valid position found
-                        {
-                            possibleDirections.Remove(direction);
+                    possibleDirections.Remove(direction);
 
-                            pathways.SetPathway(currentRoom.Position, direction);
-                            Room newRoom = new Room(currentRoom.Position + Room.GetDirectionVector(direction), GetRandomRoom(currentRoom.roomType));
-                            Room.rooms[nextIteration].Add(newRoom);
+                    pathways.SetPathway(currentRoom.Position, direction);
+                    Room newRoom = new Room(currentRoom.Position + Room.GetDirectionVector(direction), GetRandomRoom(currentRoom.roomType));
+                    Room.rooms[nextIteration].Add(newRoom);
 
-                            SpawnRoom(newRoom);
-                            break; // Exit once a valid direction is found
-                        }
-                    }
+                    SpawnRoom(newRoom);
+                    break; // Exit once a valid direction is found
                 }
             }
         }
@@ -156,23 +153,6 @@ public class RoomSpawner : MonoBehaviour
 
                 SpawnRoom(specialRoom);
                 break;
-            }
-        }
-    }
-
-    void SpawnTeleporters()
-    {
-        var iterationLevel = Room.rooms[Room.MaxIterations - 1];
-        iterationLevel = RandomHelper.ShuffleList(iterationLevel).ToList();
-
-        for (int i = 0; i < teleporterCount; i++)
-        {
-            var rooms = iterationLevel.GetRange(i * 2, 2);
-            var directions = rooms.Select(r => r.GetAvailableSpawnDirections());
-
-            if (directions.All(directionList => directionList.Count > 0))
-            {
-
             }
         }
     }
