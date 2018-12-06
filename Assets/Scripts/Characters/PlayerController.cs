@@ -20,6 +20,7 @@ public class PlayerController : MovementController
         //Move(rb2d, gameObject.transform.position, move);
         MoveTowards(move.normalized);
         //CancelMovement();
+        //MoveToLocation(move.normalized * 2);
         //MoveToRelativeToSource(transform.position, move.normalized * 2);
     }
 
@@ -33,4 +34,5 @@ public class PlayerController : MovementController
             collision.GetComponentInParent<BulletManager>().sourceEnemy.OnHitOpponent(gameObject);
         }
     }
+
 }

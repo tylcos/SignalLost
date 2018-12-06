@@ -10,13 +10,14 @@ public class RangedEnemyController : EnemyController {
 
     public float attackChargeTime;
     public float attackPauseDuration;
-
-    private bool runningAway = false;
+    
     [HideInInspector]
     public bool shooting = false;
 
+    Coroutine fleeing = null;
+
     void FixedUpdate () {
-		if(target != null && !attacking && !runningAway)
+		if(target != null && !attacking && !RunningThisRoutine(fleeing))
         {
             print("doing fixedupdate");
             Vector2 vectorToTarget = Vector2.zero;
@@ -49,13 +50,12 @@ public class RangedEnemyController : EnemyController {
                     if (vectorToTarget.magnitude > attackRange || vectorToTarget.magnitude > tooFarThreshold)
                     {
                         print("too far");
-                        Move(rb2d, transform.position, vectorToTarget.normalized * speed);
+                        MoveTowards(vectorToTarget);
                         AimWeaponAtTarget(vectorToTarget);
                     } else if (vectorToTarget.magnitude < tooCloseThreshold && hitIsTarget)
                     {
                         print("too close");
-                        //Move(rb2d, transform.position, -vectorToTarget.normalized * speed);
-                        StartCoroutine(RunAway(-vectorToTarget.normalized * (followDistance - vectorToTarget.magnitude)));
+                        fleeing = MoveToLocation(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
                         AimWeaponAtTarget(-vectorToTarget);
                     } else if(Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                     {
@@ -110,7 +110,7 @@ public class RangedEnemyController : EnemyController {
         attacking = false;
     }
 
-    private IEnumerator RunAway(Vector2 vectorToDestination)
+    /*private IEnumerator RunAway(Vector2 vectorToDestination)
     {
         // :point_right: https://gamedev.stackexchange.com/questions/100535/coroutine-to-move-to-position-passing-the-movement-speed
         runningAway = true;
@@ -127,7 +127,7 @@ public class RangedEnemyController : EnemyController {
         }
         transform.position = vectorToDestination;
         runningAway = false;
-    }
+    }8?
 
     // for movement away from things, don't use raycast positions, actually calculate the vector between their transforms' positions
 

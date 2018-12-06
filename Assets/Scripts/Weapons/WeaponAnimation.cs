@@ -6,8 +6,6 @@ public class WeaponAnimation : EnemyAnimation {
 
     private bool formation = false;
     private bool inRange = false;
-    private bool shot = false;
-    public Animation anim;
 
 
     // Use this for initialization
@@ -18,7 +16,16 @@ public class WeaponAnimation : EnemyAnimation {
     // Update is called once per frame
     void Update()
     {
-        if(enemyControllerAccessor.isAggro == true)
+        // May use if statements to call specific methods for specific enemies
+        // OR May make seperate scripts for various types of enemies
+        // OR May seperate if statements into own methods to call in enemy type animations
+        GunAnim();
+    }
+   
+// Weapon Types Animations
+    private void GunAnim()
+    {
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
@@ -34,10 +41,28 @@ public class WeaponAnimation : EnemyAnimation {
             if (enemyControllerAccessor.isAggro == false)
             {
                 animator.SetBool("PlayerInRange", false);
-                shot = false;
                 inRange = false;
                 formation = false;
             }
         }
-    }   
+    }
+
+    private void MeleeAnim()
+    {
+        if(enemyControllerAccessor.isAggro == true)
+        {
+            animator.SetBool("PlayerInRange", true);
+            inRange = true;
+        }
+        if (inRange)
+        {
+            
+        }
+     /*   If player is in range, play walking/running animation
+            If player is within attacking range, play attacking animation
+        (KEEP LOOPING THROUGH)*/
+    }
+    /*private void SpecialWeaponAnim(){
+    
+    }*/
 }

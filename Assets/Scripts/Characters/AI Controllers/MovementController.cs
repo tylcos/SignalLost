@@ -29,7 +29,6 @@ public class MovementController : MonoBehaviour
     }
 
 
-
     /// <summary>
     ///     Checks if the character is currently invincible.
     /// </summary>
@@ -96,7 +95,8 @@ public class MovementController : MonoBehaviour
     public bool Damage(float damage, float duration, Vector2 knockbackVector)
     {
         if (IsInvincible()) { return false; }
-        Move(rb2d, transform.position, knockbackVector);
+        CancelMovement();
+        MoveTowards(knockbackVector, knockbackVector.magnitude);
         return Damage(damage, duration);
     }
 
@@ -113,7 +113,8 @@ public class MovementController : MonoBehaviour
     public bool Damage(float damage, Vector2 knockbackVector)
     {
         if (IsInvincible()) { return false; }
-        Move(rb2d, transform.position, knockbackVector);
+        CancelMovement();
+        MoveTowards(knockbackVector, knockbackVector.magnitude);
         return Damage(damage);
     }
 
@@ -144,6 +145,7 @@ public class MovementController : MonoBehaviour
         if(moving)
         {
             moving = false;
+            activeCoroutine = null;
             StopCoroutine(activeCoroutine);
             return true;
         } else
@@ -152,19 +154,32 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    protected bool RunningThisRoutine(Coroutine c)
+    {
+        return activeCoroutine == c && activeCoroutine != null;
+    }
+
+    /* TO DO!!!!!!!!!
+     * PRVENT MOVING EACH OTHER BY CHECKING RAYCASTS
+     * IF THE RAYCAST HITS SOMETHING, ACCOUNT FOR THAT
+     * THERE MIGHT STILL BE COLLISION THOUGH, HOW DO I FIX THAT?
+     * 
+     * */
 
     /// <summary>
     ///      Moves from the character's current position to the specified coordinates at the character's speed.
     /// </summary>
     ///     <param name="destination">The location to move to</param>
-    protected void MoveToLocation(Vector2 destination)
+    protected Coroutine MoveToLocation(Vector2 destination)
     {
-        if (moving) return;
+        if (moving) return null;
         Vector2 source = transform.position;
         float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
         activeCoroutine = StartCoroutine(MoveFromAToB(source, source + destination, duration));
+        return activeCoroutine;
     }
 
+    // potential bug that if it hits a collider it will just ram into it because it cannot detect if its blocked
     private IEnumerator MoveFromAToB(Vector2 a, Vector2 b, float duration) // thanks stackexchange
     {
         moving = true;
@@ -178,6 +193,7 @@ public class MovementController : MonoBehaviour
         }
         rb2d.MovePosition(b);
         moving = false;
+        activeCoroutine = null;
     }
 
 
@@ -186,6 +202,18 @@ public class MovementController : MonoBehaviour
     /// </summary>
     ///     <param name="direction">The direction to move in.</param>
     protected void MoveTowards(Vector2 direction)
+    {
+        if (moving) return;
+        rb2d.MovePosition((Vector2)transform.position + (direction.normalized * (speed * Time.fixedDeltaTime)));
+    }
+
+
+    /// <summary>
+    ///      Moves the character in the direction of the specified vector at the character's speed.
+    /// </summary>
+    ///     <param name="direction">The direction to move in.</param>
+    ///     <param name="speed">Overrides movement speed for a new speed</param>
+    protected void MoveTowards(Vector2 direction, float speed)
     {
         if (moving) return;
         rb2d.MovePosition((Vector2)transform.position + (direction.normalized * (speed * Time.fixedDeltaTime)));
