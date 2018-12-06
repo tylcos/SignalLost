@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 
@@ -13,9 +14,10 @@ public class RoomSpawner : MonoBehaviour
     public Room startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
     public DictonaryGrid pathways = new DictonaryGrid();
 
-    public int iterations = 4;
-    public int roomsToSpawn = 11;
-    public int scale = 40;
+    public const int iterations = 4;
+    public const int roomsToSpawn = 11;
+    public const float teleporterCount = 3;
+    public const int scale = 40;
 
 
 
@@ -154,6 +156,23 @@ public class RoomSpawner : MonoBehaviour
 
                 SpawnRoom(specialRoom);
                 break;
+            }
+        }
+    }
+
+    void SpawnTeleporters()
+    {
+        var iterationLevel = Room.rooms[Room.MaxIterations - 1];
+        iterationLevel = RandomHelper.ShuffleList(iterationLevel).ToList();
+
+        for (int i = 0; i < teleporterCount; i++)
+        {
+            var rooms = iterationLevel.GetRange(i * 2, 2);
+            var directions = rooms.Select(r => r.GetAvailableSpawnDirections());
+
+            if (directions.All(directionList => directionList.Count > 0))
+            {
+
             }
         }
     }
