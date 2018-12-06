@@ -341,10 +341,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c562fd58ee28ade44bd99eafdaa26de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 8
   rb2d: {fileID: 50099131067445070}
   _MaxHitPoints: 200
   invincibilityDuration: 0.5
+  collideLayers:
+  - Enemy
+  - Walls
 --- !u!135 &135339620901660538
 SphereCollider:
   m_ObjectHideFlags: 1

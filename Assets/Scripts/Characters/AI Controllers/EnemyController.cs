@@ -25,9 +25,6 @@ public class EnemyController : MovementController
 
     public string[] targetTags;
 
-    public string[] collideLayers;
-    protected int collideLayerMask;
-
     public GameObject attackIndicator;
     
     protected GameObject target;
@@ -38,7 +35,6 @@ public class EnemyController : MovementController
     private void Start()
     {   
         targetLayerMask = LayerMask.GetMask(targetLayers);
-        collideLayerMask = LayerMask.GetMask(collideLayers);
         lastAttackTime = -attackCooldownLength;
     }
 

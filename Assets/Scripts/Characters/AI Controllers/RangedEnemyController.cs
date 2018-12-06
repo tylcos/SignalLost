@@ -19,7 +19,6 @@ public class RangedEnemyController : EnemyController {
     void FixedUpdate () {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
         {
-            print("doing fixedupdate");
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[2];
             Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
@@ -42,24 +41,20 @@ public class RangedEnemyController : EnemyController {
                     hitIsTarget = true;
                 }
             }
-            print("hit target: " + hitIsTarget);
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range
                 {
                     if (vectorToTarget.magnitude > attackRange || vectorToTarget.magnitude > tooFarThreshold)
                     {
-                        print("too far");
                         MoveTowards(vectorToTarget);
                         AimWeaponAtTarget(vectorToTarget);
                     } else if (vectorToTarget.magnitude < tooCloseThreshold && hitIsTarget)
                     {
-                        print("too close");
                         fleeing = MoveToLocation(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
                         AimWeaponAtTarget(-vectorToTarget);
                     } else if(Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                     {
-                        print("TARGET LOCATED");
                         if (weapon.GetComponent<RangedWeapon>().CanFire())
                         {
                             StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, attackPauseDuration));
@@ -110,55 +105,6 @@ public class RangedEnemyController : EnemyController {
         attacking = false;
     }
 
-    /*private IEnumerator RunAway(Vector2 vectorToDestination)
-    {
-        // :point_right: https://gamedev.stackexchange.com/questions/100535/coroutine-to-move-to-position-passing-the-movement-speed
-        runningAway = true;
-        Vector3 startingPosition = transform.position;
-        float duration = vectorToDestination.magnitude / speed;
-        float startTime = Time.time;
-        while (Time.time < startTime + duration)
-        {
-            print(vectorToDestination.magnitude);
-            print(speed);
-            print("running duration = " + duration);
-            transform.position = Vector3.Lerp(startingPosition, vectorToDestination, (Time.time - startTime) / duration);
-            yield return new WaitForFixedUpdate();
-        }
-        transform.position = vectorToDestination;
-        runningAway = false;
-    }8?
 
-    // for movement away from things, don't use raycast positions, actually calculate the vector between their transforms' positions
 
-    /*private IEnumerator RunAway(Vector2 vectorToDestination)
-    {
-        runningAway = true;
-        Vector3 start = transform.position;
-        float step = (vectorToDestination.magnitude / speed) * Time.fixedDeltaTime;
-        float t = 0;
-        while(t <= 1.0f)
-        {
-            print("running t = " + t);
-            print("step = " + step);
-            t += step;
-            transform.position = Vector3.Lerp(start, vectorToDestination, t);
-            yield return new WaitForFixedUpdate();
-        }
-        transform.position = vectorToDestination;
-        runningAway = false;
-    }*/
-
-    IEnumerator MoveFromTo(Transform objectToMove, Vector3 a, Vector3 b, float speed)
-    {
-        float step = (speed / (a - b).magnitude) * Time.fixedDeltaTime;
-        float t = 0;
-        while (t <= 1.0f)
-        {
-            t += step; // Goes from 0 to 1, incrementing by step each time
-            objectToMove.position = Vector3.Lerp(a, b, t); // Move objectToMove closer to b
-            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
-        }
-        objectToMove.position = b;
-    }
 }

@@ -166,6 +166,13 @@ public class MovementController : MonoBehaviour
      * 
      * */
 
+
+    public string[] collideLayers;
+    protected int collideLayerMask;
+    private void Start()
+    {
+        collideLayerMask = LayerMask.GetMask(collideLayers);
+    }
     /// <summary>
     ///      Moves from the character's current position to the specified coordinates at the character's speed.
     /// </summary>
@@ -203,8 +210,29 @@ public class MovementController : MonoBehaviour
     ///     <param name="direction">The direction to move in.</param>
     protected void MoveTowards(Vector2 direction)
     {
+        // SUGGESTION: USE CHARACTERCONTROLLERS INSTEAD
         if (moving) return;
-        rb2d.MovePosition((Vector2)transform.position + (direction.normalized * (speed * Time.fixedDeltaTime)));
+        Vector2 position = (direction.normalized * (speed * Time.fixedDeltaTime));
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, position, position.magnitude, collideLayerMask);
+        print("length" + hits.Length);
+        if (hits.Length != 0)
+        {
+            RaycastHit2D closestHit = hits[0];
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.fraction == 0) { continue; }
+                if (hit.fraction < closestHit.fraction || closestHit.fraction == 0)
+                {
+                    closestHit = hit;
+                }
+            }
+            print("fraction" + closestHit.distance);
+            if (closestHit.fraction != 0)
+            {
+                position = position.normalized * closestHit.distance;
+            }
+        }
+        rb2d.MovePosition((Vector2)transform.position + position);
     }
 
 
