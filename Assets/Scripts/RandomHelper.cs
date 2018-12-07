@@ -34,7 +34,7 @@ public static class RandomHelper
 
 
 
-    public static IEnumerable<T> ShuffleList<T>(List<T> list)
+    public static IEnumerable<T> Shuffle<T>(this IList<T> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
