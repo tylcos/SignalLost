@@ -51,6 +51,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4808902096279230}
+  - component: {fileID: 114161916595994884}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -105,7 +106,6 @@ GameObject:
   - component: {fileID: 4118150958136508}
   - component: {fileID: 2569400265264793788}
   - component: {fileID: 114251509375693790}
-  - component: {fileID: 114062557827773216}
   m_Layer: 0
   m_Name: Entry Room
   m_TagString: Untagged
@@ -370,12 +370,12 @@ CompositeCollider2D:
       - {x: -12, y: -10}
       - {x: -2, y: -10}
   m_VertexDistance: 0.0005
---- !u!114 &114062557827773216
+--- !u!114 &114161916595994884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1734982991805366}
+  m_GameObject: {fileID: 1546634192046164}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3e1869e3e6484a468b82b1286b792cd, type: 3}
@@ -404,7 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
+    type: 2}
 --- !u!114 &114346265073414044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,7 +417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
+    type: 2}
 --- !u!114 &114596842991873138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -428,7 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
+    type: 2}
 --- !u!114 &114753763899350420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -440,7 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
+    type: 2}
 --- !u!19719996 &2113883505545026762
 TilemapCollider2D:
   m_ObjectHideFlags: 1

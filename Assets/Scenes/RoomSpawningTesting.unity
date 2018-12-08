@@ -310,7 +310,8 @@ MonoBehaviour:
   - {fileID: 2118539679}
   - {fileID: 2118539679}
   iterations: 4
-  roomsToSpawn: 11
+  roomsToSpawn: 15
+  teleporterCount: 3
   scale: 50
 --- !u!4 &686826328 stripped
 Transform:

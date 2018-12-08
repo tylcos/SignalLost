@@ -10,7 +10,7 @@ public class SpawnEnemies : MonoBehaviour
 
     void Start()
     {        
-        foreach (int i in RandomHelper.RandomRangeNoRepeat(0, transform.childCount, numberToSpawn))
+        foreach (int i in RandomHelper.RandomRangeNoRepeat((byte)transform.childCount, (byte)numberToSpawn))
         {
             Transform child = transform.GetChild(i);
             SpawnCharacter(child.GetComponent<SpawnPoint>().spawnCharacter, child);

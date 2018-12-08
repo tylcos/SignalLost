@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-
-
+using System.Diagnostics;
 
 public class RoomSpawner : MonoBehaviour
 {
@@ -58,6 +57,7 @@ public class RoomSpawner : MonoBehaviour
             Room.takenPositions = new HashSet<Vector2Int>();
             startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
 
+            
             CreateRoomTree();
         }
     }
@@ -72,13 +72,17 @@ public class RoomSpawner : MonoBehaviour
 
 
 
+        Stopwatch s = Stopwatch.StartNew();
+
+
+
         // Spawn the start room in a random direction 
         int startDirection = Random.Range(0, 8);
-        Room.rooms[0].Add(new Room(Room.GetDirectionVector(startDirection), GetRandomRoom(-1)));
+        Room.levels[0].Add(new Room(Room.Directions[startDirection], GetRandomRoom(-1)));
         pathways.SetPathway(startRoom.Position, (byte)startDirection);
 
         SpawnRoom(startRoom);
-        SpawnRoom(Room.rooms[0][0]);
+        SpawnRoom(Room.levels[0][0]);
 
 
 
@@ -86,34 +90,36 @@ public class RoomSpawner : MonoBehaviour
         for (int currentIteration = 0; currentIteration < maxIterations; currentIteration++)
         {
             // Spawn rooms on last iteration rooms if no new rooms were spawned
-            int spawnedChildCount = Room.rooms[currentIteration].Count;
+            int spawnedChildCount = Room.levels[currentIteration].Count;
             if (spawnedChildCount == 0) 
             {
                 --currentIteration;
-                spawnedChildCount = Room.rooms[currentIteration].Count;
+                spawnedChildCount = Room.levels[currentIteration].Count;
             }
 
 
-            
-            
+
             float ratio = (correctedRoomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
             int nextIteration = currentIteration + 1;
             
             // Spawn new rooms on every room at the current iteration level
-            foreach (Room currentRoom in Room.rooms[currentIteration])
+            foreach (Room currentRoom in Room.levels[currentIteration])
             {
                 int numberOfRooms = GetRandom(ratio); // Number of rooms to spawn
 
-                var directionsToSpawn = currentRoom.GetAvailableSpawnDirections().Shuffle()
-                    .Where(d => pathways.GetPathwayValid(currentRoom.Position, d)).Take(numberOfRooms); // Get a list of directions where a room will be spawned at
+                // Get a list of directions where a room will be spawned at
+                var directionsToSpawn = currentRoom.GetAvailableSpawnDirectionsShuffled()
+                    .Where(d => pathways.GetPathwayValid(currentRoom.Position, d)).Take(numberOfRooms);
 
                 foreach (byte direction in directionsToSpawn)
                 {
                     pathways.SetPathway(currentRoom.Position, direction);
-                    Room newRoom = new Room(currentRoom.Position + Room.GetDirectionVector(direction), GetRandomRoom(currentRoom.roomType));
-                    Room.rooms[nextIteration].Add(newRoom);
+                    Room newRoom = new Room(currentRoom.Position + Room.Directions[direction], GetRandomRoom(currentRoom.roomType));
+                    Room.levels[nextIteration].Add(newRoom);
 
+                    s.Stop();
                     SpawnRoom(newRoom);
+                    s.Start();
                 }
             }
         }
@@ -124,9 +130,10 @@ public class RoomSpawner : MonoBehaviour
         SpawnSpecialRoom(Room.RoomType.ShopRoom);
         SpawnSpecialRoom(Room.RoomType.BossRoom);
 
+        s.Stop();
 
-
-        Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
+        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
+        UnityEngine.Debug.Log("S " + s.Elapsed);
     }
 
     
@@ -141,15 +148,15 @@ public class RoomSpawner : MonoBehaviour
 
     void SpawnSpecialRoom(Room.RoomType roomType)
     {
-        var iterationLevel = Room.rooms[Room.MaxIterations - 1];
+        var iterationLevel = Room.levels[Room.MaxIterations - 1];
         Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
 
-        var directionsToSpawn = RandomHelper.Shuffle(roomToBuildOffOf.GetAvailableSpawnDirections())
-                    .Where(d => pathways.GetPathwayValid(roomToBuildOffOf.Position, d)).First();
+        var directionsToSpawn = roomToBuildOffOf.GetAvailableSpawnDirectionsShuffled()
+            .First(d => pathways.GetPathwayValid(roomToBuildOffOf.Position, d));
 
 
 
-        Room specialRoom = new Room(roomToBuildOffOf.Position + Room.GetDirectionVector(directionsToSpawn), roomType);
+        Room specialRoom = new Room(roomToBuildOffOf.Position + Room.Directions[directionsToSpawn], (sbyte)roomType);
         pathways.SetPathway(roomToBuildOffOf.Position, directionsToSpawn);
 
         SpawnRoom(specialRoom);
@@ -212,14 +219,9 @@ public class RoomSpawner : MonoBehaviour
     {
         List<Vector2> directions = new List<Vector2>(4);
 
-        if ((direction & 1) > 0)
-            directions.Add(Room.GetDirectionVector(0));
-        if ((direction & 2) > 0)
-            directions.Add(Room.GetDirectionVector(1));
-        if ((direction & 4) > 0)
-            directions.Add(Room.GetDirectionVector(2));
-        if ((direction & 8) > 0)
-            directions.Add(Room.GetDirectionVector(3));
+        for (int i = 0; i < 4; i++)
+            if ((direction & 1 << i) > 0)
+                directions.Add(Room.Directions[i]);
 
         return directions;
     }
@@ -242,7 +244,7 @@ public class Room
         { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
             new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1) };
 
-    public static List<Room>[] rooms;
+    public static List<Room>[] levels;
 
     public enum RoomType : sbyte
     {
@@ -276,31 +278,21 @@ public class Room
         MaxIterations = iterations + 2; // One for the initial room and last spawned rooms
         int averageMaxRooms = (roomsToSpawn / iterations) * 2;
 
-        rooms = new List<Room>[MaxIterations];
+        levels = new List<Room>[MaxIterations];
 
-        rooms[0] = new List<Room>(1);
+        levels[0] = new List<Room>(1);
         for (int i = 1; i < MaxIterations; i++)
-            rooms[i] = new List<Room>(averageMaxRooms);
+            levels[i] = new List<Room>(averageMaxRooms);
     }
 
 
 
-    public List<byte> GetAvailableSpawnDirections()
+    public IEnumerable<byte> GetAvailableSpawnDirectionsShuffled()
     {
-        List<byte> validDirection = new List<byte>(8);
-
-        for (byte i = 0; i < 8; i++)
+        foreach (byte i in RandomHelper.RandomRangeNoRepeat(8, 8))
             if (!takenPositions.Contains(Position + Directions[i]))
-                validDirection.Add(i);
+                yield return i;
 
-        return validDirection;
-    }
-
-
-
-    public static Vector2Int GetDirectionVector(int value)
-    {
-        return Directions[value];
     }
 }
 
