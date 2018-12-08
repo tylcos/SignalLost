@@ -99,6 +99,7 @@ public class RoomSpawner : MonoBehaviour
 
 
 
+            // A value representing about how many rooms should be spawned per room 
             float ratio = (correctedRoomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
             int nextIteration = currentIteration + 1;
             
@@ -130,10 +131,10 @@ public class RoomSpawner : MonoBehaviour
         SpawnSpecialRoom(Room.RoomType.ShopRoom);
         SpawnSpecialRoom(Room.RoomType.BossRoom);
 
-        s.Stop();
 
-        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms");
-        UnityEngine.Debug.Log("S " + s.Elapsed);
+
+        s.Stop();
+        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms in " + s.Elapsed);
     }
 
     
@@ -149,18 +150,26 @@ public class RoomSpawner : MonoBehaviour
     void SpawnSpecialRoom(Room.RoomType roomType)
     {
         var iterationLevel = Room.levels[Room.MaxIterations - 1];
-        Room roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
 
-        var directionsToSpawn = roomToBuildOffOf.GetAvailableSpawnDirectionsShuffled()
-            .First(d => pathways.GetPathwayValid(roomToBuildOffOf.Position, d));
+        // Find a vaild direction
+        Room roomToBuildOffOf = null;
+        List<byte> directionsToSpawn = null;
+        do
+        {
+            roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
+        }
+        while ((directionsToSpawn = roomToBuildOffOf.GetAvailableSpawnDirectionsShuffled()
+            .Where(d => pathways.GetPathwayValid(roomToBuildOffOf.Position, d)).ToList()).Count == 0);
 
 
 
-        Room specialRoom = new Room(roomToBuildOffOf.Position + Room.Directions[directionsToSpawn], (sbyte)roomType);
-        pathways.SetPathway(roomToBuildOffOf.Position, directionsToSpawn);
+        Room specialRoom = new Room(roomToBuildOffOf.Position + Room.Directions[directionsToSpawn[0]], (sbyte)roomType);
+        pathways.SetPathway(roomToBuildOffOf.Position, directionsToSpawn[0]);
 
         SpawnRoom(specialRoom);
     }
+
+
 
 
 
