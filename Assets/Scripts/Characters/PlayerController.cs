@@ -1,9 +1,17 @@
-﻿using UnityEngine;
+﻿using Prime31;
+using UnityEngine;
 
 
 
 public class PlayerController : MovementController
 {
+
+    public CharacterController2D cc2d;
+
+    private void Start()
+    {
+        
+    }
 
     void FixedUpdate()
     {
@@ -15,10 +23,11 @@ public class PlayerController : MovementController
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (move.sqrMagnitude == 0)
             return;
-        
+
         //move = move.normalized * speed;
         //Move(rb2d, gameObject.transform.position, move);
-        MoveTowards(move.normalized);
+        cc2d.move(move.normalized * (speed * Time.fixedDeltaTime));
+        //MoveTowards(move.normalized);
         //CancelMovement();
         //MoveToLocation(move.normalized * 2);
         //MoveToRelativeToSource(transform.position, move.normalized * 2);
