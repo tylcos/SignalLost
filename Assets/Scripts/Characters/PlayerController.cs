@@ -1,4 +1,4 @@
-﻿using Prime31;
+﻿//using Prime31;
 using UnityEngine;
 
 
@@ -6,13 +6,8 @@ using UnityEngine;
 public class PlayerController : MovementController
 {
 
-    public CharacterController2D cc2d;
-
-    private void Start()
-    {
-        
-    }
-
+    //public CharacterController2D cc2d;
+    
     void FixedUpdate()
     {
         Movement();
@@ -26,11 +21,12 @@ public class PlayerController : MovementController
 
         //move = move.normalized * speed;
         //Move(rb2d, gameObject.transform.position, move);
-        cc2d.move(move.normalized * (speed * Time.fixedDeltaTime));
+        //cc2d.move(move.normalized * (speed * Time.fixedDeltaTime));
         //MoveTowards(move.normalized);
         //CancelMovement();
         //MoveToLocation(move.normalized * 2);
         //MoveToRelativeToSource(transform.position, move.normalized * 2);
+        Move(move.normalized);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

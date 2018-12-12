@@ -27,7 +27,7 @@ public class MeleeEnemyController : EnemyController {
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
-
+            print(hitTag);
             // This checks if the raycast hit the target
             bool hitIsTarget = false;
             foreach(string tag in targetTags)
@@ -35,17 +35,20 @@ public class MeleeEnemyController : EnemyController {
                 if(tag == hitTag)
                 {
                     hitIsTarget = true;
+                    break;
                 }
             }
-
+            
             if (vectorToTarget != Vector2.zero)
             {
+                print("enemy located");
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
-                    MoveTowards(vectorToTarget);
+                    //MoveTowards(vectorToTarget);
+                    Move(vectorToTarget);
                     AimWeaponAtTarget(vectorToTarget);
                 }
-                    if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
+                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
                     StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableLength, attackAfterPauseDuration, attackAfterRetreatDistance));
                 }
@@ -74,7 +77,8 @@ public class MeleeEnemyController : EnemyController {
         }
         if (lastAttackTime == Time.time)
         {
-            rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
+            //rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
+            Move(-vectorToTarget.normalized * retreatDistance);
         }
     }
 
@@ -94,6 +98,8 @@ public class MeleeEnemyController : EnemyController {
         attacking = true;
         AimWeaponAtTarget(vectorToTarget);
         float startTime = Time.time;
+        Coroutine retreat = null;
+        bool doing = true;
         while(Time.time < startTime + chargeTime + pauseTime + enableLength + retreatLength)
         {
             Vector3 startingPosition = transform.position;
@@ -113,9 +119,16 @@ public class MeleeEnemyController : EnemyController {
                 weapon.GetComponent<Collider2D>().enabled = false;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time < startTime+chargeTime+enableLength+pauseTime+retreatLength) // RETREATING (jumping backwards)
+            } else if(Time.time > startTime+chargeTime+enableLength+pauseTime && doing) // RETREATING (jumping backwards)
             {
-                transform.position = Vector3.Lerp(startingPosition, -vectorToTarget.normalized * retreatLength, Time.deltaTime / retreatLength);
+                if (retreat == null)
+                {
+                    retreat = MoveTo(-vectorToTarget.normalized * retreatLength);
+                } else if (RunningThisRoutine(retreat))
+                {
+                    doing = false;
+                }
+                //transform.position = Vector3.Lerp(startingPosition, -vectorToTarget.normalized * retreatLength, Time.deltaTime / retreatLength);
                 // do animations here
                 yield return new WaitForFixedUpdate();
             }

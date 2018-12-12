@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Prime31;
+using System.Collections;
 using UnityEngine;
 
 
@@ -166,13 +167,70 @@ public class MovementController : MonoBehaviour
      * 
      * */
 
+    public CharacterController2D cc2d;
 
-    public string[] collideLayers;
+    /// <summary>
+    ///      Moves the character in the direction of the specified vector at the character's speed.
+    /// </summary>
+    ///     <param name="direction">The direction to move in.</param>
+    protected void Move(Vector2 direction)
+    {
+        if (moving) return;
+        cc2d.move(direction.normalized * (speed * Time.fixedDeltaTime));
+    }
+
+    /// <summary>
+    ///      Moves the character in the direction of the specified vector at the character's speed.
+    /// </summary>
+    ///     <param name="direction">The direction to move in.</param>
+    ///     <param name="speed">Overrides movement speed for a new speed</param>
+    protected void Move(Vector2 direction, float speed)
+    {
+        if (moving) return;
+        cc2d.move(direction.normalized * (speed * Time.fixedDeltaTime));
+    }
+
+    /// <summary>
+    ///      Moves from the character's current position to the specified coordinates at the character's speed.
+    /// </summary>
+    ///     <param name="destination">The location to move to</param>
+    protected Coroutine MoveTo(Vector2 destination)
+    {
+        if (moving) return null;
+        Vector2 source = transform.position;
+        float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
+        activeCoroutine = StartCoroutine(MoveToTarget(destination, duration));
+        return activeCoroutine;
+    }
+
+    // potential bug that if it hits a collider it will just ram into it because it cannot detect if its blocked
+    // UPDATE THIS SO IT MOVES ONLY AS FAR AS IT GOT IN THIS CURRENT ITERATION
+    private IEnumerator MoveToTarget(Vector2 b, float duration) // thanks stackexchange
+    {
+        Vector2 a = Vector2.zero;
+        moving = true;
+        float step = (speed / b.magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            //rb2d.MovePosition(Vector2.Lerp(a, b, t)); // Move objectToMove closer to b
+            cc2d.move(b * step);
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
+        //rb2d.MovePosition(b);
+        moving = false;
+        activeCoroutine = null;
+    }
+
+
+    /*public string[] collideLayers;
     protected int collideLayerMask;
     private void Start()
     {
         collideLayerMask = LayerMask.GetMask(collideLayers);
-    }
+    }*/
+    public LayerMask collideLayerMask;
     /// <summary>
     ///      Moves from the character's current position to the specified coordinates at the character's speed.
     /// </summary>

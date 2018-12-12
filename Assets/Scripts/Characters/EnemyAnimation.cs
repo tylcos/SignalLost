@@ -29,7 +29,7 @@ public class EnemyAnimation : MonoBehaviour {
     //Enemy Type Animations
     private void RangedEnemyAnim()
     {
-        if (enemyControllerAccessor.isAggro == true)
+        if (enemyControllerAccessor.IsAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
@@ -42,7 +42,7 @@ public class EnemyAnimation : MonoBehaviour {
         if (formation)
         {
             animator.SetBool("Attack", true);
-            if (enemyControllerAccessor.isAggro == false)
+            if (enemyControllerAccessor.IsAggro == false)
             {
                 animator.SetBool("PlayerInRange", false);
                 inRange = false;

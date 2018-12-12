@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Prime31;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,14 @@ using UnityEngine;
 public class PushingCollider : MonoBehaviour {
 
     public float strength = 0.1f;
-    public Rigidbody2D parent;
-
-    // better idea. have a fixedupdate or something that uses overlap to determine what colliders its in then moves away on a net vector
-    // ontriggerstay should actually accomplish this
-    private void OnTriggerStay2D(Collider other)
+    public CharacterController2D parent;
+    
+    private void OnTriggerStay2D(Collider2D other)
     {
         Vector2 translate;
         Transform opponent = other.transform;
         translate = transform.position - opponent.position;
         translate.Normalize();
-        parent.MovePosition(translate * strength);
+        parent.move(translate * strength);
     }
 }

@@ -30,7 +30,15 @@ public class EnemyController : MovementController
     protected GameObject target;
     protected bool attacking = false;
 
-    public bool isAggro = false;
+    private bool isAggro = false;
+
+    public bool IsAggro
+    {
+        get
+        {
+            return isAggro;
+        }
+    }
 
     private void Start()
     {   
