@@ -66,13 +66,14 @@ public class RoomSpawner : MonoBehaviour
 
     public void CreateRoomTree()
     {
+        var s = Stopwatch.StartNew();
+        var ss = Stopwatch.StartNew();
+
+
+
         int correctedRoomsToSpawn = roomsToSpawn - 3; // Start, shop, and boss rooms
 
         Room.Initialize(iterations, roomsToSpawn);
-
-
-
-        Stopwatch s = Stopwatch.StartNew();
 
 
 
@@ -134,7 +135,8 @@ public class RoomSpawner : MonoBehaviour
 
 
         s.Stop();
-        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms in " + s.Elapsed);
+        ss.Stop();
+        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms in " + ss.Elapsed.Milliseconds + " ms total with " + s.Elapsed.Milliseconds + " ms of computing");
     }
 
     
