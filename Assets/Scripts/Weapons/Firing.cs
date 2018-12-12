@@ -49,7 +49,7 @@ public class Firing : MonoBehaviour
 
             rbBullet.velocity = directionVector * weaponManager.Weapon.Info.bulletSpeed; // + rbPlayer.velocity;
 
-            ps.Play();
+            //ps.Play();
 
 
 
