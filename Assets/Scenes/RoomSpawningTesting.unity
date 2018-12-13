@@ -152,6 +152,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4675590201343846, guid: 91994bd4b61a9f64694a29cd798367b6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91994bd4b61a9f64694a29cd798367b6, type: 2}
   m_IsPrefabAsset: 0
@@ -472,6 +476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fab290eba70b540a5282080990779c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 2130793878}
+  tile: {fileID: 11400000, guid: 724cdd098bb7e2741a1a9666823236df, type: 2}
   target: {fileID: 1615112946}
   offset: {x: -2, y: 0, z: 0}
   roomClear: 1
@@ -560,7 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1615112942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fab290eba70b540a5282080990779c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
+  tile: {fileID: 0}
   target: {fileID: 1504156370}
   offset: {x: 2, y: 0, z: 0}
   roomClear: 1
@@ -793,5 +801,10 @@ Transform:
 --- !u!1 &2118539679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1734982991805366, guid: 91994bd4b61a9f64694a29cd798367b6,
+    type: 2}
+  m_PrefabInternal: {fileID: 37723457}
+--- !u!4 &2130793878 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4122256656148758, guid: 91994bd4b61a9f64694a29cd798367b6,
     type: 2}
   m_PrefabInternal: {fileID: 37723457}
