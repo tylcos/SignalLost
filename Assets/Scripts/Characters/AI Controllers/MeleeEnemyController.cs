@@ -27,7 +27,6 @@ public class MeleeEnemyController : EnemyController {
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
-            print(hitTag);
             // This checks if the raycast hit the target
             bool hitIsTarget = false;
             foreach(string tag in targetTags)
@@ -41,7 +40,6 @@ public class MeleeEnemyController : EnemyController {
             
             if (vectorToTarget != Vector2.zero)
             {
-                print("enemy located");
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
                     //MoveTowards(vectorToTarget);
@@ -100,7 +98,7 @@ public class MeleeEnemyController : EnemyController {
         float startTime = Time.time;
         Coroutine retreat = null;
         bool doing = true;
-        while(Time.time < startTime + chargeTime + pauseTime + enableLength + retreatLength)
+        while(doing)
         {
             Vector3 startingPosition = transform.position;
             if(Time.time < startTime + chargeTime) // CHARGING ATTACK
@@ -123,8 +121,9 @@ public class MeleeEnemyController : EnemyController {
             {
                 if (retreat == null)
                 {
-                    retreat = MoveTo(-vectorToTarget.normalized * retreatLength);
-                } else if (RunningThisRoutine(retreat))
+                    AimWeaponAtTarget(-vectorToTarget);
+                    retreat = MoveTo(-vectorToTarget.normalized * retreatDistance);
+                } else if (!RunningThisRoutine(retreat))
                 {
                     doing = false;
                 }

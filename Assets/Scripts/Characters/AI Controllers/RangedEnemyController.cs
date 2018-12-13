@@ -14,7 +14,7 @@ public class RangedEnemyController : EnemyController {
     [HideInInspector]
     public bool shooting = false;
 
-    Coroutine fleeing = null;
+    private Coroutine fleeing = null;
 
     void FixedUpdate () {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
@@ -47,11 +47,13 @@ public class RangedEnemyController : EnemyController {
                 {
                     if (vectorToTarget.magnitude > attackRange || vectorToTarget.magnitude > tooFarThreshold)
                     {
-                        MoveTowards(vectorToTarget);
+                        //MoveTowards(vectorToTarget);
+                        Move(vectorToTarget);
                         AimWeaponAtTarget(vectorToTarget);
                     } else if (vectorToTarget.magnitude < tooCloseThreshold && hitIsTarget)
                     {
-                        fleeing = MoveToLocation(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
+                        //fleeing = MoveToLocation(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
+                        fleeing = MoveTo(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
                         AimWeaponAtTarget(-vectorToTarget);
                     } else if(Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                     {

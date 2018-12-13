@@ -8,7 +8,9 @@ public class MovementController : MonoBehaviour
 {
     public float speed; // in units per second
     public Rigidbody2D rb2d; // attached rigidbody
-    
+    public CharacterController2D cc2d; // attached charactercontroller2d
+    public LayerMask collideLayerMask;
+
     // This is used for the inspector until we have compact data storage
     [SerializeField]
     private float _MaxHitPoints;
@@ -29,7 +31,6 @@ public class MovementController : MonoBehaviour
         CurrentHitPoints = _MaxHitPoints;
     }
 
-
     /// <summary>
     ///     Checks if the character is currently invincible.
     /// </summary>
@@ -41,15 +42,26 @@ public class MovementController : MonoBehaviour
         return Time.time - lastDamageTime < invincibilityDuration;
     }
 
+    /// <summary>
+    ///      Checks if the specified coroutine is currently being run by this controller.
+    /// </summary>
+    /// <returns>
+    ///     Returns whether or not it is running.
+    /// </returns>
+    protected bool RunningThisRoutine(Coroutine c)
+    {
+        return activeCoroutine == c && activeCoroutine != null;
+    }
 
-    
-     /// <summary>
-     ///     Deals <c>damage</c> damage to the enemy's health.
-     /// </summary>
-     /// <returns>
-     ///     Returns <c>true</c> if the enemy is killed by the damage, false otherwise.
-     /// </returns>
-     ///     <param name="damage">The quantity of damage to deal</param>
+    #region damage functions
+
+    /// <summary>
+    ///     Deals <c>damage</c> damage to the enemy's health.
+    /// </summary>
+    /// <returns>
+    ///     Returns <c>true</c> if the enemy is killed by the damage, false otherwise.
+    /// </returns>
+    ///     <param name="damage">The quantity of damage to deal</param>
     public bool Damage(float damage)
     {
         if(IsInvincible()) { return false; }
@@ -64,9 +76,7 @@ public class MovementController : MonoBehaviour
             return false;
         }
     }
-
-
-
+    
     /// <summary>
     ///     Deals <c>damage</c> damage per second to the enemy's health over <c>duration</c> seconds.
     /// </summary>
@@ -81,9 +91,7 @@ public class MovementController : MonoBehaviour
         StartCoroutine(DamageOverTime(damage, duration));
         return false;
     }
-
-
-
+    
     /// <summary>
     ///      Deals <c>damage</c> damage to the enemy's health over <c>duration</c> seconds, then knocks them back along the given vector.
     /// </summary>
@@ -101,8 +109,6 @@ public class MovementController : MonoBehaviour
         return Damage(damage, duration);
     }
 
-
-
     /// <summary>
     ///      Deals <c>damage</c> damage to the enemy's health., then knocks them back along the given vector.
     /// </summary>
@@ -119,8 +125,6 @@ public class MovementController : MonoBehaviour
         return Damage(damage);
     }
 
-
-
     public IEnumerator DamageOverTime(float dps, float duration)
     {
         float elapsedTime = 0;
@@ -133,7 +137,10 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    #endregion
 
+
+    #region movement functions
 
     /// <summary>
     ///      Cancels current movement allowing more movement functions to be called.
@@ -155,19 +162,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    protected bool RunningThisRoutine(Coroutine c)
-    {
-        return activeCoroutine == c && activeCoroutine != null;
-    }
 
-    /* TO DO!!!!!!!!!
-     * PRVENT MOVING EACH OTHER BY CHECKING RAYCASTS
-     * IF THE RAYCAST HITS SOMETHING, ACCOUNT FOR THAT
-     * THERE MIGHT STILL BE COLLISION THOUGH, HOW DO I FIX THAT?
-     * 
-     * */
-
-    public CharacterController2D cc2d;
 
     /// <summary>
     ///      Moves the character in the direction of the specified vector at the character's speed.
@@ -203,6 +198,20 @@ public class MovementController : MonoBehaviour
         return activeCoroutine;
     }
 
+    /// <summary>
+    ///      Moves from the character's current position to the specified coordinates at the specified speed.
+    /// </summary>
+    ///     <param name="destination">The location to move to</param>
+    ///     <param name="speed">The speed to move at</param>
+    protected Coroutine MoveTo(Vector2 destination, float speed)
+    {
+        if (moving) return null;
+        Vector2 source = transform.position;
+        float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
+        activeCoroutine = StartCoroutine(MoveToTarget(destination, duration, speed));
+        return activeCoroutine;
+    }
+
     // potential bug that if it hits a collider it will just ram into it because it cannot detect if its blocked
     // UPDATE THIS SO IT MOVES ONLY AS FAR AS IT GOT IN THIS CURRENT ITERATION
     private IEnumerator MoveToTarget(Vector2 b, float duration) // thanks stackexchange
@@ -223,14 +232,27 @@ public class MovementController : MonoBehaviour
         activeCoroutine = null;
     }
 
-
-    /*public string[] collideLayers;
-    protected int collideLayerMask;
-    private void Start()
+    private IEnumerator MoveToTarget(Vector2 b, float duration, float speed) // thanks stackexchange
     {
-        collideLayerMask = LayerMask.GetMask(collideLayers);
-    }*/
-    public LayerMask collideLayerMask;
+        Vector2 a = Vector2.zero;
+        moving = true;
+        float step = (speed / b.magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            //rb2d.MovePosition(Vector2.Lerp(a, b, t)); // Move objectToMove closer to b
+            cc2d.move(b * step);
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
+        //rb2d.MovePosition(b);
+        moving = false;
+        activeCoroutine = null;
+    }
+
+    #endregion
+
+    
     /// <summary>
     ///      Moves from the character's current position to the specified coordinates at the character's speed.
     /// </summary>

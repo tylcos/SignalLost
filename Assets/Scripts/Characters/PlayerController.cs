@@ -1,12 +1,10 @@
-﻿//using Prime31;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 
 public class PlayerController : MovementController
 {
-
-    //public CharacterController2D cc2d;
+    
     
     void FixedUpdate()
     {
@@ -19,13 +17,6 @@ public class PlayerController : MovementController
         if (move.sqrMagnitude == 0)
             return;
 
-        //move = move.normalized * speed;
-        //Move(rb2d, gameObject.transform.position, move);
-        //cc2d.move(move.normalized * (speed * Time.fixedDeltaTime));
-        //MoveTowards(move.normalized);
-        //CancelMovement();
-        //MoveToLocation(move.normalized * 2);
-        //MoveToRelativeToSource(transform.position, move.normalized * 2);
         Move(move.normalized);
     }
 
@@ -39,5 +30,6 @@ public class PlayerController : MovementController
             collision.GetComponentInParent<BulletManager>().sourceEnemy.OnHitOpponent(gameObject);
         }
     }
+
 
 }

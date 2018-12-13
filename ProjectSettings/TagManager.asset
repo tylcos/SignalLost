@@ -9,6 +9,7 @@ TagManager:
   - SpawnPoint
   - EnemyWeapon
   - Room
+  - Pushing
   layers:
   - Default
   - TransparentFX
