@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
+
 public class RoomSpawner : MonoBehaviour
 {
+    public GameObject teleporter;
     [Tooltip("Starting, Shop, Boss, Extra Rooms...")]
     public GameObject[] roomPrefabs;
 
@@ -41,7 +45,7 @@ public class RoomSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        InstantiatePathways();
+        InstantiatePathwaysDebug();
     }
 
 
@@ -52,9 +56,8 @@ public class RoomSpawner : MonoBehaviour
         {
             DeleteAllRooms();
             spawnedRoomCount = -2;
-
             pathways = new DictonaryGrid();
-            Room.takenPositions = new HashSet<Vector2Int>();
+            Room.takenPositions = new Dictionary<Vector2Int, Tilemap>(roomsToSpawn + 2);
             startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
 
             
@@ -146,7 +149,9 @@ public class RoomSpawner : MonoBehaviour
         ++spawnedRoomCount;
 
         Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
-        Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
+        var spawedRoom = Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
+
+        Room.takenPositions[room.Position] = spawedRoom.GetComponent<Tilemap>();
     }
 
     void SpawnSpecialRoom(Room.RoomType roomType)
@@ -204,6 +209,17 @@ public class RoomSpawner : MonoBehaviour
 
     void InstantiatePathways()
     {
+        foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
+        {
+            foreach (Vector2 direction in GetDirectionVectors(entry.Value))
+            {
+                //Instantiate(teleporter, )
+            }
+        }
+    }
+
+    void InstantiatePathwaysDebug()
+    {
         Gizmos.color = Color.green;
 
         foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
@@ -249,7 +265,7 @@ public class Room
 
     public static int MaxIterations { get; private set; }
 
-    public static HashSet<Vector2Int> takenPositions = new HashSet<Vector2Int>();
+    public static Dictionary<Vector2Int, Tilemap> takenPositions;
 
     public static readonly Vector2Int[] Directions =
         { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
@@ -269,7 +285,7 @@ public class Room
     public Room(Vector2Int position, sbyte roomType)
     {
         Position = position;
-        takenPositions.Add(position);
+        takenPositions.Add(position, null);
 
         this.roomType = roomType;
     }
@@ -277,7 +293,7 @@ public class Room
     public Room(Vector2Int position, RoomType roomType)
     {
         Position = position;
-        takenPositions.Add(position);
+        takenPositions.Add(position, null);
 
         this.roomType = (sbyte)roomType;
     }
@@ -286,6 +302,8 @@ public class Room
 
     public static void Initialize(int iterations, int roomsToSpawn)
     {
+        takenPositions = new Dictionary<Vector2Int, Tilemap>(roomsToSpawn + 2);
+
         MaxIterations = iterations + 2; // One for the initial room and last spawned rooms
         int averageMaxRooms = (roomsToSpawn / iterations) * 2;
 
@@ -301,9 +319,8 @@ public class Room
     public IEnumerable<byte> GetAvailableSpawnDirectionsShuffled()
     {
         foreach (byte i in RandomHelper.RandomRangeNoRepeat(8, 8))
-            if (!takenPositions.Contains(Position + Directions[i]))
+            if (!takenPositions.ContainsKey(Position + Directions[i]))
                 yield return i;
-
     }
 }
 

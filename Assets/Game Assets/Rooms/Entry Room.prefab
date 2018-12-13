@@ -59,26 +59,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1679601400381578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4122256656148758}
-  - component: {fileID: 8195094282171253624}
-  - component: {fileID: 3664157345832136346}
-  - component: {fileID: 2113883505545026762}
-  - component: {fileID: 50805961852433370}
-  - component: {fileID: 66241657354861572}
-  m_Layer: 0
-  m_Name: Tilemap Wall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1725348960790334
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +86,11 @@ GameObject:
   - component: {fileID: 4118150958136508}
   - component: {fileID: 2569400265264793788}
   - component: {fileID: 114251509375693790}
+  - component: {fileID: 8195094282777444056}
+  - component: {fileID: 3664157344746887688}
+  - component: {fileID: 2113883504519786228}
+  - component: {fileID: 50189378282144924}
+  - component: {fileID: 66603081714072896}
   m_Layer: 0
   m_Name: Entry Room
   m_TagString: Untagged
@@ -157,22 +142,8 @@ Transform:
   m_Children:
   - {fileID: 4808902096279230}
   - {fileID: 4675590201343846}
-  - {fileID: 4122256656148758}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4122256656148758
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4118150958136508}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4129956546261082
 Transform:
@@ -194,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1725348960790334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4118150958136508}
@@ -256,13 +227,13 @@ Transform:
   m_Father: {fileID: 4808902096279230}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50805961852433370
+--- !u!50 &50189378282144924
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
+  m_GameObject: {fileID: 1734982991805366}
   m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -276,12 +247,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &66241657354861572
+--- !u!66 &66603081714072896
 CompositeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
+  m_GameObject: {fileID: 1734982991805366}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -292,83 +263,9 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2113883505545026762}
-    m_ColliderPaths:
-    - - X: 120000000
-        Y: 100000000
-      - X: 20000000
-        Y: 100000000
-      - X: 20000000
-        Y: 90000000
-      - X: 110000000
-        Y: 90000000
-      - X: 110000000
-        Y: 20000000
-      - X: 120000000
-        Y: 20000000
-    - - X: -110000000
-        Y: 90000000
-      - X: -20000000
-        Y: 90000000
-      - X: -20000000
-        Y: 100000000
-      - X: -120000000
-        Y: 100000000
-      - X: -120000000
-        Y: 20000000
-      - X: -110000000
-        Y: 20000000
-    - - X: 120000000
-        Y: -20000000
-      - X: 110000000
-        Y: -20000000
-      - X: 110000000
-        Y: -90000000
-      - X: 20000000
-        Y: -90000000
-      - X: 20000000
-        Y: -100000000
-      - X: 120000000
-        Y: -100000000
-    - - X: -20000000
-        Y: -90000000
-      - X: -110000000
-        Y: -90000000
-      - X: -110000000
-        Y: -20000000
-      - X: -120000000
-        Y: -20000000
-      - X: -120000000
-        Y: -100000000
-      - X: -20000000
-        Y: -100000000
+  m_ColliderPaths: []
   m_CompositePaths:
-    m_Paths:
-    - - {x: 12, y: 10}
-      - {x: 2, y: 10}
-      - {x: 2, y: 9}
-      - {x: 11, y: 9}
-      - {x: 11, y: 2}
-      - {x: 12, y: 2}
-    - - {x: -11, y: 9}
-      - {x: -2, y: 9}
-      - {x: -2, y: 10}
-      - {x: -12, y: 10}
-      - {x: -12, y: 2}
-      - {x: -11, y: 2}
-    - - {x: 12, y: -2}
-      - {x: 11, y: -2}
-      - {x: 11, y: -9}
-      - {x: 2, y: -9}
-      - {x: 2, y: -10}
-      - {x: 12, y: -10}
-    - - {x: -2, y: -9}
-      - {x: -11, y: -9}
-      - {x: -11, y: -2}
-      - {x: -12, y: -2}
-      - {x: -12, y: -10}
-      - {x: -2, y: -10}
+    m_Paths: []
   m_VertexDistance: 0.0005
 --- !u!114 &114161916595994884
 MonoBehaviour:
@@ -445,12 +342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
     type: 2}
---- !u!19719996 &2113883505545026762
+--- !u!19719996 &2113883504519786228
 TilemapCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
+  m_GameObject: {fileID: 1734982991805366}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -511,12 +408,12 @@ TilemapRenderer:
   m_SortOrder: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!483693784 &3664157345832136346
+--- !u!483693784 &3664157344746887688
 TilemapRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
+  m_GameObject: {fileID: 1734982991805366}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4299,12 +4196,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1839735485 &8195094282171253624
+--- !u!1839735485 &8195094282777444056
 Tilemap:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679601400381578}
+  m_GameObject: {fileID: 1734982991805366}
   m_Enabled: 1
   m_Tiles:
   - first: {x: -12, y: -10, z: 0}
