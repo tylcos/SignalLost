@@ -17,11 +17,7 @@ public class TeleporterBlock : MonoBehaviour
 
     private void Start()
     {
-        Vector3Int position = new Vector3Int(10, 0, 110);
-
-        Tilemap tilemap = room.GetComponent<Tilemap>();
-        tilemap.SetTile(position, tile);
-        tilemap.RefreshTile(position);
+        Vector3Int position = new Vector3Int(10, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -14,7 +14,7 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-    public Room startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
+    public Room startRoom;
     public DictonaryGrid pathways = new DictonaryGrid();
         
     public int iterations = 4;
@@ -41,6 +41,7 @@ public class RoomSpawner : MonoBehaviour
             throw new System.ArgumentOutOfRangeException("roomPrefabs", "Must have at least two different room prefabs to choose from");
 
         CreateRoomTree();
+        InstantiatePathways();
     }
 
     private void OnDrawGizmos()
@@ -81,6 +82,8 @@ public class RoomSpawner : MonoBehaviour
 
 
         // Spawn the start room in a random direction 
+        startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
+
         int startDirection = Random.Range(0, 8);
         Room.levels[0].Add(new Room(Room.Directions[startDirection], GetRandomRoom(-1)));
         pathways.SetPathway(startRoom.Position, (byte)startDirection);
@@ -213,6 +216,7 @@ public class RoomSpawner : MonoBehaviour
         {
             foreach (Vector2 direction in GetDirectionVectors(entry.Value))
             {
+                var tm = Room.takenPositions[entry.Key].GetComponent<Tilemap>();
                 //Instantiate(teleporter, )
             }
         }
@@ -222,14 +226,17 @@ public class RoomSpawner : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
+        if (pathways != null)
         {
-            foreach (Vector2 direction in GetDirectionVectors(entry.Value))
+            foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
             {
-                if (direction == Room.Directions[3])
-                    Gizmos.DrawLine((Vector2)(entry.Key + Vector2Int.right) * scale, ((entry.Key + Vector2Int.right) + direction) * scale);
-                else
-                    Gizmos.DrawLine((Vector2)entry.Key * scale, (entry.Key + direction) * scale);
+                foreach (Vector2 direction in GetDirectionVectors(entry.Value))
+                {
+                    if (direction == Room.Directions[3])
+                        Gizmos.DrawLine((Vector2)(entry.Key + Vector2Int.right) * scale, ((entry.Key + Vector2Int.right) + direction) * scale);
+                    else
+                        Gizmos.DrawLine((Vector2)entry.Key * scale, (entry.Key + direction) * scale);
+                }
             }
         }
     }

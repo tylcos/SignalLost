@@ -15,7 +15,7 @@ public class Firing : MonoBehaviour
     {
         Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
 
-        if ((Input.GetMouseButton(0) || shootDir.sqrMagnitude != 0) 
+        if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) 
             && Time.time - timeLastFired > weaponManager.Weapon.Info.cycleTime)
         {
             if (weaponManager.Weapon.CurrentAmmo == 0)
