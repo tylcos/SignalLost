@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-guid: c848e97da2c2b5a4584c55b7116852e7
+guid: 536057b46e98f0948b8fbbc9802ba875
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mpc_scheps_idle_0
-    21300002: mpc_scheps_idle_1
-    21300004: mpc_scheps_idle_2
-    21300006: mpc_scheps_idle_3
-    21300008: mpc_scheps_idle_4
-    21300010: mpc_scheps_idle_5
+    21300000: fire_spectre_boi_cast_0
+    21300002: fire_spectre_boi_cast_1
+    21300004: fire_spectre_boi_cast_2
+    21300006: fire_spectre_boi_cast_3
+    21300008: fire_spectre_boi_cast_4
+    21300010: fire_spectre_boi_cast_5
+    21300012: fire_spectre_boi_cast_6
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,13 +91,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mpc_scheps_idle_0
+      name: fire_spectre_boi_cast_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 13
-        height: 47
+        x: 4
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +105,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 019a431caf962b14e81991b044faff51
+      spriteID: a8bb04c652c2ebe41ad439e83bd84536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_1
+      name: fire_spectre_boi_cast_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1
-        width: 13
-        height: 47
+        x: 36
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +125,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8036d1811f711d448d32f63be5b6cee
+      spriteID: e2e49b72dfcddbc489d34736d10a96d0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_2
+      name: fire_spectre_boi_cast_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 1
-        width: 13
-        height: 47
+        x: 68
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +145,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dac614080ce76844e8b27c9094a9edca
+      spriteID: 92d817905de75074b8c2ab103d561f2c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_3
+      name: fire_spectre_boi_cast_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 1
-        width: 13
-        height: 47
+        x: 101
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +165,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956c6212857ff99419feb5db499211c6
+      spriteID: b0604b0f6647eb34ba562256e528b1e5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_4
+      name: fire_spectre_boi_cast_4
       rect:
         serializedVersion: 2
-        x: 137
-        y: 1
-        width: 13
-        height: 47
+        x: 134
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +185,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eae729fa552f8c43b7ff24d9a196f59
+      spriteID: a9e959cba30ca82449f22377a5ebc882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_5
+      name: fire_spectre_boi_cast_5
       rect:
         serializedVersion: 2
-        x: 169
-        y: 1
-        width: 13
-        height: 47
+        x: 166
+        y: 2
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +205,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b137559479134f047bf2f1d2b1d6792e
+      spriteID: e796654566db4994fb404442c890e947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_spectre_boi_cast_6
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 2
+        width: 25
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72de1937771c32841b8f1abe21b34ae2
       vertices: []
       indices: 
       edges: []
@@ -212,7 +233,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9aaedd7e18273044e83668edac3dda2e
+    spriteID: 0399824265f96d446b416dc638932719
     vertices: []
     indices: 
     edges: []

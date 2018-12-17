@@ -226,7 +226,6 @@ MonoBehaviour:
   animator: {fileID: 95684105940195390}
   meleeEnemy: {fileID: 1176214086741286}
   enemyControllerAccessor: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!212 &212142620017327340
 SpriteRenderer:
   m_ObjectHideFlags: 1

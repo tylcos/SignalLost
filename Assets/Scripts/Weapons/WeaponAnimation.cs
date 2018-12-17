@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class WeaponAnimation : EnemyAnimation {
 
-    private bool formation = false;
-    private bool inRange = false;
-
-
     // Use this for initialization
     void Start () {
         enemyControllerAccessor = meleeEnemy.GetComponent<EnemyController>();
@@ -47,7 +43,7 @@ public class WeaponAnimation : EnemyAnimation {
         }
     }
 
-    private void MeleeAnim()
+    /*private void MeleeAnim()
     {
         if(enemyControllerAccessor.isAggro == true)
         {
@@ -57,7 +53,7 @@ public class WeaponAnimation : EnemyAnimation {
         if (inRange)
         {
             
-        }
+        }*/
      /*   If player is in range, play walking/running animation
             If player is within attacking range, play attacking animation
         (KEEP LOOPING THROUGH)*/
@@ -65,4 +61,3 @@ public class WeaponAnimation : EnemyAnimation {
     /*private void SpecialWeaponAnim(){
     
     }*/
-}

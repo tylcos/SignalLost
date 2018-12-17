@@ -1,13 +1,15 @@
 fileFormatVersion: 2
-guid: c848e97da2c2b5a4584c55b7116852e7
+guid: d56e7be7a64e62041a4ee3df1f6e2222
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mpc_scheps_idle_0
-    21300002: mpc_scheps_idle_1
-    21300004: mpc_scheps_idle_2
-    21300006: mpc_scheps_idle_3
-    21300008: mpc_scheps_idle_4
-    21300010: mpc_scheps_idle_5
+    21300000: Inner Dirt_0
+    21300002: Inner Dirt_1
+    21300004: Inner Dirt_2
+    21300006: Inner Dirt_3
+    21300008: Inner Dirt_4
+    21300010: Inner Dirt_5
+    21300012: Inner Dirt_6
+    21300014: Inner Dirt_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -51,7 +53,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,13 +92,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mpc_scheps_idle_0
+      name: Inner Dirt_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 13
-        height: 47
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +106,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 019a431caf962b14e81991b044faff51
+      spriteID: 61ed909f2c0714a4f96cfa9d1cfcc537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_1
+      name: Inner Dirt_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1
-        width: 13
-        height: 47
+        x: 257
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +126,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8036d1811f711d448d32f63be5b6cee
+      spriteID: 0afadcf13cd107c43a12bccc1b44072d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_2
+      name: Inner Dirt_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 1
-        width: 13
-        height: 47
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +146,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dac614080ce76844e8b27c9094a9edca
+      spriteID: 490f43f50bffd364f8779a8a4209b6b4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_3
+      name: Inner Dirt_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 1
-        width: 13
-        height: 47
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +166,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956c6212857ff99419feb5db499211c6
+      spriteID: b5fcdb9e03f32234384adccff4f94e3c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_4
+      name: Inner Dirt_4
       rect:
         serializedVersion: 2
-        x: 137
-        y: 1
-        width: 13
-        height: 47
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +186,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eae729fa552f8c43b7ff24d9a196f59
+      spriteID: 978977e5bff671247b5406ed319cb5ca
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_5
+      name: Inner Dirt_5
       rect:
         serializedVersion: 2
-        x: 169
-        y: 1
-        width: 13
-        height: 47
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +206,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b137559479134f047bf2f1d2b1d6792e
+      spriteID: 6b41084011b8af44aae13cb66dbdde73
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inner Dirt_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae6e1862664b0c4ea172b99d7c1187d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inner Dirt_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b79c57c67461b14cb68b1a8e5ab3e37
       vertices: []
       indices: 
       edges: []
@@ -212,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9aaedd7e18273044e83668edac3dda2e
+    spriteID: 8bf34a887b14a814d9fe0bfca68f0d79
     vertices: []
     indices: 
     edges: []

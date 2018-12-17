@@ -10,8 +10,8 @@ public class EnemyAnimation : MonoBehaviour {
     [HideInInspector]
     public EnemyController enemyControllerAccessor;
 
-    private bool formation = false;
-    private bool inRange = false;
+    public bool formation = false;
+    public bool inRange = false;
 
     // Use this for initialization
     void Start () {
@@ -34,12 +34,23 @@ public class EnemyAnimation : MonoBehaviour {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
         }
+        else
+        {
+            animator.SetBool("PlayerInRange", false);
+            inRange = false;
+        }
+
         if (inRange)
         {
             animator.SetBool("Formation", true);
             formation = true;
         }
-        if (formation)
+        else
+        {
+            animator.SetBool("Formation", false);
+            formation = false;
+        }
+        /*if (formation)
         {
             animator.SetBool("Attack", true);
             if (enemyControllerAccessor.isAggro == false)
@@ -48,7 +59,7 @@ public class EnemyAnimation : MonoBehaviour {
                 inRange = false;
                 formation = false;
             }
-        }
+        }*/
     }
  
     /* private void MeleeEnemyAnim(){

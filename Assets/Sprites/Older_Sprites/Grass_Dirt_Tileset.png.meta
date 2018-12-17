@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-guid: c848e97da2c2b5a4584c55b7116852e7
+guid: 5d02218ad3916c848820d56785420c0f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mpc_scheps_idle_0
-    21300002: mpc_scheps_idle_1
-    21300004: mpc_scheps_idle_2
-    21300006: mpc_scheps_idle_3
-    21300008: mpc_scheps_idle_4
-    21300010: mpc_scheps_idle_5
+    21300000: Grass_Dirt_Tileset_0
+    21300002: Grass_Dirt_Tileset_1
+    21300004: Grass_Dirt_Tileset_2
+    21300006: Grass_Dirt_Tileset_3
+    21300008: Grass_Dirt_Tileset_4
+    21300010: Grass_Dirt_Tileset_5
+    21300012: Grass_Dirt_Tileset_6
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,13 +91,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mpc_scheps_idle_0
+      name: Grass_Dirt_Tileset_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 13
-        height: 47
+        x: 55
+        y: 877
+        width: 649
+        height: 648
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +105,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 019a431caf962b14e81991b044faff51
+      spriteID: 4f7c2444542237d45915ae9592442c9e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_1
+      name: Grass_Dirt_Tileset_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1
-        width: 13
-        height: 47
+        x: 753
+        y: 1309
+        width: 216
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +125,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8036d1811f711d448d32f63be5b6cee
+      spriteID: 057d4414f83929a48bcbd358b8c06833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_2
+      name: Grass_Dirt_Tileset_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 1
-        width: 13
-        height: 47
+        x: 1018
+        y: 1313
+        width: 216
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +145,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dac614080ce76844e8b27c9094a9edca
+      spriteID: 0fbedda2f94d56c4ab4ca55176fe65e1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_3
+      name: Grass_Dirt_Tileset_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 1
-        width: 13
-        height: 47
+        x: 753
+        y: 1011
+        width: 216
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,47 +165,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956c6212857ff99419feb5db499211c6
+      spriteID: 45f738a5603e74a49a8818b2bdceb010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_4
+      name: Grass_Dirt_Tileset_4
       rect:
         serializedVersion: 2
-        x: 137
-        y: 1
-        width: 13
-        height: 47
+        x: 1018
+        y: 1011
+        width: 216
+        height: 216
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eae729fa552f8c43b7ff24d9a196f59
+      spriteID: 1bde70dcc5ac83044b249c6c8da5735a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_5
+      name: Grass_Dirt_Tileset_5
       rect:
         serializedVersion: 2
-        x: 169
-        y: 1
-        width: 13
-        height: 47
+        x: 1302
+        y: 877
+        width: 216
+        height: 648
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b137559479134f047bf2f1d2b1d6792e
+      spriteID: 57b857171b35b7042b91a005ee469bf9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Dirt_Tileset_6
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 122
+        width: 648
+        height: 648
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 987d4324dfa9dda4aa11f1be1793a29e
       vertices: []
       indices: 
       edges: []
@@ -212,7 +233,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9aaedd7e18273044e83668edac3dda2e
+    spriteID: 23e11e5778e8faa409f5e763aed17b4c
     vertices: []
     indices: 
     edges: []

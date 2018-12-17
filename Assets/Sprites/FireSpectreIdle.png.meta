@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: c848e97da2c2b5a4584c55b7116852e7
+guid: 8c05a5153a1643c429ff20c66e36cea8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mpc_scheps_idle_0
-    21300002: mpc_scheps_idle_1
-    21300004: mpc_scheps_idle_2
-    21300006: mpc_scheps_idle_3
-    21300008: mpc_scheps_idle_4
-    21300010: mpc_scheps_idle_5
+    21300000: FireSpectreIdle_0
+    21300002: FireSpectreIdle_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,121 +86,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mpc_scheps_idle_0
+      name: FireSpectreIdle_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 13
-        height: 47
+        x: 3
+        y: 4
+        width: 26
+        height: 38
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 019a431caf962b14e81991b044faff51
+      spriteID: 27bcd9bc7ed0a634fae2d76b6b8ca298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mpc_scheps_idle_1
+      name: FireSpectreIdle_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1
-        width: 13
-        height: 47
+        x: 35
+        y: 3
+        width: 26
+        height: 38
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8036d1811f711d448d32f63be5b6cee
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mpc_scheps_idle_2
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 1
-        width: 13
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dac614080ce76844e8b27c9094a9edca
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mpc_scheps_idle_3
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 1
-        width: 13
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 956c6212857ff99419feb5db499211c6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mpc_scheps_idle_4
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 1
-        width: 13
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0eae729fa552f8c43b7ff24d9a196f59
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mpc_scheps_idle_5
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 1
-        width: 13
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b137559479134f047bf2f1d2b1d6792e
+      spriteID: a55c89758b3f5764ab5e30651714efa1
       vertices: []
       indices: 
       edges: []
@@ -212,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9aaedd7e18273044e83668edac3dda2e
+    spriteID: a84f081a43124e84eb1fd647973838fe
     vertices: []
     indices: 
     edges: []
