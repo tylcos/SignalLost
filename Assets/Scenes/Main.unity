@@ -382,7 +382,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -405,7 +405,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: -110}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1237663205}
@@ -478,7 +478,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4371554955868518, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 2}
@@ -4398,10 +4398,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1137757024005666, guid: 33634c035a7a5b548bc5a043244a7dd0, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33634c035a7a5b548bc5a043244a7dd0, type: 2}
   m_IsPrefabAsset: 0
@@ -4553,7 +4549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9e39121264e184181535c15791a84e, type: 2}
@@ -4597,9 +4593,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1298569208637172, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 61047100213059538, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 61047100213059538, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 58868075079340210, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 2}
@@ -4618,7 +4625,7 @@ GameObject:
   - component: {fileID: 1726713100}
   - component: {fileID: 1726713099}
   - component: {fileID: 1726713098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

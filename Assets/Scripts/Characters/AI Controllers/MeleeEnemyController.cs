@@ -1,14 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemyController : EnemyController {
+
+    #region events and fields
 
     public float attackChargeTime;
     public float attackColliderEnableLength;
     public float attackAfterPauseDuration;
     public float attackAfterRetreatDistance;
-    
+
+    public override void OnHitOpponent(GameObject entityHit)
+    {
+        if (Time.time - lastAttackTime > waitTime)
+        {
+            base.OnHitOpponent(entityHit);
+            lastAttackTime = Time.time;
+        }
+        // do anything specific to the melee enemy here
+    }
+
+    #endregion
+
+    #region monobehavior
+
     void FixedUpdate()
     {
         if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
@@ -27,7 +42,6 @@ public class MeleeEnemyController : EnemyController {
                     vectorToTarget = hit.point - (Vector2)transform.position;
                 }
             }
-
             // This checks if the raycast hit the target
             bool hitIsTarget = false;
             foreach(string tag in targetTags)
@@ -35,17 +49,19 @@ public class MeleeEnemyController : EnemyController {
                 if(tag == hitTag)
                 {
                     hitIsTarget = true;
+                    break;
                 }
             }
-
+            
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
-                    MoveTowards(vectorToTarget);
+                    //MoveTowards(vectorToTarget);
+                    Move(vectorToTarget);
                     AimWeaponAtTarget(vectorToTarget);
                 }
-                    if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
+                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
                     StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableLength, attackAfterPauseDuration, attackAfterRetreatDistance));
                 }
@@ -53,30 +69,8 @@ public class MeleeEnemyController : EnemyController {
         }
     }
 
+    #endregion
 
-    public override void OnHitOpponent(GameObject entityHit)
-    {
-        if(Time.time - lastAttackTime > waitTime)
-        {
-            base.OnHitOpponent(entityHit);
-            lastAttackTime = Time.time;
-        }
-        // do anything specific to the melee enemy here
-    }
-
-    private void OverlapAttack(Vector2 vectorToTarget)
-    {
-        Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
-        foreach (Collider2D col in overlap)
-        {
-            col.gameObject.GetComponent<MovementController>().Damage(damage);
-            lastAttackTime = Time.time;
-        }
-        if (lastAttackTime == Time.time)
-        {
-            rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
-        }
-    }
 
     /// <summary>
     ///     Times the attacking cycle for a sword style attack
@@ -94,7 +88,9 @@ public class MeleeEnemyController : EnemyController {
         attacking = true;
         AimWeaponAtTarget(vectorToTarget);
         float startTime = Time.time;
-        while(Time.time < startTime + chargeTime + pauseTime + enableLength + retreatLength)
+        Coroutine retreat = null;
+        bool doing = true;
+        while(doing)
         {
             Vector3 startingPosition = transform.position;
             if(Time.time < startTime + chargeTime) // CHARGING ATTACK
@@ -113,9 +109,16 @@ public class MeleeEnemyController : EnemyController {
                 weapon.GetComponent<Collider2D>().enabled = false;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time < startTime+chargeTime+enableLength+pauseTime+retreatLength) // RETREATING (jumping backwards)
+            } else if(Time.time > startTime+chargeTime+enableLength+pauseTime && doing) // RETREATING (jumping backwards)
             {
-                transform.position = Vector3.Lerp(startingPosition, -vectorToTarget.normalized * retreatLength, Time.deltaTime / retreatLength);
+                if (retreat == null)
+                {
+                    AimWeaponAtTarget(-vectorToTarget);
+                    retreat = MoveTo(-vectorToTarget.normalized * retreatDistance);
+                } else if (!RunningThisRoutine(retreat))
+                {
+                    doing = false;
+                }
                 // do animations here
                 yield return new WaitForFixedUpdate();
             }
