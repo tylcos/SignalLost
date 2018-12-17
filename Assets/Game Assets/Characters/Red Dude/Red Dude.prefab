@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be37872fd56c2f4188bae90cc0b686c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0.02
+  strength: 0.03
   parent: {fileID: 114268929445979850}
 --- !u!114 &114268929445979850
 MonoBehaviour:
@@ -399,16 +399,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
-  rb2d: {fileID: 50032802451872066}
+  cc2d: {fileID: 114268929445979850}
   _MaxHitPoints: 100
   invincibilityDuration: 0.05
-  cc2d: {fileID: 114268929445979850}
-  collideLayerMask:
-    serializedVersion: 2
-    m_Bits: 1792
   namedebug: default
-  enemyType: unknown
-  enemySubType: unknown
   weaponHolder: {fileID: 1735258238636906}
   weapon: {fileID: 1104184525536968}
   aggroRange: 30
@@ -417,8 +411,9 @@ MonoBehaviour:
   damage: 15
   attackRange: 1.5
   attackCooldownLength: 2
-  targetLayers:
-  - Player
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   targetTags:
   - Player
   attackIndicator: {fileID: 1227678452590240}

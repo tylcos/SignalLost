@@ -5,11 +5,11 @@
 public class EnemyController : MovementController
 {
 
-    public string namedebug = "default";
-    public string enemyType = "unknown"; //ADD IMPLEMENTATION AND FORCE REQUIRE
-    public string enemySubType = "unknown";
+    #region events and fields
+
     public GameObject weaponHolder;
     public GameObject weapon;
+    public GameObject attackIndicator;
 
     public float aggroRange;
     public float retreatDistance;
@@ -19,17 +19,12 @@ public class EnemyController : MovementController
     public float attackRange;
     public float attackCooldownLength;
     protected float lastAttackTime;
-
-    public string[] targetLayers;
-    protected int targetLayerMask;
-
-    public string[] targetTags;
-
-    public GameObject attackIndicator;
     
+    public LayerMask targetLayerMask;
+    public string[] targetTags;
     protected GameObject target;
-    protected bool attacking = false;
 
+    protected bool attacking = false;
     private bool isAggro = false;
 
     public bool IsAggro
@@ -40,12 +35,21 @@ public class EnemyController : MovementController
         }
     }
 
-    private void Start()
-    {   
-        targetLayerMask = LayerMask.GetMask(targetLayers);
-        lastAttackTime = -attackCooldownLength;
+    // Override this in child
+    public virtual void OnHitOpponent(GameObject entityHit)
+    {
+        entityHit.GetComponent<MovementController>().Damage(damage);
     }
 
+    #endregion
+
+
+    #region monobehavior
+
+    private void Start()
+    {   
+        lastAttackTime = -attackCooldownLength;
+    }
     
     protected virtual void Update()
     {
@@ -60,16 +64,8 @@ public class EnemyController : MovementController
             target = AttemptFindNewSingleTarget(transform.position, aggroRange, targetLayerMask);
         }
         isAggro = target != null;
-        //print("aggrostate: " + namedebug + " , " + isAggro);
     }
 
-    // Override this in child
-    public virtual void OnHitOpponent(GameObject entityHit)
-    {
-        entityHit.GetComponent<MovementController>().Damage(damage);
-    }
-
-    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
@@ -79,6 +75,10 @@ public class EnemyController : MovementController
         }
     }
 
+    #endregion
+
+
+    #region public
     
     /// <summary>
     ///     Looks for the target within a circle defined by center and radius
@@ -94,7 +94,11 @@ public class EnemyController : MovementController
         return Mathf.Sqrt((center - target.transform.position).sqrMagnitude) <= radius;
     }
 
-    
+    #endregion
+
+
+    #region protected
+
     /// <summary>
     ///     Looks for and returns first enemy found within a circle defined by center and radius
     /// </summary>
@@ -113,7 +117,6 @@ public class EnemyController : MovementController
         return (overlap == null) ? null : overlap.gameObject;
     }
 
-
     /// <summary>
     ///     Aims this enemy's weapon towards the vector given by rotating the weapon holder
     /// </summary>
@@ -129,4 +132,7 @@ public class EnemyController : MovementController
 
         weaponHolder.transform.RotateAround(weaponHolder.transform.position, Vector3.forward, 180 + angleDifference);
     }
+
+    #endregion
+
 }

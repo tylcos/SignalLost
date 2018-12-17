@@ -7,7 +7,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    #region events and fields
+    #region fields
 
     public float speed; // in units per second
     public CharacterController2D cc2d; // attached charactercontroller2d

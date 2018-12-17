@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangedEnemyController : EnemyController {
 
+    #region fields
+
     public float followDistance;
     public float tooCloseThreshold;
     public float tooFarThreshold;
@@ -15,6 +17,11 @@ public class RangedEnemyController : EnemyController {
     public bool shooting = false;
 
     private Coroutine fleeing = null;
+
+    #endregion
+
+
+    #region monobehavior
 
     void FixedUpdate () {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
@@ -66,6 +73,8 @@ public class RangedEnemyController : EnemyController {
             }
         }
 	}
+
+    #endregion
 
 
     private IEnumerator ShootAttack(Vector2 vectorToTarget, float chargeTime, float pauseTime)

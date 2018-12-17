@@ -343,16 +343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  rb2d: {fileID: 50166492276897542}
+  cc2d: {fileID: 114994901661913452}
   _MaxHitPoints: 60
   invincibilityDuration: 0.05
-  cc2d: {fileID: 114994901661913452}
-  collideLayerMask:
-    serializedVersion: 2
-    m_Bits: 1792
   namedebug: shooty fella
-  enemyType: unknown
-  enemySubType: unknown
   weaponHolder: {fileID: 1930892130316638}
   weapon: {fileID: 1460442571032554}
   aggroRange: 15
@@ -361,8 +355,9 @@ MonoBehaviour:
   damage: 15
   attackRange: 13
   attackCooldownLength: 2
-  targetLayers:
-  - Player
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   targetTags:
   - Player
   attackIndicator: {fileID: 1721720636901802}
@@ -397,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be37872fd56c2f4188bae90cc0b686c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0.02
+  strength: 0.05
   parent: {fileID: 114994901661913452}
 --- !u!114 &114994901661913452
 MonoBehaviour:

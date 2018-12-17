@@ -5,13 +5,12 @@
 public class PlayerController : MovementController
 {
     
-    
     void FixedUpdate()
     {
         Movement();
     }
 
-    void Movement()
+    private void Movement()
     {
         Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (move.sqrMagnitude == 0)
@@ -30,6 +29,5 @@ public class PlayerController : MovementController
             collision.GetComponentInParent<BulletManager>().sourceEnemy.OnHitOpponent(gameObject);
         }
     }
-
 
 }

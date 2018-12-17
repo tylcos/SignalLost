@@ -1,14 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemyController : EnemyController {
+
+    #region events and fields
 
     public float attackChargeTime;
     public float attackColliderEnableLength;
     public float attackAfterPauseDuration;
     public float attackAfterRetreatDistance;
-    
+
+    public override void OnHitOpponent(GameObject entityHit)
+    {
+        if (Time.time - lastAttackTime > waitTime)
+        {
+            base.OnHitOpponent(entityHit);
+            lastAttackTime = Time.time;
+        }
+        // do anything specific to the melee enemy here
+    }
+
+    #endregion
+
+    #region monobehavior
+
     void FixedUpdate()
     {
         if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
@@ -54,31 +69,8 @@ public class MeleeEnemyController : EnemyController {
         }
     }
 
+    #endregion
 
-    public override void OnHitOpponent(GameObject entityHit)
-    {
-        if(Time.time - lastAttackTime > waitTime)
-        {
-            base.OnHitOpponent(entityHit);
-            lastAttackTime = Time.time;
-        }
-        // do anything specific to the melee enemy here
-    }
-
-    private void OverlapAttack(Vector2 vectorToTarget)
-    {
-        Collider2D[] overlap = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
-        foreach (Collider2D col in overlap)
-        {
-            col.gameObject.GetComponent<MovementController>().Damage(damage);
-            lastAttackTime = Time.time;
-        }
-        if (lastAttackTime == Time.time)
-        {
-            //rb2d.MovePosition(-vectorToTarget.normalized * retreatDistance);
-            Move(-vectorToTarget.normalized * retreatDistance);
-        }
-    }
 
     /// <summary>
     ///     Times the attacking cycle for a sword style attack
@@ -127,7 +119,6 @@ public class MeleeEnemyController : EnemyController {
                 {
                     doing = false;
                 }
-                //transform.position = Vector3.Lerp(startingPosition, -vectorToTarget.normalized * retreatLength, Time.deltaTime / retreatLength);
                 // do animations here
                 yield return new WaitForFixedUpdate();
             }
