@@ -25,13 +25,14 @@ GameObject:
   - component: {fileID: 50889516469690704}
   - component: {fileID: 114362156729458064}
   - component: {fileID: 114168695691064070}
+  - component: {fileID: 114625397840865958}
   m_Layer: 10
   m_Name: FireSpectre
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1631564001345880
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,9 +85,9 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176214086741286}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10000
   m_LinearDrag: 10000
@@ -94,7 +95,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &61741251822685088
@@ -187,6 +188,10 @@ MonoBehaviour:
   rb2d: {fileID: 50889516469690704}
   _MaxHitPoints: 100
   invincibilityDuration: 0.05
+  cc2d: {fileID: 114625397840865958}
+  collideLayerMask:
+    serializedVersion: 2
+    m_Bits: 1792
   namedebug: default
   enemyType: unknown
   enemySubType: unknown
@@ -202,16 +207,70 @@ MonoBehaviour:
   - Player
   targetTags:
   - Player
-  collideLayers:
-  - Player
-  - Enemy
-  - Walls
   attackIndicator: {fileID: 0}
-  isAggro: 0
   attackChargeTime: 0.6
   attackColliderEnableLength: 0.15
   attackAfterPauseDuration: 0.8
   attackAfterRetreatDistance: 0.2
+--- !u!114 &114625397840865958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176214086741286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b005891a5d1c45cc8cea8c713a8bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreOneWayPlatformsThisFrame: 0
+  _skinWidth: 0.02
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 1792
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  oneWayPlatformMask:
+    serializedVersion: 2
+    m_Bits: 0
+  slopeLimit: 30
+  jumpingThreshold: 0.07
+  slopeSpeedMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -90
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 90
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
 --- !u!114 &114627071589305540
 MonoBehaviour:
   m_ObjectHideFlags: 1

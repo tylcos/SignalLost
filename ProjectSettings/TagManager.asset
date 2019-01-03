@@ -9,6 +9,7 @@ TagManager:
   - SpawnPoint
   - EnemyWeapon
   - Room
+  - Pushing
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Walls
   - Player
   - Enemy
-  - 
+  - Pushing
   - Player Fired
   - Enemy Fired
   - Bullets

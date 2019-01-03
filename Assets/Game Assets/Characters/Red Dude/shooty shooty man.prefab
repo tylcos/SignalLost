@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50166492276897542}
   - component: {fileID: 114664005140517220}
   - component: {fileID: 114640785694825438}
+  - component: {fileID: 114994901661913452}
   m_Layer: 10
   m_Name: shooty shooty man
   m_TagString: Enemy
@@ -76,6 +77,23 @@ GameObject:
   m_Layer: 0
   m_Name: HealthbarBasic
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1641520548492822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4426815030151156}
+  - component: {fileID: 58152426757925366}
+  - component: {fileID: 114959292077130018}
+  m_Layer: 11
+  m_Name: Pushing Aura
+  m_TagString: Pushing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,6 +184,7 @@ Transform:
   - {fileID: 4364458348216418}
   - {fileID: 4010045540003896}
   - {fileID: 4810231885246762}
+  - {fileID: 4426815030151156}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,6 +214,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4010045540003896}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4426815030151156
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641520548492822}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4273588013815034}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4810231885246762
 Transform:
@@ -230,9 +262,9 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411719202972802}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10000
   m_LinearDrag: 10000
@@ -240,9 +272,24 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: e39018e5537b39546a7209b708943872, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58152426757925366
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641520548492822}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.45
 --- !u!61 &61978907668579480
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -296,12 +343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  rb2d: {fileID: 50166492276897542}
+  cc2d: {fileID: 114994901661913452}
   _MaxHitPoints: 60
   invincibilityDuration: 0.05
   namedebug: shooty fella
-  enemyType: unknown
-  enemySubType: unknown
   weaponHolder: {fileID: 1930892130316638}
   weapon: {fileID: 1460442571032554}
   aggroRange: 15
@@ -310,16 +355,12 @@ MonoBehaviour:
   damage: 15
   attackRange: 13
   attackCooldownLength: 2
-  targetLayers:
-  - Player
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   targetTags:
   - Player
-  collideLayers:
-  - Player
-  - Enemy
-  - Walls
   attackIndicator: {fileID: 1721720636901802}
-  isAggro: 0
   followDistance: 4
   tooCloseThreshold: 2
   tooFarThreshold: 6
@@ -340,6 +381,78 @@ MonoBehaviour:
   background: {fileID: 1551720550349624}
   foreground: {fileID: 1266971872158808}
   boundCharacter: {fileID: 114640785694825438}
+--- !u!114 &114959292077130018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641520548492822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be37872fd56c2f4188bae90cc0b686c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0.05
+  parent: {fileID: 114994901661913452}
+--- !u!114 &114994901661913452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411719202972802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b005891a5d1c45cc8cea8c713a8bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreOneWayPlatformsThisFrame: 0
+  _skinWidth: 0.02
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 768
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  oneWayPlatformMask:
+    serializedVersion: 2
+    m_Bits: 0
+  slopeLimit: 30
+  jumpingThreshold: 0.07
+  slopeSpeedMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -90
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 90
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
 --- !u!212 &212040096856302450
 SpriteRenderer:
   m_ObjectHideFlags: 1

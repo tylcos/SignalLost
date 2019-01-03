@@ -85,12 +85,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4118150958136508}
   - component: {fileID: 2569400265264793788}
-  - component: {fileID: 114251509375693790}
   - component: {fileID: 8195094282777444056}
   - component: {fileID: 3664157344746887688}
   - component: {fileID: 2113883504519786228}
   - component: {fileID: 50189378282144924}
   - component: {fileID: 66603081714072896}
+  - component: {fileID: 114251509375693790}
   m_Layer: 0
   m_Name: Entry Room
   m_TagString: Untagged
@@ -253,7 +253,7 @@ CompositeCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734982991805366}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -263,9 +263,83 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 2113883504519786228}
+    m_ColliderPaths:
+    - - X: 120000000
+        Y: 100000000
+      - X: 20000000
+        Y: 100000000
+      - X: 20000000
+        Y: 90000000
+      - X: 110000000
+        Y: 90000000
+      - X: 110000000
+        Y: 20000000
+      - X: 120000000
+        Y: 20000000
+    - - X: -110000000
+        Y: 90000000
+      - X: -20000000
+        Y: 90000000
+      - X: -20000000
+        Y: 100000000
+      - X: -120000000
+        Y: 100000000
+      - X: -120000000
+        Y: 20000000
+      - X: -110000000
+        Y: 20000000
+    - - X: 120000000
+        Y: -20000000
+      - X: 110000000
+        Y: -20000000
+      - X: 110000000
+        Y: -90000000
+      - X: 20000000
+        Y: -90000000
+      - X: 20000000
+        Y: -100000000
+      - X: 120000000
+        Y: -100000000
+    - - X: -20000000
+        Y: -90000000
+      - X: -110000000
+        Y: -90000000
+      - X: -110000000
+        Y: -20000000
+      - X: -120000000
+        Y: -20000000
+      - X: -120000000
+        Y: -100000000
+      - X: -20000000
+        Y: -100000000
   m_CompositePaths:
-    m_Paths: []
+    m_Paths:
+    - - {x: 12, y: 10}
+      - {x: 2, y: 10}
+      - {x: 2, y: 9}
+      - {x: 11, y: 9}
+      - {x: 11, y: 2}
+      - {x: 12, y: 2}
+    - - {x: -11, y: 9}
+      - {x: -2, y: 9}
+      - {x: -2, y: 10}
+      - {x: -12, y: 10}
+      - {x: -12, y: 2}
+      - {x: -11, y: 2}
+    - - {x: 12, y: -2}
+      - {x: 11, y: -2}
+      - {x: 11, y: -9}
+      - {x: 2, y: -9}
+      - {x: 2, y: -10}
+      - {x: 12, y: -10}
+    - - {x: -2, y: -9}
+      - {x: -11, y: -9}
+      - {x: -11, y: -2}
+      - {x: -12, y: -2}
+      - {x: -12, y: -10}
+      - {x: -2, y: -10}
   m_VertexDistance: 0.0005
 --- !u!114 &114161916595994884
 MonoBehaviour:
@@ -301,8 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
-    type: 2}
+  spawnCharacter: {fileID: 0}
 --- !u!114 &114346265073414044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,8 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
-    type: 2}
+  spawnCharacter: {fileID: 0}
 --- !u!114 &114596842991873138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,8 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
-    type: 2}
+  spawnCharacter: {fileID: 0}
 --- !u!114 &114753763899350420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,8 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 1176214086741286, guid: 22741fa65b1cce84fa55ed6bcbb61440,
-    type: 2}
+  spawnCharacter: {fileID: 0}
 --- !u!19719996 &2113883504519786228
 TilemapCollider2D:
   m_ObjectHideFlags: 1

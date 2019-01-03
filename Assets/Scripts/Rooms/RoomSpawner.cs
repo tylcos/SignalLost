@@ -181,8 +181,6 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-
-
     int GetRandom(float baseNumber)
     {
         float decimalPart = Mathf.Round(baseNumber) - baseNumber;
