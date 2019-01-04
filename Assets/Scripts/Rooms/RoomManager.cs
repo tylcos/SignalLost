@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
-
-
+using UnityEditor;
 
 public class RoomManager : MonoBehaviour 
 {
@@ -49,6 +48,12 @@ public class RoomManager : MonoBehaviour
         topConnectors = topConnectors.Select(c => Mathf.Clamp(c, 0, bounds.size.x - 2)).ToArray();
         leftConnectors = leftConnectors.Select(c => Mathf.Clamp(c, 0, bounds.size.y - 2)).ToArray();
         rightConnectors = rightConnectors.Select(c => Mathf.Clamp(c, 0, bounds.size.y - 2)).ToArray();
+    }
+
+    [MenuItem("CONTEXT/RoomManager/Update Bound Size")]
+    public void UpdateBoundSize()
+    {
+        OnEnable();
     }
 
 
