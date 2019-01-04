@@ -8,10 +8,10 @@ public class RoomManager : MonoBehaviour
 {
     public BoundsInt bounds;
 
-    public int[] bottomConnectors;
-    public int[] leftConnectors;
-    public int[] topConnectors;
-    public int[] rightConnectors;
+    public int[] bottomConnectors = new int[0];
+    public int[] leftConnectors = new int[0];
+    public int[] topConnectors = new int[0];
+    public int[] rightConnectors = new int[0];
 
 
 
@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
         if (!gizmosEnabled)
             OnEnable();
 
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.magenta;
 
         var minX = bounds.min + new Vector3(1, 0.5f);
         var minY = bounds.min + new Vector3(.5f, 1);
