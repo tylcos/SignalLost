@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIMaster : MonoBehaviour {
+public class UIMaster : Graphic {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // https://www.google.com/search?q=brackeys+unity+gui+elements&spell=1&sa=X&ved=0ahUKEwiVtI2JudzfAhXJT98KHTIDAYAQBQgrKAA&biw=1536&bih=762
+
+   
+
 }
