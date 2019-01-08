@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class HealthbarController : MonoBehaviour
+public class PlayerHealthbarController : MonoBehaviour
 {
-    public GameObject background;
+    //public GameObject background;
     public GameObject foreground;
 
     public MovementController boundCharacter;
@@ -15,7 +15,7 @@ public class HealthbarController : MonoBehaviour
 
 
 
-    void Start ()
+    /*void Start ()
     {
         fgSprite = foreground.GetComponent<SpriteRenderer>().sprite;
         bgSprite = background.GetComponent<SpriteRenderer>().sprite;
@@ -25,11 +25,11 @@ public class HealthbarController : MonoBehaviour
 
         max = boundCharacter.MaxHitPoints;
         background.SetActive(false);
-    }
+    }*/
 
 
 
-    void Update ()
+    /*void Update ()
     {
         current = boundCharacter.CurrentHitPoints / max;
 
@@ -38,5 +38,16 @@ public class HealthbarController : MonoBehaviour
             background.SetActive(true);
             foreground.transform.localScale = new Vector3(current, foreground.transform.localScale.y, foreground.transform.localScale.z);
         }
+    }*/
+
+    private void Start()
+    {
+        max = boundCharacter.MaxHitPoints;
+    }
+
+    private void Update()
+    {
+        current = boundCharacter.CurrentHitPoints / max;
+        foreground.transform.localScale = new Vector3(current, foreground.transform.localScale.y, foreground.transform.localScale.z);
     }
 }

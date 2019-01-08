@@ -402,9 +402,9 @@ MonoBehaviour:
   cc2d: {fileID: 114268929445979850}
   _MaxHitPoints: 100
   invincibilityDuration: 0.05
-  namedebug: default
   weaponHolder: {fileID: 1735258238636906}
   weapon: {fileID: 1104184525536968}
+  attackIndicator: {fileID: 1227678452590240}
   aggroRange: 30
   retreatDistance: 3
   waitTime: 2
@@ -416,7 +416,6 @@ MonoBehaviour:
     m_Bits: 512
   targetTags:
   - Player
-  attackIndicator: {fileID: 1227678452590240}
   attackChargeTime: 0.6
   attackColliderEnableLength: 0.3
   attackAfterPauseDuration: 0.8

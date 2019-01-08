@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4160192979165522}
   - component: {fileID: 212238431652477558}
   - component: {fileID: 114980250400258964}
-  - component: {fileID: 114712155233164472}
+  - component: {fileID: 114515321812931572}
   - component: {fileID: 50822498620361568}
   - component: {fileID: 61047100213059538}
   - component: {fileID: 114050555920559164}
@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1827454127404192
 GameObject:
   m_ObjectHideFlags: 1
@@ -291,7 +291,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.55
+  m_Radius: 0.5
 --- !u!61 &61047100213059538
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -315,7 +315,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
 --- !u!114 &114050555920559164
 MonoBehaviour:
@@ -326,8 +326,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b005891a5d1c45cc8cea8c713a8bfe2, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ignoreOneWayPlatformsThisFrame: 0
   _skinWidth: 0.02
   platformMask:
@@ -385,10 +385,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90e0e5cc2b6c1f84bbcda717fb4075d5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: 25a7ac3adde18cd4b9e0537848655795, type: 3}
---- !u!114 &114712155233164472
+--- !u!114 &114515321812931572
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,11 +396,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1298569208637172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fd858a654a7b54aa040c8de750c047, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  background: {fileID: 1809814955800962}
-  foreground: {fileID: 1827454127404192}
+  m_Script: {fileID: 11500000, guid: 2cf86068bb6e01c48a07bf80e7dfe539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foreground: {fileID: 0}
   boundCharacter: {fileID: 114980250400258964}
 --- !u!114 &114714410810140362
 MonoBehaviour:
@@ -411,8 +410,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0a0ac9962273c4469135e5b550a2c1a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sr: {fileID: 212856325067432018}
   bulletSpawnPoint: {fileID: 4453064393674552}
   WeaponInfos:
@@ -428,8 +427,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8be37872fd56c2f4188bae90cc0b686c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   strength: 0
   parent: {fileID: 114050555920559164}
 --- !u!114 &114887874564137588
@@ -441,8 +440,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: addd9c55ba7958249b1773cf8b962aa9, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   weaponManager: {fileID: 114714410810140362}
   bulletSpawnPoint: {fileID: 4453064393674552}
   ps: {fileID: 0}
@@ -456,16 +455,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c562fd58ee28ade44bd99eafdaa26de4, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   speed: 8
-  rb2d: {fileID: 50822498620361568}
+  cc2d: {fileID: 114050555920559164}
   _MaxHitPoints: 150
   invincibilityDuration: 0.5
-  cc2d: {fileID: 114050555920559164}
-  collideLayerMask:
-    serializedVersion: 2
-    m_Bits: 1280
 --- !u!135 &135339620901660538
 SphereCollider:
   m_ObjectHideFlags: 1

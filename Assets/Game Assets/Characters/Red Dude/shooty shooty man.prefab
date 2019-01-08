@@ -346,9 +346,9 @@ MonoBehaviour:
   cc2d: {fileID: 114994901661913452}
   _MaxHitPoints: 60
   invincibilityDuration: 0.05
-  namedebug: shooty fella
   weaponHolder: {fileID: 1930892130316638}
   weapon: {fileID: 1460442571032554}
+  attackIndicator: {fileID: 1721720636901802}
   aggroRange: 15
   retreatDistance: 1
   waitTime: 2
@@ -360,7 +360,6 @@ MonoBehaviour:
     m_Bits: 512
   targetTags:
   - Player
-  attackIndicator: {fileID: 1721720636901802}
   followDistance: 4
   tooCloseThreshold: 2
   tooFarThreshold: 6
