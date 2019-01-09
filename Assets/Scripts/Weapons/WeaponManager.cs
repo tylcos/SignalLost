@@ -29,6 +29,16 @@ public class WeaponManager : MonoBehaviour
     private bool reloading = false;
     private int weaponBeingReloaded;
 
+    public int CurrentAmmo
+    {
+        get { return Weapon.CurrentAmmo;  }
+    }
+
+    public int MaxAmmo
+    {
+        get { return Weapon.Info.clipSize;  }
+    }
+
 
 
     private void Start()

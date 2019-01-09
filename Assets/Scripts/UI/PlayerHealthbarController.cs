@@ -2,6 +2,7 @@
 
 public class PlayerHealthbarController : MonoBehaviour
 {
+    /* TEMPORARY HEALTHBAR GUI SCRIPT */
     //public GameObject background;
     public GameObject foreground;
 
