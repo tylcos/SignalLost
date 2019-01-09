@@ -9,8 +9,9 @@ public class EnemyAnimation : MonoBehaviour {
     public GameObject meleeEnemy;
     [HideInInspector]
     public EnemyController enemyControllerAccessor;
-
+    [HideInInspector]
     public bool formation = false;
+    [HideInInspector]
     public bool inRange = false;
 
     // Use this for initialization
