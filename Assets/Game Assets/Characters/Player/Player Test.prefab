@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1228698209818634
 GameObject:
   m_ObjectHideFlags: 1
@@ -305,13 +305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  rb2d: {fileID: 50716692309976234}
+  cc2d: {fileID: 114990848352086058}
   _MaxHitPoints: 150
   invincibilityDuration: 0.5
-  cc2d: {fileID: 114990848352086058}
-  collideLayerMask:
-    serializedVersion: 2
-    m_Bits: 1280
 --- !u!114 &114381978308868076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -338,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fd858a654a7b54aa040c8de750c047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 1488466432367046}
+  background: {fileID: 1137757024005666}
   foreground: {fileID: 1290607150197754}
   boundCharacter: {fileID: 114123260519790410}
 --- !u!114 &114704447040440994
@@ -353,7 +349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95146869947485630}
-  playerControllerAccessor: {fileID: 0}
+  weaponInfo: {fileID: 1904586837322150}
+  weaponAccessor: {fileID: 0}
 --- !u!114 &114855259857991612
 MonoBehaviour:
   m_ObjectHideFlags: 1

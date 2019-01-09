@@ -6,12 +6,15 @@ public class PlayerAnimation : MonoBehaviour {
 
     public Animator animator;
     [HideInInspector]
-    public PlayerController playerControllerAccessor;
+    public GameObject weaponInfo;
+    [HideInInspector]
+    public WeaponManager weaponAccessor;
 
 	// Use this for initialization    
         public void Start()
         {
             transform.hasChanged = false;
+            weaponAccessor = weaponInfo.GetComponent<WeaponManager>();
         }    
 
 	// Update is called once per frame
@@ -24,6 +27,11 @@ public class PlayerAnimation : MonoBehaviour {
             {
                 MeleeAnimation();
             }
+            //Setup for Shooting animation
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                ShootingAnimation();
+            }
         }
         else
         {
@@ -31,9 +39,8 @@ public class PlayerAnimation : MonoBehaviour {
             animator.SetBool("Moving", false);
         }
         MeleeAnimation();
+        ShootingAnimation();
     }
-
-
 
     private void MeleeAnimation()
     {
@@ -46,6 +53,18 @@ public class PlayerAnimation : MonoBehaviour {
         else
         {
             animator.SetBool("ClickedMeleeButton", false);
+        }
+    }
+
+    private void ShootingAnimation()
+    {
+        if (Input.GetKey(KeyCode.Mouse0)&& weaponAccessor.Weapon.CurrentAmmo!=0)
+        {
+            animator.SetBool("Shooting", true);
+        }
+        else
+        {
+            animator.SetBool("Shooting", false);
         }
     }
 }
