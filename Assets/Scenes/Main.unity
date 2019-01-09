@@ -183,6 +183,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 105037925}
   m_CullTransparentMesh: 0
+--- !u!114 &328379637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114714410810140362, guid: 74904ff051524d048a5a98912b5aafbe,
+    type: 2}
+  m_PrefabInternal: {fileID: 861169293}
+  m_Script: {fileID: 11500000, guid: a0a0ac9962273c4469135e5b550a2c1a, type: 3}
 --- !u!114 &382178209 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
@@ -261,7 +267,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: -110}
+  m_LocalPosition: {x: 0.0000005364418, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1237663205}
@@ -461,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228ce8ef892cc6943aa54b81ccd7dc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterWeapon: {fileID: 328379637}
 --- !u!114 &652009704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1052,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1814215812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000047683716, y: 0, z: -110}
+  m_LocalPosition: {x: 0.0000005364418, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347403481}
@@ -1090,6 +1097,11 @@ Prefab:
     - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 2}
+      propertyPath: attackRange
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d575f7607164f48b727524d3edcea2, type: 2}
@@ -1189,10 +1201,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200.25, y: -50}
-  m_SizeDelta: {x: -500.5, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -37.5}
+  m_SizeDelta: {x: 200, y: 25}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1962538959
 MonoBehaviour:
   m_ObjectHideFlags: 0
