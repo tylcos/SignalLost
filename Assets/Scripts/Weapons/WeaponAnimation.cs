@@ -21,7 +21,7 @@ public class WeaponAnimation : EnemyAnimation {
 // Weapon Types Animations
     private void GunAnim()
     {
-        if (enemyControllerAccessor.IsAggro == true)
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
@@ -34,7 +34,7 @@ public class WeaponAnimation : EnemyAnimation {
         if (formation)
         {
             animator.SetBool("Shot", true);
-            if (enemyControllerAccessor.IsAggro == false)
+            if (enemyControllerAccessor.isAggro == false)
             {
                 animator.SetBool("PlayerInRange", false);
                 inRange = false;

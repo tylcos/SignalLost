@@ -7,6 +7,8 @@ public class EnemyController : MovementController
 
     #region events and fields
 
+    public const int raycastDepth = 2; // change this to increase the penetration depth of raycasts. Lower numbers wont penetrate walls
+
     public GameObject weaponHolder;
     public GameObject weapon;
     public GameObject attackIndicator;
@@ -25,15 +27,8 @@ public class EnemyController : MovementController
     protected GameObject target;
 
     protected bool attacking = false;
-    private bool isAggro = false;
 
-    public bool IsAggro
-    {
-        get
-        {
-            return isAggro;
-        }
-    }
+    public bool isAggro { get; private set; } = false;
 
     // Override this in child
     public virtual void OnHitOpponent(GameObject entityHit)

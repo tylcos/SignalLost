@@ -30,7 +30,7 @@ public class EnemyAnimation : MonoBehaviour {
     //Enemy Type Animations
     private void RangedEnemyAnim()
     {
-        if (enemyControllerAccessor.IsAggro == true)
+        if (enemyControllerAccessor.isAggro == true)
         {
             animator.SetBool("PlayerInRange", true);
             inRange = true;
