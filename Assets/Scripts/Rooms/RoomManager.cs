@@ -60,22 +60,3 @@ public class RoomManager : MonoBehaviour
         gameObject.SetActive(enabled);
     }
 }
-
-
-
-public class Connector
-{
-    public int[] connections;
-
-    public Connector()
-    {
-        connections = new int[0];
-    }
-
-    public int this [int i]
-    {
-        get { return connections[i]; }
-        set { connections[i] = value; }
-    }
-}
-

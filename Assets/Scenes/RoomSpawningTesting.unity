@@ -345,6 +345,16 @@ Prefab:
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: connectors.Array.data[0].connections.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: connectors.Array.data[1].connections.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 66603081714072896, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
       propertyPath: m_CompositePaths.m_Paths.Array.data[2].Array.size
@@ -7868,6 +7878,21 @@ Prefab:
         type: 2}
       propertyPath: m_TileSpriteArray.Array.data[3].m_RefCount
       value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: connectors.Array.data[0].connections.Array.data[0]
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: connectors.Array.data[0].connections.Array.data[1]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: connectors.Array.data[1].connections.Array.data[0]
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91994bd4b61a9f64694a29cd798367b6, type: 2}
