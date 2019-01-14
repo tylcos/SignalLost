@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: d56e7be7a64e62041a4ee3df1f6e2222
+guid: 05419af5dfbe02f4c8856533dabe68c1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Inner Dirt_0
-    21300002: Inner Dirt_1
-    21300004: Inner Dirt_2
-    21300006: Inner Dirt_3
-    21300008: Inner Dirt_4
-    21300010: Inner Dirt_5
-    21300012: Inner Dirt_6
-    21300014: Inner Dirt_7
+    21300000: Dirt Wall_0
+    21300002: Dirt Wall_1
+    21300004: Dirt Wall_2
+    21300006: Dirt Wall_3
+    21300008: Dirt Wall_4
+    21300010: Dirt Wall_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -92,67 +90,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inner Dirt_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61ed909f2c0714a4f96cfa9d1cfcc537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inner Dirt_1
-      rect:
-        serializedVersion: 2
-        x: 257
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0afadcf13cd107c43a12bccc1b44072d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inner Dirt_2
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 490f43f50bffd364f8779a8a4209b6b4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inner Dirt_3
+      name: Dirt Wall_0
       rect:
         serializedVersion: 2
         x: 0
@@ -160,19 +98,39 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5fcdb9e03f32234384adccff4f94e3c
+      spriteID: 9ce8aacb900f6bf4ab9f0e4e0e06da8f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inner Dirt_4
+      name: Dirt Wall_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a09b743860493ce448be7a25b1853a9e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt Wall_2
       rect:
         serializedVersion: 2
         x: 512
@@ -180,19 +138,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 978977e5bff671247b5406ed319cb5ca
+      spriteID: 53443fa2ba543074ebe75570f7c09721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inner Dirt_5
+      name: Dirt Wall_3
       rect:
         serializedVersion: 2
         x: 0
@@ -200,19 +158,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b41084011b8af44aae13cb66dbdde73
+      spriteID: 412def4cdec81ff468388653dc2f6ce2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inner Dirt_6
+      name: Dirt Wall_4
       rect:
         serializedVersion: 2
         x: 256
@@ -220,19 +178,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bae6e1862664b0c4ea172b99d7c1187d
+      spriteID: 17eb3438457880347ab3e10bfa4099c5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inner Dirt_7
+      name: Dirt Wall_5
       rect:
         serializedVersion: 2
         x: 512
@@ -240,13 +198,13 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b79c57c67461b14cb68b1a8e5ab3e37
+      spriteID: 749a572e249a7f34e8165fa6528c370e
       vertices: []
       indices: 
       edges: []
@@ -254,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8bf34a887b14a814d9fe0bfca68f0d79
+    spriteID: 22ebf3df61898f2409712a12ca8aa1cd
     vertices: []
     indices: 
     edges: []
