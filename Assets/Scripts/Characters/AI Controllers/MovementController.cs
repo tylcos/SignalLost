@@ -16,9 +16,9 @@ public class MovementController : MonoBehaviour
 
     // This is used for the inspector until we have compact data storage
     [SerializeField]
-    private float _MaxHitPoints;
-    public float CurrentHitPoints { get; set; }
+    private float _maxHitPoints;
     public float MaxHitPoints { get; private set; }
+    public float CurrentHitPoints { get; set; }
 
     public float invincibilityDuration; // length of invincibility frames
     private float lastDamageTime; // last time took damage
@@ -34,9 +34,13 @@ public class MovementController : MonoBehaviour
     private void Awake()
     {
         lastDamageTime = invincibilityDuration;
-        MaxHitPoints = _MaxHitPoints;
-        CurrentHitPoints = _MaxHitPoints;
         collideLayerMask = cc2d.platformMask;
+    }
+
+    private void OnEnable()
+    {
+        MaxHitPoints = _maxHitPoints;
+        CurrentHitPoints = _maxHitPoints;
     }
 
     #endregion
@@ -46,6 +50,15 @@ public class MovementController : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    protected virtual void OnTakeDamage(float damageReceived)
+    {
+        CurrentHitPoints -= damageReceived;
+        if (CurrentHitPoints <= 0)
+        {
+            Die();
+        }
     }
 
 
@@ -61,8 +74,8 @@ public class MovementController : MonoBehaviour
     public bool Damage(float damage)
     {
         if(IsInvincible()) { return false; }
-        CurrentHitPoints -= damage;
-        if (CurrentHitPoints <= 0)
+        OnTakeDamage(damage);
+        if (MaxHitPoints - CurrentHitPoints <= 0)
         {
             Die();
             return true;

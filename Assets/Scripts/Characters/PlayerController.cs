@@ -42,4 +42,17 @@ public class PlayerController : MovementController
         ui.DeathSequence();
         base.Die();
     }
+
+    protected override void OnTakeDamage(float damageReceived)
+    {
+        print(damageReceived + " damage");
+        print(CurrentHitPoints + " before removal");
+        CurrentHitPoints -= damageReceived;
+        print(CurrentHitPoints + " after removal");
+        ui.UpdateHealthbar();
+        if (CurrentHitPoints <= 0)
+        {
+            Die();
+        }
+    }
 }

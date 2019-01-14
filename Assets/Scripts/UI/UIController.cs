@@ -38,7 +38,8 @@ public class UIController : MonoBehaviour {
                     } else
                     {
                         healthbar = child.gameObject;
-                        _healthbarSettings.healthbarTransform = healthbar.transform;
+                        _healthbarSettings.healthbarTransform = healthbar.GetComponentsInChildren<Transform>()[2];
+                        // thats the transform of the child of the child aka the foreground
                     }
                     break;
                 case "UI Ammo Counter":
