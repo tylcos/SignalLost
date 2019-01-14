@@ -4,7 +4,14 @@
 
 public class PlayerController : MovementController
 {
-    
+
+    private UIController ui;
+
+    private void Awake()
+    {
+        ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
+    }
+
     void FixedUpdate()
     {
         Movement();
@@ -30,4 +37,9 @@ public class PlayerController : MovementController
         }
     }
 
+    protected override void Die()
+    {
+        ui.DeathSequence();
+        base.Die();
+    }
 }

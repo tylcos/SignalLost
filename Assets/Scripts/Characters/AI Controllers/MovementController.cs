@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
 
     #region fields
 
+    public bool dead = false; // is it dead?
     public float speed; // in units per second
     public CharacterController2D cc2d; // attached charactercontroller2d
     protected LayerMask collideLayerMask; // the layermask used for collision
