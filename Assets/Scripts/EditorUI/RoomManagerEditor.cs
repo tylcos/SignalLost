@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-/*
+
 // https://www.youtube.com/watch?v=RInUu1_8aGw
 [CustomEditor(typeof(RoomManager))]
 [CanEditMultipleObjects]
@@ -15,36 +15,31 @@ class RoomManagerEditor : Editor
 {
     int[][] connectors;
 
-    bool showSides = true;
-    bool[] showSide = { true, true, true, true };
+    float size = 5f;
 
-
-
-    void OnEnable() 
+    protected virtual void OnSceneGUI()
     {
-        connectors = ((RoomManager)target).connectors;
-    }
-
-    public override void OnInspectorGUI()
-    {
-        EditorGUILayout.Space();
-
-        showSides = EditorGUILayout.Foldout(showSides, "Sides");
-        if (showSides)
+        if (Event.current.type == EventType.Repaint)
         {
-            EditorGUI.indentLevel++;
+            Transform transform = ((RoomManager)target).transform;
 
-            for (ushort s = 0; s < 4; s++)
-            {
-                var side = connectors[s];
+            Handles.color = Handles.xAxisColor;
+            Handles.ArrowHandleCap(
+                0,
+                transform.position,
+                transform.rotation * Quaternion.LookRotation(Vector3.right),
+                size,
+                EventType.Repaint
+            );
 
-                showSide[s] = EditorGUILayout.Foldout(showSide[s], "Side" + s);
-                if (showSide[s])
-                {
-                    side[0] = EditorGUILayout.IntField(side[0], new GUIStyle());
-                }
-
-            }
+            Handles.color = Handles.yAxisColor;
+            Handles.ArrowHandleCap(
+                0,
+                transform.position,
+                transform.rotation * Quaternion.LookRotation(Vector3.up),
+                size,
+                EventType.Repaint
+            );
         }
     }
-}*/
+}
