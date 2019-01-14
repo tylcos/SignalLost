@@ -27,32 +27,27 @@ public class RangedEnemyController : EnemyController {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
         {
             Vector2 vectorToTarget = Vector2.zero;
-            RaycastHit2D[] hits = new RaycastHit2D[raycastDepth];
-            Physics2D.RaycastNonAlloc(weaponHolder.transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
+            RaycastHit2D[] hits = new RaycastHit2D[2];
+            Physics2D.RaycastNonAlloc(transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
             string hitTag = null;
-            bool hitIsTarget = false;
             foreach (RaycastHit2D hit in hits)
             {
-                // go through hits from closest to farthest
                 if (hit.collider != null && hit.fraction != 0)
                 {
                     hitTag = hit.collider.tag;
                     vectorToTarget = hit.point - (Vector2)transform.position;
-
-                    // if the tag of this object is a target, then we will target this one since it is the closest
-                    foreach (string tag in targetTags)
-                    {
-                        if (tag == hitTag)
-                        {
-                            hitIsTarget = true;
-                            break;
-                        }
-                    }
-
-                    if (hitIsTarget) { break; }
                 }
             }
 
+            // This checks if the raycast hit the target
+            bool hitIsTarget = false;
+            foreach (string tag in targetTags)
+            {
+                if (tag == hitTag)
+                {
+                    hitIsTarget = true;
+                }
+            }
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range
