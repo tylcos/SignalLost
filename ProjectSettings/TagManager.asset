@@ -44,6 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Top
+    uniqueID: 1508567857
+    locked: 0
+  - name: Wall
+    uniqueID: 2491981589
+    locked: 0
+  - name: Floor
+    uniqueID: 691514129
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
