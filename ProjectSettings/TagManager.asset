@@ -10,6 +10,7 @@ TagManager:
   - EnemyWeapon
   - Room
   - Pushing
+  - UI Parent
   layers:
   - Default
   - TransparentFX
