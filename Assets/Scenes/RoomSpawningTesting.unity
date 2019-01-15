@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 457240946}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,16 +344,6 @@ Prefab:
         type: 2}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
-        type: 2}
-      propertyPath: sides.Array.data[0].connections.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
-        type: 2}
-      propertyPath: sides.Array.data[2].connections.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
         type: 2}
@@ -7903,21 +7893,6 @@ Prefab:
         type: 2}
       propertyPath: connectors.Array.data[1].connections.Array.data[0]
       value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
-        type: 2}
-      propertyPath: sides.Array.data[0].connections.Array.data[0]
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
-        type: 2}
-      propertyPath: sides.Array.data[2].connections.Array.data[0]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
-        type: 2}
-      propertyPath: sides.Array.data[2].connections.Array.data[1]
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91994bd4b61a9f64694a29cd798367b6, type: 2}

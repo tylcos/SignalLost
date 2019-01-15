@@ -10,10 +10,6 @@ TagManager:
   - EnemyWeapon
   - Room
   - Pushing
-  - UI Healthbar
-  - UI Ammo Counter
-  - UI Death Message
-  - UI Parent
   layers:
   - Default
   - TransparentFX
@@ -59,7 +55,4 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UI
-    uniqueID: 1333977493
     locked: 0
