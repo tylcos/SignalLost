@@ -29,6 +29,9 @@ public class WeaponManager : MonoBehaviour
     private bool reloading = false;
     private int weaponBeingReloaded;
 
+    public delegate void WeaponUpdateHandler();
+    public event WeaponUpdateHandler WeaponDataChanged;
+
     public int CurrentAmmo
     {
         get { return Weapon.CurrentAmmo;  }
@@ -45,7 +48,6 @@ public class WeaponManager : MonoBehaviour
     {
         if (WeaponInfos.Length == 0)
             throw new System.ArgumentOutOfRangeException("No weapon infos selected.");
-
         Weapons = WeaponInfos.Select(w => new Weapon(w)).ToArray();
     }
 
@@ -81,6 +83,8 @@ public class WeaponManager : MonoBehaviour
             Weapon.CurrentAmmo = 0;
             Reload();
         }
+
+        WeaponDataChanged();
     }
 
 

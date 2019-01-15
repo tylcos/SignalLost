@@ -41,7 +41,7 @@ public class EnemyController : MovementController
 
     #region monobehavior
 
-    private void Start()
+    protected virtual void Start()
     {   
         lastAttackTime = -attackCooldownLength;
     }
