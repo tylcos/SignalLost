@@ -16,30 +16,16 @@ class RoomManagerEditor : Editor
     int[][] connectors;
 
     float size = 5f;
+    Vector3 offset = new Vector3(10, 0, 100);
 
     protected virtual void OnSceneGUI()
     {
-        if (Event.current.type == EventType.Repaint)
-        {
-            Transform transform = ((RoomManager)target).transform;
+        Transform roomCenter = ((RoomManager)target).transform;
+        
 
-            Handles.color = Handles.xAxisColor;
-            Handles.ArrowHandleCap(
-                0,
-                transform.position,
-                transform.rotation * Quaternion.LookRotation(Vector3.right),
-                size,
-                EventType.Repaint
-            );
-
-            Handles.color = Handles.yAxisColor;
-            Handles.ArrowHandleCap(
-                0,
-                transform.position,
-                transform.rotation * Quaternion.LookRotation(Vector3.up),
-                size,
-                EventType.Repaint
-            );
-        }
+        Handles.RectangleHandleCap(0, offset)
+        Handles.Label(offset, offset.ToString());
+        offset = Handles.PositionHandle(offset, Quaternion.identity);
+        
     }
 }

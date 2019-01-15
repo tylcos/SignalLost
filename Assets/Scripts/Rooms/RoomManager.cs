@@ -27,14 +27,14 @@ public class RoomManager : MonoBehaviour
 
     private bool gizmosEnabled;
     void OnDrawGizmos()
-    {
+    {   
         if (!gizmosEnabled)
             OnEnable();
 
         Gizmos.color = Color.magenta;
 
         var minX = bounds.min + new Vector3(1, 0.5f);
-        var minY = bounds.min + new Vector3(.5f, 1);
+        var minY = bounds.min + new Vector3(0.5f, 1);
         foreach (int pos in sides[0].connections) Gizmos.DrawCube(minX + new Vector3Int(pos, 0, 0), new Vector3(2,1));
         foreach (int pos in sides[1].connections) Gizmos.DrawCube(minX + new Vector3Int(pos, bounds.size.y - 1, 0), new Vector3(2, 1));
         foreach (int pos in sides[2].connections) Gizmos.DrawCube(minY + new Vector3Int(0, pos, 0), new Vector3(1, 2));
