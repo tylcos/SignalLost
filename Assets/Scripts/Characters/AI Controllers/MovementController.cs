@@ -7,7 +7,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    #region fields
+    #region fields and events
 
     public float speed; // in units per second
     public CharacterController2D cc2d; // attached charactercontroller2d
@@ -25,26 +25,46 @@ public class MovementController : MonoBehaviour
     private bool moving = false; // is this character executing a coroutine move function?
     private Coroutine activeCoroutine; // the active coroutine if there is one
 
+    public delegate void DamageEventHandler(float amount);
+    public event DamageEventHandler DamageTaken; // for when player takes damage. this can probably be put in movementcontroller
+    public delegate void DeathEventHandler();
+    public event DeathEventHandler Died; // for when the player dies
+
     #endregion
 
 
     #region Monobehaviors
 
-    private void Awake()
+    protected virtual void Awake()
     {
         lastDamageTime = invincibilityDuration;
+        collideLayerMask = cc2d.platformMask;
+        DamageTaken += OnTakeDamage;
+        Died += OnDeath;
+    }
+
+    protected virtual void OnEnable()
+    {
         MaxHitPoints = _MaxHitPoints;
         CurrentHitPoints = _MaxHitPoints;
-        collideLayerMask = cc2d.platformMask;
     }
 
     #endregion
 
 
     // Implement later for death animation / loot
-    protected virtual void Die()
+    protected virtual void OnDeath()
     {
         Destroy(gameObject);
+    }
+
+    protected virtual void OnTakeDamage(float damageReceived)
+    {
+        CurrentHitPoints -= damageReceived;
+        if (CurrentHitPoints <= 0)
+        {
+            Died();
+        }
     }
 
 
@@ -54,16 +74,16 @@ public class MovementController : MonoBehaviour
     ///     Deals <c>damage</c> damage to the enemy's health.
     /// </summary>
     /// <returns>
-    ///     Returns <c>true</c> if the enemy is killed by the damage, false otherwise.
+    ///     Returns <c>true</c> if the enemy should be killed by the damage, false otherwise.
     /// </returns>
     ///     <param name="damage">The quantity of damage to deal</param>
     public bool Damage(float damage)
     {
         if(IsInvincible()) { return false; }
-        CurrentHitPoints -= damage;
-        if (CurrentHitPoints <= 0)
+        lastDamageTime = Time.time;
+        DamageTaken(damage);
+        if (MaxHitPoints - CurrentHitPoints <= 0)
         {
-            Die();
             return true;
         }
         else
@@ -71,7 +91,7 @@ public class MovementController : MonoBehaviour
             return false;
         }
     }
-    
+
     /// <summary>
     ///     Deals <c>damage</c> damage per second to the enemy's health over <c>duration</c> seconds.
     /// </summary>

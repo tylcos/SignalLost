@@ -23,6 +23,8 @@ public class RangedEnemyController : EnemyController {
 
     #region monobehavior
 
+    
+
     void FixedUpdate () {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
         {

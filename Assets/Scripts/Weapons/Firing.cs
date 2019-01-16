@@ -4,6 +4,9 @@
 
 public class Firing : MonoBehaviour
 {
+
+    // merge this into weaponmanager and call fire methods from a gun object
+    // for gods sake put some of this stuff in methods
     public WeaponManager weaponManager;
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;

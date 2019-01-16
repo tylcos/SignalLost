@@ -24,6 +24,8 @@ public class MeleeEnemyController : EnemyController {
 
     #region monobehavior
 
+    
+
     void FixedUpdate()
     {
         if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
