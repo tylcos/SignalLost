@@ -13,7 +13,7 @@ sysinfo.txt
 # Unity3D generated meta files
 *.pidb.meta
 
-[Pp]rojectSettings/ProjectVersion.txt
+ProjectVersion.txt
 
 ###
 # VS/MD solution and project files
@@ -42,4 +42,3 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
-
