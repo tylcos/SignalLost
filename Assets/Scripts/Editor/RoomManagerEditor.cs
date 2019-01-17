@@ -39,6 +39,10 @@ class RoomManagerEditor : Editor
         GUI.skin.button.alignment = TextAnchor.MiddleCenter;
         GUI.skin.button.margin = new RectOffset(5, 5, 0, 0);
 
+
+
+        EditorGUILayout.LabelField("Used to place pathways on each side of the current room.");
+
         for (int r = 0; r < 4; r++)
         {
             var currentRow = connectors[r];

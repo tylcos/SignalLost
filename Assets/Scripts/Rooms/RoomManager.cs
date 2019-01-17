@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class RoomManager : MonoBehaviour 
 {
     // Necessary because unity cannot serialize an array of lists
-    public List<int>[] connectors = new List<int>[4];
+    public int[][] connectors = new int[4][];
     public List<int> side1 = new List<int>(); public List<int> side2 = new List<int>();
     public List<int> side3 = new List<int>(); public List<int> side4 = new List<int>();
 
@@ -66,9 +66,9 @@ public class RoomManager : MonoBehaviour
     public void UpdateConnectors()
     {
         // Update connectors
-        connectors[0] = side1;
-        connectors[1] = side2;
-        connectors[2] = side3;
-        connectors[3] = side4;
+        connectors[0] = side1.ToArray();
+        connectors[1] = side2.ToArray();
+        connectors[2] = side3.ToArray();
+        connectors[3] = side4.ToArray();
     }
 }

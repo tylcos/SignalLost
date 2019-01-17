@@ -372,6 +372,16 @@ Prefab:
       propertyPath: side4.Array.data[2]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: side1.Array.data[1]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114251509375693790, guid: 91994bd4b61a9f64694a29cd798367b6,
+        type: 2}
+      propertyPath: side3.Array.data[1]
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91994bd4b61a9f64694a29cd798367b6, type: 2}
   m_IsPrefabAsset: 0
