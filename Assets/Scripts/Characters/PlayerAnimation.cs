@@ -10,6 +10,8 @@ public class PlayerAnimation : MonoBehaviour {
     [HideInInspector]
     public WeaponManager weaponAccessor;
 
+    private bool idle;
+
 	// Use this for initialization    
         public void Start()
         {
@@ -22,6 +24,7 @@ public class PlayerAnimation : MonoBehaviour {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) 
             || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
+            idle = false;
             animator.SetBool("Moving", true);
             if (Input.GetKeyDown(KeyCode.V))
             {
@@ -37,6 +40,7 @@ public class PlayerAnimation : MonoBehaviour {
         {
             transform.hasChanged = false;
             animator.SetBool("Moving", false);
+            idle = true;
         }
         MeleeAnimation();
         ShootingAnimation();
