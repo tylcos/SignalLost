@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 4277910436130678}
   - component: {fileID: 58154560056975910}
   - component: {fileID: 114232897573413850}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Pushing Aura
   m_TagString: Pushing
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 114683862728167450}
   - component: {fileID: 114007684564531466}
   - component: {fileID: 114268929445979850}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Red Dude
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840001185029764}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.42, y: 0.3, z: -10}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
