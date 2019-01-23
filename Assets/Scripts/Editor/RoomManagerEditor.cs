@@ -10,7 +10,7 @@ using UnityEngine;
 class RoomManagerEditor : Editor
 {
     public List<int>[] connectors = new List<int>[4];
-    public BoundsInt bounds;
+    public Bounds bounds;
 
 
 
@@ -23,7 +23,7 @@ class RoomManagerEditor : Editor
     {
         castedTarget = (target as RoomManager);
 
-        bounds = serializedObject.FindProperty("bounds").boundsIntValue;
+        bounds = serializedObject.FindProperty("bounds").boundsValue;
 
         // Necessary because unity cannot serialize an array of lists
         connectors[0] = castedTarget.side1;
@@ -52,8 +52,9 @@ class RoomManagerEditor : Editor
             if (GUILayout.Button("+", width))
             {
                 Undo.RecordObject(castedTarget, "Change pathways");
-                currentRow.Add(0);
+                currentRow.Add(0);  
                 UpdateValues();
+                PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
             }
                 
 
@@ -62,12 +63,13 @@ class RoomManagerEditor : Editor
                 Undo.RecordObject(castedTarget, "Change pathways");
                 currentRow.RemoveAt(currentRow.Count - 1);
                 UpdateValues();
+                PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
             }
 
 
             for (int c = 0; c < currentRow.Count; c++)
             {
-                int size = r < 2 ? bounds.size.x : bounds.size.y;
+                int size = (int)(r < 2 ? bounds.size.x : bounds.size.y);
                 int changedValue = EditorGUILayout.IntSlider(currentRow[c], 0, size - 2);
 
                 if (changedValue != currentRow[c])
@@ -75,21 +77,22 @@ class RoomManagerEditor : Editor
                     Undo.RecordObject(castedTarget, "Change pathways");
                     currentRow[c] = changedValue;
                     UpdateValues();
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
                 }
             }
 
 
             EditorGUILayout.EndHorizontal();
         }
+
+        EditorGUILayout.Separator();
+        if (GUILayout.Button("Update room bounds", GUILayout.Width(200)))
+            castedTarget.UpdateBoundSize();
     }
 
     private void UpdateValues()
     {
-        castedTarget.side1 = connectors[0];
-        castedTarget.side2 = connectors[1];
-        castedTarget.side3 = connectors[2];
-        castedTarget.side4 = connectors[3];
-
         castedTarget.UpdateConnectors();
+        SceneView.RepaintAll();
     }
 }
