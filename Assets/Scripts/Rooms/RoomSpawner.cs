@@ -58,7 +58,8 @@ public class RoomSpawner : MonoBehaviour
 
                 foreach (var connection in room.GetConnections())
                 {
-                    Room roomToSpawn = Room.BaseRooms[2][0].Clone();
+                    int connections = new int[] { 1, 2, 4, 6 }[UnityEngine.Random.Range(0, 4)]; // TODO
+                    Room roomToSpawn = Room.GetRoom(connections, connection.Direction).Clone();
 
                     var pos = room.GetSpawnPosition(connection, roomToSpawn);
 
@@ -225,6 +226,17 @@ public class Room
         BaseRooms = new List<Room>[maxConnections];
         for (int i = 0; i < maxConnections; i++)
             BaseRooms[i] = new List<Room>(2);
+    }
+
+
+
+    public static Room GetRoom(int connections, byte direction)
+    {
+        foreach (Room room in RandomHelper.Shuffle(BaseRooms[connections]))
+            if (room.connectors[direction].Any())
+                return room;
+
+        throw new Exception("No room with " + connections + " connections and connections on each side!");
     }
 }
 
