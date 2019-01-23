@@ -36,22 +36,43 @@ public class UIController : MonoBehaviour {
     AmmoSettings _ammoSettings;
     public PlayerController player;
     [SerializeField]
-    private GameObject healthbar;
+    private GameObject healthbar = null;
     [SerializeField]
-    private GameObject ammo;
+    private GameObject ammo = null;
     [SerializeField]
-    private GameObject deathMessage;
+    private GameObject deathMessage = null;
 
 
     private void Awake()
     {
-        _healthbarSettings.healthbarTransform = healthbar.GetComponentsInChildren<Transform>()[2];
-        _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
-        _ammoSettings.weapon = player.GetComponentInChildren<WeaponManager>();
+        try
+        {
+            _healthbarSettings.healthbarTransform = healthbar.GetComponentsInChildren<Transform>()[2];
+            player.DamageTaken += OnTakeDamage;
+        } catch(UnassignedReferenceException e)
+        {
+            Debug.LogError("The healthbar was not assigned in the UI canvas! Disabling updates!");
+        }
 
-        player.DamageTaken += OnTakeDamage;
-        player.Died += OnDeath;
-        _ammoSettings.weapon.WeaponDataChanged += OnWeaponUpdate;
+        try
+        {
+            _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
+            _ammoSettings.weapon = player.GetComponentInChildren<WeaponManager>();
+            _ammoSettings.weapon.WeaponDataChanged += OnWeaponUpdate;
+        }
+        catch (UnassignedReferenceException e)
+        {
+            Debug.LogError("The ammo counter was not assigned in the UI canvas! Disabling updates!");
+        }
+
+        if(deathMessage != null)
+        {
+            player.Died += OnDeath;
+        } else
+        {
+            Debug.LogError("The death message was not assigned in the UI canvas! Disabling updates!");
+        }
+
     }
 
     private void OnEnable()
@@ -63,9 +84,11 @@ public class UIController : MonoBehaviour {
     private void DeathSequence()
     {
         //this should fade in death message and fade out the rest somehow
-        UpdateHealthbar();
-        UpdateAmmo();
         deathMessage.SetActive(true);
+        if(healthbar != null)
+            UpdateHealthbar();
+        if(ammo != null)
+            UpdateAmmo();
     }
 
     // called when player takes damage

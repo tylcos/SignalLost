@@ -2,260 +2,78 @@
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
-
-
+using System;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public GameObject teleporter;
-    [Tooltip("Starting, Shop, Boss, Extra Rooms...")]
+    public int roomsToSpawn = 5;
+
     public GameObject[] roomPrefabs;
-
-
-
-    public Room startRoom;
-    public DictonaryGrid pathways = new DictonaryGrid();
-        
-    public int iterations = 4;
-    public int roomsToSpawn = 11;
-    public float teleporterCount = 3;
-    public int scale = 40;
-
-
-
-    private const int maxConnections = 3;
-
-    private const float lowerThreshhold = .2f;
-    private const float upperThreshhold = .3f;
-    private const float decreaseRandomChance = .2f;
-    private const float increaseRandomChance = .5f;
-
-    private int spawnedRoomCount = -2; // Offset the inital two spawned rooms
+    [Tooltip("Starting, Shop, Boss")]
+    public GameObject[] specialRooms = new GameObject[3];
 
 
 
     private void Start()
     {
-        if (roomPrefabs.Length == 0)
-            throw new System.ArgumentOutOfRangeException("roomPrefabs", "Must have at least two different room prefabs to choose from");
+        Room.Initialize(4, transform);
 
-        CreateRoomTree();
-        InstantiatePathways();
+        foreach (GameObject room in roomPrefabs)
+        {
+            var script = room.GetComponent<RoomManager>();
+            script.UpdateConnectors();
+            int connections = script.connectors.Count(s => s.Any());
+
+            Room.BaseRooms[connections].Add(new Room(room, script));
+        }
+
+        SpawnRooms();
     }
-
-    private void OnDrawGizmos()
-    {
-        InstantiatePathwaysDebug();
-    }
-
-
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            DeleteAllRooms();
-            spawnedRoomCount = -2;
-            pathways = new DictonaryGrid();
-            Room.takenPositions = new Dictionary<Vector2Int, Tilemap>(roomsToSpawn + 2);
-            startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
-
-            
-            CreateRoomTree();
         }
     }
 
 
 
-    public void CreateRoomTree()
+    public void SpawnRooms()
     {
-        var s = Stopwatch.StartNew();
-        var ss = Stopwatch.StartNew();
+        Room startRoom = new Room(Instantiate(specialRooms[0], transform));
+        int remainingRooms = roomsToSpawn;
+
+        List<Room> unconsumedRooms = new List<Room>(8);
+        Queue<Room> queue = new Queue<Room>(8);
+        queue.Enqueue(startRoom);
 
 
 
-        int correctedRoomsToSpawn = roomsToSpawn - 3; // Start, shop, and boss rooms
-
-        Room.Initialize(iterations, roomsToSpawn);
-
-
-
-        // Spawn the start room in a random direction 
-        startRoom = new Room(Vector2Int.zero, Room.RoomType.StartingRoom);
-
-        int startDirection = Random.Range(0, 8);
-        Room.levels[0].Add(new Room(Room.Directions[startDirection], GetRandomRoom(-1)));
-        pathways.SetPathway(startRoom.Position, (byte)startDirection);
-
-        SpawnRoom(startRoom);
-        SpawnRoom(Room.levels[0][0]);
-
-
-
-        int maxIterations = iterations + 1; // Includes one for the initial room
-        for (int currentIteration = 0; currentIteration < maxIterations; currentIteration++)
+        while (remainingRooms > 0)
         {
-            // Spawn rooms on last iteration rooms if no new rooms were spawned
-            int spawnedChildCount = Room.levels[currentIteration].Count;
-            if (spawnedChildCount == 0) 
+            while (queue.Any())
             {
-                --currentIteration;
-                spawnedChildCount = Room.levels[currentIteration].Count;
-            }
+                Room room = queue.Dequeue();
 
-
-
-            // A value representing about how many rooms should be spawned per room 
-            float ratio = (correctedRoomsToSpawn - spawnedRoomCount) / ((maxIterations - currentIteration) * spawnedChildCount);
-            int nextIteration = currentIteration + 1;
-            
-            // Spawn new rooms on every room at the current iteration level
-            foreach (Room currentRoom in Room.levels[currentIteration])
-            {
-                int numberOfRooms = GetRandom(ratio); // Number of rooms to spawn
-
-                // Get a list of directions where a room will be spawned at
-                var directionsToSpawn = currentRoom.GetAvailableSpawnDirectionsShuffled()
-                    .Where(d => pathways.GetPathwayValid(currentRoom.Position, d)).Take(numberOfRooms);
-
-                foreach (byte direction in directionsToSpawn)
+                foreach (var connection in room.GetConnections())
                 {
-                    pathways.SetPathway(currentRoom.Position, direction);
-                    Room newRoom = new Room(currentRoom.Position + Room.Directions[direction], GetRandomRoom(currentRoom.roomType));
-                    Room.levels[nextIteration].Add(newRoom);
+                    int connections = new int[] { 1, 2, 4, 6 }[UnityEngine.Random.Range(0, 4)]; // TODO
+                    Room roomToSpawn = Room.GetRoom(connections, connection.Direction).Clone();
 
-                    s.Stop();
-                    SpawnRoom(newRoom);
-                    s.Start();
+                    var pos = room.GetSpawnPosition(connection, roomToSpawn);
+
+
+
+                    roomToSpawn.Instantiate(pos);
+                    unconsumedRooms.Add(roomToSpawn);
+                    --remainingRooms;
                 }
             }
+
+            queue = new Queue<Room>(unconsumedRooms);
+            unconsumedRooms.Clear();
         }
-
-
-
-        // Spawning the boss room and shop room
-        SpawnSpecialRoom(Room.RoomType.ShopRoom);
-        SpawnSpecialRoom(Room.RoomType.BossRoom);
-
-
-
-        s.Stop();
-        ss.Stop();
-        UnityEngine.Debug.Log("Finished spawning " + (spawnedRoomCount + 1) + " rooms in " + ss.Elapsed.Milliseconds + " ms total with " + s.Elapsed.Milliseconds + " ms of computing");
-    }
-
-    
-
-    void SpawnRoom(Room room)
-    {
-        ++spawnedRoomCount;
-
-        Vector3 position = new Vector3(room.Position.x * scale, room.Position.y * scale);
-        var spawedRoom = Instantiate(roomPrefabs[room.roomType + 3], position, transform.rotation, transform);
-
-        Room.takenPositions[room.Position] = spawedRoom.GetComponent<Tilemap>();
-    }
-
-    void SpawnSpecialRoom(Room.RoomType roomType)
-    {
-        var iterationLevel = Room.levels[Room.MaxIterations - 1];
-
-        // Find a vaild direction
-        Room roomToBuildOffOf = null;
-        List<byte> directionsToSpawn = null;
-        do
-        {
-            roomToBuildOffOf = iterationLevel[Random.Range(0, iterationLevel.Count)];
-        }
-        while ((directionsToSpawn = roomToBuildOffOf.GetAvailableSpawnDirectionsShuffled()
-            .Where(d => pathways.GetPathwayValid(roomToBuildOffOf.Position, d)).ToList()).Count == 0);
-
-
-
-        Room specialRoom = new Room(roomToBuildOffOf.Position + Room.Directions[directionsToSpawn[0]], (sbyte)roomType);
-        pathways.SetPathway(roomToBuildOffOf.Position, directionsToSpawn[0]);
-
-        SpawnRoom(specialRoom);
-    }
-
-
-
-    int GetRandom(float baseNumber)
-    {
-        float decimalPart = Mathf.Round(baseNumber) - baseNumber;
-        int numberToSpawn = 0;
-        double absoluteDecimalPart = Mathf.Abs(decimalPart);
-
-        if (absoluteDecimalPart < lowerThreshhold)
-            numberToSpawn =  Mathf.FloorToInt(baseNumber) + (Random.value < decreaseRandomChance ? -1 : 0);
-        else if (1 - absoluteDecimalPart < upperThreshhold)
-            numberToSpawn =  Mathf.FloorToInt(baseNumber) + (Random.value < increaseRandomChance ? 1 : 0);
-        else
-            numberToSpawn = Mathf.FloorToInt(baseNumber) + (Random.value < decimalPart ? 1 : 0);
-
-        return numberToSpawn > maxConnections ? maxConnections : numberToSpawn;
-    }
-
-    sbyte GetRandomRoom(sbyte parentRoomType)
-    {
-        int randomRoom;
-
-        while ((randomRoom = Random.Range(0, roomPrefabs.Length - 3)) == parentRoomType);
-
-        return (sbyte)randomRoom;
-    }
-
-
-
-    void InstantiatePathways()
-    {
-        foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
-        {
-            foreach (Vector2 direction in GetDirectionVectors(entry.Value))
-            {
-                var tm = Room.takenPositions[entry.Key].GetComponent<Tilemap>();
-                //Instantiate(teleporter, )
-            }
-        }
-    }
-
-    void InstantiatePathwaysDebug()
-    {
-        Gizmos.color = Color.green;
-
-        if (pathways != null)
-        {
-            foreach (KeyValuePair<Vector2Int, byte> entry in pathways.grid)
-            {
-                foreach (Vector2 direction in GetDirectionVectors(entry.Value))
-                {
-                    if (direction == Room.Directions[3])
-                        Gizmos.DrawLine((Vector2)(entry.Key + Vector2Int.right) * scale, ((entry.Key + Vector2Int.right) + direction) * scale);
-                    else
-                        Gizmos.DrawLine((Vector2)entry.Key * scale, (entry.Key + direction) * scale);
-                }
-            }
-        }
-    }
-
-    void DeleteAllRooms()
-    {
-        foreach (Transform room in transform)
-            Destroy(room.gameObject);
-    }
-
-
-
-    List<Vector2> GetDirectionVectors(byte direction)
-    {
-        List<Vector2> directions = new List<Vector2>(4);
-
-        for (int i = 0; i < 4; i++)
-            if ((direction & 1 << i) > 0)
-                directions.Add(Room.Directions[i]);
-
-        return directions;
     }
 }
 
@@ -263,131 +81,188 @@ public class RoomSpawner : MonoBehaviour
 
 public class Room
 {
-    public Vector2Int Position;
-    public sbyte roomType;
+    public GameObject gameObject;
+    public Transform transform;
+    public List<int>[] connectors;
+    public Bounds bounds;
 
 
 
-    public static int MaxIterations { get; private set; }
+    public static List<Room>[] BaseRooms;
 
-    public static Dictionary<Vector2Int, Tilemap> takenPositions;
 
-    public static readonly Vector2Int[] Directions =
-        { new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(0, 1), new Vector2Int(-1, 1),
-            new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1) };
 
-    public static List<Room>[] levels;
+    private static Transform roomSpawner;
 
-    public enum RoomType : sbyte
+
+
+    public Room(GameObject go, RoomManager rm)
     {
-        StartingRoom = -3,
-        ShopRoom = -2,
-        BossRoom = -1
+        gameObject = go;
+        transform = go.transform;
+
+        connectors = rm.connectors;
+        bounds = rm.bounds;
+    }
+
+    public Room(GameObject go)
+    {
+        gameObject = go;
+        transform = go.transform;
+
+        var rm = go.GetComponent<RoomManager>();
+        connectors = rm.connectors;
+        bounds = rm.bounds;
+    }
+
+    public Room()
+    {
+    }
+
+    public Room Clone()
+    {
+        Room room = new Room
+        {
+            connectors = new List<int>[]
+            {
+                new List<int>(connectors[0]),
+                new List<int>(connectors[1]),
+                new List<int>(connectors[2]),
+                new List<int>(connectors[3])
+            },
+
+            gameObject = gameObject,
+            bounds = bounds
+        };
+
+        return room;
     }
 
 
 
-    public Room(Vector2Int position, sbyte roomType)
+    public IEnumerable<Connection> GetConnections()
     {
-        Position = position;
-        takenPositions.Add(position, null);
-
-        this.roomType = roomType;
+        for (int s = 0; s < 4; s++)
+        {
+            var side = connectors[s];
+            for (int c = 0; c < side.Count; c++)
+                yield return new Connection((byte)s, side[c]);
+        }
     }
 
-    public Room(Vector2Int position, RoomType roomType)
+    public Vector3 GetConnectionOffset(Connection connection)
     {
-        Position = position;
-        takenPositions.Add(position, null);
+        float xOffset;
+        float yOffset;
 
-        this.roomType = (sbyte)roomType;
+        if ((connection.Direction & 2) > 0)
+        {
+            xOffset = (connection.Direction & 1) > 0 ? bounds.max.x : bounds.min.x;
+            yOffset = bounds.min.y + connection.Position;
+        }
+        else
+        {
+            xOffset = bounds.min.x + connection.Position;
+            yOffset = (connection.Direction & 1) > 0 ? bounds.max.y : bounds.min.y;
+        }
+
+        return new Vector3(xOffset, yOffset);
+    }
+
+    public void EnsureDirection(int direction)
+    {
+        if (!connectors[direction].Any())
+        {
+            int rotation;
+            int[] indexes = { 0, 2, 1, 3 };
+            for (rotation = 1; rotation < 4; rotation++)
+            {
+                int index = (Array.IndexOf(indexes, direction) + rotation) % 4;
+                if (connectors[indexes[index]].Any())
+                    break;
+            }
+
+            switch (rotation)
+            {
+                case 1:
+
+                    break;
+            }
+        }
     }
 
 
 
-    public static void Initialize(int iterations, int roomsToSpawn)
+    public Vector3 GetSpawnPosition(Connection connection, Room roomToSpawn)
     {
-        takenPositions = new Dictionary<Vector2Int, Tilemap>(roomsToSpawn + 2);
+        var flippedDirection = connection.Flip();
 
-        MaxIterations = iterations + 2; // One for the initial room and last spawned rooms
-        int averageMaxRooms = (roomsToSpawn / iterations) * 2;
+        roomToSpawn.EnsureDirection(flippedDirection.Direction);
+        var spawnConnector = roomToSpawn.GetConnections().First(c => c.Direction == flippedDirection.Direction);
+        roomToSpawn.connectors[flippedDirection.Direction].Remove(connection.Position);
 
-        levels = new List<Room>[MaxIterations];
-
-        levels[0] = new List<Room>(1);
-        for (int i = 1; i < MaxIterations; i++)
-            levels[i] = new List<Room>(averageMaxRooms);
+        return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(spawnConnector);
     }
 
 
 
-    public IEnumerable<byte> GetAvailableSpawnDirectionsShuffled()
+    public void Instantiate(Vector3 position)
     {
-        foreach (byte i in RandomHelper.RandomRangeNoRepeat(8, 8))
-            if (!takenPositions.ContainsKey(Position + Directions[i]))
-                yield return i;
+        Instantiate(position, roomSpawner.transform.rotation);
+    }
+
+    public void Instantiate(Vector3 position, Quaternion rotation)
+    {
+        gameObject = UnityEngine.Object.Instantiate(gameObject, position, rotation, roomSpawner);
+        transform = gameObject.transform;
+    }
+
+
+
+    public static void Initialize(int maxConnections, Transform parent)
+    {
+        roomSpawner = parent;
+
+        BaseRooms = new List<Room>[maxConnections];
+        for (int i = 0; i < maxConnections; i++)
+            BaseRooms[i] = new List<Room>(2);
+    }
+
+
+
+    public static Room GetRoom(int connections, byte direction)
+    {
+        foreach (Room room in RandomHelper.Shuffle(BaseRooms[connections]))
+            if (room.connectors[direction].Any())
+                return room;
+
+        throw new Exception("No room with " + connections + " connections and connections on each side!");
     }
 }
 
 
 
-public class DictonaryGrid
+public struct Connection
 {
-    public Dictionary<Vector2Int, byte> grid = new Dictionary<Vector2Int, byte>(32);
+    public readonly byte Direction;
+    public readonly int Position;
 
 
 
-    public byte GetPosition(Vector2Int pos)
+    public byte FlippedDirection { get { return (byte)(Direction ^ 1); } }
+
+
+
+    public Connection(byte dir, int pos)
     {
-        byte outValue = 0;
-
-        grid.TryGetValue(pos, out outValue);
-
-        return outValue;
+        Direction = dir;
+        Position = pos;
     }
 
 
 
-    public bool GetPathwayValid(Vector2Int position, byte direction)
+    public Connection Flip()
     {
-        CorrectPosition(ref position, ref direction);
-        byte value = GetPosition(position);
-
-        return (direction % 2 == 0) ? (value & (1 << direction)) == 0 : (value & 0xA) == 0; 
-    }
-
-
-
-    public void SetPathway(Vector2Int position, byte direction)
-    {
-        CorrectPosition(ref position, ref direction);
-
-        if (grid.ContainsKey(position))
-            grid[position] |= (byte)(1 << direction);
-        else
-            grid.Add(position, (byte)(1 << direction));
-    }
-
-
-
-
-    private static void CorrectPosition(ref Vector2Int position, ref byte direction)
-    {
-        switch (direction)
-        {
-            case 3:
-            case 4:
-                position += Vector2Int.left;
-                break;
-            case 5:
-                position += new Vector2Int(-1, -1);
-                break;
-            case 6:
-            case 7:
-                position += Vector2Int.down;
-                break;
-        }
-
-        direction %= 4;
+        return new Connection(FlippedDirection, Position);
     }
 }

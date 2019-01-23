@@ -15,7 +15,7 @@ public class MovementController : MonoBehaviour
 
     // This is used for the inspector until we have compact data storage
     [SerializeField]
-    private float _MaxHitPoints;
+    private float _MaxHitPoints = 1;
     public float CurrentHitPoints { get; set; }
     public float MaxHitPoints { get; private set; }
 

@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour
 
 
 
-    private float weaponPos = 1f;
+    private float weaponPos = 0f;
     private bool reloading = false;
     private int weaponBeingReloaded;
 
@@ -44,17 +44,20 @@ public class WeaponManager : MonoBehaviour
 
 
 
-    private void Start()
+    private void OnEnable()
     {
         if (WeaponInfos.Length == 0)
             throw new System.ArgumentOutOfRangeException("No weapon infos selected.");
+
         Weapons = WeaponInfos.Select(w => new Weapon(w)).ToArray();
+        CurrentWeapon = 0;
     }
 
 
 
     void Update()
     {
+        
         weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -65,18 +68,9 @@ public class WeaponManager : MonoBehaviour
         weaponPos %= Weapons.Length;
         int flooredWeaponPos = Mathf.FloorToInt(weaponPos); 
         if (CurrentWeapon != flooredWeaponPos)
-        {
-            CurrentWeapon = flooredWeaponPos;
-
-            sr.sprite = Weapon.Info.weaponSprite;
-            bulletSpawnPoint.localPosition = Weapon.Info.bulletSpawnOffset;
-            reloading = false;
+            ChangeWeapon(flooredWeaponPos);
 
 
-
-            if (Weapon.CurrentAmmo == 0)
-                Reload();
-        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -87,6 +81,19 @@ public class WeaponManager : MonoBehaviour
         WeaponDataChanged();
     }
 
+    private void ChangeWeapon(int flooredWeaponPos)
+    {
+        CurrentWeapon = flooredWeaponPos;
+
+        sr.sprite = Weapon.Info.weaponSprite;
+        bulletSpawnPoint.localPosition = Weapon.Info.bulletSpawnOffset;
+        reloading = false;
+
+
+
+        if (Weapon.CurrentAmmo == 0)
+            Reload();
+    }
 
 
     public void Reload()
