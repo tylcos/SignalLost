@@ -24,8 +24,8 @@ public class PlayerAnimation : MonoBehaviour {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) 
             || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            idle = false;
             animator.SetBool("Moving", true);
+            idle = false;
             if (Input.GetKeyDown(KeyCode.V))
             {
                 MeleeAnimation();
@@ -38,12 +38,19 @@ public class PlayerAnimation : MonoBehaviour {
         }
         else
         {
-            transform.hasChanged = false;
-            animator.SetBool("Moving", false);
             idle = true;
         }
+
         MeleeAnimation();
         ShootingAnimation();
+
+        if (idle)
+        {
+            transform.hasChanged = false;
+            animator.SetBool("Moving", false);
+        }
+
+
     }
 
     private void MeleeAnimation()
@@ -53,6 +60,7 @@ public class PlayerAnimation : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.V))
         {
             animator.SetBool("ClickedMeleeButton", true);
+            idle = false;
         }
         else
         {
@@ -65,6 +73,8 @@ public class PlayerAnimation : MonoBehaviour {
         if (Input.GetKey(KeyCode.Mouse0)&& weaponAccessor.Weapon.CurrentAmmo!=0)
         {
             animator.SetBool("Shooting", true);
+            idle = false;
+            Debug.Log(idle);
         }
         else
         {
