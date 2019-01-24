@@ -502,8 +502,6 @@ MonoBehaviour:
   weapon: {fileID: 1104184525536968}
   attackIndicator: {fileID: 1227678452590240}
   aggroRange: 30
-  retreatDistance: 2
-  waitTime: 1.5
   damage: 15
   attackRange: 1.5
   attackCooldownLength: 1.5
@@ -513,9 +511,9 @@ MonoBehaviour:
   targetTags:
   - Player
   attackChargeTime: 0.3
-  attackColliderEnableLength: 0.3
-  attackAfterPauseDuration: 0.3
-  attackAfterRetreatDistance: 0.3
+  attackColliderEnableDuration: 0.3
+  postAttackPauseDuration: 0.3
+  postAttackRetreatDistance: 0.3
 --- !u!114 &114007684564531466
 MonoBehaviour:
   m_ObjectHideFlags: 0
