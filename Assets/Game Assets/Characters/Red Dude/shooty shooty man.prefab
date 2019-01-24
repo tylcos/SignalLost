@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 114664005140517220}
   - component: {fileID: 114640785694825438}
   - component: {fileID: 114994901661913452}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: shooty shooty man
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 4426815030151156}
   - component: {fileID: 58152426757925366}
   - component: {fileID: 114959292077130018}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Pushing Aura
   m_TagString: Pushing
   m_Icon: {fileID: 0}

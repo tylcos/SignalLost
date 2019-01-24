@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 50822498620361568}
   - component: {fileID: 61047100213059538}
   - component: {fileID: 114050555920559164}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 4510016736433532}
   - component: {fileID: 58868075079340210}
   - component: {fileID: 114842883488392252}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Pushing Aura
   m_TagString: Pushing
   m_Icon: {fileID: 0}
