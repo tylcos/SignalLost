@@ -507,7 +507,7 @@ MonoBehaviour:
   attackCooldownLength: 1.5
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4096
   targetTags:
   - Player
   attackChargeTime: 0.3
@@ -545,7 +545,7 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   triggerMask:
     serializedVersion: 2
     m_Bits: 4096
