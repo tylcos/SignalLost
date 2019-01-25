@@ -35,7 +35,7 @@ public class RoomManager : MonoBehaviour
         UpdateConnectors();
     }
 
-
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
@@ -48,9 +48,9 @@ public class RoomManager : MonoBehaviour
         foreach (int pos in connectors[2]) Gizmos.DrawCube(centerY + new Vector3(0, pos, 0), new Vector3(1, 2));
         foreach (int pos in connectors[3]) Gizmos.DrawCube(centerY + new Vector3(bounds.size.x - 1, pos, 0), new Vector3(1, 2));
     }
+#endif
 
 
-    
     [ContextMenu("Update Bound Size")]
     public void UpdateBoundSize()
     {
