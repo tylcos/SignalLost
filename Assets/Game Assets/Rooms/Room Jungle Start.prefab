@@ -3278,7 +3278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   side1: 
   side2: 
-  side3: ffffffff
+  side3: 00000000
   side4: 
   bounds:
     m_Center: {x: -1, y: 0, z: 0}
