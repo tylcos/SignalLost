@@ -59,7 +59,7 @@ public class RoomSpawner : MonoBehaviour
 
                 foreach (var connection in room.GetConnections())
                 {
-                    int connections = new int[] { 1, 2, 4 }[UnityEngine.Random.Range(0, 3)]; // TODO
+                    int connections = new int[] { 2, 4 }[UnityEngine.Random.Range(0, 2)]; // TODO
                     Room roomToSpawn = Room.GetRoom(connections, connection.Direction).Clone();
 
                     var pos = room.GetSpawnPosition(connection, roomToSpawn);
@@ -150,7 +150,7 @@ public class Room
 
     public IEnumerable<Connection> GetConnections()
     {
-        for (int s = 0; s < 4; s++)
+        foreach (int s in new int[] { 0,2,1,3})
         {
             var side = connectors[s];
             for (int c = 0; c < side.Count; c++)
@@ -163,15 +163,15 @@ public class Room
         float xOffset;
         float yOffset;
 
-        if ((connection.Direction & 2) > 0)
+        if ((connection.Direction & 2) > 0) // Vertical
         {
-            xOffset = (connection.Direction & 1) > 0 ? bounds.max.x : bounds.min.x;
-            yOffset = bounds.min.y + connection.Position;
+            xOffset = (connection.Direction & 1) > 0 ? bounds.extents.x : -bounds.extents.x;
+            yOffset = connection.Position;
         }
         else
         {
-            xOffset = bounds.min.x + connection.Position;
-            yOffset = (connection.Direction & 1) > 0 ? bounds.max.y : bounds.min.y;
+            xOffset = connection.Position;
+            yOffset = (connection.Direction & 1) > 0 ? bounds.extents.y : -bounds.extents.y;
         }
 
         return new Vector3(xOffset, yOffset);
@@ -183,8 +183,12 @@ public class Room
     {
         var flippedDirection = connection.Flip();
 
+        Debug.Log(connection.Direction);
+        Debug.Log(roomToSpawn.GetConnections().Count());
         var spawnConnector = roomToSpawn.GetConnections().First(c => c.Direction == flippedDirection.Direction);
         roomToSpawn.connectors[flippedDirection.Direction].Remove(connection.Position);
+
+        Debug.Log(spawnConnector.Direction + "    " + spawnConnector.Position);
 
         return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(spawnConnector);
     }
@@ -193,8 +197,10 @@ public class Room
 
     public void Instantiate(Vector3 position)
     {
-        var quaternion = new Quaternion();
-        quaternion.eulerAngles = new Vector3(0, 0, 90f * rotation);
+        var quaternion = new Quaternion
+        {
+            eulerAngles = new Vector3(0, 0, 90f * rotation)
+        };
         Debug.Log(rotation);
 
         gameObject = UnityEngine.Object.Instantiate(gameObject, position, quaternion, roomSpawner);
@@ -214,7 +220,6 @@ public class Room
 
     public void Rotate(int rotation)
     {
-        Debug.Log("ROtate");
         if (rotation == 0)
             return;
 

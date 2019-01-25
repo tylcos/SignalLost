@@ -69,8 +69,8 @@ class RoomManagerEditor : Editor
 
             for (int c = 0; c < currentRow.Count; c++)
             {
-                int size = (int)(r < 2 ? bounds.size.x : bounds.size.y);
-                int changedValue = EditorGUILayout.IntSlider(currentRow[c], 0, size - 2);
+                int size = (int)(r < 2 ? bounds.extents.x : bounds.extents.y);
+                int changedValue = EditorGUILayout.IntSlider(currentRow[c], -size + 1, size - 1);
 
                 if (changedValue != currentRow[c])
                 {
