@@ -8725,10 +8725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d2bd542d985ca498c043fca40c112c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side1: 0c000000
-  side2: 0c000000
-  side3: 0c00000004000000
-  side4: 0c00000004000000
+  side1: 00000000
+  side2: 00000000
+  side3: 0000000000000000
+  side4: 0000000000000000
   bounds:
     m_Center: {x: 1, y: -2, z: 0}
     m_Extent: {x: 13, y: 13, z: 0}

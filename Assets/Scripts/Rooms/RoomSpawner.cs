@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 
-
 public class RoomSpawner : MonoBehaviour
 {
     public int roomsToSpawn = 5;
@@ -32,7 +31,17 @@ public class RoomSpawner : MonoBehaviour
 
         Debug.Log("[Total Rooms] " + Room.BaseRooms.Sum(s => s == null ? 0 : s.Count));
 
+
+
+
+        var c = System.Diagnostics.Stopwatch.StartNew();
+        var ss = System.Diagnostics.Stopwatch.StartNew();
+
         SpawnRooms();
+
+        c.Stop();
+        ss.Stop();
+        Debug.Log("Finished spawning " + (roomsToSpawn + 1) + " rooms in " + ss.Elapsed.Milliseconds + " ms total with " + c.Elapsed.Milliseconds + " ms of computing");
     }
 
     private void Update()
@@ -63,7 +72,7 @@ public class RoomSpawner : MonoBehaviour
 
                 foreach (var connection in room.GetConnections())
                 {
-                    int connections = new int[] { 2, 4 }.Shuffle().First(); // TODO
+                    int connections = new int[] { 1, 2, 4 }.Shuffle().First(); // TODO
                     Room roomToSpawn = Room.GetRoom(connections, connection.FlippedDirection).Clone();
 
                     Debug.Log("Chosen rot " + roomToSpawn.rotation);
@@ -74,6 +83,9 @@ public class RoomSpawner : MonoBehaviour
                     roomToSpawn.Instantiate(pos);
                     unconsumedRooms.Add(roomToSpawn);
                     --remainingRooms;
+
+                    if (remainingRooms == 0)
+                        return;
                 }
             }
 
@@ -173,23 +185,24 @@ public class Room
 
     public Vector3 GetConnectionOffset(Connection connection)
     {
-        Vector3 offset = new Vector3(bounds.center.x, bounds.center.y);
+        Vector3 offset = new Vector3();
         float multiplier = (connection.Direction & 1) > 0 ? 1 : -1;
 
         if ((connection.Direction & 2) > 0) // Horizonal connection
         {
-            offset.x += bounds.extents.x * multiplier;
-            offset.y += connection.Position;
+            offset.x = (connection.Direction & 1) > 0 ? bounds.max.x : bounds.min.x;
+            offset.y = connection.Position;
         }
         else
         {
-            offset.x += connection.Position;
-            offset.y += bounds.extents.y * multiplier;
+            offset.x = connection.Position;
+            offset.y = (connection.Direction & 1) > 0 ? bounds.max.y : bounds.min.y;
         }
 
         Debug.Log("-----");
         Debug.Log(rotation);
-        Debug.Log(bounds.center.x + "   " + bounds.center.y + "   " + bounds.extents.x);
+        Debug.Log(bounds.center.x + "   " + bounds.center.y + "   " + bounds.extents.x + "   " + bounds.extents.y);
+        Debug.Log(bounds.min.x + "   " + bounds.min.y + "   " + bounds.max.x + "   " + bounds.max.y);
         Debug.Log(offset.x + "   " + offset.y);
         return offset;
     }
@@ -235,51 +248,49 @@ public class Room
 
     public void Rotate()
     {
+        bounds = new Bounds(new Vector3(0, 0), new Vector3(bounds.size.x, bounds.size.y));
         if (rotation == 0)
             return;
 
 
 
         List<int>[] newConnectors = null;
-        var newBounds = new Bounds();
 
         switch (rotation)
         {
             case 1:
-                newBounds.SetMinMax(new Vector3(bounds.min.y, -bounds.max.x), new Vector3(bounds.max.y, -bounds.min.x));
+                bounds = new Bounds(new Vector3(0, 0), new Vector3(bounds.size.y, bounds.size.x));
 
                 newConnectors = new List<int>[] {
                     new List<int>(connectors[3]),
-                    new List<int>(connectors[0]),
-                    new List<int>(connectors[1]),
-                    new List<int>(connectors[2])
-                };
-                break;
-
-            case 2:
-                newBounds.SetMinMax(new Vector3(-bounds.max.x, -bounds.max.y), new Vector3(-bounds.min.x, -bounds.min.y));
-
-                newConnectors = new List<int>[] {
                     new List<int>(connectors[2]),
-                    new List<int>(connectors[3]),
                     new List<int>(connectors[0]),
                     new List<int>(connectors[1])
                 };
                 break;
 
-            case 3:
-                newBounds.SetMinMax(new Vector3(-bounds.max.y, bounds.min.x), new Vector3(-bounds.min.y, bounds.max.x));
+            case 2:
 
                 newConnectors = new List<int>[] {
                     new List<int>(connectors[1]),
+                    new List<int>(connectors[0]),
+                    new List<int>(connectors[3]),
+                    new List<int>(connectors[2])
+                };
+                break;
+
+            case 3:
+                bounds = new Bounds(new Vector3(0, 0), new Vector3(bounds.size.y, bounds.size.x));
+
+                newConnectors = new List<int>[] {
                     new List<int>(connectors[2]),
                     new List<int>(connectors[3]),
+                    new List<int>(connectors[1]),
                     new List<int>(connectors[0])
                 };
                 break;
         }
 
-        bounds = newBounds;
         connectors = newConnectors;
     }
 

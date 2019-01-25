@@ -7,6 +7,7 @@ using UnityEngine;
 
 [CustomEditor(typeof(RoomManager))]
 [CanEditMultipleObjects]
+[ExecuteInEditMode]
 class RoomManagerEditor : Editor
 {
     public List<int>[] connectors = new List<int>[4];
@@ -36,6 +37,11 @@ class RoomManagerEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        if (Application.isPlaying)
+            return;
+
+
+
         GUI.skin.button.alignment = TextAnchor.MiddleCenter;
         GUI.skin.button.margin = new RectOffset(5, 5, 0, 0);
 
