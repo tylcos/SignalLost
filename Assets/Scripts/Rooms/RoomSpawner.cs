@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 
+
 public class RoomSpawner : MonoBehaviour
 {
     public int roomsToSpawn = 5;
@@ -22,11 +23,14 @@ public class RoomSpawner : MonoBehaviour
         {
             var script = room.GetComponent<RoomManager>();
             script.UpdateConnectors();
-            int connections = script.connectors.Count(s => s.Any());
+            int connections = script.connectors.Sum(s => s.Count);
 
+            Debug.Log("[Adding Rooms] " + connections);
             for (int rotation = 0; rotation < 4; rotation++)
                 Room.BaseRooms[connections].Add(new Room(room, script, rotation));
         }
+
+        Debug.Log("[Total Rooms] " + Room.BaseRooms.Sum(s => s == null ? 0 : s.Count));
 
         SpawnRooms();
     }
@@ -59,9 +63,10 @@ public class RoomSpawner : MonoBehaviour
 
                 foreach (var connection in room.GetConnections())
                 {
-                    int connections = new int[] { 1, 2, 4 }[UnityEngine.Random.Range(0, 3)]; // TODO
-                    Room roomToSpawn = Room.GetRoom(connections, connection.Direction).Clone();
+                    int connections = new int[] { 2, 4 }.Shuffle().First(); // TODO
+                    Room roomToSpawn = Room.GetRoom(connections, connection.FlippedDirection).Clone();
 
+                    Debug.Log("Chosen rot " + roomToSpawn.rotation);
                     var pos = room.GetSpawnPosition(connection, roomToSpawn);
 
 
@@ -87,7 +92,7 @@ public class Room
 
     public List<int>[] connectors;
     public Bounds bounds;
-    public byte rotation = 0;
+    public byte rotation;
 
 
 
@@ -122,9 +127,16 @@ public class Room
         bounds = rm.bounds;
     }
 
-    public Room(GameObject go, RoomManager rm, int rotation) : this(go, rm)
+    public Room(GameObject go, RoomManager rm, int rotation)
     {
-        Rotate(rotation);
+        gameObject = go;
+        transform = go.transform;
+
+        connectors = rm.connectors;
+        bounds = rm.bounds;
+
+        this.rotation = (byte)rotation;
+        Rotate();
     }
 
     public Room Clone()
@@ -140,7 +152,8 @@ public class Room
             },
 
             gameObject = gameObject,
-            bounds = bounds
+            bounds = bounds,
+            rotation = rotation
         };
 
         return room;
@@ -150,7 +163,7 @@ public class Room
 
     public IEnumerable<Connection> GetConnections()
     {
-        for (int s = 0; s < 4; s++)
+        foreach (int s in new int[] { 0,2,1,3})
         {
             var side = connectors[s];
             for (int c = 0; c < side.Count; c++)
@@ -160,21 +173,25 @@ public class Room
 
     public Vector3 GetConnectionOffset(Connection connection)
     {
-        float xOffset;
-        float yOffset;
+        Vector3 offset = new Vector3(bounds.center.x, bounds.center.y);
+        float multiplier = (connection.Direction & 1) > 0 ? 1 : -1;
 
-        if ((connection.Direction & 2) > 0)
+        if ((connection.Direction & 2) > 0) // Horizonal connection
         {
-            xOffset = (connection.Direction & 1) > 0 ? bounds.max.x : bounds.min.x;
-            yOffset = bounds.min.y + connection.Position;
+            offset.x += bounds.extents.x * multiplier;
+            offset.y += connection.Position;
         }
         else
         {
-            xOffset = bounds.min.x + connection.Position;
-            yOffset = (connection.Direction & 1) > 0 ? bounds.max.y : bounds.min.y;
+            offset.x += connection.Position;
+            offset.y += bounds.extents.y * multiplier;
         }
 
-        return new Vector3(xOffset, yOffset);
+        Debug.Log("-----");
+        Debug.Log(rotation);
+        Debug.Log(bounds.center.x + "   " + bounds.center.y + "   " + bounds.extents.x);
+        Debug.Log(offset.x + "   " + offset.y);
+        return offset;
     }
 
 
@@ -183,8 +200,11 @@ public class Room
     {
         var flippedDirection = connection.Flip();
 
+        Debug.Log(roomToSpawn.GetConnections().Count());
         var spawnConnector = roomToSpawn.GetConnections().First(c => c.Direction == flippedDirection.Direction);
         roomToSpawn.connectors[flippedDirection.Direction].Remove(connection.Position);
+
+        Debug.Log(spawnConnector.Direction + "    " + spawnConnector.Position);
 
         return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(spawnConnector);
     }
@@ -193,9 +213,10 @@ public class Room
 
     public void Instantiate(Vector3 position)
     {
-        var quaternion = new Quaternion();
-        quaternion.eulerAngles = new Vector3(0, 0, 90f * rotation);
-        Debug.Log(rotation);
+        var quaternion = new Quaternion
+        {
+            eulerAngles = new Vector3(0, 0, 90f * rotation)
+        };
 
         gameObject = UnityEngine.Object.Instantiate(gameObject, position, quaternion, roomSpawner);
         transform = gameObject.transform;
@@ -212,21 +233,20 @@ public class Room
             BaseRooms[i] = new List<Room>(2);
     }
 
-    public void Rotate(int rotation)
+    public void Rotate()
     {
-        Debug.Log("ROtate");
         if (rotation == 0)
             return;
 
-        List<int>[] newConnectors;
-        this.rotation = (byte)rotation;
 
+
+        List<int>[] newConnectors = null;
         var newBounds = new Bounds();
+
         switch (rotation)
         {
             case 1:
                 newBounds.SetMinMax(new Vector3(bounds.min.y, -bounds.max.x), new Vector3(bounds.max.y, -bounds.min.x));
-                bounds = newBounds;
 
                 newConnectors = new List<int>[] {
                     new List<int>(connectors[3]),
@@ -238,7 +258,6 @@ public class Room
 
             case 2:
                 newBounds.SetMinMax(new Vector3(-bounds.max.x, -bounds.max.y), new Vector3(-bounds.min.x, -bounds.min.y));
-                bounds = newBounds;
 
                 newConnectors = new List<int>[] {
                     new List<int>(connectors[2]),
@@ -250,7 +269,6 @@ public class Room
 
             case 3:
                 newBounds.SetMinMax(new Vector3(-bounds.max.y, bounds.min.x), new Vector3(-bounds.min.y, bounds.max.x));
-                bounds = newBounds;
 
                 newConnectors = new List<int>[] {
                     new List<int>(connectors[1]),
@@ -260,18 +278,31 @@ public class Room
                 };
                 break;
         }
+
+        bounds = newBounds;
+        connectors = newConnectors;
     }
 
 
 
     public static Room GetRoom(int connections, byte direction)
     {
-        Debug.Log("Conn" + connections);
         foreach (Room room in RandomHelper.Shuffle(BaseRooms[connections]))
+        {
+            Debug.Log("Rot " + room.rotation);
             if (room.connectors[direction].Count > 0)
                 return room;
+        }
 
-        throw new Exception("No room with " + connections + " connections and connections on each side!");
+        throw new Exception("No room with " + connections + " connections and a connection at " + direction);
+    }
+
+
+
+    public static void Print(List<int>[] a, String b)
+    {
+        Debug.Log("[Connetors] -- " + b + " -- " + ((a[0].Count > 0) ? 1 : 0) + ((a[1].Count > 0) ? 1 : 0)
+        + ((a[2].Count > 0) ? 1 : 0) + ((a[3].Count > 0) ? 1 : 0));
     }
 }
 

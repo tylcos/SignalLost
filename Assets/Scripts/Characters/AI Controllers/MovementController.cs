@@ -9,16 +9,16 @@ public class MovementController : MonoBehaviour
 
     #region fields and events
 
+    [Tooltip("This character's speed in units/second.")]
     public float speed; // in units per second
     public CharacterController2D cc2d; // attached charactercontroller2d
     protected LayerMask collideLayerMask; // the layermask used for collision
-
-    // This is used for the inspector until we have compact data storage
     [SerializeField]
+    [Tooltip("Default maximum health.")]
     private float _MaxHitPoints = 1;
     public float CurrentHitPoints { get; set; }
     public float MaxHitPoints { get; private set; }
-
+    [Tooltip("Length of invincibility frames.")]
     public float invincibilityDuration; // length of invincibility frames
     private float lastDamageTime; // last time took damage
 
@@ -26,9 +26,9 @@ public class MovementController : MonoBehaviour
     private Coroutine activeCoroutine; // the active coroutine if there is one
 
     public delegate void DamageEventHandler(float amount);
-    public event DamageEventHandler DamageTaken; // for when player takes damage. this can probably be put in movementcontroller
+    public event DamageEventHandler DamageTaken; // for when damage is taken
     public delegate void DeathEventHandler();
-    public event DeathEventHandler Died; // for when the player dies
+    public event DeathEventHandler Died; // for when this character dies
 
     #endregion
 
@@ -37,14 +37,14 @@ public class MovementController : MonoBehaviour
 
     protected virtual void Awake()
     {
-        lastDamageTime = invincibilityDuration;
-        collideLayerMask = cc2d.platformMask;
         DamageTaken += OnTakeDamage;
         Died += OnDeath;
     }
 
     protected virtual void OnEnable()
     {
+        lastDamageTime = invincibilityDuration;
+        collideLayerMask = cc2d.platformMask;
         MaxHitPoints = _MaxHitPoints;
         CurrentHitPoints = _MaxHitPoints;
     }

@@ -43,13 +43,14 @@ public class UIController : MonoBehaviour {
     private GameObject deathMessage = null;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         try
         {
             _healthbarSettings.healthbarTransform = healthbar.GetComponentsInChildren<Transform>()[2];
             player.DamageTaken += OnTakeDamage;
-        } catch(UnassignedReferenceException e)
+        }
+        catch (UnassignedReferenceException)
         {
             Debug.LogError("The healthbar was not assigned in the UI canvas! Disabling updates!");
         }
@@ -60,23 +61,20 @@ public class UIController : MonoBehaviour {
             _ammoSettings.weapon = player.GetComponentInChildren<WeaponManager>();
             _ammoSettings.weapon.WeaponDataChanged += OnWeaponUpdate;
         }
-        catch (UnassignedReferenceException e)
+        catch (UnassignedReferenceException)
         {
             Debug.LogError("The ammo counter was not assigned in the UI canvas! Disabling updates!");
         }
 
-        if(deathMessage != null)
+        if (deathMessage != null)
         {
             player.Died += OnDeath;
-        } else
+        }
+        else
         {
             Debug.LogError("The death message was not assigned in the UI canvas! Disabling updates!");
         }
 
-    }
-
-    private void OnEnable()
-    {
         UpdateAmmo();
         UpdateHealthbar();
     }

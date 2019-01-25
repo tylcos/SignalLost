@@ -5,12 +5,9 @@
 public class PlayerController : MovementController
 {
 
-    private UIController ui;
-
     protected override void Awake()
     {
         base.Awake();
-        //ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
     }
     void FixedUpdate()
     {

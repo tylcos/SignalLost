@@ -8,27 +8,35 @@ public class EnemyController : MovementController
     #region events and fields
 
     public const int raycastDepth = 2; // change this to increase the penetration depth of raycasts. Lower numbers wont penetrate walls
-
+    
     public GameObject weaponHolder;
     public GameObject weapon;
     public GameObject attackIndicator;
 
+    [Tooltip("Aggro range.")]
     public float aggroRange;
-    public float retreatDistance;
-    public float waitTime;
+    [Tooltip("Damage dealt per hit.")]
     public float damage;
-
+    [Tooltip("Targets within a circle of this radius can be attacked.")]
     public float attackRange;
+    [Tooltip("Cooldown between attacks in seconds.")]
     public float attackCooldownLength;
-    protected float lastAttackTime;
-    
+    protected float lastAttackTime; // stores the last time this enemy attacked
+    [Tooltip("The layers this enemy will search for their target on.")]
     public LayerMask targetLayerMask;
+    [Tooltip("The tags that a target object can have.")]
     public string[] targetTags;
-    protected GameObject target;
+
+    protected GameObject target; // stores target gameobject
 
     protected bool attacking = false;
 
     public bool isAggro { get; private set; } = false;
+    
+    #endregion
+
+
+    #region event handlers
 
     // Override this in child
     public virtual void OnHitOpponent(GameObject entityHit)

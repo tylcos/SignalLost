@@ -6,24 +6,42 @@ public class RangedEnemyController : EnemyController {
 
     #region fields
 
+    [Tooltip("Target distance to try and follow the player from.")]
     public float followDistance;
+    [Tooltip("Distance at which to back away from the target.")]
     public float tooCloseThreshold;
+    [Tooltip("Distance at which to get closer to the target.")]
     public float tooFarThreshold;
-
+    [Tooltip("Time it takes to charge up an attack in seconds.")]
     public float attackChargeTime;
-    public float attackPauseDuration;
+    [Tooltip("Time to wait immediately after attacking in seconds.")]
+    public float postAttackPauseDuration;
     
     [HideInInspector]
     public bool shooting = false;
-
     private Coroutine fleeing = null;
+
+    #endregion
+
+
+    #region event handlers
+
+    public override void OnHitOpponent(GameObject entityHit)
+    {
+        if (Time.time - lastAttackTime > attackCooldownLength)
+        {
+            base.OnHitOpponent(entityHit);
+            lastAttackTime = Time.time;
+        }
+        // do anything specific to the melee enemy here
+    }
 
     #endregion
 
 
     #region monobehavior
 
-    
+
 
     void FixedUpdate () {
 		if(target != null && !attacking && !RunningThisRoutine(fleeing))
@@ -74,7 +92,7 @@ public class RangedEnemyController : EnemyController {
                     {
                         if (weapon.GetComponent<RangedWeapon>().CanFire())
                         {
-                            StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, attackPauseDuration));
+                            StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, postAttackPauseDuration));
                         }
                     }
                 }

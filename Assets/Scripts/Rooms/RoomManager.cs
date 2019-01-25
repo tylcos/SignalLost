@@ -18,7 +18,7 @@ public class RoomManager : MonoBehaviour
 
 
     private Tilemap[] tilemaps;
-    private Vector3 minPos;
+    private Vector3 center;
 
 
 
@@ -29,7 +29,7 @@ public class RoomManager : MonoBehaviour
 
         // Update bounds
         bounds = tilemaps[0].localBounds;
-        minPos = bounds.min + transform.position;
+        center = bounds.center + transform.position;
         var size = bounds.size;
 
         UpdateConnectors();
@@ -40,13 +40,13 @@ public class RoomManager : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        var minX = minPos + new Vector3(1, 0.5f);
-        var minY = minPos + new Vector3(0.5f, 1);
+        var centerX = center + new Vector3(0, -bounds.extents.y + 0.5f);
+        var centerY = center + new Vector3(-bounds.extents.x + 0.5f, 0);
 
-        foreach (int pos in connectors[0]) Gizmos.DrawCube(minX + new Vector3(pos, 0, 0), new Vector3(2,1));
-        foreach (int pos in connectors[1]) Gizmos.DrawCube(minX + new Vector3(pos, bounds.size.y - 1, 0), new Vector3(2, 1));
-        foreach (int pos in connectors[2]) Gizmos.DrawCube(minY + new Vector3(0, pos, 0), new Vector3(1, 2));
-        foreach (int pos in connectors[3]) Gizmos.DrawCube(minY + new Vector3(bounds.size.x - 1, pos, 0), new Vector3(1, 2));
+        foreach (int pos in connectors[0]) Gizmos.DrawCube(centerX + new Vector3(pos, 0, 0), new Vector3(2,1));
+        foreach (int pos in connectors[1]) Gizmos.DrawCube(centerX + new Vector3(pos, bounds.size.y - 1, 0), new Vector3(2, 1));
+        foreach (int pos in connectors[2]) Gizmos.DrawCube(centerY + new Vector3(0, pos, 0), new Vector3(1, 2));
+        foreach (int pos in connectors[3]) Gizmos.DrawCube(centerY + new Vector3(bounds.size.x - 1, pos, 0), new Vector3(1, 2));
     }
 
 

@@ -263,7 +263,7 @@ MonoBehaviour:
   tooCloseThreshold: 2
   tooFarThreshold: 6
   attackChargeTime: 0.5
-  attackPauseDuration: 0.6
+  postAttackPauseDuration: 0.5
   shooting: 0
 --- !u!114 &114994901661913452
 MonoBehaviour:

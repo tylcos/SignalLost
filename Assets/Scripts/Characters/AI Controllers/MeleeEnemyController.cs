@@ -5,14 +5,23 @@ public class MeleeEnemyController : EnemyController {
 
     #region events and fields
 
+    [Tooltip("Time it takes to charge up an attack in seconds.")]
     public float attackChargeTime;
-    public float attackColliderEnableLength;
-    public float attackAfterPauseDuration;
-    public float attackAfterRetreatDistance;
+    [Tooltip("Time to keep the weapon's collider on in attacks.")]
+    public float attackColliderEnableDuration;
+    [Tooltip("Time to wait immediately after attacking in seconds.")]
+    public float postAttackPauseDuration;
+    [Tooltip("Distance to run away from the player after attacking.")]
+    public float postAttackRetreatDistance;
+
+    #endregion
+
+
+    #region event handlers
 
     public override void OnHitOpponent(GameObject entityHit)
     {
-        if (Time.time - lastAttackTime > waitTime)
+        if (Time.time - lastAttackTime > attackCooldownLength)
         {
             base.OnHitOpponent(entityHit);
             lastAttackTime = Time.time;
@@ -22,13 +31,14 @@ public class MeleeEnemyController : EnemyController {
 
     #endregion
 
+
     #region monobehavior
 
-    
+
 
     void FixedUpdate()
     {
-        if(Time.time - lastAttackTime <= waitTime) { return; } // cancel if this enemy just attacked
+        if(Time.time - lastAttackTime <= attackCooldownLength) { return; } // cancel if this enemy just attacked
 
         if (target != null && !attacking) // if the enemy is not attacking, do movement and try to attack
         {
@@ -69,7 +79,7 @@ public class MeleeEnemyController : EnemyController {
                 }
                 if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
                 {
-                    StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableLength, attackAfterPauseDuration, attackAfterRetreatDistance));
+                    StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableDuration, postAttackPauseDuration, postAttackRetreatDistance));
                 }
             }
         }
@@ -120,7 +130,7 @@ public class MeleeEnemyController : EnemyController {
                 if (retreat == null)
                 {
                     AimWeaponAtTarget(-vectorToTarget);
-                    retreat = MoveTo(-vectorToTarget.normalized * retreatDistance);
+                    retreat = MoveTo(-vectorToTarget.normalized * retreatLength);
                 } else if (!RunningThisRoutine(retreat))
                 {
                     doing = false;
