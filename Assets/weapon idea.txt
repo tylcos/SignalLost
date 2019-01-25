@@ -1,0 +1,3 @@
+the scriptable object holds defaults for the weapon type
+and other data like possible data ranges for weapon variety
+but keep the weapon type defined in a prefab
