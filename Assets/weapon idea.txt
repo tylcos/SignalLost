@@ -1,3 +1,15 @@
 the scriptable object holds defaults for the weapon type
 and other data like possible data ranges for weapon variety
 but keep the weapon type defined in a prefab
+
+FORMAT
+CONTROLLERS
+The current heirarchy is good for quick editing and whatnot so we leave that be
+player movement should probably stay in the player controller and weapon swapping should be moved there
+or would it be better to hve both modify the player externally from the game controller object?
+anyways, guns need a script nearly identical to the ranged weapon script
+bullets need a script like the bulletmanager but it needs more info on host and target and more efficiency
+USE UPDATE TO CAPTURE INPUT
+
+I found this 
+https://www.reddit.com/r/Unity3D/comments/7267yi/player_inputs_update_or_fixedupdate/dngowm4/
