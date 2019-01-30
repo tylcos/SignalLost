@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Bits: 8960
   triggerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 73728
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -272,6 +272,9 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 4453064393674552}
   ps: {fileID: 0}
   bulletLayer: Player Fired
+  layer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &114714410810140362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545658913111338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4303963763005330}

@@ -11,6 +11,7 @@ public class Firing : MonoBehaviour
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;
     public string bulletLayer;
+    public LayerMask layer;
     
     private float timeLastFired;
 
@@ -44,7 +45,7 @@ public class Firing : MonoBehaviour
             bm.lifeTime = weaponManager.Weapon.Info.bulletLifeTime;
             bm.damage = weaponManager.Weapon.Info.damage;
             bm.maxCollisions = weaponManager.Weapon.Info.penetrationDepth;
-            bm.gameObject.layer = 12;
+            bm.gameObject.layer = LayerMask.NameToLayer(bulletLayer);
             //bm.targetTags = new string[] {"Enemy"};
 
             float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;

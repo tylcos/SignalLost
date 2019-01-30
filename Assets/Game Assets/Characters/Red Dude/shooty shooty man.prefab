@@ -421,6 +421,9 @@ MonoBehaviour:
   gunType: {fileID: 11400000, guid: 0e3d8b0dffe09bd419fcebf8484ee0d2, type: 2}
   weaponHolder: {fileID: 4364458348216418}
   bulletLayer: Enemy Fired
+  layer:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!1 &1551720550349624
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,13 @@ public class BulletManager : MonoBehaviour
                 break;
             }
         }*/
+        try
+        {
+            collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
+        } catch (System.NullReferenceException)
+        {
 
+        }
         currentPenetration++;
         if(currentPenetration >= maxCollisions)
             Destroy(gameObject);

@@ -9,6 +9,7 @@ public class RangedWeapon : MonoBehaviour {
     public WeaponInfo gunType;
     public Transform weaponHolder;
     public string bulletLayer;
+    public LayerMask layer;
 
     private float timeLastFired;
 
@@ -43,7 +44,7 @@ public class RangedWeapon : MonoBehaviour {
         bm.damage = gunType.damage;
         bm.maxCollisions = gunType.penetrationDepth;
         bm.sourceEnemy = parentController;
-        bm.gameObject.layer = 13;
+        bm.gameObject.layer = LayerMask.NameToLayer(bulletLayer);
         //bm.targetTags = parentController.targetTags;
 
         float randomAngle = randomQuaternion.eulerAngles.z * Mathf.Deg2Rad;
