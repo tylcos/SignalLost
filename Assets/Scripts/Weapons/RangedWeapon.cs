@@ -9,7 +9,6 @@ public class RangedWeapon : MonoBehaviour {
     public WeaponInfo gunType;
     public Transform weaponHolder;
     public string bulletLayer;
-    public LayerMask layer;
 
     private float timeLastFired;
 

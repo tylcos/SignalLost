@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4246590814481236}
   - component: {fileID: 212494944379017002}
   - component: {fileID: 70818530610139892}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: melee weapon
   m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}

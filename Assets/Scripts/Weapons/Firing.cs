@@ -12,12 +12,25 @@ public class Firing : MonoBehaviour
     public ParticleSystem ps;
     public string bulletLayer;
     public LayerMask layer;
-    
+    private GameController master;
+
     private float timeLastFired;
+
+    private void OnEnable()
+    {
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
+    }
 
     void Update()
     {
-        Vector2 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+        Vector2 shootDir = Vector2.zero;
+        if (master.inputMethod == "keyboard")
+        {
+            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+        } else if(master.inputMethod == "arcade")
+        {
+            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+        }
 
         if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) 
             && Time.time - timeLastFired > weaponManager.Weapon.Info.cycleTime)

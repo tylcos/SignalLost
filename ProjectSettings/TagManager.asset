@@ -11,6 +11,7 @@ TagManager:
   - Room
   - Pushing
   - UI Parent
+  - Master
   layers:
   - Default
   - TransparentFX

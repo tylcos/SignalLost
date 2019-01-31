@@ -31,6 +31,7 @@ public class WeaponManager : MonoBehaviour
 
     public delegate void WeaponUpdateHandler();
     public event WeaponUpdateHandler WeaponDataChanged;
+    private GameController master;
 
     public int CurrentAmmo
     {
@@ -42,8 +43,6 @@ public class WeaponManager : MonoBehaviour
         get { return Weapon.Info.clipSize;  }
     }
 
-
-
     private void OnEnable()
     {
         if (WeaponInfos.Length == 0)
@@ -51,18 +50,23 @@ public class WeaponManager : MonoBehaviour
 
         Weapons = WeaponInfos.Select(w => new Weapon(w)).ToArray();
         CurrentWeapon = 0;
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
     }
 
 
 
     void Update()
     {
-        
+        if (master.inputMethod == "keyboard") {
         weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
         if (Input.GetKeyDown(KeyCode.Tab))
             ++weaponPos;
-
+        } else if(master.inputMethod == "arcade")
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                ++weaponPos;
+        }
 
         
         weaponPos %= Weapons.Length;
@@ -71,11 +75,13 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon(flooredWeaponPos);
 
 
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if(master.inputMethod == "keyboard")
         {
-            Weapon.CurrentAmmo = 0;
-            Reload();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Weapon.CurrentAmmo = 0;
+                Reload();
+            }
         }
 
         WeaponDataChanged();
