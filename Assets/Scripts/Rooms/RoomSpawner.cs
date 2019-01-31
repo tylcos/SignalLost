@@ -64,8 +64,10 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-        while (remainingRooms > 0)
+        while (remainingRooms > 0) // Iteration
         {
+            var totalConnections = queue.Sum(r => r.connectors.Sum(s => s.Count));
+
             while (queue.Any())
             {
                 Room room = queue.Dequeue();
