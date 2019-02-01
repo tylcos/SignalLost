@@ -2386,7 +2386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 3}
 --- !u!1 &1258711789241694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,7 +2431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 3}
 --- !u!1 &1546634192046164
 GameObject:
   m_ObjectHideFlags: 0
@@ -4143,8 +4145,8 @@ MonoBehaviour:
   side3: 00000000
   side4: 
   bounds:
-    m_Center: {x: -3, y: -2, z: 0}
-    m_Extent: {x: 9, y: 6, z: 0}
+    m_Center: {x: -3.5, y: -2, z: 0}
+    m_Extent: {x: 9.5, y: 6, z: 0}
 --- !u!1 &1837956289766596
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,7 +4190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 3}
 --- !u!1 &1897207844691398
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,4 +4235,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728a9ab665f8b34690597b141c75f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCharacter: {fileID: 0}
+  spawnCharacter: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 3}
