@@ -393,8 +393,8 @@ InputManager:
     m_Name: VerticalArcade
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: e
-    positiveButton: d
+    negativeButton: d
+    positiveButton: e
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
