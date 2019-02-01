@@ -64,7 +64,7 @@ public class WeaponManager : MonoBehaviour
             ++weaponPos;
         } else if(master.inputMethod == "arcade")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Minus))
                 ++weaponPos;
         }
 
