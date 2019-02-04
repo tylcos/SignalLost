@@ -11,7 +11,6 @@ public class Firing : MonoBehaviour
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;
     public string bulletLayer;
-    public LayerMask layer;
     private GameController master;
 
     private float timeLastFired;
@@ -47,8 +46,7 @@ public class Firing : MonoBehaviour
 
 
             float halfAngle = weaponManager.Weapon.Info.inaccuracy / 2f;
-            Quaternion randomQuaternion = bulletSpawnPoint.rotation 
-                * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
+            Quaternion randomQuaternion = bulletSpawnPoint.rotation * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
 
             GameObject bullet = Instantiate(weaponManager.Weapon.Info.bullet, bulletSpawnPoint.position, randomQuaternion);
             
