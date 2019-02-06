@@ -26,10 +26,13 @@ public class Firing : MonoBehaviour
         if (master.inputMethod == "keyboard")
         {
             shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        } else if(master.inputMethod == "arcade")
+        }
+        else if(master.inputMethod == "arcade")
         {
             shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
         }
+
+
 
         if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) 
             && Time.time - timeLastFired > weaponManager.Weapon.Info.cycleTime)
@@ -46,7 +49,8 @@ public class Firing : MonoBehaviour
 
 
             float halfAngle = weaponManager.Weapon.Info.inaccuracy / 2f;
-            Quaternion randomQuaternion = bulletSpawnPoint.rotation * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
+            Quaternion randomQuaternion = bulletSpawnPoint.rotation;
+            randomQuaternion.eulerAngles += new Vector3(0f, 0f, Random.Range(-halfAngle, halfAngle));
 
             GameObject bullet = Instantiate(weaponManager.Weapon.Info.bullet, bulletSpawnPoint.position, randomQuaternion);
             
