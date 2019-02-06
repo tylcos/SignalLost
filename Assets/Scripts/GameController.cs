@@ -33,13 +33,14 @@ public class GameController : MonoBehaviour
             default:
                 break;
         }
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("ArcadeExit")>0)
+        if (Input.GetAxis("ArcadeExit") > 0)
         {
             Debug.Log("Exit");
             Application.Quit();

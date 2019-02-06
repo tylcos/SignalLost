@@ -55,6 +55,18 @@ TagManager:
   - name: Top
     uniqueID: 1508567857
     locked: 0
+  - name: Character
+    uniqueID: 1879759805
+    locked: 0
+  - name: Weapon
+    uniqueID: 4120625047
+    locked: 0
+  - name: Bullet
+    uniqueID: 4203929945
+    locked: 0
+  - name: GFX
+    uniqueID: 2936001389
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
