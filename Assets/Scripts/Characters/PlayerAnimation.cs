@@ -35,6 +35,11 @@ public class PlayerAnimation : MonoBehaviour {
             {
                 ShootingAnimation();
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ReloadingAnimation();
+            }
         }
         else
         {
@@ -43,6 +48,7 @@ public class PlayerAnimation : MonoBehaviour {
 
         MeleeAnimation();
         ShootingAnimation();
+        ReloadingAnimation();
 
         if (idle)
         {
@@ -79,6 +85,20 @@ public class PlayerAnimation : MonoBehaviour {
         else
         {
             animator.SetBool("Shooting", false);
+        }
+    }
+
+    private void ReloadingAnimation()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            idle = false;
+            animator.SetBool("Reloading", true);
+            animator.SetBool("Shooting", false);
+        }
+        else
+        {
+            animator.SetBool("Reloading", false);
         }
     }
 }
