@@ -42,7 +42,7 @@ public class WeaponManager : MonoBehaviour
     {
         get { return Weapon.Info.clipSize;  }
     }
-
+    
     private void OnEnable()
     {
         if (WeaponInfos.Length == 0)
