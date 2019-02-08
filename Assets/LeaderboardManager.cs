@@ -8,7 +8,7 @@ using UnityEngine;
 
 public static class LeaderboardManager
 {
-    public static readonly string leaderboardPath = Path.Combine(Application.persistentDataPath, "highscores.dat");
+    public static readonly string savePath = Path.Combine(Application.persistentDataPath, "highscores.dat");
 
 
 
@@ -18,20 +18,33 @@ public static class LeaderboardManager
 
     public static List<LeaderboardEntry> GetLeaderboardEntries()
     {
-        FileStream fs = new FileStream(leaderboardPath, FileMode.Open);
-        return (List<LeaderboardEntry>)formatter.Deserialize(fs);
+        if (!File.Exists(savePath))
+            return new List<LeaderboardEntry>();
+
+        try
+        {
+            using (FileStream fs = new FileStream(savePath, FileMode.Open))
+                return (List<LeaderboardEntry>)formatter.Deserialize(fs);
+        }
+        catch (Exception)
+        {
+            Debug.Log("Error opening leaderboard file at " + savePath);
+            return new List<LeaderboardEntry>();
+        }
     }
 
     public static void SetLeaderboardEntries(List<LeaderboardEntry> leaderboardEntries)
     {
-        File.Delete(leaderboardPath);
-        FileStream fs = new FileStream(leaderboardPath, FileMode.CreateNew);
-        formatter.Serialize(fs, leaderboardEntries);
+        File.Delete(savePath);
+
+        using (FileStream fs = new FileStream(savePath, FileMode.CreateNew))
+            formatter.Serialize(fs, leaderboardEntries);
     }
 }
 
 
 
+[Serializable]
 public readonly struct LeaderboardEntry
 {
     readonly string Name;
@@ -45,5 +58,12 @@ public readonly struct LeaderboardEntry
         Name = name;
         Score = score;
         Date = DateTime.UtcNow.Ticks;
+    }
+
+
+
+    public override string ToString()   
+    {
+        return $"[LeaderboardEntry] {Name} achieved {Score} score on {new DateTime(Date).ToString("dddd MM/dd/yyyy HH:mm:ss")}";
     }
 }
