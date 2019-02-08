@@ -10,4 +10,7 @@ public class WeaponInformation : ScriptableObject
 
     [Tooltip("The prefab for the weapon.")]
     public GameObject weapon;
+
+    [Tooltip("The minimum time between shots.")]
+    public float cycleTime;
 }

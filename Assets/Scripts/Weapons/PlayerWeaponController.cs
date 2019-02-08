@@ -26,6 +26,9 @@ public class PlayerWeaponController : WeaponController
         public GameObject gun;
         public GameObject bullet;
         private readonly bool logical = true;
+        private readonly float minTimeBetweenShots;
+        private float timeOfLastShot;
+        private Transform bulletSpawnLocation;
 
         private EquippedWeapon()
         {
@@ -36,6 +39,8 @@ public class PlayerWeaponController : WeaponController
         {
             gun = Instantiate(info.weapon, parent);
             bullet = info.bullet;
+            minTimeBetweenShots = info.cycleTime;
+            bulletSpawnLocation = gun.GetComponentInChildren<Transform>();
             gun.SetActive(false);
         }
 
@@ -52,6 +57,18 @@ public class PlayerWeaponController : WeaponController
             }
         }
 
+        public bool CanFire()
+        {
+            return Time.time - timeOfLastShot >= minTimeBetweenShots;
+        }
+
+        public void Fire(Vector2 direction)
+        {
+            GameObject shot = Instantiate(bullet, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
+            shot.GetComponent<Rigidbody2D>().velocity = bulletSpawnLocation.eulerAngles * 4;
+            BulletManager bm = bullet.GetComponent<BulletManager>();
+            bm.lifeTime = 10;
+        }
     }
 
     private void OnEnable()
@@ -80,13 +97,13 @@ public class PlayerWeaponController : WeaponController
     void Update()
     {
         // To swap weapons on the arcade, pause the sim and pull up a radial selector and use joysticks to select
-        if(Input.GetKeyDown(KeyCode.Alpha1) && swapListIndex != 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && swapListIndex != 0)
         {
             swapList[swapListIndex].SetEnabled(false);
             swapListIndex = 0;
             swapList[swapListIndex].SetEnabled(true);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2) && swapListIndex != 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && swapListIndex != 1)
         {
             swapList[swapListIndex].SetEnabled(false);
             swapListIndex = 1;
@@ -104,15 +121,23 @@ public class PlayerWeaponController : WeaponController
             swapListIndex = 3;
             swapList[swapListIndex].SetEnabled(true);
         }
+        else
+        {
+            Vector2 shootDir = Vector2.zero;
+            if (master.inputMethod == "keyboard")
+            {
+                shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+            }
+            else if (master.inputMethod == "arcade")
+            {
+                shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+            }
 
-        Vector2 shootDir = Vector2.zero;
-        if (master.inputMethod == "keyboard")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        }
-        else if (master.inputMethod == "arcade")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+            if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) && swapList[swapListIndex].CanFire())
+            {
+                print("shooting");
+                swapList[swapListIndex].Fire(shootDir);
+            }
         }
     }
 }
