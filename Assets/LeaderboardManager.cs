@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 
 
-public class LeaderboardManager : MonoBehaviour
+public static class LeaderboardManager
 {
+    public static readonly string leaderboardPath = Path.Combine(Application.persistentDataPath, "highscores.dat");
+
+
+
     private static readonly BinaryFormatter formatter = new BinaryFormatter();
 
 
 
-    public LeaderboardEntry[] GetLeaderboardEntries()
+    public static List<LeaderboardEntry> GetLeaderboardEntries()
     {
-        FileStream fs = new FileStream(Application.persistentDataPath, FileMode.Open);
-        return (LeaderboardEntry[]) formatter.Deserialize(fs);
+        FileStream fs = new FileStream(leaderboardPath, FileMode.Open);
+        return (List<LeaderboardEntry>)formatter.Deserialize(fs);
     }
 
-    public void SetLeaderboardEntries(LeaderboardEntry[] leaderboardEntries)
+    public static void SetLeaderboardEntries(List<LeaderboardEntry> leaderboardEntries)
     {
-        FileStream fs = new FileStream(Application.persistentDataPath, FileMode.O);
-        return (LeaderboardEntry[])formatter.Deserialize(fs);
+        File.Delete(leaderboardPath);
+        FileStream fs = new FileStream(leaderboardPath, FileMode.CreateNew);
+        formatter.Serialize(fs, leaderboardEntries);
     }
 }
 
