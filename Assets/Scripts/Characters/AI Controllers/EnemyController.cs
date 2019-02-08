@@ -54,8 +54,9 @@ public class EnemyController : MovementController
         lastAttackTime = -attackCooldownLength;
     }
     
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         if(target != null)
         {
             if(!IsGameObjectInRadius(transform.position, target, aggroRange, targetLayerMask)) {

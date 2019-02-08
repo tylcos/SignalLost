@@ -30,6 +30,9 @@ public class MovementController : MonoBehaviour
     public delegate void DeathEventHandler();
     public event DeathEventHandler Died; // for when this character dies
 
+    private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
+    public Sprite[] spriteDirections;
+
     #endregion
 
 
@@ -47,6 +50,23 @@ public class MovementController : MonoBehaviour
         collideLayerMask = cc2d.platformMask;
         MaxHitPoints = _MaxHitPoints;
         CurrentHitPoints = _MaxHitPoints;
+    }
+
+    protected virtual void Update()
+    {
+        if(spriteDirection.y > 0.0f)
+        {
+            //Sprite player = Resources.Load("JoS_Back", typeof(Sprite)) as Sprite;
+            //Sprite myFruit = Resources.Load("fruits_1", typeof(Sprite)) as Sprite;
+        }
+        else if (spriteDirection.x > 0.0f)
+        {
+
+        }
+        else if (spriteDirection.x < 0.0f)
+        {
+
+        }
     }
 
     #endregion
@@ -208,6 +228,7 @@ public class MovementController : MonoBehaviour
     {
         if (moving) return;
         cc2d.move(direction.normalized * (speed * Time.fixedDeltaTime));
+        spriteDirection = direction;
     }
 
     /// <summary>
@@ -229,6 +250,8 @@ public class MovementController : MonoBehaviour
     {
         if (moving) return null;
         Vector2 source = transform.position;
+        Vector3 destination3 = destination;
+        spriteDirection = transform.position - destination3;
         float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
         activeCoroutine = StartCoroutine(MoveToTarget(destination, duration));
         return activeCoroutine;
