@@ -30,10 +30,13 @@ public class MovementController : MonoBehaviour
     public delegate void DeathEventHandler();
     public event DeathEventHandler Died; // for when this character dies
 
-    private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
-    public Sprite[] spriteDirections;
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
+    [HideInInspector]
+    public int animationDirection = 1;
+    private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
+    public Sprite[] spriteDirections;
+
 
     #endregion
 
@@ -54,27 +57,32 @@ public class MovementController : MonoBehaviour
         CurrentHitPoints = _MaxHitPoints;
     }
 
+
+
     protected virtual void Update()
     {
         if (spriteDirections.Length > 0) // Checks if there are any sprites in the SpritesDirection List
         {
             if (spriteDirection.y > 0.0f) // Checks if the sprite is moving north
             {
+                animationDirection = 0;
                 spriteRenderer.sprite = spriteDirections[0];
             }
             else // Checks if sprite is moving South
             {
+                animationDirection = 1;
                 spriteRenderer.sprite = spriteDirections[2];
             }
-            if (spriteDirection.x < 0.0f) // Checks if the sprite is moving East
+            if (spriteDirection.x < 0.0f) // Checks if the sprite is moving West
             {
+                animationDirection = -1;
                 spriteRenderer.sprite = spriteDirections[1];
             }
-            if (spriteDirection.x > 0.0f) // Checks if the sprite is moving West
+            if (spriteDirection.x > 0.0f) // Checks if the sprite is moving East
             {
+                animationDirection = 1;
                 spriteRenderer.sprite = spriteDirections[2];
             }
-            
         }
     }
 

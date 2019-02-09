@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour {
 
     public Animator animator;
+    //public GameObject weaponInfo;
     [HideInInspector]
-    public GameObject weaponInfo;
+    public GameObject player;
     [HideInInspector]
-    public WeaponManager weaponAccessor;
+    public MovementController movementAccessor;
 
     private bool idle;
 
@@ -16,11 +17,25 @@ public class PlayerAnimation : MonoBehaviour {
         public void Start()
         {
             transform.hasChanged = false;
-            weaponAccessor = weaponInfo.GetComponent<WeaponManager>();
+            player = GameObject.FindGameObjectWithTag("Player");
+            movementAccessor = player.GetComponent<PlayerController>();
         }    
 
 	// Update is called once per frame
 	void Update () {
+        if (movementAccessor.animationDirection == 0) // North
+        {
+            animator.SetInteger("PlayerDirection", 0);
+        }
+        else if(movementAccessor.animationDirection == 1) // South
+        {
+            animator.SetInteger("PlayerDirection", 1);
+        }
+        else if(movementAccessor.animationDirection == -1)
+        {
+            animator.SetInteger("PlayerDirection", -1);
+        }
+        /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) 
             || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
@@ -55,10 +70,10 @@ public class PlayerAnimation : MonoBehaviour {
             transform.hasChanged = false;
             animator.SetBool("Moving", false);
         }
-
-
+        */
     }
 
+    /*
     private void MeleeAnimation()
     {
         // TODO?: 
@@ -73,7 +88,9 @@ public class PlayerAnimation : MonoBehaviour {
             animator.SetBool("ClickedMeleeButton", false);
         }
     }
+    */
 
+    /*
     private void ShootingAnimation()
     {
         if (Input.GetKey(KeyCode.Mouse0)&& weaponAccessor.Weapon.CurrentAmmo!=0)
@@ -87,7 +104,9 @@ public class PlayerAnimation : MonoBehaviour {
             animator.SetBool("Shooting", false);
         }
     }
+    */
 
+    /*
     private void ReloadingAnimation()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -101,4 +120,5 @@ public class PlayerAnimation : MonoBehaviour {
             animator.SetBool("Reloading", false);
         }
     }
+    */
 }
