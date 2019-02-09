@@ -9,6 +9,7 @@ public class PlayerController : MovementController
     protected override void Awake()
     {
         base.Awake();
+        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     protected override void OnEnable()

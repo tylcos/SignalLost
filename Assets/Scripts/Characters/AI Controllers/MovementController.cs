@@ -32,6 +32,8 @@ public class MovementController : MonoBehaviour
 
     private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
     public Sprite[] spriteDirections;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
 
     #endregion
 
@@ -54,18 +56,25 @@ public class MovementController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(spriteDirection.y > 0.0f)
+        if (spriteDirections.Length > 0) // Checks if there are any sprites in the SpritesDirection List
         {
-            //Sprite player = Resources.Load("JoS_Back", typeof(Sprite)) as Sprite;
-            //Sprite myFruit = Resources.Load("fruits_1", typeof(Sprite)) as Sprite;
-        }
-        else if (spriteDirection.x > 0.0f)
-        {
-
-        }
-        else if (spriteDirection.x < 0.0f)
-        {
-
+            if (spriteDirection.y > 0.0f) // Checks if the sprite is moving north
+            {
+                spriteRenderer.sprite = spriteDirections[0];
+            }
+            else // Checks if sprite is moving South
+            {
+                spriteRenderer.sprite = spriteDirections[2];
+            }
+            if (spriteDirection.x < 0.0f) // Checks if the sprite is moving East
+            {
+                spriteRenderer.sprite = spriteDirections[1];
+            }
+            if (spriteDirection.x > 0.0f) // Checks if the sprite is moving West
+            {
+                spriteRenderer.sprite = spriteDirections[2];
+            }
+            
         }
     }
 
