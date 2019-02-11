@@ -13,4 +13,19 @@ public class WeaponInformation : ScriptableObject
 
     [Tooltip("The minimum time between shots.")]
     public float cycleTime;
+
+    [Tooltip("How fast the bullets travel.")]
+    public float muzzleVelocity;
+
+    [Tooltip("How long bullets stay in the scene.")]
+    public float lifetime;
+
+    [Tooltip("How much damage one bullet will deal.")]
+    public float damage;
+
+    [Tooltip("Max ammo per clip.")]
+    public int clipSize;
+
+    [Tooltip("How long it takes to reload.")]
+    public float reloadTime;
 }

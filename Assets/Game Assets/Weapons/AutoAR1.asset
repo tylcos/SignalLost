@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 3}
   weapon: {fileID: 8976151292421940513, guid: 6cc2b42bdc6fa0f4181ad2894bba66c0, type: 3}
+  cycleTime: 0.1
+  muzzleVelocity: 10
+  lifetime: 5

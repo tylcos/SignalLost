@@ -241,9 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e711393a45603da48810bdd2ddff45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponManager: {fileID: 0}
-  bulletSpawnPoint: {fileID: 0}
-  bulletLayer: 
+  bulletLayer: Player Fired
   inventory:
   - {fileID: 11400000, guid: 2108dd756fc225749b2a9ee720afece5, type: 2}
   - {fileID: 11400000, guid: 6e1ccc4120c160f44994e4db9f7ac6ea, type: 2}

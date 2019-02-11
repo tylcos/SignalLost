@@ -27,6 +27,13 @@ public class PlayerWeaponController : WeaponController
         public GameObject bullet;
         private readonly bool logical = true;
         private readonly float minTimeBetweenShots;
+        private readonly float speed;
+        private readonly float lifetime;
+        private readonly int layer;
+        private readonly float baseDamage;
+        private readonly int maxAmmo;
+        private readonly float reloadTime;
+        private int currentAmmo;
         private float timeOfLastShot;
         private Transform bulletSpawnLocation;
 
@@ -35,12 +42,19 @@ public class PlayerWeaponController : WeaponController
             logical = false;
         }
 
-        public EquippedWeapon(WeaponInformation info, Transform parent)
+        public EquippedWeapon(WeaponInformation info, Transform parent, string layer)
         {
             gun = Instantiate(info.weapon, parent);
             bullet = info.bullet;
             minTimeBetweenShots = info.cycleTime;
             bulletSpawnLocation = gun.GetComponentInChildren<Transform>();
+            speed = info.muzzleVelocity;
+            lifetime = info.lifetime;
+            this.layer = LayerMask.NameToLayer(layer);
+            baseDamage = info.damage;
+            maxAmmo = info.clipSize;
+            currentAmmo = maxAmmo;
+            reloadTime = info.reloadTime;
             gun.SetActive(false);
         }
 
@@ -64,10 +78,28 @@ public class PlayerWeaponController : WeaponController
 
         public void Fire(Vector2 direction)
         {
+            if (Time.time - timeOfLastShot < minTimeBetweenShots) return;
+            if (currentAmmo <= 0)
+            {
+                //Reload();
+                // lets call an event or somehow access the enclosing class so we can access the ui and do updates
+                // better yet call into a script attached to the gun gameobject which is abstracted to be fairly generalized
+                return;
+            }
+            currentAmmo--;
             GameObject shot = Instantiate(bullet, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
-            shot.GetComponent<Rigidbody2D>().velocity = bulletSpawnLocation.eulerAngles * 4;
+            float angle = bulletSpawnLocation.rotation.eulerAngles.z * Mathf.Deg2Rad;
+            shot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
             BulletManager bm = bullet.GetComponent<BulletManager>();
-            bm.lifeTime = 10;
+            bm.gameObject.layer = layer;
+            bm.lifeTime = lifetime;
+            bm.damage = baseDamage;
+            timeOfLastShot = Time.time;
+        }
+
+        public void Reload()
+        {
+            currentAmmo = maxAmmo;
         }
     }
 
@@ -81,7 +113,7 @@ public class PlayerWeaponController : WeaponController
             if(wep == null)
                 swapList.Add(EquippedWeapon.empty);
             else
-                swapList.Add(new EquippedWeapon(wep, transform));
+                swapList.Add(new EquippedWeapon(wep, transform, bulletLayer));
             // so we have a parallel array that holds the objects, their bullets, and ammo
             // so we call commands there when we need to fire or whatnot since that stores everything
         }
