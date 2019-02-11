@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -8,6 +8,11 @@ using UnityEngine;
 
 public static class LeaderboardManager
 {
+    public static int currentScore;
+    public static List<LeaderboardEntry> leaderboardEntries;
+
+
+
     public static readonly string savePath = Path.Combine(Application.persistentDataPath, "highscores.dat");
 
 
@@ -16,29 +21,49 @@ public static class LeaderboardManager
 
 
 
-    public static List<LeaderboardEntry> GetLeaderboardEntries()
+    public static void LoadLeaderboardEntries()
     {
         if (!File.Exists(savePath))
-            return new List<LeaderboardEntry>();
+            leaderboardEntries = new List<LeaderboardEntry>();
 
         try
         {
             using (FileStream fs = new FileStream(savePath, FileMode.Open))
-                return (List<LeaderboardEntry>)formatter.Deserialize(fs);
+                leaderboardEntries = (List<LeaderboardEntry>)formatter.Deserialize(fs);
         }
         catch (Exception)
         {
             Debug.Log("Error opening leaderboard file at " + savePath);
-            return new List<LeaderboardEntry>();
+
+            leaderboardEntries = new List<LeaderboardEntry>();
         }
     }
 
-    public static void SetLeaderboardEntries(List<LeaderboardEntry> leaderboardEntries)
+    public static void SaveLeaderboardEntries()
     {
-        File.Delete(savePath);
+        try
+        {
+            File.Delete(savePath);
 
-        using (FileStream fs = new FileStream(savePath, FileMode.CreateNew))
-            formatter.Serialize(fs, leaderboardEntries);
+            using (FileStream fs = new FileStream(savePath, FileMode.CreateNew))
+                formatter.Serialize(fs, leaderboardEntries);
+        }
+        catch (Exception)
+        {
+            Debug.Log("Error saving leaderboard file at " + savePath);
+        }
+    }
+
+
+
+    public static void AddCurrentRun(string name)
+    {
+        // Find where to insert current run based on index (Lower index = higher score)
+        int i = 0;
+        while (leaderboardEntries[i].Score > currentScore)
+            i++;
+
+        leaderboardEntries.Insert(i, new LeaderboardEntry(name, currentScore));
     }
 }
 
@@ -47,9 +72,9 @@ public static class LeaderboardManager
 [Serializable]
 public readonly struct LeaderboardEntry
 {
-    readonly string Name;
-    readonly long Score;
-    readonly long Date;
+    public readonly string Name;
+    public readonly long Score;
+    public readonly long Date;
 
 
 

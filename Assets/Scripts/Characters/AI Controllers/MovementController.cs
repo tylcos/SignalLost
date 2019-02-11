@@ -92,6 +92,8 @@ public class MovementController : MonoBehaviour
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
+
+
         Destroy(gameObject);
     }
 
