@@ -11,19 +11,20 @@ public class MenuManager : MonoBehaviour
 
 
 
-    private UIRect[] bounds;
     private TextMeshProUGUI[] textItems;
 
 
 
-    private int currentSelectedItem = -1;
+    private int currentSelectedItem;
+    private bool keyFirstPressed;
+    private bool keyReleased = true;
 
 
 
     void Start()
     {
-        bounds = menuItems.Select(m => new UIRect(m.GetComponent<RectTransform>())).ToArray();
         textItems = menuItems.Select(m => m.GetComponent<TextMeshProUGUI>()).ToArray();
+        textItems[0].color = Color.gray;
 
 
 
@@ -36,29 +37,25 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        Vector2 mousePos = RectTransformUtility.PixelAdjustPoint(Input.mousePosition, transform, canvas);
-        int selected = -1;
+        int menuMove = -(int)(GameController.GetMovementVector().y + GameController.GetAimingVector().y);
+        keyFirstPressed = menuMove != 0 && keyReleased;
+        keyReleased = menuMove == 0;
 
-        for (int i = 0; i < menuItems.Length; i++)
+        if (keyFirstPressed)
         {
-            if (bounds[i].Contains(mousePos))
-            {
-                selected = i;
-                textItems[i].color = Color.gray;
-            }
-            else
-                textItems[i].color = Color.white;
+            textItems[currentSelectedItem].color = Color.white;
+
+            currentSelectedItem = (currentSelectedItem + menuMove) % menuItems.Length;
+            if (currentSelectedItem < 0)
+                currentSelectedItem = menuItems.Length - 1;
+
+            textItems[currentSelectedItem].color = Color.gray;
         }
-        currentSelectedItem = selected;
 
 
 
-        if (Input.GetAxis("Fire1") > 0)
+        if (Input.GetAxis("Fire1") > 0 || Input.GetKeyDown(KeyCode.Return))
             MenuSelect();
-
-        float menuMove = GameController.GetMovementVector().y + GameController.GetAimingVector().y; Debug.Log((int)menuMove);
-        if (menuMove > 0)
-            currentSelectedItem = (currentSelectedItem + (int)menuMove) % menuItems.Length;
     }
 
 
@@ -81,28 +78,5 @@ public class MenuManager : MonoBehaviour
                 GameController.QuitApplication();
                 break;
         }
-    }
-}
-
-
-
-public readonly struct UIRect
-{
-    public readonly Vector2 Min;
-    public readonly Vector2 Max;
-
-
-
-    public UIRect(RectTransform rect)
-    {
-        Min = rect.anchoredPosition;
-        Max = Min + rect.rect.size;
-    }
-
-
-
-    public bool Contains(Vector2 point)
-    {
-        return point.x < Max.x && point.y < Max.y && point.x > Min.x && point.y > Min.y;
     }
 }
