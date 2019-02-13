@@ -234,7 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c64e3fc8e417e4188b098d6abc2465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   player: {fileID: 0}
   movementAccessor: {fileID: 0}
 --- !u!1001 &437724495
@@ -292,6 +291,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 3}
+      propertyPath: spriteAnimator
+      value: 
+      objectReference: {fileID: 99023017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 3}
 --- !u!4 &437724496 stripped
@@ -325,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702584517}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000035762787, y: 0, z: -110}
+  m_LocalPosition: {x: 0.0000002682209, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8070580}
@@ -655,7 +659,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226238265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000035762787, y: 0, z: -110}
+  m_LocalPosition: {x: 0.0000002682209, y: 0, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 824619630}
@@ -2192,7 +2196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161512312, guid: ff72be23bb9afd24f8557310c8110fa6, type: 3}
       propertyPath: m_Size.x
-      value: 31
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1770153126, guid: ff72be23bb9afd24f8557310c8110fa6, type: 3}
       propertyPath: m_Enabled

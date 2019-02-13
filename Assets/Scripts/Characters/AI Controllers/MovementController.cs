@@ -36,6 +36,7 @@ public class MovementController : MonoBehaviour
     public int animationDirection = 1;
     private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
     public Sprite[] spriteDirections;
+    public Animator spriteAnimator;
 
 
     #endregion
@@ -61,30 +62,26 @@ public class MovementController : MonoBehaviour
 
     protected virtual void Update()
     {
-/*        if (spriteDirections.Length > 0) // Checks if there are any sprites in the SpritesDirection List
+        if (spriteAnimator != null) // Checks if there is an animator attached
         {
+            Debug.Log(animationDirection);
             if (spriteDirection.y > 0.0f) // Checks if the sprite is moving north
             {
-                animationDirection = 0;
-                spriteRenderer.sprite = spriteDirections[0];
+                animationDirection = 1;
             }
             else // Checks if sprite is moving South
             {
-                animationDirection = 1;
-                spriteRenderer.sprite = spriteDirections[2];
+                animationDirection = 3;
             }
             if (spriteDirection.x < 0.0f) // Checks if the sprite is moving West
             {
-                animationDirection = -1;
-                spriteRenderer.sprite = spriteDirections[1];
+                animationDirection = 4;
             }
             if (spriteDirection.x > 0.0f) // Checks if the sprite is moving East
             {
-                animationDirection = 1;
-                spriteRenderer.sprite = spriteDirections[2];
+                animationDirection = 3;
             }
         }
-*/
     }
 
     #endregion

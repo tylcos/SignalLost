@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
 
-    public Animator animator;
     //public GameObject weaponInfo;
     [HideInInspector]
     public GameObject player;
     [HideInInspector]
     public MovementController movementAccessor;
+
+    private Animator playerAnimator;
 
     private bool idle;
 
@@ -19,21 +20,33 @@ public class PlayerAnimation : MonoBehaviour {
             transform.hasChanged = false;
             player = GameObject.FindGameObjectWithTag("Player");
             movementAccessor = player.GetComponent<PlayerController>();
+            playerAnimator = movementAccessor.GetComponent<PlayerController>().spriteAnimator;
         }    
 
 	// Update is called once per frame
 	void Update () {
-        if (movementAccessor.animationDirection == 0) // North
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)
+            || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            animator.SetInteger("PlayerDirection", 0);
+            playerAnimator.SetBool("Idle", false);
         }
-        else if(movementAccessor.animationDirection == 1) // South
+        else
         {
-            animator.SetInteger("PlayerDirection", 1);
+            playerAnimator.SetBool("Idle", true);
         }
-        else if(movementAccessor.animationDirection == -1)
+
+        if (movementAccessor.animationDirection == 1) // North && East
         {
-            animator.SetInteger("PlayerDirection", -1);
+            playerAnimator.SetInteger("PlayerDirection", 1);
+        }
+        else if(movementAccessor.animationDirection == 3) // South
+        {
+            playerAnimator.SetInteger("PlayerDirection", 3);
+        }
+        else if(movementAccessor.animationDirection == 4) // West
+        {
+            playerAnimator.SetInteger("PlayerDirection", 4);
         }
         /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) 
