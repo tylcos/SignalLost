@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [HideInInspector]
-    public static string inputMethod;
+    public static string inputMethod = "keyboard";
 
 
 
@@ -19,9 +19,6 @@ public class GameController : MonoBehaviour
             case "keyboard":
             case "arcade":
                 inputMethod = inputArg;
-                break;
-            default:
-                inputMethod = "keyboard";
                 break;
         }
     }
@@ -54,26 +51,22 @@ public class GameController : MonoBehaviour
 
     public static Vector2 GetMovementVector()
     {
-        Vector2 move = Vector2.zero;
-
         if (inputMethod == "keyboard")
-            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         else if (inputMethod == "arcade")
-            move = new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
-
-        return move;
+            return new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
+        
+        return Vector2.zero;
     }
 
     public static Vector2 GetAimingVector()
     {
-        Vector2 move = Vector2.zero;
-
         if (inputMethod == "keyboard")
-            move = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+            return new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
         else if (inputMethod == "arcade")
-            move = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
-
-        return move;
+            return new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+        
+        return Vector2.zero;
     }
     
 

@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using TMPro;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject[] menuItems;
+    public string SceneLoadName;
     public Canvas canvas;
 
 
@@ -66,7 +66,7 @@ public class MenuManager : MonoBehaviour
         {
             // Start new game
             case 0:
-                // Trigger load level
+                SceneManager.LoadSceneAsync(SceneLoadName);
                 break;
 
             // Options
