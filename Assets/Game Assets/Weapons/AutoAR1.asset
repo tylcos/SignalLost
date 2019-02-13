@@ -17,3 +17,6 @@ MonoBehaviour:
   cycleTime: 0.1
   muzzleVelocity: 10
   lifetime: 5
+  damage: 5
+  clipSize: 30
+  reloadTime: 1.7

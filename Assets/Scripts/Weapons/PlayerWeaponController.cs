@@ -20,89 +20,6 @@ public class PlayerWeaponController : WeaponController
         }
     }
 
-    public class EquippedWeapon
-    {
-        public static readonly EquippedWeapon empty = new EquippedWeapon();
-        public GameObject gun;
-        public GameObject bullet;
-        private readonly bool logical = true;
-        private readonly float minTimeBetweenShots;
-        private readonly float speed;
-        private readonly float lifetime;
-        private readonly int layer;
-        private readonly float baseDamage;
-        private readonly int maxAmmo;
-        private readonly float reloadTime;
-        private int currentAmmo;
-        private float timeOfLastShot;
-        private Transform bulletSpawnLocation;
-
-        private EquippedWeapon()
-        {
-            logical = false;
-        }
-
-        public EquippedWeapon(WeaponInformation info, Transform parent, string layer)
-        {
-            gun = Instantiate(info.weapon, parent);
-            bullet = info.bullet;
-            minTimeBetweenShots = info.cycleTime;
-            bulletSpawnLocation = gun.GetComponentInChildren<Transform>();
-            speed = info.muzzleVelocity;
-            lifetime = info.lifetime;
-            this.layer = LayerMask.NameToLayer(layer);
-            baseDamage = info.damage;
-            maxAmmo = info.clipSize;
-            currentAmmo = maxAmmo;
-            reloadTime = info.reloadTime;
-            gun.SetActive(false);
-        }
-
-        public void SetEnabled(bool state)
-        {
-            if (!logical) return;
-            if(state)
-            {
-                gun.SetActive(true);
-            }
-            else
-            {
-                gun.SetActive(false);
-            }
-        }
-
-        public bool CanFire()
-        {
-            return Time.time - timeOfLastShot >= minTimeBetweenShots;
-        }
-
-        public void Fire(Vector2 direction)
-        {
-            if (Time.time - timeOfLastShot < minTimeBetweenShots) return;
-            if (currentAmmo <= 0)
-            {
-                //Reload();
-                // lets call an event or somehow access the enclosing class so we can access the ui and do updates
-                // better yet call into a script attached to the gun gameobject which is abstracted to be fairly generalized
-                return;
-            }
-            currentAmmo--;
-            GameObject shot = Instantiate(bullet, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
-            float angle = bulletSpawnLocation.rotation.eulerAngles.z * Mathf.Deg2Rad;
-            shot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
-            BulletManager bm = bullet.GetComponent<BulletManager>();
-            bm.gameObject.layer = layer;
-            bm.lifeTime = lifetime;
-            bm.damage = baseDamage;
-            timeOfLastShot = Time.time;
-        }
-
-        public void Reload()
-        {
-            currentAmmo = maxAmmo;
-        }
-    }
-
     private void OnEnable()
     {
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
@@ -153,7 +70,7 @@ public class PlayerWeaponController : WeaponController
             swapListIndex = 3;
             swapList[swapListIndex].SetEnabled(true);
         }
-        else
+        else if (swapList[swapListIndex].CanFire())
         {
             Vector2 shootDir = Vector2.zero;
             if (master.inputMethod == "keyboard")
