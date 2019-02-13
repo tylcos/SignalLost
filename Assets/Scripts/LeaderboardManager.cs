@@ -43,7 +43,8 @@ public static class LeaderboardManager
     {
         try
         {
-            File.Delete(savePath);
+            if (File.Exists(savePath))
+                File.Delete(savePath);
 
             using (FileStream fs = new FileStream(savePath, FileMode.CreateNew))
                 formatter.Serialize(fs, leaderboardEntries);

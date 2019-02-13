@@ -22,15 +22,7 @@ public class Firing : MonoBehaviour
 
     void Update()
     {
-        Vector2 shootDir = Vector2.zero;
-        if (master.inputMethod == "keyboard")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        }
-        else if(master.inputMethod == "arcade")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
-        }
+        Vector2 shootDir = GameController.GetAimingVector();
 
 
 

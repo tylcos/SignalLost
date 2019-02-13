@@ -50,19 +50,20 @@ public class WeaponManager : MonoBehaviour
 
         Weapons = WeaponInfos.Select(w => new Weapon(w)).ToArray();
         CurrentWeapon = 0;
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
     }
 
 
 
     void Update()
     {
-        if (master.inputMethod == "keyboard") {
-        weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
+        if (GameController.inputMethod == "keyboard")
+        {
+            weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-            ++weaponPos;
-        } else if(master.inputMethod == "arcade")
+            if (Input.GetKeyDown(KeyCode.Tab))
+                ++weaponPos;
+        }
+        else if (GameController.inputMethod == "arcade")
         {
             if (Input.GetKeyDown(KeyCode.Minus))
                 ++weaponPos;
@@ -75,7 +76,7 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon(flooredWeaponPos);
 
 
-        if(master.inputMethod == "keyboard")
+        if(GameController.inputMethod == "keyboard")
         {
             if (Input.GetKeyDown(KeyCode.R))
             {

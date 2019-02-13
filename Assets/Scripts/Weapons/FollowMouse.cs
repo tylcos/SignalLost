@@ -5,13 +5,7 @@
 public class FollowMouse : MonoBehaviour 
 {
     public Texture2D cursorTexture;
-    private GameController master;
 
-
-    private void OnEnable()
-    {
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
-    }
 
 
     void Start()
@@ -23,16 +17,7 @@ public class FollowMouse : MonoBehaviour
     
     void FixedUpdate() 
 	{
-        Vector2 shootDir = Vector2.zero;
-        if (master.inputMethod == "keyboard")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        }
-        else if (master.inputMethod == "arcade")
-        {
-            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
-        }
-        // = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+        Vector2 shootDir = GameController.GetMovementVector();
 
         float angleDifference;
         if (shootDir.sqrMagnitude == 0)

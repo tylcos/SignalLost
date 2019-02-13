@@ -6,11 +6,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [HideInInspector]
-    public string inputMethod;
+    public static string inputMethod;
 
-    
 
-    void OnEnable()
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void OnBeforeSceneLoadRuntimeMethod()
     {
         var inputArg = GetArg("-inputMethod");
         switch(inputArg)
@@ -23,13 +24,9 @@ public class GameController : MonoBehaviour
                 inputMethod = "keyboard";
                 break;
         }
-
-
-
-        LeaderboardManager.LoadLeaderboardEntries();
-        // Update some ui thingy that shows leaderboard
-        // Possibly subscribe some thingy to call AddCurrentRun when player dies
     }
+
+
 
     void Update()
     {
@@ -52,6 +49,33 @@ public class GameController : MonoBehaviour
 
         return null;
     }
+
+
+
+    public static Vector2 GetMovementVector()
+    {
+        Vector2 move = Vector2.zero;
+
+        if (inputMethod == "keyboard")
+            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        else if (inputMethod == "arcade")
+            move = new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
+
+        return move;
+    }
+
+    public static Vector2 GetAimingVector()
+    {
+        Vector2 move = Vector2.zero;
+
+        if (inputMethod == "keyboard")
+            move = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+        else if (inputMethod == "arcade")
+            move = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+
+        return move;
+    }
+    
 
 
 

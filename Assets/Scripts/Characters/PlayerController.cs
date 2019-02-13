@@ -4,8 +4,6 @@
 
 public class PlayerController : MovementController
 {
-    private GameController master;
-
     protected override void Awake()
     {
         base.Awake();
@@ -15,7 +13,6 @@ public class PlayerController : MovementController
     protected override void OnEnable()
     {
         base.OnEnable();
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
     }
 
     void FixedUpdate()
@@ -25,14 +22,8 @@ public class PlayerController : MovementController
 
     private void Movement()
     {
-        Vector2 move = Vector2.zero;
-        if(master.inputMethod == "keyboard")
-        {
-            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        } else if(master.inputMethod == "arcade")
-        {
-            move = new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
-        }
+        Vector2 move = GameController.GetMovementVector();
+        
         if (move.sqrMagnitude == 0)
             return;
 
