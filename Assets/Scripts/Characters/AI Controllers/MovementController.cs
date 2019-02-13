@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (spriteDirections.Length > 0) // Checks if there are any sprites in the SpritesDirection List
+/*        if (spriteDirections.Length > 0) // Checks if there are any sprites in the SpritesDirection List
         {
             if (spriteDirection.y > 0.0f) // Checks if the sprite is moving north
             {
@@ -84,6 +84,7 @@ public class MovementController : MonoBehaviour
                 spriteRenderer.sprite = spriteDirections[2];
             }
         }
+*/
     }
 
     #endregion
