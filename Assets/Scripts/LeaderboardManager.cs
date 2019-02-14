@@ -79,17 +79,27 @@ public readonly struct LeaderboardEntry
 
 
 
+    public static readonly int nameLength = 6;
+    public static readonly int scoreLength = 10;
+
+
+
     public LeaderboardEntry(string name, long score)
     {
-        Name = name;
+        Name = name.PadRight(nameLength);
         Score = score;
         Date = DateTime.UtcNow.Ticks;
     }
 
 
 
+    public string ShortToString()
+    {
+        return $"{Name} - {Score.ToString().PadRight(scoreLength)} - {new DateTime(Date).ToString("f").PadLeft(25)}";
+    }
+
     public override string ToString()   
     {
-        return $"[LeaderboardEntry] {Name} achieved {Score} score on {new DateTime(Date).ToString("dddd MM/dd/yyyy HH:mm:ss")}";
+        return $"[LeaderboardEntry] {Name} achieved {Score} score on {new DateTime(Date).ToString("f")}";
     }
 }
