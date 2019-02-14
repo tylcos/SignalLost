@@ -21,20 +21,29 @@ public class UIController : MonoBehaviour {
 
     struct AmmoSettings
     {
-        public WeaponManager weapon;
+        public EquippedWeapon wep;
+        public int cur;
+        public int max;
         public TMP_Text text;
+        public bool reload;
+        public float reloadPercent;
 
         public void Redraw()
         {
-            int cur = weapon.CurrentAmmo;
-            int max = weapon.MaxAmmo;
+            cur = wep.CurrentAmmo;
+            max = wep.MaxAmmo;
+            reload = wep.reloading;
+            reloadPercent = wep.reloadProgress;
             text.text = cur + " / " + max;
         }
     }
 
-    HealthbarSettings _healthbarSettings;
-    AmmoSettings _ammoSettings;
-    public PlayerController player;
+    private HealthbarSettings _healthbarSettings;
+    private AmmoSettings _ammoSettings;
+    [SerializeField]
+    private PlayerWeaponController PWC;
+    [SerializeField]
+    private PlayerController player;
     [SerializeField]
     private GameObject healthbar = null;
     [SerializeField]
@@ -58,8 +67,11 @@ public class UIController : MonoBehaviour {
         try
         {
             _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
-            _ammoSettings.weapon = player.GetComponentInChildren<WeaponManager>();
-            _ammoSettings.weapon.WeaponDataChanged += OnWeaponUpdate;
+            _ammoSettings.wep = PWC.GetEquippedWeapon();
+            EquippedWeapon.WeaponAmmoChanged += OnWeaponUpdate;
+            EquippedWeapon.WeaponSwapped += OnWeaponSwap;
+            PWC.ReloadUpdate += OnReloadUpdate;
+
         }
         catch (UnassignedReferenceException)
         {
@@ -114,6 +126,17 @@ public class UIController : MonoBehaviour {
     }
 
     private void OnWeaponUpdate()
+    {
+        UpdateAmmo();
+    }
+
+    private void OnWeaponSwap(EquippedWeapon wep)
+    {
+        _ammoSettings.wep = wep;
+        UpdateAmmo();
+    }
+
+    private void OnReloadUpdate(bool reloading, float progress)
     {
         UpdateAmmo();
     }

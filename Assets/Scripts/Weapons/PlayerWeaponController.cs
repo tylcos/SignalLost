@@ -11,6 +11,9 @@ public class PlayerWeaponController : WeaponController
     private List<EquippedWeapon> swapList = new List<EquippedWeapon>(INVSIZE);
     private int swapListIndex = 0;
 
+    public delegate void PWCReloadHandler(bool reloading, float progress);
+    public event PWCReloadHandler ReloadUpdate;
+
     private void OnValidate()
     {
         if(inventory.Length != INVSIZE)
@@ -34,12 +37,12 @@ public class PlayerWeaponController : WeaponController
             // so we have a parallel array that holds the objects, their bullets, and ammo
             // so we call commands there when we need to fire or whatnot since that stores everything
         }
+        swapList[0].SetEnabled(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        swapList[0].gun.SetActive(true);
     }
 
     // Update is called once per frame
@@ -70,6 +73,7 @@ public class PlayerWeaponController : WeaponController
             swapListIndex = 3;
             swapList[swapListIndex].SetEnabled(true);
         }
+        // on R press, reload. If arcade, on P2 press, reload, one P2 hold, open weapon wheel
         else if (swapList[swapListIndex].CanFire())
         {
             Vector2 shootDir = Vector2.zero;
@@ -88,5 +92,19 @@ public class PlayerWeaponController : WeaponController
                 swapList[swapListIndex].Fire(shootDir);
             }
         }
+
+        // update reload bar if applicable
+        if(swapList[swapListIndex].reloading)
+        {
+            ReloadUpdate(swapList[swapListIndex].reloading, swapList[swapListIndex].reloadProgress);
+            // when reloading, put an indicator over players head that shows bullets and flashes red when you try to shoot
+            // also put a bar above the ammo counter that fills up with respect to the reloadProgress
+            // use events to do update the UI btw
+        }
+    }
+
+    public EquippedWeapon GetEquippedWeapon()
+    {
+        return swapList[swapListIndex];
     }
 }

@@ -17,7 +17,18 @@ public class EquippedWeapon : Object
     private int currentAmmo;
     private float timeOfLastShot;
     private Transform bulletSpawnLocation;
-    private bool reloading = false;
+    public bool reloading = false;
+    public float reloadProgress;
+
+    public int CurrentAmmo { get => currentAmmo; private set => currentAmmo = value; }
+
+    public int MaxAmmo => maxAmmo;
+
+    public delegate void WeaponUpdateHandler();
+    public static event WeaponUpdateHandler WeaponAmmoChanged;
+
+    public delegate void WeaponSwapHandler(EquippedWeapon wep);
+    public static event WeaponSwapHandler WeaponSwapped;
 
     private EquippedWeapon()
     {
@@ -47,6 +58,8 @@ public class EquippedWeapon : Object
     {
         if (!logical) return;
         gun.SetActive(state);
+        CancelReload();
+        WeaponSwapped(this);
     }
 
     public bool CanFire()
@@ -74,24 +87,28 @@ public class EquippedWeapon : Object
         bm.lifeTime = lifetime;
         bm.damage = baseDamage;
         timeOfLastShot = Time.time;
+        WeaponAmmoChanged();
     }
 
     public void CancelReload()
     {
         gunScript.CancelReload();
         reloading = false;
+        reloadProgress = 0;
     }
 
     public void Reload()
     {
-        //currentAmmo = maxAmmo;
         gunScript.Reload(reloadTime);
         reloading = true;
+        reloadProgress = 0;
     }
 
     public void FillMag()
     {
         currentAmmo = maxAmmo;
+        WeaponAmmoChanged();
         reloading = false;
+        reloadProgress = 1;
     }
 }
