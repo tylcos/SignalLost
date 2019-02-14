@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "My new weapon", menuName = "WeaponV2")]
-public class WeaponInformation : ScriptableObject
+public class WeaponV2Information : ScriptableObject
 {
     [Tooltip("The prefab for the projectile fired.")]
     public GameObject bullet;

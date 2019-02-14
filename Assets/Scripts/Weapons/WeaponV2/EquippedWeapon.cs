@@ -35,7 +35,7 @@ public class EquippedWeapon : Object
         logical = false;
     }
 
-    public EquippedWeapon(WeaponInformation info, Transform parent, string layer)
+    public EquippedWeapon(WeaponV2Information info, Transform parent, string layer)
     {
         gun = Instantiate(info.weapon, parent);
         gunScript = gun.GetComponent<Gun>();

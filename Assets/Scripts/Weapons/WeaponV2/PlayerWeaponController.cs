@@ -6,7 +6,7 @@ public class PlayerWeaponController : WeaponController
 {
     private const int INVSIZE = 4;
     [SerializeField]
-    public WeaponInformation[] inventory = new WeaponInformation[INVSIZE];
+    public WeaponV2Information[] inventory = new WeaponV2Information[INVSIZE];
     private GameController master;
     private List<EquippedWeapon> swapList = new List<EquippedWeapon>(INVSIZE);
     private int swapListIndex = 0;
@@ -27,7 +27,7 @@ public class PlayerWeaponController : WeaponController
     {
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
         // populates the swaplist
-        foreach (WeaponInformation wep in inventory)
+        foreach (WeaponV2Information wep in inventory)
         {
             // create a class that stores a reference to the object we 
             if(wep == null)

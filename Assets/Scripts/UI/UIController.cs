@@ -35,15 +35,16 @@ public class UIController : MonoBehaviour {
             reload = wep.reloading;
             reloadPercent = wep.reloadProgress;
             text.text = cur + " / " + max;
+            // turn on reload indicator and update it or turn it off
         }
     }
 
     private HealthbarSettings _healthbarSettings;
     private AmmoSettings _ammoSettings;
     [SerializeField]
-    private PlayerWeaponController PWC;
+    private PlayerWeaponController PWC = null;
     [SerializeField]
-    private PlayerController player;
+    private PlayerController player = null;
     [SerializeField]
     private GameObject healthbar = null;
     [SerializeField]
