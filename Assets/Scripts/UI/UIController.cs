@@ -27,6 +27,8 @@ public class UIController : MonoBehaviour {
         public TMP_Text text;
         public bool reload;
         public float reloadPercent;
+        public GameObject pIndic;
+        public GameObject uIndic;
 
         public void Redraw()
         {
@@ -35,12 +37,19 @@ public class UIController : MonoBehaviour {
             reload = wep.reloading;
             reloadPercent = wep.reloadProgress;
             text.text = cur + " / " + max;
+            pIndic.SetActive(reload);
+            uIndic.SetActive(reload);
             // turn on reload indicator and update it or turn it off
+            // need a reload bar to use
         }
     }
 
     private HealthbarSettings _healthbarSettings;
     private AmmoSettings _ammoSettings;
+    [SerializeField]
+    private GameObject uiReloadIndicator = null;
+    [SerializeField]
+    private GameObject playerReloadIndicator = null;
     [SerializeField]
     private PlayerWeaponController PWC = null;
     [SerializeField]
@@ -69,6 +78,8 @@ public class UIController : MonoBehaviour {
         {
             _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
             _ammoSettings.wep = PWC.GetEquippedWeapon();
+            _ammoSettings.pIndic = playerReloadIndicator;
+            _ammoSettings.uIndic = uiReloadIndicator;
             EquippedWeapon.WeaponAmmoChanged += OnWeaponUpdate;
             EquippedWeapon.WeaponSwapped += OnWeaponSwap;
             PWC.ReloadUpdate += OnReloadUpdate;
