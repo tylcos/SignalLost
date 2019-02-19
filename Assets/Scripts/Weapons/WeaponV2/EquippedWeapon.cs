@@ -107,8 +107,8 @@ public class EquippedWeapon : Object
     public void FillMag()
     {
         currentAmmo = maxAmmo;
-        WeaponAmmoChanged();
         reloading = false;
         reloadProgress = 1;
+        WeaponAmmoChanged();
     }
 }
