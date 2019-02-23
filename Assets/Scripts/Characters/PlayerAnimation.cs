@@ -13,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour {
     private Animator playerAnimator;
 
     private bool idle;
+    private Coroutine animationDelayObject;
 
 	// Use this for initialization    
         public void Start()
@@ -21,33 +22,47 @@ public class PlayerAnimation : MonoBehaviour {
             player = GameObject.FindGameObjectWithTag("Player");
             movementAccessor = player.GetComponent<PlayerController>();
             playerAnimator = movementAccessor.GetComponent<PlayerController>().spriteAnimator;
-        }    
+        }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    private void Update()
+    {
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)
-            || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+    }
+
+
+    void LateUpdate() {
+        if (movementAccessor.movingForAnimation)
         {
+            StopCoroutine("AnimationDelay");
             playerAnimator.SetBool("Idle", false);
         }
-        else
+        else 
         {
-            playerAnimator.SetBool("Idle", true);
+            StartCoroutine("AnimationDelay");
         }
 
         if (movementAccessor.animationDirection == 1) // North && East
         {
             playerAnimator.SetInteger("PlayerDirection", 1);
         }
-        else if(movementAccessor.animationDirection == 3) // South
+        else if (movementAccessor.animationDirection == 3) // South
         {
             playerAnimator.SetInteger("PlayerDirection", 3);
         }
-        else if(movementAccessor.animationDirection == 4) // West
+        else if (movementAccessor.animationDirection == 4) // West
         {
             playerAnimator.SetInteger("PlayerDirection", 4);
         }
+
+        movementAccessor.movingForAnimation = false;
+    }
+
+    IEnumerator AnimationDelay()
+    {
+        yield return new WaitForSeconds(3.0f);
+        playerAnimator.SetBool("Idle", true);
+    }
         /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) 
             || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
@@ -84,8 +99,6 @@ public class PlayerAnimation : MonoBehaviour {
             animator.SetBool("Moving", false);
         }
         */
-    }
-
     /*
     private void MeleeAnimation()
     {

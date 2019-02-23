@@ -556,6 +556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Dude
       objectReference: {fileID: 0}
+    - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.42

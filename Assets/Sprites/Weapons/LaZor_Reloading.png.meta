@@ -1,7 +1,23 @@
 fileFormatVersion: 2
 guid: 7cab3de92579b374cb6b6618675b54c2
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: LaZor_Reloading_0
+    21300002: LaZor_Reloading_1
+    21300004: LaZor_Reloading_2
+    21300006: LaZor_Reloading_3
+    21300008: LaZor_Reloading_4
+    21300010: LaZor_Reloading_5
+    21300012: LaZor_Reloading_6
+    21300014: LaZor_Reloading_7
+    21300016: LaZor_Reloading_8
+    21300018: LaZor_Reloading_9
+    21300020: LaZor_Reloading_10
+    21300022: LaZor_Reloading_11
+    21300024: LaZor_Reloading_12
+    21300026: LaZor_Reloading_13
+    21300028: LaZor_Reloading_14
+    21300030: LaZor_Reloading_15
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -104,7 +120,327 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: LaZor_Reloading_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 473a3ad7d8de0c84ba887d2637eec488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e8eca69115a47248acd7dd96109ffb4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba4900c422da164391c4baa4b1ef872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ed1f5a67e32d0458d77e4ea2785053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_4
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8752899642362e141b7263aecb5a55c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_5
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd668df879652f46b3ab663bbe6e658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_6
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2d044d8d7a0c3409e5d24d2de4fdc2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_7
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57fa2d7468fc0794bbac1a6e4af92e8e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_8
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6a46c359362c9d42a4ff7685a8bbc44
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_9
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa71f75d34537ea448d7a48ee76d26df
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_10
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ebc76ca467670a4eab5ae75c86c15c8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_11
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1341f2855db4541a31bcd2ebef506b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_12
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b519f551a631f1409c50c3876367ec7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_13
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b9006a22521124d9eb6155d501c034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_14
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21d99e58f754a9e47aa8fd28643d6c03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Reloading_15
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74e35838bed03b744b2d243e7fc0a7e2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
