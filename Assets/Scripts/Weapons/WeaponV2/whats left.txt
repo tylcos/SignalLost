@@ -4,11 +4,11 @@
 *reloading
 *reload indicator above player
 *reload indicator on hud
+*hud indicator sprite
+*animation for hud indicator
 
 above player indicator sprite
 above player indicator flashing on fire attempt
-hud indicator sprite
-animation for hud indicator
 hud indicator filling from grey to white as reload progresses
 bullet penetration
 bullet ricochets
