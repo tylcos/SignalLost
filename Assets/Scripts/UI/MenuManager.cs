@@ -3,9 +3,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class MenuManager : MonoBehaviour
 {
-    public GameObject[] menuItems;
+    public Transform menuItems;
     public string SceneLoadName;
     public Canvas canvas;
 
@@ -23,7 +25,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        textItems = menuItems.Select(m => m.GetComponent<TextMeshProUGUI>()).ToArray();
+        textItems = menuItems.GetComponentsInChildren<TextMeshProUGUI>();
         textItems[0].color = Color.gray;
 
 
@@ -31,6 +33,14 @@ public class MenuManager : MonoBehaviour
         LeaderboardManager.LoadLeaderboardEntries();
         // Update some ui thingy that shows leaderboard
         // Possibly subscribe some thingy to call AddCurrentRun when player dies
+
+
+
+        for (int i = 9; i >= LeaderboardManager.leaderboardEntries.Count; i--)
+            textItems[i].enabled = false;
+
+        for (int i = 0; i < LeaderboardManager.leaderboardEntries.Count; i++)
+            textItems[i].text = LeaderboardManager.leaderboardEntries[i].ToString();
     }
 
 
@@ -45,9 +55,9 @@ public class MenuManager : MonoBehaviour
         {
             textItems[currentSelectedItem].color = Color.white;
 
-            currentSelectedItem = (currentSelectedItem + menuMove) % menuItems.Length;
+            currentSelectedItem = (currentSelectedItem + menuMove) % textItems.Length;
             if (currentSelectedItem < 0)
-                currentSelectedItem = menuItems.Length - 1;
+                currentSelectedItem = textItems.Length - 1;
 
             textItems[currentSelectedItem].color = Color.gray;
         }

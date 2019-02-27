@@ -93,13 +93,13 @@ public readonly struct LeaderboardEntry
 
 
 
-    public string ShortToString()
-    {
-        return $"{Name} - {Score.ToString().PadRight(scoreLength)} - {new DateTime(Date).ToString("f").PadLeft(25)}";
-    }
-
-    public override string ToString()   
+    public string DebugToString()
     {
         return $"[LeaderboardEntry] {Name} achieved {Score} score on {new DateTime(Date).ToString("f")}";
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} - {Score.ToString().PadRight(scoreLength)} - {new DateTime(Date).ToString("f").PadLeft(25)}";
     }
 }
