@@ -13,6 +13,8 @@ public class PlayerWeaponController : WeaponController
 
     public delegate void PWCReloadHandler(bool reloading, float progress);
     public event PWCReloadHandler ReloadUpdate;
+    public delegate void PWCFireError();
+    public event PWCFireError FireError;
 
     private void OnValidate()
     {
@@ -74,7 +76,7 @@ public class PlayerWeaponController : WeaponController
             swapList[swapListIndex].SetEnabled(true);
         }
         // on R press, reload. If arcade, on P2 press, reload, one P2 hold, open weapon wheel
-        else if (swapList[swapListIndex].CanFire())
+        else /*if (swapList[swapListIndex].CanFire())*/
         {
             Vector2 shootDir = Vector2.zero;
             if (master.inputMethod == "keyboard")
@@ -86,10 +88,15 @@ public class PlayerWeaponController : WeaponController
                 shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
             }
 
-            if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) && swapList[swapListIndex].CanFire())
+            if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0))
             {
-                print("shooting");
-                swapList[swapListIndex].Fire(shootDir);
+                if(swapList[swapListIndex].CanFire())
+                {
+                    swapList[swapListIndex].Fire(shootDir);
+                } else if(swapList[swapListIndex].reloading)
+                {
+                    FireError();
+                }
             }
         }
 

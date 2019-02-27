@@ -5,6 +5,7 @@
 public class PlayerController : MovementController
 {
     private GameController master;
+    private PlayerWeaponController PWC;
 
     protected override void Awake()
     {
@@ -15,9 +16,17 @@ public class PlayerController : MovementController
     {
         base.OnEnable();
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
+        PWC = gameObject.GetComponentInChildren<PlayerWeaponController>();
+        PWC.FireError += OnFireError;
     }
 
-    void FixedUpdate()
+    private void OnFireError()
+    {
+        // start a coroutine to turn on the indicator for a few seconds
+        // if this is called again during this time, refresh the coroutine
+    }
+
+    private void FixedUpdate()
     {
         Movement();
     }
