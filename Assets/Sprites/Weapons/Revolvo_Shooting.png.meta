@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 7343021ed0fb1ed4d8aceee4cd9d66b1
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Revolvo_Shooting_0
+    21300002: Revolvo_Shooting_1
+    21300004: Revolvo_Shooting_2
+    21300006: Revolvo_Shooting_3
+    21300008: Revolvo_Shooting_4
+    21300010: Revolvo_Shooting_5
+    21300012: Revolvo_Shooting_6
+    21300014: Revolvo_Shooting_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -104,7 +112,167 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Revolvo_Shooting_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1226e3c7efcf3e049ab28e819c738e13
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 4
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5deee1feb6a14b4893a0c9a6a80373b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_2
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 2
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80c0101d5f684db46ba32353b05eb29f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44392a3f2ef9ac4abcf83d37f3f1c1c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_4
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 2
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4649dabc3dd649d46929855ca7e0f700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_5
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 4
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e43d2b9890067941b7d0d35f84849a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_6
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 4
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3969b3c6d7b9ad46ad189bf5abe51c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Revolvo_Shooting_7
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 4
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1685ad816f397214c9f15961ddbb3f4e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

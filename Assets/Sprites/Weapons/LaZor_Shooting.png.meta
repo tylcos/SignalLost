@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 0eef53d0a8c7c7c4ca113c30ff328545
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: LaZor_Shooting_0
+    21300002: LaZor_Shooting_1
+    21300004: LaZor_Shooting_2
+    21300006: LaZor_Shooting_3
+    21300008: LaZor_Shooting_4
+    21300010: LaZor_Shooting_5
+    21300012: LaZor_Shooting_6
+    21300014: LaZor_Shooting_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -104,7 +112,167 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: LaZor_Shooting_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6ca95b58c88e84ea7038527ff8a669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eddc4d4eab3637e4c9850bf35a1246ea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71640c961ca5e344b9ddea6d0a111ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c73c662a4a9eb49b85cd600a624aa3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_4
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b247e41ee3f2a764eb3be9d11511f310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_5
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6794e973531d7c549b0395cb9955c268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_6
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70bdab5f5809e4a4893a4de318484776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaZor_Shooting_7
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 3
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ae6738cc0409e74396bdeefb2c7b89a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

@@ -22,6 +22,7 @@ public class MovementController : MonoBehaviour
     public float invincibilityDuration; // length of invincibility frames
     private float lastDamageTime; // last time took damage
 
+    public bool movingForAnimation = false;
     private bool moving = false; // is this character executing a coroutine move function?
     private Coroutine activeCoroutine; // the active coroutine if there is one
 
@@ -35,7 +36,6 @@ public class MovementController : MonoBehaviour
     [HideInInspector]
     public int animationDirection = 1;
     private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
-    public Sprite[] spriteDirections;
     public Animator spriteAnimator;
 
 
@@ -64,7 +64,6 @@ public class MovementController : MonoBehaviour
     {
         if (spriteAnimator != null) // Checks if there is an animator attached
         {
-            Debug.Log(animationDirection);
             if (spriteDirection.y > 0.0f) // Checks if the sprite is moving north
             {
                 animationDirection = 1;
@@ -84,14 +83,18 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    protected virtual void LateUpdate()
+    {
+       // Debug.Log(movingForAnimation);
+      //  movingForAnimation = false;
+    }
+
     #endregion
 
 
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
-
-
         Destroy(gameObject);
     }
 
@@ -228,6 +231,7 @@ public class MovementController : MonoBehaviour
         if(moving)
         {
             moving = false;
+            movingForAnimation = false;
             activeCoroutine = null;
             StopCoroutine(activeCoroutine);
             return true;
@@ -243,6 +247,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="direction">The direction to move in.</param>
     protected void Move(Vector2 direction)
     {
+        movingForAnimation = true;
         if (moving) return;
         cc2d.move(direction.normalized * (speed * Time.fixedDeltaTime));
         spriteDirection = direction;
@@ -255,6 +260,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="speed">Overrides movement speed for a new speed</param>
     protected void Move(Vector2 direction, float speed)
     {
+        movingForAnimation = true;
         if (moving) return;
         cc2d.move(direction.normalized * (speed * Time.fixedDeltaTime));
     }
@@ -265,6 +271,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="destination">The location to move to</param>
     protected Coroutine MoveTo(Vector2 destination)
     {
+        movingForAnimation = true;
         if (moving) return null;
         Vector2 source = transform.position;
         Vector3 destination3 = destination;
@@ -281,6 +288,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="speed">The speed to move at</param>
     protected Coroutine MoveTo(Vector2 destination, float speed)
     {
+        movingForAnimation = true;
         if (moving) return null;
         Vector2 source = transform.position;
         float duration = Mathf.Pow(speed / Mathf.Abs(Vector2.Distance(source, destination)), -1);
@@ -294,6 +302,7 @@ public class MovementController : MonoBehaviour
     {
         Vector2 a = Vector2.zero;
         moving = true;
+        movingForAnimation = true;
         float step = (speed / b.magnitude) * Time.fixedDeltaTime;
         float t = 0;
         while (t <= 1.0f)
@@ -305,6 +314,7 @@ public class MovementController : MonoBehaviour
         }
         //rb2d.MovePosition(b);
         moving = false;
+        movingForAnimation = false;
         activeCoroutine = null;
     }
 
@@ -312,6 +322,7 @@ public class MovementController : MonoBehaviour
     {
         Vector2 a = Vector2.zero;
         moving = true;
+        movingForAnimation = true;
         float step = (speed / b.magnitude) * Time.fixedDeltaTime;
         float t = 0;
         while (t <= 1.0f)
@@ -323,10 +334,8 @@ public class MovementController : MonoBehaviour
         }
         //rb2d.MovePosition(b);
         moving = false;
+        movingForAnimation = false;
         activeCoroutine = null;
     }
-
     #endregion
-
-
 }
