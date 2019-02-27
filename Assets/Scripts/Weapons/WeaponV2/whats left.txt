@@ -6,10 +6,11 @@
 *reload indicator on hud
 *hud indicator sprite
 *animation for hud indicator
+*hud indicator filling from grey to white as reload progresses
 
 above player indicator sprite
-above player indicator flashing on fire attempt
-hud indicator filling from grey to white as reload progresses
+above player indicator flashing animation on fire attempt
+ENEMY WEAPON COMPATIBILITY [MERGE AFTER THIS]
 bullet penetration
 bullet ricochets
 bullet spread
