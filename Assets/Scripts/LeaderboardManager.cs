@@ -80,7 +80,6 @@ public readonly struct LeaderboardEntry
 
 
     public static readonly int nameLength = 6;
-    public static readonly int scoreLength = 10;
 
 
 
@@ -100,6 +99,6 @@ public readonly struct LeaderboardEntry
 
     public override string ToString()
     {
-        return $"{Name} - {Score.ToString().PadRight(scoreLength)} - {new DateTime(Date).ToString("f").PadLeft(25)}";
+        return $"{Name} - {Score.ToString()} - {new DateTime(Date).ToString("f").PadLeft(25)}";
     }
 }

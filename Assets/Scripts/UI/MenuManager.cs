@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Transform menuItems;
+    public TextMeshProUGUI[] textItems = new TextMeshProUGUI[3];
+    public Transform leaderboardItem;
     public string SceneLoadName;
     public Canvas canvas;
 
 
 
-    private TextMeshProUGUI[] textItems;
+    private TextMeshProUGUI[] leaderboardItems;
 
 
 
@@ -25,11 +26,11 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        textItems = menuItems.GetComponentsInChildren<TextMeshProUGUI>();
         textItems[0].color = Color.gray;
 
 
 
+        leaderboardItems = leaderboardItem.GetComponentsInChildren<TextMeshProUGUI>().Where(t => t.fontSize < 25).ToArray();
         LeaderboardManager.LoadLeaderboardEntries();
         // Update some ui thingy that shows leaderboard
         // Possibly subscribe some thingy to call AddCurrentRun when player dies
@@ -37,10 +38,10 @@ public class MenuManager : MonoBehaviour
 
 
         for (int i = 9; i >= LeaderboardManager.leaderboardEntries.Count; i--)
-            textItems[i].enabled = false;
+            leaderboardItems[i].transform.parent.gameObject.SetActive(false);
 
         for (int i = 0; i < LeaderboardManager.leaderboardEntries.Count; i++)
-            textItems[i].text = LeaderboardManager.leaderboardEntries[i].ToString();
+            leaderboardItems[i].text = LeaderboardManager.leaderboardEntries[i].ToString();
     }
 
 
