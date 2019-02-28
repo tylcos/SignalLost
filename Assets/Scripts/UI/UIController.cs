@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour {
         public TMP_Text text;
         public bool reload;
         public float reloadPercent;
-        public GameObject pIndic;
         public GameObject uIndic;
         public Transform uFill;
         public float uFillFull;
@@ -39,7 +38,6 @@ public class UIController : MonoBehaviour {
             reload = wep.reloading;
             reloadPercent = wep.reloadProgress;
             text.text = cur + " / " + max;
-            pIndic.SetActive(reload);
             uIndic.SetActive(reload);
             uFill.localScale = new Vector3(uFillFull * reloadPercent, uFill.localScale.y, uFill.localScale.z);
             // turn on reload indicator and update it or turn it off
@@ -83,7 +81,6 @@ public class UIController : MonoBehaviour {
         {
             _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
             _ammoSettings.wep = PWC.GetEquippedWeapon();
-            _ammoSettings.pIndic = playerReloadIndicator;
             _ammoSettings.uIndic = uiReloadIndicator;
             _ammoSettings.uFill = uiReloadIndicatorMask.transform;
             _ammoSettings.uFillFull = uiReloadIndicatorMask.transform.localScale.x;

@@ -46,4 +46,32 @@ public class GameController : MonoBehaviour
             Application.Quit();
         }
     }
+
+    public bool ReloadPressed()
+    {
+        if(inputMethod == "keyboard")
+        {
+            return Input.GetKeyDown(KeyCode.R);
+        } else if (inputMethod == "arcade")
+        {
+            return false;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public bool SwapPressed()
+    {
+        if(inputMethod == "keyboard")
+        {
+            return Input.GetKeyDown(KeyCode.Tab);
+        } else if(inputMethod == "arcade")
+        {
+            return Input.GetKeyDown(KeyCode.Minus);
+        } else
+        {
+            return false;
+        }
+    }
 }

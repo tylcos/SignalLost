@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
-
+using System.Collections;
 
 
 public class PlayerController : MovementController
 {
     private GameController master;
     private PlayerWeaponController PWC;
+    [SerializeField]
+    private GameObject reloadFailIndicator;
+    private const float indicatorOnLength = 1f;
+    private Coroutine coroutine = null;
 
     protected override void Awake()
     {
@@ -22,8 +26,26 @@ public class PlayerController : MovementController
 
     private void OnFireError()
     {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(ReloadIndicatorThingy());
+        
         // start a coroutine to turn on the indicator for a few seconds
         // if this is called again during this time, refresh the coroutine
+    }
+
+    private IEnumerator ReloadIndicatorThingy()
+    {
+        reloadFailIndicator.SetActive(true);
+        float time = Time.time;
+        while(Time.time - time < indicatorOnLength)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        reloadFailIndicator.SetActive(false);
+        coroutine = null;
     }
 
     private void FixedUpdate()

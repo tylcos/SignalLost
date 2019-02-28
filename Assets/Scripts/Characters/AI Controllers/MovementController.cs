@@ -190,9 +190,9 @@ public class MovementController : MonoBehaviour
     {
         if(moving)
         {
+            StopCoroutine(activeCoroutine);
             moving = false;
             activeCoroutine = null;
-            StopCoroutine(activeCoroutine);
             return true;
         } else
         {

@@ -70,7 +70,6 @@ public class EquippedWeapon : Object
     public void Fire(Vector2 direction)
     {
         if (!CanFire()) return;
-        Debug.Log(currentAmmo);
         if (currentAmmo <= 0)
         {
             Reload();
@@ -95,6 +94,11 @@ public class EquippedWeapon : Object
         gunScript.CancelReload();
         reloading = false;
         reloadProgress = 0;
+    }
+
+    public bool CanReload()
+    {
+        return maxAmmo != currentAmmo;
     }
 
     public void Reload()

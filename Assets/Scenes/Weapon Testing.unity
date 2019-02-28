@@ -751,7 +751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1453835560
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1823072942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2790,6 +2790,7 @@ MonoBehaviour:
   cc2d: {fileID: 114050555550337395}
   _MaxHitPoints: 150
   invincibilityDuration: 0.5
+  reloadFailIndicator: {fileID: 1453835559}
 --- !u!212 &212238432020455225
 SpriteRenderer:
   m_ObjectHideFlags: 0
