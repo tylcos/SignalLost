@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         else if (inputMethod == "arcade")
             return new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
-        
+
         return Vector2.zero;
     }
 
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
             return new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
         else if (inputMethod == "arcade")
             return new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
-        
+
         return Vector2.zero;
     }
     
@@ -78,5 +78,33 @@ public class GameController : MonoBehaviour
 
         Debug.Log("Exiting Game");
         Application.Quit();
+    }
+
+    public bool ReloadPressed()
+    {
+        if(inputMethod == "keyboard")
+        {
+            return Input.GetKeyDown(KeyCode.R);
+        } else if (inputMethod == "arcade")
+        {
+            return false;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public bool SwapPressed()
+    {
+        if(inputMethod == "keyboard")
+        {
+            return Input.GetKeyDown(KeyCode.Tab);
+        } else if(inputMethod == "arcade")
+        {
+            return Input.GetKeyDown(KeyCode.Minus);
+        } else
+        {
+            return false;
+        }
     }
 }

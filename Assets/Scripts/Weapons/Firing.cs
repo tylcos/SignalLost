@@ -26,8 +26,7 @@ public class Firing : MonoBehaviour
 
 
 
-        if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0) 
-            && Time.time - timeLastFired > weaponManager.Weapon.Info.cycleTime)
+        if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0)  && Time.time - timeLastFired > weaponManager.Weapon.Info.cycleTime)
         {
             if (weaponManager.Weapon.CurrentAmmo == 0)
             {

@@ -1,29 +1,68 @@
 ﻿using UnityEngine;
-
+using System.Collections;
 
 
 public class PlayerController : MovementController
 {
+    private GameController master;
+    private PlayerWeaponController PWC;
+    [SerializeField]
+    private GameObject reloadFailIndicator;
+    private const float indicatorOnLength = 1f;
+    private Coroutine coroutine = null;
+
     protected override void Awake()
     {
         base.Awake();
-        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
+        PWC = gameObject.GetComponentInChildren<PlayerWeaponController>();
+        PWC.FireError += OnFireError;
     }
 
-    void FixedUpdate()
+    private void OnFireError()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(ReloadIndicatorThingy());
+
+        // start a coroutine to turn on the indicator for a few seconds
+        // if this is called again during this time, refresh the coroutine
+    }
+
+    private IEnumerator ReloadIndicatorThingy()
+    {
+        reloadFailIndicator.SetActive(true);
+        float time = Time.time;
+        while(Time.time - time < indicatorOnLength)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        reloadFailIndicator.SetActive(false);
+        coroutine = null;
+    }
+
+    private void FixedUpdate()
     {
         Movement();
     }
 
     private void Movement()
     {
-        Vector2 move = GameController.GetMovementVector();
-        
+        Vector2 move = Vector2.zero;
+        if(master.inputMethod == "keyboard")
+        {
+            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        } else if(master.inputMethod == "arcade")
+        {
+            move = new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
+        }
         if (move.sqrMagnitude == 0)
             return;
 

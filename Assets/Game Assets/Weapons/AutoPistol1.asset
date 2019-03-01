@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
+  m_Name: AutoPistol1
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 3}
+  weapon: {fileID: 8520570019915805274, guid: 6e2620b9c2054b347b1bbb5908901bfd, type: 3}
+  cycleTime: 0.8
+  muzzleVelocity: 20
+  lifetime: 5
+  damage: 20
+  clipSize: 8
+  reloadTime: 1.6

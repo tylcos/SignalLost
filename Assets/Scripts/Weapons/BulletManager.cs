@@ -7,11 +7,6 @@ public class BulletManager : MonoBehaviour
     public float maxCollisions;
     private float currentPenetration = 0;
     public EnemyController sourceEnemy = null;
-    
-
-    //public string[] collideLayers;
-    //protected int collideLayerMask;
-    //public string[] targetTags = { "Player", "Enemy", "Walls" };
 
     private float startTime;
 
@@ -38,13 +33,8 @@ public class BulletManager : MonoBehaviour
                 break;
             }
         }*/
-        try
-        {
+        if(collEvent.gameObject.GetComponent<MovementController>() != null)
             collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
-        } catch (System.NullReferenceException)
-        {
-
-        }
         currentPenetration++;
         if(currentPenetration >= maxCollisions)
             Destroy(gameObject);

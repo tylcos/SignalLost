@@ -2,7 +2,7 @@
 
 
 
-public class FollowMouse : MonoBehaviour 
+public class FollowMouse : MonoBehaviour
 {
     public Texture2D cursorTexture;
 
@@ -13,22 +13,38 @@ public class FollowMouse : MonoBehaviour
         Cursor.SetCursor(cursorTexture, new Vector2(16, 16), CursorMode.ForceSoftware);
     }
 
-    
-    
-    void FixedUpdate() 
-	{
-        Vector2 shootDir = GameController.GetAimingVector();
+    private Vector3 lastMousePosition = new Vector3(0, 0, float.MaxValue);
 
-        float angleDifference;
+    void FixedUpdate()
+	{
+        Vector2 shootDir = Vector2.zero;
+        if (master.inputMethod == "keyboard")
+        {
+            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
+        }
+        else if (master.inputMethod == "arcade")
+        {
+            shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
+        }
+
+        float angleDifference = 0;
         if (shootDir.sqrMagnitude == 0)
         {
-            Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-            float mouseAngle = Mathf.Rad2Deg * Mathf.Atan2(mousePosRelative.y, mousePosRelative.x);
-            angleDifference = mouseAngle - transform.eulerAngles.z;
+            Vector3 trueMousePos = Input.mousePosition;
+            if(lastMousePosition == new Vector3(0, 0, float.MaxValue) || lastMousePosition != trueMousePos || Input.GetAxis("Fire1") > 0)
+            {
+                lastMousePosition = trueMousePos;
+                Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                float mouseAngle = Mathf.Rad2Deg * Mathf.Atan2(mousePosRelative.y, mousePosRelative.x);
+                angleDifference = mouseAngle - transform.eulerAngles.z;
+                Cursor.visible = true;
+            }
         }
         else
+        {
             angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(shootDir.y, shootDir.x)) - transform.eulerAngles.z;
+            Cursor.visible = false;
+        }
 
         transform.RotateAround(transform.position, Vector3.forward, angleDifference);
     }

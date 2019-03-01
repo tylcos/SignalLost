@@ -231,10 +231,10 @@ public class MovementController : MonoBehaviour
     {
         if(moving)
         {
+            StopCoroutine(activeCoroutine);
             moving = false;
             movingForAnimation = false;
             activeCoroutine = null;
-            StopCoroutine(activeCoroutine);
             return true;
         } else
         {

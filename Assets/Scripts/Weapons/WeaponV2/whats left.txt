@@ -1,0 +1,37 @@
+*shooting
+*weapon swapping
+*ammo limit
+*reloading
+*reload indicator above player
+*reload indicator on hud
+*hud indicator sprite
+*animation for hud indicator
+*hud indicator filling from grey to white as reload progresses
+*above player indicator sprite
+*above player indicator flashing animation on fire attempt
+*R to reload
+*arcade weapon swapping
+*DON'T UPDATE PREFABS
+*ENEMY WEAPON COMPATIBILITY [MERGE AFTER THIS]
+
+UPDATE PREFABS
+bullet penetration
+bullet ricochets
+bullet spread
+aoe bullet damage
+bullet sprites
+impact vfx
+muzzle vfx
+weapon swapping radial menu
+slight camera follow when aiming
+weapon variations (values added to presets thanks to rng and rarity)
+picking up and simultaneously dropping weapons through radial
+in game menu with resume, exit to desk and main, dummy inventory
+interact with game menu
+inventory
+visual inventory menu
+interact with visual inventory menu
+swap weapon slots in inventory menu
+integrate inventory menu in in game menu
+dodge mechanic (double tap or spacebar)
+critical damage system
