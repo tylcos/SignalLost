@@ -95,6 +95,7 @@ public class MovementController : MonoBehaviour
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
+        LeaderboardManager.currentScore += 500;
         Destroy(gameObject);
     }
 

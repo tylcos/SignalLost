@@ -59,12 +59,19 @@ public static class LeaderboardManager
 
     public static void AddCurrentRun(string name)
     {
+        if (name.Length > LeaderboardEntry.nameLength)
+            name = name.Substring(0, LeaderboardEntry.nameLength);
+
+
+
         // Find where to insert current run based on index (Lower index = higher score)
         int i = 0;
-        while (leaderboardEntries[i].Score > currentScore)
-            i++;
+        while (i < leaderboardEntries.Count && leaderboardEntries[i++].Score > currentScore);
 
-        leaderboardEntries.Insert(i, new LeaderboardEntry(name, currentScore));
+        if (i < leaderboardEntries.Count)
+            leaderboardEntries.Insert(i, new LeaderboardEntry(name, currentScore));
+        else
+            leaderboardEntries.Add(new LeaderboardEntry(name, currentScore));
     }
 }
 

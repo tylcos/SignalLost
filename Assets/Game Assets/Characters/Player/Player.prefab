@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 50822498620361568}
   - component: {fileID: 61047100213059538}
   - component: {fileID: 114050555920559164}
+  - component: {fileID: 99023017}
+  - component: {fileID: 99023018}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -102,6 +104,10 @@ MonoBehaviour:
   cc2d: {fileID: 114050555920559164}
   _MaxHitPoints: 150
   invincibilityDuration: 0.5
+  movingForAnimation: 0
+  spriteRenderer: {fileID: 0}
+  animationDirection: 1
+  spriteAnimator: {fileID: 99023017}
 --- !u!50 &50822498620361568
 Rigidbody2D:
   serializedVersion: 4
@@ -136,7 +142,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.01188302}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -147,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7}
+  m_Size: {x: 0.7, y: 0.91389483}
   m_EdgeRadius: 0
 --- !u!114 &114050555920559164
 MonoBehaviour:
@@ -209,6 +215,39 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 8
   totalVerticalRays: 4
+--- !u!95 &99023017
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298569208637172}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8379ec59478b454e95a9b5bbceec304, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &99023018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298569208637172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c64e3fc8e417e4188b098d6abc2465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  movementAccessor: {fileID: 0}
 --- !u!1 &1525885596130818
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,9 +311,6 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 4453064393674552}
   ps: {fileID: 0}
   bulletLayer: Player Fired
-  layer:
-    serializedVersion: 2
-    m_Bits: 32768
 --- !u!114 &114714410810140362
 MonoBehaviour:
   m_ObjectHideFlags: 0

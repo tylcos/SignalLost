@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-public class UIController : MonoBehaviour {
 
+
+public class UIController : MonoBehaviour
+{
     // Ammo, health, and death updates should be performed from the player class
 
     struct HealthbarSettings
@@ -36,11 +36,13 @@ public class UIController : MonoBehaviour {
     AmmoSettings _ammoSettings;
     public PlayerController player;
     [SerializeField]
-    private GameObject healthbar = null;
+    private GameObject healthbar;
     [SerializeField]
-    private GameObject ammo = null;
+    private GameObject ammo;
     [SerializeField]
-    private GameObject deathMessage = null;
+    private GameObject deathMessage;
+    [SerializeField]
+    private TextMeshProUGUI score;
 
 
     private void OnEnable()
@@ -112,6 +114,8 @@ public class UIController : MonoBehaviour {
     {
         _ammoSettings.Redraw();
     }
+
+
 
     private void OnWeaponUpdate()
     {
