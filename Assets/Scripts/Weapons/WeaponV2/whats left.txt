@@ -11,8 +11,9 @@
 *above player indicator flashing animation on fire attempt
 *R to reload
 *arcade weapon swapping
-DON'T UPDATE PREFABS
-ENEMY WEAPON COMPATIBILITY [MERGE AFTER THIS]
+*DON'T UPDATE PREFABS
+*ENEMY WEAPON COMPATIBILITY [MERGE AFTER THIS]
+
 UPDATE PREFABS
 bullet penetration
 bullet ricochets
