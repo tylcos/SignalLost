@@ -56,10 +56,10 @@ public class PlayerController : MovementController
     private void Movement()
     {
         Vector2 move = Vector2.zero;
-        if(master.inputMethod == "keyboard")
+        if(GameController.inputMethod == "keyboard")
         {
             move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        } else if(master.inputMethod == "arcade")
+        } else if(GameController.inputMethod == "arcade")
         {
             move = new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
         }

@@ -18,11 +18,11 @@ public class FollowMouse : MonoBehaviour
     void FixedUpdate()
 	{
         Vector2 shootDir = Vector2.zero;
-        if (master.inputMethod == "keyboard")
+        if (GameController.inputMethod == "keyboard")
         {
             shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
         }
-        else if (master.inputMethod == "arcade")
+        else if (GameController.inputMethod == "arcade")
         {
             shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
         }
