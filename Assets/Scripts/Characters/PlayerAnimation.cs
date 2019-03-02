@@ -11,9 +11,8 @@ public class PlayerAnimation : MonoBehaviour {
     public MovementController movementAccessor;
 
     private Animator playerAnimator;
-
     private bool idle;
-    private Coroutine animationDelayObject;
+    private Coroutine animationDelayObject = null;
 
 	// Use this for initialization    
         public void Start()
@@ -24,15 +23,23 @@ public class PlayerAnimation : MonoBehaviour {
             playerAnimator = movementAccessor.GetComponent<PlayerController>().spriteAnimator;
         }
 
+    private void Update()
+    {
+    }
+
     void LateUpdate() {
+
         if (movementAccessor.movingForAnimation)
         {
-            StopCoroutine("AnimationDelay");
+            if (animationDelayObject != null)
+                StopCoroutine(animationDelayObject);
+            animationDelayObject = null;
             playerAnimator.SetBool("Idle", false);
+
         }
-        else 
+        else if (!movementAccessor.movingForAnimation && animationDelayObject == null)
         {
-            StartCoroutine("AnimationDelay");
+            animationDelayObject = StartCoroutine("AnimationDelay");
         }
 
         if (movementAccessor.animationDirection == 1) // North && East
@@ -48,6 +55,7 @@ public class PlayerAnimation : MonoBehaviour {
             playerAnimator.SetInteger("PlayerDirection", 4);
         }
 
+        
         movementAccessor.movingForAnimation = false;
     }
 

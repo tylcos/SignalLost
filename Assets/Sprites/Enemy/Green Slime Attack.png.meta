@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 7343021ed0fb1ed4d8aceee4cd9d66b1
+guid: 58a0adeccb9076e4993efcce4bed48b8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Revolvo_Shooting_0
-    21300002: Revolvo_Shooting_1
-    21300004: Revolvo_Shooting_2
-    21300006: Revolvo_Shooting_3
-    21300008: Revolvo_Shooting_4
-    21300010: Revolvo_Shooting_5
-    21300012: Revolvo_Shooting_6
-    21300014: Revolvo_Shooting_7
+    21300000: Green Slime Attack_0
+    21300002: Green Slime Attack_1
+    21300004: Green Slime Attack_2
+    21300006: Green Slime Attack_3
+    21300008: Green Slime Attack_4
+    21300010: Green Slime Attack_5
+    21300012: Green Slime Attack_6
+    21300014: Green Slime Attack_7
+    21300016: Green Slime Attack_8
+    21300018: Green Slime Attack_9
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -53,7 +55,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -114,52 +116,32 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Revolvo_Shooting_0
+      name: Green Slime Attack_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 4
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1226e3c7efcf3e049ab28e819c738e13
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Revolvo_Shooting_1
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 4
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5deee1feb6a14b4893a0c9a6a80373b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Revolvo_Shooting_2
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 2
+        y: 1
         width: 20
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4236c10b434de64591163173b3417fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 1
+        width: 21
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -168,18 +150,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80c0101d5f684db46ba32353b05eb29f
+      spriteID: 5f405c2cd23696a48b2d451516752b3f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Revolvo_Shooting_3
+      name: Green Slime Attack_2
       rect:
         serializedVersion: 2
-        x: 73
+        x: 65
         y: 1
-        width: 18
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e46a7ca0764cb6844a1fd994b9bdc391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 3
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2303565f1b967a848afd6aa67e8272d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 4
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0e16ef32e4f7a541a1b246546f5bf05
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_5
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 5
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58159cb27727f3e4d9bbc9f56ebfb1ab
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_6
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 3
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 848eeb3c3975dd74891871df0a198f70
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_7
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 2
+        width: 24
         height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -188,19 +270,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a44392a3f2ef9ac4abcf83d37f3f1c1c
+      spriteID: 6e59d313e07424e47bd71026c44204e1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Revolvo_Shooting_4
+      name: Green Slime Attack_8
       rect:
         serializedVersion: 2
-        x: 97
-        y: 2
+        x: 264
+        y: 1
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 305921f97080c43498817c188185b949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Green Slime Attack_9
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 1
         width: 20
-        height: 16
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,67 +310,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4649dabc3dd649d46929855ca7e0f700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Revolvo_Shooting_5
-      rect:
-        serializedVersion: 2
-        x: 121
-        y: 4
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e43d2b9890067941b7d0d35f84849a0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Revolvo_Shooting_6
-      rect:
-        serializedVersion: 2
-        x: 145
-        y: 4
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3969b3c6d7b9ad46ad189bf5abe51c5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Revolvo_Shooting_7
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 4
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1685ad816f397214c9f15961ddbb3f4e
+      spriteID: 055440908cfcfab4897e289f56888a22
       vertices: []
       indices: 
       edges: []
@@ -276,7 +318,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 470132d2624c10c4fac02ecd87190fbd
+    spriteID: ef495066a671cec43a746f72c78cca62
     vertices: []
     indices: 
     edges: []
