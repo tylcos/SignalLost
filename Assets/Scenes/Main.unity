@@ -385,12 +385,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22741fa65b1cce84fa55ed6bcbb61440, type: 3}
---- !u!95 &583761435 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 723578674, guid: 74904ff051524d048a5a98912b5aafbe,
-    type: 3}
-  m_PrefabInstance: {fileID: 861169293}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &633434858 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1187906708794232797, guid: 74904ff051524d048a5a98912b5aafbe,
@@ -479,16 +473,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
-        type: 3}
-      propertyPath: reloadFailIndicator
-      value: 
-      objectReference: {fileID: 633434858}
-    - target: {fileID: 114980250400258964, guid: 74904ff051524d048a5a98912b5aafbe,
-        type: 3}
-      propertyPath: spriteAnimator
-      value: 
-      objectReference: {fileID: 583761435}
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

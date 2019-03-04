@@ -47,5 +47,6 @@ public class FollowMouse : MonoBehaviour
         }
 
         transform.RotateAround(transform.position, Vector3.forward, angleDifference);
+
     }
 }

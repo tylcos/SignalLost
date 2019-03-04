@@ -53,6 +53,6 @@ public class GunAutomatic : Gun
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
