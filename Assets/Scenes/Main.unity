@@ -977,11 +977,6 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 382178209}
-    - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
-        type: 3}
       propertyPath: playerReloadIndicator
       value: 
       objectReference: {fileID: 633434858}
@@ -990,6 +985,11 @@ PrefabInstance:
       propertyPath: PWC
       value: 
       objectReference: {fileID: 1394147747}
+    - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 382178209}
     - target: {fileID: 2644264972944387957, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: m_havePropertiesChanged
