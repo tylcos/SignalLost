@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
     [HideInInspector]
     public static InputMethod inputMethod = InputMethod.Keyboard;
-
+    
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -38,13 +38,10 @@ public class GameController : MonoBehaviour
     public static string GetArg(string name)
     {
         var args = Environment.GetCommandLineArgs();
+
         for (int i = 0; i < args.Length; i++)
-        {
             if (args[i] == name && args.Length > i + 1)
-            {
                 return args[i + 1];
-            }
-        }
 
         return null;
     }
@@ -85,7 +82,6 @@ public class GameController : MonoBehaviour
 
         return false;
     }
-
 
 
 
