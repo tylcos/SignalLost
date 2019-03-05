@@ -52,17 +52,15 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject uiReloadIndicatorMask = null;
     [SerializeField]
-    private GameObject playerReloadIndicator = null;
-    [SerializeField]
     private PlayerWeaponController PWC = null;
     [SerializeField]
     private PlayerController player = null;
     [SerializeField]
-    private GameObject healthbar;
+    private GameObject healthbar = null;
     [SerializeField]
-    private GameObject ammo;
+    private GameObject ammo = null;
     [SerializeField]
-    private GameObject deathMessage;
+    private GameObject deathMessage = null;
     [SerializeField]
     private TextMeshProUGUI score;
 
