@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 
 public class MenuManager : MonoBehaviour
 {
     public TextMeshProUGUI[] textItems = new TextMeshProUGUI[3];
-    public Transform leaderboardItem;
     public string SceneLoadName;
     public Canvas canvas;
 
@@ -77,7 +75,7 @@ public class MenuManager : MonoBehaviour
         {
             // Start new game
             case 0:
-                SceneManager.LoadSceneAsync(SceneLoadName);
+                LevelManager.LoadStartingLevel();
                 break;
 
             // Options
