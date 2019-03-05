@@ -7,7 +7,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public TextMeshProUGUI[] textItems = new TextMeshProUGUI[3];
-    public string SceneLoadName;
+    public Transform leaderboardItem;
     public Canvas canvas;
 
 
