@@ -7,7 +7,7 @@ public class PlayerController : MovementController
     private GameManager master;
     private PlayerWeaponController PWC;
     [SerializeField]
-    private GameObject reloadFailIndicator;
+    private GameObject reloadFailIndicator = null;
     private const float indicatorOnLength = 1f;
     private Coroutine coroutine = null;
 
