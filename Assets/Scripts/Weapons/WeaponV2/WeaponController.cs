@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField]
     public WeaponV2Information[] inventory = new WeaponV2Information[INVSIZE];
-    protected GameController master;
+    protected GameManager master;
     protected List<EquippedWeapon> swapList = new List<EquippedWeapon>(INVSIZE);
     protected int swapListIndex = 0;
 
@@ -26,7 +26,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnEnable()
     {
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameManager>();
         // populates the swaplist
         foreach (WeaponV2Information wep in inventory)
         {
