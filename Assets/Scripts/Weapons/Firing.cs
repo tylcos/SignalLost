@@ -11,18 +11,18 @@ public class Firing : MonoBehaviour
     public Transform bulletSpawnPoint;
     public ParticleSystem ps;
     public string bulletLayer;
-    private GameController master;
+    private GameManager master;
 
     private float timeLastFired;
 
     private void OnEnable()
     {
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameController>();
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        Vector2 shootDir = GameController.GetAimingVector();
+        Vector2 shootDir = GameManager.GetAimingVector();
 
 
 

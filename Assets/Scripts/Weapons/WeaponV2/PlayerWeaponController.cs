@@ -49,15 +49,7 @@ public class PlayerWeaponController : WeaponController
             // on R press, reload. If arcade, on P2 press, reload, one P2 hold, open weapon wheel
         } else /*if (swapList[swapListIndex].CanFire())*/
         {
-            Vector2 shootDir = Vector2.zero;
-            if (GameController.inputMethod == "keyboard")
-            {
-                shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-            }
-            else if (GameController.inputMethod == "arcade")
-            {
-                shootDir = new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
-            }
+            Vector2 shootDir = GameManager.GetAimingVector();
 
             if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0))
             {
