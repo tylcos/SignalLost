@@ -37,12 +37,12 @@ public class RangedWeapon : MonoBehaviour {
         Quaternion randomQuaternion = weaponHolder.rotation * Quaternion.Euler(0f, 0f, Random.Range(-halfAngle, halfAngle));
         GameObject bullet = Instantiate(gunType.bullet, bulletSpawnPoint.position, randomQuaternion);
         Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
-        BulletManager bm = bullet.GetComponent<BulletManager>();
+        BulletController bm = bullet.GetComponent<BulletController>();
 
         bm.lifeTime = gunType.bulletLifeTime;
         bm.damage = gunType.damage;
         bm.maxCollisions = gunType.penetrationDepth;
-        bm.sourceEnemy = parentController;
+        bm.source = parentController;
         bm.gameObject.layer = LayerMask.NameToLayer(bulletLayer);
         //bm.targetTags = parentController.targetTags;
 

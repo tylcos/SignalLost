@@ -19,6 +19,7 @@ public class EquippedWeapon : Object
     private Transform bulletSpawnLocation;
     public bool reloading = false;
     public float reloadProgress;
+    public readonly MovementController character;
 
     public int CurrentAmmo { get => currentAmmo; private set => currentAmmo = value; }
 
@@ -35,7 +36,7 @@ public class EquippedWeapon : Object
         logical = false;
     }
 
-    public EquippedWeapon(WeaponV2Information info, Transform parent, string layer)
+    public EquippedWeapon(WeaponV2Information info, Transform parent, string layer, MovementController parentMoveController)
     {
         gun = Instantiate(info.weapon, parent);
         gunScript = gun.GetComponent<Gun>();
@@ -52,6 +53,7 @@ public class EquippedWeapon : Object
         currentAmmo = maxAmmo;
         reloadTime = info.reloadTime;
         gun.SetActive(false);
+        character = parentMoveController;
     }
 
     public void SetEnabled(bool state)
@@ -81,10 +83,11 @@ public class EquippedWeapon : Object
         GameObject shot = Instantiate(bullet, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
         float angle = bulletSpawnLocation.rotation.eulerAngles.z * Mathf.Deg2Rad;
         shot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
-        BulletManager bm = bullet.GetComponent<BulletManager>();
+        BulletController bm = bullet.GetComponent<BulletController>();
         bm.gameObject.layer = layer;
         bm.lifeTime = lifetime;
         bm.damage = baseDamage;
+        bm.source = character;
         timeOfLastShot = Time.time;
         WeaponAmmoChanged();
     }

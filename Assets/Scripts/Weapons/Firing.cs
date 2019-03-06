@@ -46,7 +46,7 @@ public class Firing : MonoBehaviour
             GameObject bullet = Instantiate(weaponManager.Weapon.Info.bullet, bulletSpawnPoint.position, randomQuaternion);
             
             Rigidbody2D rbBullet = bullet.GetComponent<Rigidbody2D>();
-            BulletManager bm = bullet.GetComponent<BulletManager>();
+            BulletController bm = bullet.GetComponent<BulletController>();
             
             bm.lifeTime = weaponManager.Weapon.Info.bulletLifeTime;
             bm.damage = weaponManager.Weapon.Info.damage;

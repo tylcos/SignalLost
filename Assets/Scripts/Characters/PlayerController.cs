@@ -66,10 +66,24 @@ public class PlayerController : MovementController
     {
         if(collision.tag == "EnemyWeapon")
         {
-            collision.GetComponentInParent<EnemyController>().OnHitOpponent(gameObject);
+            collision.GetComponentInParent<EnemyController>().OnHitOpponent(this);
         } else if(collision.tag == "Projectile")
         {
-            collision.GetComponentInParent<BulletManager>().sourceEnemy.OnHitOpponent(gameObject);
+            //collision.GetComponentInParent<BulletController>().source.OnHitOpponent(this);
         }
     }
+
+    public override void OnHitOpponent(MovementController opponent)
+    {
+        base.OnHitOpponent(opponent);
+        print("player hit something");
+    }
+
+    public override void OnHitByOpponent(MovementController opponent, float damageReceived)
+    {
+        base.OnHitByOpponent(opponent, damageReceived);
+        print("player hit by something");
+    }
+
+
 }

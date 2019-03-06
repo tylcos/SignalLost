@@ -19,11 +19,11 @@ public class MeleeEnemyController : EnemyController {
 
     #region event handlers
 
-    public override void OnHitOpponent(GameObject entityHit)
+    public override void OnHitOpponent(MovementController opponent)
     {
         if (Time.time - lastAttackTime > attackCooldownLength)
         {
-            base.OnHitOpponent(entityHit);
+            base.OnHitOpponent(opponent);
             lastAttackTime = Time.time;
         }
         // do anything specific to the melee enemy here

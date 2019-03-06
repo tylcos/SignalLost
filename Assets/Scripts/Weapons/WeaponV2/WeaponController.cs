@@ -34,7 +34,7 @@ public class WeaponController : MonoBehaviour
             if (wep == null)
                 swapList.Add(EquippedWeapon.empty);
             else
-                swapList.Add(new EquippedWeapon(wep, transform, bulletLayer));
+                swapList.Add(new EquippedWeapon(wep, transform, bulletLayer, GetComponentInParent<MovementController>()));
             // so we have a parallel array that holds the objects, their bullets, and ammo
             // so we call commands there when we need to fire or whatnot since that stores everything
         }

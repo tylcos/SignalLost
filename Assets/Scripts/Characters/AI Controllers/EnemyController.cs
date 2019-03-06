@@ -39,11 +39,17 @@ public class EnemyController : MovementController
     #region event handlers
 
     // Override this in child
-    public virtual void OnHitOpponent(GameObject entityHit)
+    public override void OnHitOpponent(MovementController opponent)
     {
-        entityHit.GetComponent<MovementController>().Damage(damage);
+        base.OnHitOpponent(opponent);
+        print("reached enemy child onhitopponent");
     }
 
+    public override void OnHitByOpponent(MovementController opponent, float damageReceived)
+    {
+        base.OnHitByOpponent(opponent, damageReceived);
+        print("reached enemy child onhitbyopponent");
+    }
     #endregion
 
 
@@ -74,7 +80,7 @@ public class EnemyController : MovementController
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            BulletManager bm = collision.gameObject.GetComponent<BulletManager>();
+            BulletController bm = collision.gameObject.GetComponent<BulletController>();
             Damage(bm.damage);
         }
     }

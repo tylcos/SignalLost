@@ -218,6 +218,17 @@ public class MovementController : MonoBehaviour
         return activeCoroutine == c && activeCoroutine != null;
     }
 
+    public virtual void OnHitOpponent(MovementController opponent)
+    {
+        print("reached parent onhitopponent");
+    }
+
+    public virtual void OnHitByOpponent(MovementController opponent, float damageReceived)
+    {
+        print("reached parent onhitbyopponent");
+        Damage(damageReceived);
+    }
+
 
     #region movement functions
 
