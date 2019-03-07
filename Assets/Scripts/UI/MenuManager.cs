@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     public Canvas canvas;
 
 
-
     private TextMeshProUGUI[] leaderboardItems;
 
 

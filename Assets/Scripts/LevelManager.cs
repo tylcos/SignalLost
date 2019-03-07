@@ -8,7 +8,7 @@ public static class LevelManager
     public static string startingLevelName = "Release";
 
 
-
+    
     public static int startingLevels = 6;
     public static int currentLevel = 0;
 
