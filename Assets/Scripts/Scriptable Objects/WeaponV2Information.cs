@@ -1,14 +1,28 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "My new weapon", menuName = "WeaponV2")]
 public class WeaponV2Information : ScriptableObject
 {
+    [Dropdown("test")]
+    public int combatMode;
+
+    private DropdownList<int> test = new DropdownList<int>()
+    {
+        { "Melee", 1 },
+        { "Gun"  , 2 }
+    };
+
     [Tooltip("The prefab for the projectile fired.")]
+    [ShowAssetPreview]
+    [Required]
     public GameObject bullet;
 
     [Tooltip("The prefab for the weapon.")]
+    [ShowAssetPreview]
+    [Required]
     public GameObject weapon;
 
     [Tooltip("The prefab for the final impact effect.")]

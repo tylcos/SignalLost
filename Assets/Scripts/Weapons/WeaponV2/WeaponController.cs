@@ -6,6 +6,8 @@ public class WeaponController : MonoBehaviour
 {
     // we need a dedicated enemyweaponcontroller
     protected const int INVSIZE = 4;
+    protected const int COMBATMODE_GUN = 0;
+    protected const int COMBATMODE_MELEE = 1;
 
     [SerializeField]
     public WeaponV2Information[] inventory = new WeaponV2Information[INVSIZE];
@@ -14,6 +16,7 @@ public class WeaponController : MonoBehaviour
     protected int swapListIndex = 0;
 
     public string bulletLayer;
+    public int combatMode;
 
     private void OnValidate()
     {

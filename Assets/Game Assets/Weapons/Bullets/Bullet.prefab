@@ -134,4 +134,4 @@ MonoBehaviour:
   lifeTime: 5
   damage: 20
   maxCollisions: 0
-  sourceEnemy: {fileID: 0}
+  source: {fileID: 0}
