@@ -2,24 +2,33 @@
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Assertions;
 
 
 
-public class RoomSpawner : MonoBehaviour
+public static class RoomSpawner
 {
-    public int roomsToSpawn = 5;
-    public int maxConnections = 4;
-    public bool debug;
+    public static int roomsToSpawn = 5;
+    public static int maxConnections = 4;
+    public static bool debug;
 
-    public GameObject[] roomPrefabs;
+    public static GameObject[] roomPrefabs;
     [Tooltip("Starting, zero, Shop, Boss")]
-    public GameObject[] specialRooms = new GameObject[4];
+    public static GameObject[] specialRooms = new GameObject[4];
+
+    public static GameObject gameObject = GameObject.Find("/Scene/Rooms");
+    public static Transform transform;
     
 
 
     // Eventually change to spawn a specific number of rooms ~~~
-    private void Start()
+    private static void Start()
     {
+        Assert.IsNotNull(gameObject, "No game object '/Scene/Rooms' found");
+        transform = gameObject.transform;
+
+
+
         Room.Initialize(maxConnections, transform);
 
         foreach (GameObject room in roomPrefabs)
@@ -56,18 +65,11 @@ public class RoomSpawner : MonoBehaviour
         Debug.Log("Finished spawning " + (roomsToSpawn + 1) + " rooms in " + ss.Elapsed.Milliseconds + " ms total with " + c.Elapsed.Milliseconds + " ms of computing");
     }
 
-    private void Update()
+
+
+    public static void SpawnRooms()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-        }
-    }
-
-
-
-    public void SpawnRooms()
-    {
-        Room startRoom = new Room(Instantiate(specialRooms[0], transform));
+        Room startRoom = new Room(GameObject.Instantiate(specialRooms[0], transform));
         int remainingRooms = roomsToSpawn;
 
         List<Room> unconsumedRooms = new List<Room>(8);
@@ -220,15 +222,6 @@ public class Room
             offset.y += (connection.Direction & 1) > 0 ? bounds.extents.y : -bounds.extents.y;
         }
 
-        if (roomSpawner.GetComponent<RoomSpawner>().debug)
-        {
-            Debug.Log("-----[Connection Offset]-----");
-            Debug.Log(rotation);
-            Debug.Log(bounds.center.x + "   " + bounds.center.y + "   " + bounds.extents.x + "   " + bounds.extents.y);
-            Debug.Log(bounds.min.x + "   " + bounds.min.y + "   " + bounds.max.x + "   " + bounds.max.y);
-            Debug.Log(offset.x + "   " + offset.y);
-        }
-        
         return offset;
     }
 

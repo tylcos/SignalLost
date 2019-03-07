@@ -3046,8 +3046,13 @@ MonoBehaviour:
   - {fileID: 1415942842}
   - {fileID: 862223748}
   leaderboardItem: {fileID: 1432097228}
-  SceneLoadName: Release
   canvas: {fileID: 1942177429}
+  a:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &2013532017
 Transform:
   m_ObjectHideFlags: 0
