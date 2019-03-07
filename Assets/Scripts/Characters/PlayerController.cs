@@ -64,25 +64,28 @@ public class PlayerController : MovementController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "EnemyWeapon")
+        /*if(collision.tag == "EnemyWeapon")
         {
             collision.GetComponentInParent<EnemyController>().OnHitOpponent(this);
         } else if(collision.tag == "Projectile")
         {
             //collision.GetComponentInParent<BulletController>().source.OnHitOpponent(this);
-        }
+        }*/
     }
 
-    public override void OnHitOpponent(MovementController opponent)
+    public override void OnHitOpponent(MovementController opponent, bool killedOpponent)
     {
-        base.OnHitOpponent(opponent);
+        base.OnHitOpponent(opponent, killedOpponent);
         print("player hit something");
+        if (killedOpponent)
+            LeaderboardManager.currentScore += 500;
     }
 
-    public override void OnHitByOpponent(MovementController opponent, float damageReceived)
+    public override bool OnHitByOpponent(MovementController opponent, float damageReceived)
     {
-        base.OnHitByOpponent(opponent, damageReceived);
+        bool targetKilled = base.OnHitByOpponent(opponent, damageReceived);
         print("player hit by something");
+        return targetKilled;
     }
 
 

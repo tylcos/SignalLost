@@ -39,16 +39,17 @@ public class EnemyController : MovementController
     #region event handlers
 
     // Override this in child
-    public override void OnHitOpponent(MovementController opponent)
+    public override void OnHitOpponent(MovementController opponent, bool killedOpponent)
     {
-        base.OnHitOpponent(opponent);
+        base.OnHitOpponent(opponent, killedOpponent);
         print("reached enemy child onhitopponent");
     }
 
-    public override void OnHitByOpponent(MovementController opponent, float damageReceived)
+    public override bool OnHitByOpponent(MovementController opponent, float damageReceived)
     {
-        base.OnHitByOpponent(opponent, damageReceived);
+        bool targetKilled = base.OnHitByOpponent(opponent, damageReceived);
         print("reached enemy child onhitbyopponent");
+        return targetKilled;
     }
     #endregion
 

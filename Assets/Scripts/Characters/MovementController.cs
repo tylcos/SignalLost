@@ -95,7 +95,6 @@ public class MovementController : MonoBehaviour
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
-        LeaderboardManager.currentScore += 500;
         Destroy(gameObject);
     }
 
@@ -218,15 +217,15 @@ public class MovementController : MonoBehaviour
         return activeCoroutine == c && activeCoroutine != null;
     }
 
-    public virtual void OnHitOpponent(MovementController opponent)
+    public virtual void OnHitOpponent(MovementController opponent, bool killedOpponent)
     {
         print("reached parent onhitopponent");
     }
 
-    public virtual void OnHitByOpponent(MovementController opponent, float damageReceived)
+    public virtual bool OnHitByOpponent(MovementController opponent, float damageReceived)
     {
         print("reached parent onhitbyopponent");
-        Damage(damageReceived);
+        return Damage(damageReceived);
     }
 
 
