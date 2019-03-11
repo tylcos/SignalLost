@@ -15,68 +15,108 @@ public class WeaponV2Information : ScriptableObject
         { "Gun"  , WeaponController.COMBATMODE_GUN }
     };
 
-    [Tooltip("The prefab for the projectile fired.")]
-    [ShowAssetPreview]
-    [Required]
-    public GameObject bullet;
+    [Space(15)]
 
+    [BoxGroup("Sprites")]
     [Tooltip("The prefab for the weapon.")]
     [ShowAssetPreview]
     [Required]
     public GameObject weapon;
 
+    private bool GunMode()
+    {
+        return combatMode == WeaponController.COMBATMODE_GUN;
+    }
+
+    private bool MeleeMode()
+    {
+        return combatMode == WeaponController.COMBATMODE_MELEE;
+    }
+
+    [ShowIf("GunMode")]
+    [BoxGroup("Sprites")]
+    [Tooltip("The prefab for the projectile fired.")]
+    [ShowAssetPreview]
+    [Required]
+    public GameObject bullet;
+
+    [ShowIf("GunMode")]
+    [BoxGroup("Sprites")]
     [Tooltip("The prefab for the final impact effect.")]
     public GameObject impactVFX;
 
+    [ShowIf("GunMode")]
+    [BoxGroup("Sprites")]
     [Tooltip("The prefab for the muzzle effect.")]
     public GameObject muzzleVFX;
 
+    [ShowIf("GunMode")]
+    [BoxGroup("Sprites")]
     [Tooltip("The prefab for the penetration effect.")]
     public GameObject penetrationVFX;
 
+    [ShowIf("GunMode")]
+    [BoxGroup("Sprites")]
     [Tooltip("The prefab for the ricochet effect.")]
     public GameObject ricochetVFX;
 
+    [Space(10)]
+
+    [ShowIf("GunMode")]
     [Tooltip("The minimum time between shots.")]
     public float cycleTime;
 
+    [ShowIf("GunMode")]
     [Tooltip("How fast the bullets travel.")]
     public float muzzleVelocity;
 
+    [ShowIf("GunMode")]
     [Tooltip("How long bullets stay in the scene.")]
     public float lifetime;
 
+    [ShowIf("GunMode")]
     [Tooltip("How much damage one bullet will deal.")]
     public float damage;
 
+    [ShowIf("GunMode")]
     [Tooltip("Max ammo per clip.")]
     public int clipSize;
 
+    [ShowIf("GunMode")]
     [Tooltip("How long it takes to reload.")]
     public float reloadTime;
 
+    [ShowIf("GunMode")]
     [Tooltip("Max number of impacts (penetrations + ricochets) allowed.")]
     public int impacts;
+
     // ricochets are calculated first, if failed a penetration is attempted
+    [ShowIf("GunMode")]
     [Tooltip("Whether the bullet can ricochet.")]
     public bool canRicochet;
 
+    [ShowIf("GunMode")]
     [Tooltip("The largest angle a bullet can ricochet at.")]
     [Range(0, 90)]
     public float ricochetAngle;
 
+    [ShowIf("GunMode")]
     [Tooltip("Whether the bullet can penetrate soft targets.")]
     public bool canPenetrate;
 
+    [ShowIf("GunMode")]
     [Tooltip("The maximum strength material the bullet can penetrate.\nNO IMPLEMENTATION")]
     public int penetrationStrength;
 
+    [ShowIf("GunMode")]
     [Tooltip("Radius around impacts to deal damage.")]
     public float impactRadius;
 
+    [ShowIf("GunMode")]
     [Tooltip("Whether or not to use damage falloff in the impact radius.")]
     public bool falloff;
 
+    [ShowIf("GunMode")]
     [Tooltip("The angle of the spread cone divided by 2.")]
     [Range(0, 90)]
     public float halfSpreadAngle;
