@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponAnimation : EnemyAnimation {
+public class WeaponAnimation {
 
     // Use this for initialization
     void Start () {
