@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bulletLayer: Enemy Fired
+  combatMode: 0
 --- !u!1 &1266971872158808
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,8 +141,8 @@ GameObject:
   - component: {fileID: 212203585661193816}
   - component: {fileID: 61978907668579480}
   - component: {fileID: 50166492276897542}
-  - component: {fileID: 114664005140517220}
   - component: {fileID: 114640785694825438}
+  - component: {fileID: 114664005140517220}
   - component: {fileID: 114994901661913452}
   m_Layer: 13
   m_Name: shooty shooty man
@@ -263,21 +264,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &114664005140517220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411719202972802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fd858a654a7b54aa040c8de750c047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background: {fileID: 1551720550349624}
-  foreground: {fileID: 1266971872158808}
-  boundCharacter: {fileID: 114640785694825438}
 --- !u!114 &114640785694825438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +280,10 @@ MonoBehaviour:
   cc2d: {fileID: 114994901661913452}
   _MaxHitPoints: 80
   invincibilityDuration: 0.05
+  movingForAnimation: 0
+  spriteRenderer: {fileID: 0}
+  animationDirection: 1
+  spriteAnimator: {fileID: 0}
   weaponHolder: {fileID: 0}
   weapon: {fileID: 0}
   attackIndicator: {fileID: 1721720636901802}
@@ -313,6 +303,21 @@ MonoBehaviour:
   postAttackPauseDuration: 0.5
   WC: {fileID: 524693820}
   shooting: 0
+--- !u!114 &114664005140517220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411719202972802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4fd858a654a7b54aa040c8de750c047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 1551720550349624}
+  foreground: {fileID: 1266971872158808}
+  boundCharacter: {fileID: 114640785694825438}
 --- !u!114 &114994901661913452
 MonoBehaviour:
   m_ObjectHideFlags: 0

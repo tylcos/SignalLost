@@ -178,10 +178,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Dude
       objectReference: {fileID: 0}
-    - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.42
@@ -376,6 +372,10 @@ PrefabInstance:
     - target: {fileID: 1594456382, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
       propertyPath: m_Name
       value: Room SciFi 2L 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594456382, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2073237864, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -628,6 +628,36 @@ PrefabInstance:
     - target: {fileID: 1770153115, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.data[11].y
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918491526, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 372012030, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 816014422, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 916317834, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192977966, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233045196815502525, guid: 14f2af20c6dcc614f83fd409af731da6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952319148061878061, guid: 14f2af20c6dcc614f83fd409af731da6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14f2af20c6dcc614f83fd409af731da6, type: 3}
@@ -1105,24 +1135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4cd49f9151d14f8b30b34513858f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  roomsToSpawn: 5
-  maxConnections: 4
-  debug: 0
-  roomPrefabs:
-  - {fileID: 1594456382, guid: ff72be23bb9afd24f8557310c8110fa6, type: 3}
-  - {fileID: 8298907241756308718, guid: 6b78e57308532a940ac7e0b011f3b650, type: 3}
-  specialRooms:
-  - {fileID: 2118539679, guid: 848c55d8d84151f44a8f37050485abe5, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1001 &2644264972376821661
 PrefabInstance:
   m_ObjectHideFlags: 0

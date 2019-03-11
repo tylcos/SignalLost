@@ -6,8 +6,8 @@ public class WeaponController : MonoBehaviour
 {
     // we need a dedicated enemyweaponcontroller
     protected const int INVSIZE = 4;
-    protected const int COMBATMODE_GUN = 0;
-    protected const int COMBATMODE_MELEE = 1;
+    public const int COMBATMODE_GUN = 0;
+    public const int COMBATMODE_MELEE = 1;
 
     [SerializeField]
     public WeaponV2Information[] inventory = new WeaponV2Information[INVSIZE];

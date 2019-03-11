@@ -50,7 +50,7 @@ public class RangedEnemyController : EnemyController {
         {
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[raycastDepth];
-            Physics2D.RaycastNonAlloc(weaponHolder.transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
+            Physics2D.RaycastNonAlloc(WC.transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
             string hitTag = null;
             bool hitIsTarget = false;
             foreach (RaycastHit2D hit in hits)

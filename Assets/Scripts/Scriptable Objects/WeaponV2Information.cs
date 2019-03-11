@@ -6,13 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "My new weapon", menuName = "WeaponV2")]
 public class WeaponV2Information : ScriptableObject
 {
-    [Dropdown("test")]
+    [Dropdown("Mode")]
     public int combatMode;
 
-    private DropdownList<int> test = new DropdownList<int>()
+    private DropdownList<int> Mode = new DropdownList<int>()
     {
-        { "Melee", 1 },
-        { "Gun"  , 2 }
+        { "Melee", WeaponController.COMBATMODE_MELEE },
+        { "Gun"  , WeaponController.COMBATMODE_GUN }
     };
 
     [Tooltip("The prefab for the projectile fired.")]
