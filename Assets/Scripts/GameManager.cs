@@ -6,10 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector]
-    public static InputMethodType InputMethod = InputMethodType.Keyboard;
-    [HideInInspector]
-    public static int Difficulty;
-
+    public static InputMethod inputMethod = InputMethod.Keyboard;
+    
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -19,10 +17,10 @@ public class GameManager : MonoBehaviour
         switch(inputArg)
         {
             case "keyboard":
-                InputMethod = InputMethodType.Keyboard;
+                inputMethod = InputMethod.Keyboard;
                 break;
             case "arcade":
-                InputMethod = InputMethodType.Arcade;
+                inputMethod = InputMethod.Arcade;
                 break;
         }
     }
@@ -52,9 +50,9 @@ public class GameManager : MonoBehaviour
 
     public static Vector2 GetMovementVector()
     {
-        if (InputMethod == InputMethodType.Keyboard)
+        if (inputMethod == InputMethod.Keyboard)
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        else if (InputMethod == InputMethodType.Arcade)
+        else if (inputMethod == InputMethod.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
 
         return Vector2.zero;
@@ -62,9 +60,9 @@ public class GameManager : MonoBehaviour
 
     public static Vector2 GetAimingVector()
     {
-        if (InputMethod == InputMethodType.Keyboard)
+        if (inputMethod == InputMethod.Keyboard)
             return new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        else if (InputMethod == InputMethodType.Arcade)
+        else if (inputMethod == InputMethod.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
 
         return Vector2.zero;
@@ -72,14 +70,14 @@ public class GameManager : MonoBehaviour
 
     public bool ReloadPressed()
     {
-        return (InputMethod == InputMethodType.Keyboard) ? Input.GetKeyDown(KeyCode.R) : false;
+        return (inputMethod == InputMethod.Keyboard) ? Input.GetKeyDown(KeyCode.R) : false;
     }
 
     public bool SwapPressed()
     {
-        if (InputMethod == InputMethodType.Keyboard)
+        if (inputMethod == InputMethod.Keyboard)
             return Input.GetKeyDown(KeyCode.Tab);
-        else if (InputMethod == InputMethodType.Arcade)
+        else if (inputMethod == InputMethod.Arcade)
             return Input.GetKeyDown(KeyCode.Minus);
 
         return false;
@@ -97,7 +95,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public enum InputMethodType
+    public enum InputMethod
     {
         Keyboard, Arcade
     }

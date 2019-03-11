@@ -56,14 +56,14 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.InputMethod == GameManager.InputMethod.Keyboard)
+        if (GameManager.inputMethod == GameManager.InputMethod.Keyboard)
         {
             weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
             if (Input.GetKeyDown(KeyCode.Tab))
                 ++weaponPos;
         }
-        else if (GameManager.InputMethod == GameManager.InputMethod.Arcade)
+        else if (GameManager.inputMethod == GameManager.InputMethod.Arcade)
         {
             if (Input.GetKeyDown(KeyCode.Minus))
                 ++weaponPos;
@@ -76,7 +76,7 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon(flooredWeaponPos);
 
 
-        if(GameManager.InputMethod == GameManager.InputMethod.Keyboard)
+        if(GameManager.inputMethod == GameManager.InputMethod.Keyboard)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
