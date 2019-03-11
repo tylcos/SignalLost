@@ -8,7 +8,7 @@ public class EnemyController : MovementController
     #region events and fields
 
     public const int raycastDepth = 2; // change this to increase the penetration depth of raycasts. Lower numbers wont penetrate walls
-    
+
     public GameObject weaponHolder;
     public GameObject weapon;
     public GameObject attackIndicator;
@@ -32,7 +32,7 @@ public class EnemyController : MovementController
     protected bool attacking = false;
 
     public bool isAggro { get; private set; } = false;
-    
+
     #endregion
 
 
@@ -57,16 +57,17 @@ public class EnemyController : MovementController
     #region monobehavior
 
     protected virtual void Start()
-    {   
+    {
         lastAttackTime = -attackCooldownLength;
     }
-    
+
     protected override void Update()
     {
         base.Update();
-        if(target != null)
+        if (target != null)
         {
-            if(!IsGameObjectInRadius(transform.position, target, aggroRange, targetLayerMask)) {
+            if (!IsGameObjectInRadius(transform.position, target, aggroRange, targetLayerMask))
+            {
                 target = null;
             }
         }
@@ -90,7 +91,7 @@ public class EnemyController : MovementController
 
 
     #region public
-    
+
     /// <summary>
     ///     Looks for the target within a circle defined by center and radius
     /// </summary>

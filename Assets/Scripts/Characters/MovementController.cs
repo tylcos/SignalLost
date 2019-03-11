@@ -85,8 +85,8 @@ public class MovementController : MonoBehaviour
 
     protected virtual void LateUpdate()
     {
-       // Debug.Log(movingForAnimation);
-      //  movingForAnimation = false;
+        // Debug.Log(movingForAnimation);
+        //  movingForAnimation = false;
     }
 
     #endregion
@@ -119,7 +119,7 @@ public class MovementController : MonoBehaviour
     ///     <param name="damage">The quantity of damage to deal</param>
     public bool Damage(float damage)
     {
-        if(IsInvincible()) { return false; }
+        if (IsInvincible()) { return false; }
         lastDamageTime = Time.time;
         DamageTaken(damage);
         if (MaxHitPoints - CurrentHitPoints <= 0)
@@ -239,14 +239,15 @@ public class MovementController : MonoBehaviour
     /// </returns>
     protected bool CancelMovement()
     {
-        if(moving)
+        if (moving)
         {
             StopCoroutine(activeCoroutine);
             moving = false;
             movingForAnimation = false;
             activeCoroutine = null;
             return true;
-        } else
+        }
+        else
         {
             return false;
         }

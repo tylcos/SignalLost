@@ -43,20 +43,23 @@ public class PlayerWeaponController : WeaponController
             swapListIndex++;
             if (swapListIndex == 4) swapListIndex = 0;
             swapList[swapListIndex].SetEnabled(true);
-        } else if (master.ReloadPressed() && swapList[swapListIndex].CanReload())
+        }
+        else if (master.ReloadPressed() && swapList[swapListIndex].CanReload())
         {
             swapList[swapListIndex].Reload();
             // on R press, reload. If arcade, on P2 press, reload, one P2 hold, open weapon wheel
-        } else /*if (swapList[swapListIndex].CanFire())*/
+        }
+        else /*if (swapList[swapListIndex].CanFire())*/
         {
             Vector2 shootDir = GameManager.GetAimingVector();
 
             if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0))
             {
-                if(swapList[swapListIndex].CanFire())
+                if (swapList[swapListIndex].CanFire())
                 {
                     swapList[swapListIndex].Fire(shootDir);
-                } else if(swapList[swapListIndex].reloading)
+                }
+                else if (swapList[swapListIndex].reloading)
                 {
                     FireError();
                 }
@@ -64,7 +67,7 @@ public class PlayerWeaponController : WeaponController
         }
 
         // update reload bar if applicable
-        if(swapList[swapListIndex].reloading)
+        if (swapList[swapListIndex].reloading)
         {
             ReloadUpdate(swapList[swapListIndex].reloading, swapList[swapListIndex].reloadProgress);
             // when reloading, put an indicator over players head that shows bullets and flashes red when you try to shoot

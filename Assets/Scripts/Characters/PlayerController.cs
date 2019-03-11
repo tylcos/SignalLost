@@ -40,7 +40,7 @@ public class PlayerController : MovementController
     {
         reloadFailIndicator.SetActive(true);
         float time = Time.time;
-        while(Time.time - time < indicatorOnLength)
+        while (Time.time - time < indicatorOnLength)
         {
             yield return new WaitForEndOfFrame();
         }

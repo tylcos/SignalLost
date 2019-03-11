@@ -15,9 +15,7 @@ public class WeaponV2Information : ScriptableObject
         { "Gun"  , WeaponController.COMBATMODE_GUN }
     };
 
-    [Space(15)]
-
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the weapon.")]
     [ShowAssetPreview]
     [Required]
@@ -33,34 +31,33 @@ public class WeaponV2Information : ScriptableObject
         return combatMode == WeaponController.COMBATMODE_MELEE;
     }
 
+    #region guns
     [ShowIf("GunMode")]
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the projectile fired.")]
     [ShowAssetPreview]
     [Required]
     public GameObject bullet;
 
     [ShowIf("GunMode")]
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the final impact effect.")]
     public GameObject impactVFX;
 
     [ShowIf("GunMode")]
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the muzzle effect.")]
     public GameObject muzzleVFX;
 
     [ShowIf("GunMode")]
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the penetration effect.")]
     public GameObject penetrationVFX;
 
     [ShowIf("GunMode")]
-    [BoxGroup("Sprites")]
+    [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the ricochet effect.")]
     public GameObject ricochetVFX;
-
-    [Space(10)]
 
     [ShowIf("GunMode")]
     [Tooltip("The minimum time between shots.")]
@@ -76,7 +73,7 @@ public class WeaponV2Information : ScriptableObject
 
     [ShowIf("GunMode")]
     [Tooltip("How much damage one bullet will deal.")]
-    public float damage;
+    public float bulletDamage;
 
     [ShowIf("GunMode")]
     [Tooltip("Max ammo per clip.")]
@@ -109,6 +106,11 @@ public class WeaponV2Information : ScriptableObject
     public int penetrationStrength;
 
     [ShowIf("GunMode")]
+    [Tooltip("The angle of the spread cone divided by 2.")]
+    [Range(0, 90)]
+    public float halfSpreadAngle;
+
+    [ShowIf("GunMode")]
     [Tooltip("Radius around impacts to deal damage.")]
     public float impactRadius;
 
@@ -116,10 +118,20 @@ public class WeaponV2Information : ScriptableObject
     [Tooltip("Whether or not to use damage falloff in the impact radius.")]
     public bool falloff;
 
-    [ShowIf("GunMode")]
-    [Tooltip("The angle of the spread cone divided by 2.")]
-    [Range(0, 90)]
-    public float halfSpreadAngle;
+    #endregion
+
+    #region melee
+
+    [ShowIf("MeleeMode")]
+    [Tooltip("How much damage one hit will deal.")]
+    public float meleeDamage;
+
+    [ShowIf("MeleeMode")]
+    [BoxGroup("Prefabs")]
+    [Tooltip("The prefab for the swing effect.")]
+    public GameObject swingVFX;
+
+    #endregion
 
     // below this put rarity variations
 }

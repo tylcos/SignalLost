@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: EnemyAutoRiflel1
+  m_Name: RedDudeStick1
   m_EditorClassIdentifier: 
   combatMode: 0
-  weapon: {fileID: 7726071373437928022, guid: 03d1a7804e3465a478793d3207d1876e, type: 3}
-  bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 3}
+  weapon: {fileID: 0}
+  bullet: {fileID: 0}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
   ricochetVFX: {fileID: 0}
-  cycleTime: 3
-  muzzleVelocity: 20
-  lifetime: 5
+  cycleTime: 0
+  muzzleVelocity: 0
+  lifetime: 0
   bulletDamage: 0
-  clipSize: 999
-  reloadTime: 1
+  clipSize: 0
+  reloadTime: 0
   impacts: 0
   canRicochet: 0
   ricochetAngle: 0

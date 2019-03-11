@@ -48,7 +48,7 @@ public class EquippedWeapon : Object
         speed = info.muzzleVelocity;
         lifetime = info.lifetime;
         this.layer = LayerMask.NameToLayer(layer);
-        baseDamage = info.damage;
+        baseDamage = info.bulletDamage;
         maxAmmo = info.clipSize;
         currentAmmo = maxAmmo;
         reloadTime = info.reloadTime;

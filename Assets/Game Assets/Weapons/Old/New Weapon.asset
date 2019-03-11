@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -14,16 +15,17 @@ MonoBehaviour:
   name: Machine Blat
   description: blat blat sooka
   weaponSprite: {fileID: 21300000, guid: bf6b6fda6febf494999d3260c8394aa5, type: 3}
-  bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 2}
+  bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 3}
   damage: 0
   bulletSpeed: 0
   cycleTime: 0
   clipSize: 0
   reloadTime: 0
-  firingType: 
-  numberOfProjectiles: 0
+  numberOfBursts: 0
+  burstCycleTime: 0
+  numberOfProjectilesPerBurst: 0
   inaccuracy: 0
   bulletLifeTime: 0
-  penetrates: 0
   penetrationDepth: 0
+  richochetAngle: 0
   bulletSpawnOffset: {x: 0, y: 0, z: 0}

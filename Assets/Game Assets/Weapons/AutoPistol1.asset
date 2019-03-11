@@ -12,11 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
   m_Name: AutoPistol1
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 3}
+  combatMode: 0
   weapon: {fileID: 8520570019915805274, guid: 6e2620b9c2054b347b1bbb5908901bfd, type: 3}
+  bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 3}
+  impactVFX: {fileID: 0}
+  muzzleVFX: {fileID: 0}
+  penetrationVFX: {fileID: 0}
+  ricochetVFX: {fileID: 0}
   cycleTime: 0.8
   muzzleVelocity: 20
   lifetime: 5
-  damage: 20
+  bulletDamage: 0
   clipSize: 8
   reloadTime: 1.6
+  impacts: 0
+  canRicochet: 0
+  ricochetAngle: 0
+  canPenetrate: 0
+  penetrationStrength: 0
+  halfSpreadAngle: 0
+  impactRadius: 0
+  falloff: 0
+  meleeDamage: 0
+  swingVFX: {fileID: 0}

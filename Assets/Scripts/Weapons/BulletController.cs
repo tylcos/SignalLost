@@ -15,12 +15,12 @@ public class BulletController : MonoBehaviour
     {
         startTime = Time.time;
     }
-	
-	void LateUpdate()
+
+    void LateUpdate()
     {
-		if (Time.time - startTime >= lifeTime)
+        if (Time.time - startTime >= lifeTime)
             Destroy(gameObject);
-	}
+    }
 
     void OnTriggerEnter2D(Collider2D collEvent)
     {
@@ -31,7 +31,7 @@ public class BulletController : MonoBehaviour
             source.OnHitOpponent(collEvent.gameObject.GetComponent<MovementController>(), killedCharacterHit);
         }
         currentPenetration++;
-        if(currentPenetration >= maxCollisions)
+        if (currentPenetration >= maxCollisions)
             Destroy(gameObject);
 
         // damaging should be in an onhittaken method
