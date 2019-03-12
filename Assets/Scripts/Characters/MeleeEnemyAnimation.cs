@@ -25,7 +25,6 @@ public class MeleeEnemyAnimation : MonoBehaviour
 
     private void LateUpdate()
     {
-        Debug.Log(movementAccessor.animationDirection);
         if (movementAccessor.movingForAnimation)
         {
             meleeAnimator.SetBool("Idle", false);
