@@ -18,7 +18,6 @@ public class WeaponV2Information : ScriptableObject
     [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the weapon.")]
     [ShowAssetPreview]
-    [Required]
     public GameObject weapon;
 
     private bool GunMode()
@@ -36,7 +35,6 @@ public class WeaponV2Information : ScriptableObject
     [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the projectile fired.")]
     [ShowAssetPreview]
-    [Required]
     public GameObject bullet;
 
     [ShowIf("GunMode")]
