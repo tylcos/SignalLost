@@ -10,13 +10,20 @@ namespace NaughtyAttributes.Editor
     {
         private Dictionary<string, ReorderableList> reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
+        string GetPropertyKeyName(SerializedProperty property)
+        {
+            return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
+        }
+
         public override void DrawProperty(SerializedProperty property)
         {
             EditorDrawUtility.DrawHeader(property);
 
             if (property.isArray)
             {
-                if (!this.reorderableListsByPropertyName.ContainsKey(property.name))
+                var key = GetPropertyKeyName(property);
+
+                if (!this.reorderableListsByPropertyName.ContainsKey(key))
                 {
                     ReorderableList reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
                     {
@@ -28,16 +35,23 @@ namespace NaughtyAttributes.Editor
                         drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                         {
                             var element = property.GetArrayElementAtIndex(index);
-                            rect.y += 2f;
+                            rect.y += 1.0f;
+                            rect.x += 10.0f;
+                            rect.width -= 10.0f;
 
-                            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element);
+                            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, 0.0f), element, true);
+                        },
+
+                        elementHeightCallback = (int index) =>
+                        {
+                            return EditorGUI.GetPropertyHeight(property.GetArrayElementAtIndex(index)) + 4.0f;
                         }
                     };
 
-                    this.reorderableListsByPropertyName[property.name] = reorderableList;
+                    this.reorderableListsByPropertyName[key] = reorderableList;
                 }
 
-                this.reorderableListsByPropertyName[property.name].DoLayoutList();
+                this.reorderableListsByPropertyName[key].DoLayoutList();
             }
             else
             {
