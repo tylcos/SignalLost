@@ -51,7 +51,7 @@ public class PlayerWeaponController : WeaponController
         }
         else /*if (swapList[swapListIndex].CanFire())*/
         {
-            Vector2 shootDir = GameManager.GetAimingVector();
+            Vector2 shootDir = DungeonGameManager.GetAimingVector();
 
             if ((Input.GetAxis("Fire1") > 0 || shootDir.sqrMagnitude != 0))
             {

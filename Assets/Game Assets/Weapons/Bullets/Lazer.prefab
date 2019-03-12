@@ -132,6 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5
-  damage: 20
+  damage: 0
   maxCollisions: 0
   source: {fileID: 0}

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerController : MovementController
 {
-    private GameManager master;
+    private DungeonGameManager master;
     private PlayerWeaponController PWC;
     [SerializeField]
     private GameObject reloadFailIndicator = null;
@@ -19,7 +19,7 @@ public class PlayerController : MovementController
     protected override void OnEnable()
     {
         base.OnEnable();
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<GameManager>();
+        master = GameObject.FindGameObjectWithTag("Master").GetComponent<DungeonGameManager>();
         PWC = gameObject.GetComponentInChildren<PlayerWeaponController>();
         PWC.FireError += OnFireError;
     }
@@ -55,7 +55,7 @@ public class PlayerController : MovementController
 
     private void Movement()
     {
-        Vector2 move = GameManager.GetMovementVector();
+        Vector2 move = DungeonGameManager.GetMovementVector();
         if (move.sqrMagnitude == 0)
             return;
 

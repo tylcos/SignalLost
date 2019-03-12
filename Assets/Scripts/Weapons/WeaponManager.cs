@@ -31,7 +31,7 @@ public class WeaponManager : MonoBehaviour
 
     public delegate void WeaponUpdateHandler();
     public event WeaponUpdateHandler WeaponDataChanged;
-    private GameManager master;
+    private DungeonGameManager master;
 
     public int CurrentAmmo
     {
@@ -56,14 +56,14 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.inputMethod == GameManager.InputMethod.Keyboard)
+        if (DungeonGameManager.inputMethod == DungeonGameManager.InputMethod.Keyboard)
         {
             weaponPos += Mathf.Abs(Input.GetAxis("ScrollWheel"));
 
             if (Input.GetKeyDown(KeyCode.Tab))
                 ++weaponPos;
         }
-        else if (GameManager.inputMethod == GameManager.InputMethod.Arcade)
+        else if (DungeonGameManager.inputMethod == DungeonGameManager.InputMethod.Arcade)
         {
             if (Input.GetKeyDown(KeyCode.Minus))
                 ++weaponPos;
@@ -76,7 +76,7 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon(flooredWeaponPos);
 
 
-        if(GameManager.inputMethod == GameManager.InputMethod.Keyboard)
+        if(DungeonGameManager.inputMethod == DungeonGameManager.InputMethod.Keyboard)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {

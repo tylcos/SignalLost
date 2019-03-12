@@ -17,7 +17,7 @@ public class FollowMouse : MonoBehaviour
 
     void FixedUpdate()
 	{
-        Vector2 shootDir = GameManager.GetAimingVector();
+        Vector2 shootDir = DungeonGameManager.GetAimingVector();
 
         float angleDifference = 0;
         if (shootDir.sqrMagnitude == 0)

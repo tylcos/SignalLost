@@ -45,7 +45,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        int menuMove = -(int)(GameManager.GetMovementVector().y + GameManager.GetAimingVector().y);
+        int menuMove = -(int)(DungeonGameManager.GetMovementVector().y + DungeonGameManager.GetAimingVector().y);
         keyFirstPressed = menuMove != 0 && keyReleased;
         keyReleased = menuMove == 0;
 
@@ -83,7 +83,7 @@ public class MenuManager : MonoBehaviour
 
             // Exit Game
             case 2:
-                GameManager.QuitApplication();
+                DungeonGameManager.QuitApplication();
                 break;
         }
     }

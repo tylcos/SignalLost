@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 
-public class GameManager : MonoBehaviour
+public class DungeonGameManager : MonoBehaviour
 {
     [HideInInspector]
     public static InputMethod inputMethod = InputMethod.Keyboard;
