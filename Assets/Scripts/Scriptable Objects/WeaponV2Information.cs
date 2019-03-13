@@ -1,7 +1,7 @@
 ﻿using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+
 
 [CreateAssetMenu(fileName = "My new weapon", menuName = "WeaponV2")]
 public class WeaponV2Information : ScriptableObject

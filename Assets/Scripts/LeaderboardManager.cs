@@ -33,7 +33,18 @@ public static class LeaderboardManager
         }
         catch (Exception)
         {
-            Debug.Log("Error opening leaderboard file at " + savePath);
+            Debug.LogError("Error opening leaderboard file at " + savePath);
+
+
+
+            string backupPath = savePath + ".bak";
+            if (File.Exists(backupPath))
+                File.Delete(backupPath);
+
+            File.Move(savePath, backupPath);
+            File.Delete(savePath);
+
+
 
             leaderboardEntries = new List<LeaderboardEntry>();
         }
