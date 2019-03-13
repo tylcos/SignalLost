@@ -6,7 +6,7 @@ using UnityEngine;
 public class DungeonGameManager : MonoBehaviour
 {
     [HideInInspector]
-    public static InputMethod inputMethod = InputMethod.Keyboard;
+    public static InputMethodType InputMethod = InputMethodType.Keyboard;
     
 
 
@@ -17,10 +17,10 @@ public class DungeonGameManager : MonoBehaviour
         switch(inputArg)
         {
             case "keyboard":
-                inputMethod = InputMethod.Keyboard;
+                InputMethod = InputMethodType.Keyboard;
                 break;
             case "arcade":
-                inputMethod = InputMethod.Arcade;
+                InputMethod = InputMethodType.Arcade;
                 break;
         }
     }
@@ -50,9 +50,9 @@ public class DungeonGameManager : MonoBehaviour
 
     public static Vector2 GetMovementVector()
     {
-        if (inputMethod == InputMethod.Keyboard)
+        if (InputMethod == InputMethodType.Keyboard)
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        else if (inputMethod == InputMethod.Arcade)
+        else if (InputMethod == InputMethodType.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
 
         return Vector2.zero;
@@ -60,24 +60,24 @@ public class DungeonGameManager : MonoBehaviour
 
     public static Vector2 GetAimingVector()
     {
-        if (inputMethod == InputMethod.Keyboard)
+        if (InputMethod == InputMethodType.Keyboard)
             return new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        else if (inputMethod == InputMethod.Arcade)
+        else if (InputMethod == InputMethodType.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
 
         return Vector2.zero;
     }
 
-    public bool ReloadPressed()
+    public static bool ReloadPressed()
     {
-        return (inputMethod == InputMethod.Keyboard) ? Input.GetKeyDown(KeyCode.R) : false;
+        return (InputMethod == InputMethodType.Keyboard) ? Input.GetKeyDown(KeyCode.R) : false;
     }
 
-    public bool SwapPressed()
+    public static bool SwapPressed()
     {
-        if (inputMethod == InputMethod.Keyboard)
+        if (InputMethod == InputMethodType.Keyboard)
             return Input.GetKeyDown(KeyCode.Tab);
-        else if (inputMethod == InputMethod.Arcade)
+        else if (InputMethod == InputMethodType.Arcade)
             return Input.GetKeyDown(KeyCode.Minus);
 
         return false;
@@ -95,7 +95,7 @@ public class DungeonGameManager : MonoBehaviour
 
 
 
-    public enum InputMethod
+    public enum InputMethodType
     {
         Keyboard, Arcade
     }

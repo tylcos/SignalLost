@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+
 
 public class PlayerWeaponController : WeaponController
 {
@@ -37,14 +37,14 @@ public class PlayerWeaponController : WeaponController
             swapListIndex = 3;
             swapList[swapListIndex].SetEnabled(true);
         }
-        else if (master.SwapPressed())
+        else if (DungeonGameManager.SwapPressed())
         {
             swapList[swapListIndex].SetEnabled(false);
             swapListIndex++;
             if (swapListIndex == 4) swapListIndex = 0;
             swapList[swapListIndex].SetEnabled(true);
         }
-        else if (master.ReloadPressed() && swapList[swapListIndex].CanReload())
+        else if (DungeonGameManager.ReloadPressed() && swapList[swapListIndex].CanReload())
         {
             swapList[swapListIndex].Reload();
             // on R press, reload. If arcade, on P2 press, reload, one P2 hold, open weapon wheel
