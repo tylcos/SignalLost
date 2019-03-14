@@ -179,11 +179,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Spectre Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 3197787328414642397, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3200651533691715749, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1110,6 +1105,25 @@ Transform:
   m_Father: {fileID: 1237663205}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1864651299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3197787328414642397, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 385235882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1864651300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864651299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee040df02977524b879f1bd67f1e13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAccessor: {fileID: 0}
 --- !u!1 &1909278501
 GameObject:
   m_ObjectHideFlags: 0
