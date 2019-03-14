@@ -14,8 +14,8 @@ public class GunAutomatic : Gun
 
     public override void CancelReload()
     {
-        if(rel != null)
-        StopCoroutine(rel);
+        if (rel != null)
+            StopCoroutine(rel);
     }
 
     public override void Fire(Vector2 direction)
@@ -31,15 +31,11 @@ public class GunAutomatic : Gun
     private IEnumerator Reloading(float duration)
     {
         float start = Time.time;
-        //dad.reloading = true;
-        //dad.reloadProgress = 0;
         do
         {
             yield return new WaitForEndOfFrame();
-            dad.reloadProgress = (Time.time - start) / duration; 
+            dad.reloadProgress = (Time.time - start) / duration;
         } while (dad.reloadProgress < duration);
-        //dad.reloadProgress = 1;
-        //dad.reloading = false;
         dad.FillMag();
         Debug.Log("Filled mag");
     }
@@ -47,7 +43,7 @@ public class GunAutomatic : Gun
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatMode: 1
   weapon: {fileID: 5804408742316254558, guid: ba9fff0437784e947b1c1965fdb6ceb1, type: 3}
+  horizontalOffset: 0
+  verticalOffset: 0
   bullet: {fileID: 0}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
@@ -35,3 +37,4 @@ MonoBehaviour:
   falloff: 0
   swingVFX: {fileID: 0}
   meleeDamage: 15
+  exhaustTime: 0

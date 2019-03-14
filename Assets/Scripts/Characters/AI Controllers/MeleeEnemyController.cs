@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeEnemyController : EnemyController {
+public class MeleeEnemyController : EnemyController
+{
 
     #region events and fields
 
@@ -38,7 +39,7 @@ public class MeleeEnemyController : EnemyController {
 
     void FixedUpdate()
     {
-        if(Time.time - lastAttackTime <= attackCooldownLength) { return; } // cancel if this enemy just attacked
+        if (Time.time - lastAttackTime <= attackCooldownLength) { return; } // cancel if this enemy just attacked
 
         if (target != null && !attacking) // if the enemy is not attacking, do movement and try to attack
         {
@@ -68,7 +69,7 @@ public class MeleeEnemyController : EnemyController {
                     if (hitIsTarget) { break; }
                 }
             }
-            
+
             if (vectorToTarget != Vector2.zero)
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
@@ -106,32 +107,36 @@ public class MeleeEnemyController : EnemyController {
         float startTime = Time.time;
         Coroutine retreat = null;
         bool doing = true;
-        while(doing)
+        while (doing)
         {
             Vector3 startingPosition = transform.position;
-            if(Time.time < startTime + chargeTime) // CHARGING ATTACK
+            if (Time.time < startTime + chargeTime) // CHARGING ATTACK
             {
                 attackIndicator.SetActive(true);
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time < startTime + chargeTime + enableLength) // ATTACKING
+            }
+            else if (Time.time < startTime + chargeTime + enableLength) // ATTACKING
             {
                 attackIndicator.SetActive(false);
                 weapon.GetComponent<Collider2D>().enabled = true;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
+            }
+            else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
             {
                 weapon.GetComponent<Collider2D>().enabled = false;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            } else if(Time.time > startTime+chargeTime+enableLength+pauseTime && doing) // RETREATING (jumping backwards)
+            }
+            else if (Time.time > startTime + chargeTime + enableLength + pauseTime && doing) // RETREATING (jumping backwards)
             {
                 if (retreat == null)
                 {
                     AimWeaponAtTarget(-vectorToTarget);
                     retreat = MoveTo(-vectorToTarget.normalized * retreatLength);
-                } else if (!RunningThisRoutine(retreat))
+                }
+                else if (!RunningThisRoutine(retreat))
                 {
                     doing = false;
                 }
@@ -142,5 +147,5 @@ public class MeleeEnemyController : EnemyController {
         attacking = false;
     }
 
-    
+
 }

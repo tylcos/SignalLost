@@ -20,6 +20,16 @@ public class WeaponV2Information : ScriptableObject
     [ShowAssetPreview]
     public GameObject weapon;
 
+    [InfoBox("Unimplemented")]
+    [BoxGroup("Prefabs")]
+    [Tooltip("Horizontal offset to place the weapon from the center of the character.")]
+    public float horizontalOffset;
+
+    [InfoBox("Unimplemented")]
+    [BoxGroup("Prefabs")]
+    [Tooltip("Vertical offset to place the weapon from the center of the character.")]
+    public float verticalOffset;
+
     private bool GunMode()
     {
         return combatMode == WeaponController.COMBATMODE_GUN;
@@ -31,12 +41,14 @@ public class WeaponV2Information : ScriptableObject
     }
 
     #region guns
+
     [ShowIf("GunMode")]
     [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the projectile fired.")]
     [ShowAssetPreview]
     public GameObject bullet;
 
+    [InfoBox("All of these are unimplemented", "GunMode")]
     [ShowIf("GunMode")]
     [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the final impact effect.")]
@@ -85,10 +97,13 @@ public class WeaponV2Information : ScriptableObject
     [MinValue(0)]
     public float lifetime;
 
+    [InfoBox("Unimplemented")]
     [ShowIf("GunMode")]
     [Tooltip("The angle of the spread cone divided by 2.")]
     [Range(0, 90)]
     public float halfSpreadAngle;
+
+    [InfoBox("Everything below this is unimplemented", "GunMode")]
 
     [ShowIf("GunMode")]
     [Tooltip("Max number of impacts (penetrations + ricochets) allowed.")]
@@ -135,6 +150,7 @@ public class WeaponV2Information : ScriptableObject
 
     #region melee
 
+    [InfoBox("Unimplemented")]
     [ShowIf("MeleeMode")]
     [BoxGroup("Prefabs")]
     [Tooltip("The prefab for the swing effect.")]
@@ -144,6 +160,12 @@ public class WeaponV2Information : ScriptableObject
     [Tooltip("How much damage one hit will deal.")]
     [MinValue(0)]
     public float meleeDamage;
+
+    [ShowIf("MeleeMode")]
+    [Tooltip("The minimum time between melee attacks.")]
+    [MinValue(0)]
+    public float exhaustTime;
+
 
     #endregion
 

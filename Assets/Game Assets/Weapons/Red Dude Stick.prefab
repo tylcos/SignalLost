@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5801089868725973186}
   - component: {fileID: 5943737512835976380}
   - component: {fileID: 5797561898409904482}
+  - component: {fileID: 1415160423642752948}
   m_Layer: 16
-  m_Name: melee weapon
-  m_TagString: EnemyWeapon
+  m_Name: Red Dude Stick
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +97,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.51, y: 0.12}
   m_Direction: 1
+--- !u!114 &1415160423642752948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804408742316254558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c6a21d87379b549b5697a646ea3c85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 5797561898409904482}

@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     struct AmmoSettings
     {
         public EquippedWeapon wep;
+        public int mode;
         public int cur;
         public int max;
         public TMP_Text text;
@@ -33,15 +34,23 @@ public class UIController : MonoBehaviour
 
         public void Redraw()
         {
-            cur = wep.CurrentAmmo;
-            max = wep.MaxAmmo;
-            reload = wep.reloading;
-            reloadPercent = wep.reloadProgress;
-            text.text = cur + " / " + max;
-            uIndic.SetActive(reload);
-            uFill.localScale = new Vector3(uFillFull * reloadPercent, uFill.localScale.y, uFill.localScale.z);
-            // turn on reload indicator and update it or turn it off
-            // need a reload bar to use
+            if (mode == WeaponController.COMBATMODE_GUN)
+            {
+                cur = wep.CurrentAmmo;
+                max = wep.MaxAmmo;
+                reload = wep.reloading;
+                reloadPercent = wep.reloadProgress;
+                text.text = cur + " / " + max;
+                uIndic.SetActive(reload);
+                uFill.localScale = new Vector3(uFillFull * reloadPercent, uFill.localScale.y, uFill.localScale.z);
+                // turn on reload indicator and update it or turn it off
+                // need a reload bar to use
+            }
+            else if (mode == WeaponController.COMBATMODE_MELEE)
+            {
+                uIndic.SetActive(false);
+                text.text = "melee";
+            }
         }
     }
 
@@ -111,9 +120,9 @@ public class UIController : MonoBehaviour
     {
         //this should fade in death message and fade out the rest somehow
         deathMessage.SetActive(true);
-        if(healthbar != null)
+        if (healthbar != null)
             UpdateHealthbar();
-        if(ammo != null)
+        if (ammo != null)
             UpdateAmmo();
     }
 
@@ -148,9 +157,10 @@ public class UIController : MonoBehaviour
         UpdateAmmo();
     }
 
-    private void OnWeaponSwap(EquippedWeapon wep)
+    private void OnWeaponSwap(EquippedWeapon wep, int combatMode)
     {
         _ammoSettings.wep = wep;
+        _ammoSettings.mode = combatMode;
         UpdateAmmo();
     }
 
