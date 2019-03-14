@@ -2,8 +2,11 @@
 
 public class BulletController : MonoBehaviour
 {
+    [HideInInspector]
     public float lifeTime;
+    [HideInInspector]
     public float damage;
+    [HideInInspector]
     public float maxCollisions;
     private float currentPenetration = 0;
     [HideInInspector]
