@@ -101,6 +101,7 @@ public class RangedEnemyController : EnemyController {
                     }
                 }
             }
+            spriteDirection = vectorToTarget;
         }
 	}
 
@@ -145,6 +146,7 @@ public class RangedEnemyController : EnemyController {
                 yield return new WaitForSeconds(.05f);
             }
         }
+        
         attacking = false;
     }
 

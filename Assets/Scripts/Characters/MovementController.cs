@@ -35,7 +35,7 @@ public class MovementController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public int animationDirection = 1;
-    private Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
+    public Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
     public Animator spriteAnimator;
 
 
@@ -80,6 +80,7 @@ public class MovementController : MonoBehaviour
             {
                 animationDirection = 3;
             }
+            
         }
     }
 
