@@ -19,6 +19,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1864651300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197787328414642397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee040df02977524b879f1bd67f1e13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAccessor: {fileID: 0}
 --- !u!1001 &3199193262799443039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1411719202972802, guid: 5b9e39121264e184181535c15791a84e, type: 3}
       propertyPath: m_Name
-      value: Fire Spectre
+      value: Fire Spectre Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,6 +87,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 61978907668579480, guid: 5b9e39121264e184181535c15791a84e,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -104,6 +129,11 @@ PrefabInstance:
       propertyPath: cc2d
       value: 
       objectReference: {fileID: 3313903936124077363}
+    - target: {fileID: 114640785694825438, guid: 5b9e39121264e184181535c15791a84e,
+        type: 3}
+      propertyPath: spriteAnimator
+      value: 
+      objectReference: {fileID: 118718438}
     - target: {fileID: 114640785694825438, guid: 5b9e39121264e184181535c15791a84e,
         type: 3}
       propertyPath: attackIndicator

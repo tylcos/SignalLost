@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
+  m_Name: Wand
+  m_EditorClassIdentifier: 
+  combatMode: 0
+  weapon: {fileID: 691260215632038837, guid: 3a42ddb340d0ddd4abe7eeea512de401, type: 3}
+  bullet: {fileID: 0}
+  impactVFX: {fileID: 0}
+  muzzleVFX: {fileID: 0}
+  penetrationVFX: {fileID: 0}
+  ricochetVFX: {fileID: 0}
+  bulletDamage: 20
+  cycleTime: 3
+  clipSize: 20
+  reloadTime: 5
+  muzzleVelocity: 3
+  lifetime: 5
+  halfSpreadAngle: 0
+  impacts: 0
+  canRicochet: 0
+  ricochetAngle: 0
+  canPenetrate: 0
+  penetrationStrength: 0
+  impactRadius: 0
+  falloff: 0
+  swingVFX: {fileID: 0}
+  meleeDamage: 0

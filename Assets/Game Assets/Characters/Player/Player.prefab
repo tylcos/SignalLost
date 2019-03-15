@@ -635,6 +635,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bulletLayer: Player Fired
+  combatMode: 0
 --- !u!114 &5123112155736431875
 MonoBehaviour:
   m_ObjectHideFlags: 0

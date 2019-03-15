@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour
 {
     // Ammo, health, and death updates should be performed from the player class
 
-    struct HealthbarSettings
+    private struct HealthbarSettings
     {
         public float maximum;
         public float health;
@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    struct AmmoSettings
+    public struct AmmoSettings
     {
         public EquippedWeapon wep;
         public int mode;
@@ -53,6 +53,13 @@ public class UIController : MonoBehaviour
             }
         }
     }
+
+    private struct ScoreSettings
+    {
+        public 
+    }
+
+
 
     private HealthbarSettings _healthbarSettings;
     private AmmoSettings _ammoSettings;

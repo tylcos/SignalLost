@@ -10,6 +10,11 @@ public class DungeonGameManager : MonoBehaviour
     
 
 
+    [HideInInspector]
+    public static int CurrentScore;
+    
+
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod()
     {
