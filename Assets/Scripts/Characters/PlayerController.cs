@@ -73,18 +73,18 @@ public class PlayerController : MovementController
         }*/
     }
 
-    public override void OnHitOpponent(MovementController opponent, bool killedOpponent)
+    public override void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
-        base.OnHitOpponent(opponent, killedOpponent);
-        print("player hit something");
+        base.OnHitDealt(opponent, killedOpponent);
+        print("player hit an enemy and killed?:" + killedOpponent);
         if (killedOpponent)
             LeaderboardManager.currentScore += 500;
     }
 
-    public override bool OnHitByOpponent(MovementController opponent, float damageReceived)
+    public override bool OnHitReceived(MovementController opponent, float damageReceived)
     {
-        bool targetKilled = base.OnHitByOpponent(opponent, damageReceived);
-        print("player hit by something");
+        bool targetKilled = base.OnHitReceived(opponent, damageReceived);
+        print("player hit by an enemy and took " + damageReceived + " damage");
         return targetKilled;
     }
 

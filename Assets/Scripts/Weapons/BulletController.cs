@@ -30,8 +30,8 @@ public class BulletController : MonoBehaviour
         if (collEvent.gameObject.GetComponent<MovementController>() != null)
         {
             //collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
-            bool killedCharacterHit = collEvent.gameObject.GetComponent<MovementController>().OnHitByOpponent(source, damage);
-            source.OnHitOpponent(collEvent.gameObject.GetComponent<MovementController>(), killedCharacterHit);
+            bool killedCharacterHit = collEvent.gameObject.GetComponent<MovementController>().OnHitReceived(source, damage);
+            source.OnHitDealt(collEvent.gameObject.GetComponent<MovementController>(), killedCharacterHit);
         }
         currentPenetration++;
         if (currentPenetration >= maxCollisions)

@@ -16,6 +16,7 @@ public class WeaponController : MonoBehaviour
     protected int swapListIndex = 0;
 
     public string bulletLayer;
+    [HideInInspector]
     public int combatMode;
 
     private void OnValidate()
@@ -40,13 +41,16 @@ public class WeaponController : MonoBehaviour
             // so we have a parallel array that holds the objects, their bullets, and ammo
             // so we call commands there when we need to fire or whatnot since that stores everything
         }
-        SwapTo(swapList[0]);
+        SwapTo(0);
     }
 
-    private void SwapTo(EquippedWeapon weapon)
+    private void SwapTo(int index)
     {
-        swapList[0].SetEnabled(true);
-        combatMode = weapon.combatMode;
+        swapList[swapListIndex].SetEnabled(false);
+        swapList[index].SetEnabled(true);
+        swapListIndex = index;
+        combatMode = swapList[index].combatMode;
+        
     }
 
     public EquippedWeapon GetEquippedWeapon()

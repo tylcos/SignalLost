@@ -39,16 +39,16 @@ public class EnemyController : MovementController
     #region event handlers
 
     // Override this in child
-    public override void OnHitOpponent(MovementController opponent, bool killedOpponent)
+    public override void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
-        base.OnHitOpponent(opponent, killedOpponent);
+        base.OnHitDealt(opponent, killedOpponent);
         print("reached enemy child onhitopponent");
     }
 
-    public override bool OnHitByOpponent(MovementController opponent, float damageReceived)
+    public override bool OnHitReceived(MovementController opponent, float damageReceived)
     {
-        bool targetKilled = base.OnHitByOpponent(opponent, damageReceived);
-        print("reached enemy child onhitbyopponent");
+        bool targetKilled = base.OnHitReceived(opponent, damageReceived);
+        print("enemy was hit by player and took " + damageReceived + " damage");
         return targetKilled;
     }
     #endregion
@@ -80,11 +80,11 @@ public class EnemyController : MovementController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        /*if (collision.gameObject.CompareTag("Projectile"))
         {
             BulletController bm = collision.gameObject.GetComponent<BulletController>();
             Damage(bm.damage);
-        }
+        }*/
     }
 
     #endregion

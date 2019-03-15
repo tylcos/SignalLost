@@ -217,14 +217,13 @@ public class MovementController : MonoBehaviour
         return activeCoroutine == c && activeCoroutine != null;
     }
 
-    public virtual void OnHitOpponent(MovementController opponent, bool killedOpponent)
+    public virtual void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
-        print("reached parent onhitopponent");
+        
     }
 
-    public virtual bool OnHitByOpponent(MovementController opponent, float damageReceived)
+    public virtual bool OnHitReceived(MovementController opponent, float damageReceived)
     {
-        print("reached parent onhitbyopponent");
         return Damage(damageReceived);
     }
 

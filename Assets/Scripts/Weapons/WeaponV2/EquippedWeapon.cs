@@ -63,7 +63,7 @@ public class EquippedWeapon : Object
         else if (combatMode == WeaponController.COMBATMODE_MELEE)
         {
             swordScript = weapon.GetComponent<Sword>();
-            swordScript.Initialize(this, this.layer, character);
+            swordScript.Initialize(this, this.layer, parentMoveController);
             minTimeBetweenAttacks = info.exhaustTime;
             baseDamage = info.meleeDamage;
         }
