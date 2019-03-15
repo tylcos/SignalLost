@@ -8,15 +8,12 @@ using UnityEngine;
 
 public static class LeaderboardManager
 {
-    public static int currentScore;
     public static List<LeaderboardEntry> leaderboardEntries;
 
 
 
     public static readonly string savePath = Path.Combine(Application.persistentDataPath, "highscores.dat");
-
-
-
+    
     private static readonly BinaryFormatter formatter = new BinaryFormatter();
 
 
@@ -24,7 +21,12 @@ public static class LeaderboardManager
     public static void LoadLeaderboardEntries()
     {
         if (!File.Exists(savePath))
+        {
             leaderboardEntries = new List<LeaderboardEntry>();
+            SaveLeaderboardEntries();
+        }
+
+
 
         try
         {
@@ -37,13 +39,15 @@ public static class LeaderboardManager
 
 
 
-            string backupPath = savePath + ".bak";
-            if (File.Exists(backupPath))
-                File.Delete(backupPath);
+            if (File.Exists(savePath))
+            {
+                string backupPath = savePath + ".bak";
+                if (File.Exists(backupPath))
+                    File.Delete(backupPath);
 
-            File.Move(savePath, backupPath);
-            File.Delete(savePath);
-
+                File.Move(savePath, backupPath);
+            }
+            
 
 
             leaderboardEntries = new List<LeaderboardEntry>();
@@ -77,12 +81,12 @@ public static class LeaderboardManager
 
         // Find where to insert current run based on index (Lower index = higher score)
         int i = 0;
-        while (i < leaderboardEntries.Count && leaderboardEntries[i++].Score > currentScore);
+        while (i < leaderboardEntries.Count && leaderboardEntries[i++].Score > DungeonGameManager.CurrentScore);
 
         if (i < leaderboardEntries.Count)
-            leaderboardEntries.Insert(i, new LeaderboardEntry(name, currentScore));
+            leaderboardEntries.Insert(i, new LeaderboardEntry(name, DungeonGameManager.CurrentScore));
         else
-            leaderboardEntries.Add(new LeaderboardEntry(name, currentScore));
+            leaderboardEntries.Add(new LeaderboardEntry(name, DungeonGameManager.CurrentScore));
     }
 }
 

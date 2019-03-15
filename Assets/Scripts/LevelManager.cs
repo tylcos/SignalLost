@@ -15,50 +15,55 @@ public static class LevelManager
 
     public static long timeAtLevelLoad;
 
-    public static int timeScore = 500;
-    public static int[] timeExpected = { };             // Full score if player beats boss in this time
-    public static int[] timeFalloff = { };              // After time expected is past, how much time till time score is zero
-    public static int[] baseScorePerLevel = { };
-    
-
-
-    static LevelManager()
-    {
-
-    }
+    private static readonly int baseTimeScore = 500;
+    private static readonly int timeExpectedPerLevel = 15;
+    private static readonly int timeMaxPerLevel = 30;
 
 
 
     public static void LoadStartingLevel()
     {
-        SceneManager.LoadSceneAsync(levelName);
+        SceneManager.LoadScene(levelName);
 
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
     }
 
     public static void LoadNewLevel()
     {
-        long timeTaken = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
+        long timeTakenS = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
-        // Score Stuff
+
+        DungeonGameManager.CurrentScore += ScoreFromTime(timeTakenS);
 
 
 
+        ++currentLevel;
         SceneManager.LoadScene(levelName);
         // Spawn rooms with LevelsToSpawn
         // Remove blind from camera
+    }
+
+    public static void LoadDeathScene()
+    {
+
+    }
+
+    public static void LoadStartScene()
+    {
+
     }
 
 
 
     private static int ScoreFromTime(long timeTaken)
     {
-        long expected = timeExpected[currentLevel];
+        long timeExpected = timeExpectedPerLevel * LevelsToSpawn;
+        long timeMax = timeMaxPerLevel * LevelsToSpawn - timeExpected;
 
-        if (timeTaken <= expected)
-            return timeScore;
+        if (timeTaken <= timeExpected)
+            return baseTimeScore;
         else
-            return (int)(1);
+            return (int)(baseTimeScore * (double)(timeTaken - timeExpected) / timeMax);
     }
 
     private static int LevelsToSpawn => startingLevels + currentLevel * 2;
