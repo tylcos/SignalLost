@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
 
     private struct ScoreSettings
     {
-        public 
+        
     }
 
 
