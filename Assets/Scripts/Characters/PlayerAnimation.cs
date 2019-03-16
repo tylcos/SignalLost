@@ -27,7 +27,8 @@ public class PlayerAnimation : MonoBehaviour {
     {
     }
 
-    void LateUpdate() {
+    void LateUpdate()
+    {
 
         if (movementAccessor.movingForAnimation)
         {
@@ -42,24 +43,34 @@ public class PlayerAnimation : MonoBehaviour {
             animationDelayObject = StartCoroutine("AnimationDelay");
         }
 
-        if (movementAccessor.animationDirection == 1) // North && East
+        if (!movementAccessor.movingForAnimation)
         {
-            playerAnimator.SetInteger("PlayerDirection", 1);
-        }
-        else if (movementAccessor.animationDirection == 3) // South
-        {
-            playerAnimator.SetInteger("PlayerDirection", 3);
-        }
-        else if (movementAccessor.animationDirection == 4) // West
-        {
-            playerAnimator.SetInteger("PlayerDirection", 4);
-        }
 
-        
+            if (movementAccessor.animationDirection == 1) // North && East
+            {
+                playerAnimator.SetInteger("PlayerDirection", 1);
+            }
+            else if (movementAccessor.animationDirection == 2) // East
+            {
+                playerAnimator.SetInteger("PlayerDirection", 2);
+            }
+            else if (movementAccessor.animationDirection == 3) // South
+            {
+                playerAnimator.SetInteger("PlayerDirection", 3);
+            }
+            else if (movementAccessor.animationDirection == 4) // West
+            {
+                playerAnimator.SetInteger("PlayerDirection", 4);
+            }
+        }
+        else
+        {
+            playerAnimator.SetBool("Moving", true);
+        }
         movementAccessor.movingForAnimation = false;
     }
 
-    IEnumerator AnimationDelay()
+        IEnumerator AnimationDelay()
     {
         yield return new WaitForSeconds(3.0f);
         playerAnimator.SetBool("Idle", true);

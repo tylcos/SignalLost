@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 22f75c7ccb91aab4fb246b23596fadf4
+guid: 7a3aa128e34a42f4d8e77ccb0bb3eb4f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: JoS_Right_IDLE_0
-    21300002: JoS_Right_IDLE_1
+    21300000: JoS_Front_IDLE_RUN_0
+    21300002: JoS_Front_IDLE_RUN_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -108,12 +108,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JoS_Right_IDLE_0
+      name: JoS_Front_IDLE_RUN_0
       rect:
         serializedVersion: 2
         x: 3
         y: 0
-        width: 18
+        width: 17
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -122,18 +122,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d75c76e304c506d4da9209baf7286948
+      spriteID: 89c4da6b6758e274e89361bb7bbc359c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JoS_Right_IDLE_1
+      name: JoS_Front_IDLE_RUN_1
       rect:
         serializedVersion: 2
         x: 27
         y: 0
-        width: 18
+        width: 17
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -142,7 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8ce8713fd1dc0e4eaa17a1f562ed964
+      spriteID: 977ea5db576a3f743a63336534a1abd7
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 6edb6fe0194192743bad4298640e3d4a
+    spriteID: 4e2f3bdb46f255d4fa677d4bdc261717
     vertices: []
     indices: 
     edges: []

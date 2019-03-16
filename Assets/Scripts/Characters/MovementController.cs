@@ -78,7 +78,7 @@ public class MovementController : MonoBehaviour
             }
             if (spriteDirection.x > 0.0f) // Checks if the sprite is moving East
             {
-                animationDirection = 3;
+                animationDirection = 2;
             }
             
         }
