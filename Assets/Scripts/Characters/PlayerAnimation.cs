@@ -36,17 +36,18 @@ public class PlayerAnimation : MonoBehaviour {
                 StopCoroutine(animationDelayObject);
             animationDelayObject = null;
             playerAnimator.SetBool("Idle", false);
+            playerAnimator.SetBool("Moving", true);
 
         }
         else if (!movementAccessor.movingForAnimation && animationDelayObject == null)
         {
+            playerAnimator.SetBool("Moving", false);
             animationDelayObject = StartCoroutine("AnimationDelay");
         }
 
         if (!movementAccessor.movingForAnimation)
         {
-
-            if (movementAccessor.animationDirection == 1) // North && East
+            if (movementAccessor.animationDirection == 1) // North
             {
                 playerAnimator.SetInteger("PlayerDirection", 1);
             }
