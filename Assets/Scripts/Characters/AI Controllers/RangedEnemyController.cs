@@ -121,6 +121,7 @@ public class RangedEnemyController : EnemyController {
             if (Time.time < startTime + chargeTime) // CHARGING ATTACK
             {
                 attackIndicator.SetActive(true);
+                chargingAttackAnim = true;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
             }
@@ -146,7 +147,7 @@ public class RangedEnemyController : EnemyController {
                 yield return new WaitForSeconds(.05f);
             }
         }
-        
+        chargingAttackAnim = false;
         attacking = false;
     }
 

@@ -29,13 +29,22 @@ public class RangedEnemyAnimation : MonoBehaviour
             rangedAnimator.SetBool("Idle", true);
         }*/
 
-        if (movementAccessor.animationDirection == 3) // Checks if sprite is moving east
+        if (movementAccessor.animationDirection == 2) // Checks if sprite is moving east
         {
-            rangedAnimator.SetInteger("Direction", 1);
+            rangedAnimator.SetInteger("Direction", 2);
         }
         else if (movementAccessor.animationDirection == 4) // Checks if sprite is moving west
         {
             rangedAnimator.SetInteger("Direction", 4);
-        }   
+        }
+
+        if (movementAccessor.chargingAttackAnim)
+        {
+            rangedAnimator.SetBool("InRange", true);
+        }
+        else
+        {
+            rangedAnimator.SetBool("InRange", false);
+        }
     }
 }

@@ -15,13 +15,13 @@ public class PlayerAnimation : MonoBehaviour {
     private Coroutine animationDelayObject = null;
 
 	// Use this for initialization    
-        public void Start()
-        {
-            transform.hasChanged = false;
-            player = GameObject.FindGameObjectWithTag("Player");
-            movementAccessor = player.GetComponent<PlayerController>();
-            playerAnimator = movementAccessor.GetComponent<PlayerController>().spriteAnimator;
-        }
+    public void Start()
+    {
+        transform.hasChanged = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+        movementAccessor = player.GetComponent<PlayerController>();
+        playerAnimator = movementAccessor.GetComponent<PlayerController>().spriteAnimator;
+    }
 
     private void Update()
     {

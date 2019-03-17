@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 180211f5cd8bcbc46b8829340fb49f00
+guid: ecd309343bea14a4c890df70393f8d48
 TextureImporter:
   fileIDToRecycleName:
-    21300000: FireSpectreCasting_0
-    21300002: FireSpectreCasting_1
-    21300004: FireSpectreCasting_2
-    21300006: FireSpectreCasting_3
-    21300008: FireSpectreCasting_4
-    21300010: FireSpectreCasting_5
-    21300012: FireSpectreCasting_6
-    21300014: FireSpectreCasting_7
-    21300016: FireSpectreCasting_8
-    21300018: FireSpectreCasting_9
-    21300020: FireSpectreCasting_10
-    21300022: FireSpectreCasting_11
-    21300024: FireSpectreCasting_12
+    21300000: FireSpectreCasting_West_0
+    21300002: FireSpectreCasting_West_1
+    21300004: FireSpectreCasting_West_2
+    21300006: FireSpectreCasting_West_3
+    21300008: FireSpectreCasting_West_4
+    21300010: FireSpectreCasting_West_5
+    21300012: FireSpectreCasting_West_6
+    21300014: FireSpectreCasting_West_7
+    21300016: FireSpectreCasting_West_8
+    21300018: FireSpectreCasting_West_9
+    21300020: FireSpectreCasting_West_10
+    21300022: FireSpectreCasting_West_11
+    21300024: FireSpectreCasting_West_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,11 +93,33 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FireSpectreCasting_0
+      name: FireSpectreCasting_West_0
       rect:
         serializedVersion: 2
         x: 3
@@ -111,16 +133,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edf62adeea41be643ba8486218f66b0c
+      spriteID: fd2737d6ba875854d82dec695562239c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_1
+      name: FireSpectreCasting_West_1
       rect:
         serializedVersion: 2
-        x: 35
+        x: 34
         y: 4
         width: 26
         height: 38
@@ -131,16 +153,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cce0f2f605733df4aa75af40ecefaf34
+      spriteID: 84a6e5bc5f7aeda4e8b6d63ea566b66e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_2
+      name: FireSpectreCasting_West_2
       rect:
         serializedVersion: 2
-        x: 67
+        x: 65
         y: 3
         width: 26
         height: 38
@@ -151,13 +173,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19b6e3e1b29062946b3c2a5dfcb5bfa3
+      spriteID: a4a449894fcb7564fbd5ccdecf9f8329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_3
+      name: FireSpectreCasting_West_3
       rect:
         serializedVersion: 2
         x: 100
@@ -171,16 +193,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74e94e6cecc549f4fb1fc7c592e73891
+      spriteID: 8d1574a652f0c19469c6edb0e9911c52
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_4
+      name: FireSpectreCasting_West_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 133
         y: 2
         width: 25
         height: 38
@@ -191,13 +213,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ee175c7d1a0a68449faed9f7a4e9242
+      spriteID: 26a367f56e81c0d4692be645f07efe38
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_5
+      name: FireSpectreCasting_West_5
       rect:
         serializedVersion: 2
         x: 164
@@ -211,16 +233,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a81f11d991275a478a74ce3b7e42be8
+      spriteID: 620a729e0a3266c42a503b7345c698f3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_6
+      name: FireSpectreCasting_West_6
       rect:
         serializedVersion: 2
-        x: 197
+        x: 195
         y: 2
         width: 24
         height: 38
@@ -231,16 +253,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccd6f8dc8072e7f4da8af69708ff71af
+      spriteID: 35ddd4fe09994954b91d0c6f6fd1613c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_7
+      name: FireSpectreCasting_West_7
       rect:
         serializedVersion: 2
-        x: 230
+        x: 231
         y: 2
         width: 23
         height: 38
@@ -251,16 +273,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 111ae17f005293e49a00ba28191ff641
+      spriteID: 699f81619756f9641a36129f9374007e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_8
+      name: FireSpectreCasting_West_8
       rect:
         serializedVersion: 2
-        x: 262
+        x: 261
         y: 2
         width: 23
         height: 38
@@ -271,16 +293,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d827a0c22a252341aaa71a6b893c494
+      spriteID: 28db8afd947824141ba2bb9aacc14a9f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_9
+      name: FireSpectreCasting_West_9
       rect:
         serializedVersion: 2
-        x: 293
+        x: 291
         y: 2
         width: 24
         height: 38
@@ -291,13 +313,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd12a9e5a77f98a4a9d11f220a86f558
+      spriteID: 8775c08b9ade6264b96b5c3ab6dc4847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_10
+      name: FireSpectreCasting_West_10
       rect:
         serializedVersion: 2
         x: 324
@@ -311,16 +333,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9e79b385ade8540a7249f922052c41
+      spriteID: cbe9662d13b5d1d45a8492cc0dabd26a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_11
+      name: FireSpectreCasting_West_11
       rect:
         serializedVersion: 2
-        x: 355
+        x: 357
         y: 4
         width: 26
         height: 38
@@ -331,13 +353,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19505c7192ec6e0448ac16fac4c5f131
+      spriteID: b6669cd92f8890e44a78440ec801cf2d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireSpectreCasting_12
+      name: FireSpectreCasting_West_12
       rect:
         serializedVersion: 2
         x: 387
@@ -351,7 +373,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b123b114be9a8014d9d636e6e3bae1e3
+      spriteID: 86e4df35bc95ea04e85ea50dc2f2756c
       vertices: []
       indices: 
       edges: []
@@ -359,7 +381,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 020704182b2cde3408126f79b4a6e005
+    spriteID: a72f3e3035005434a9d0bb6f1f2b6345
     vertices: []
     indices: 
     edges: []

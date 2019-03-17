@@ -35,8 +35,11 @@ public class MovementController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public int animationDirection = 1;
+    [HideInInspector]
+    public bool chargingAttackAnim = false;
     public Vector2 spriteDirection = new Vector2(0.0f, 0.0f); // for checking sprite direction 
     public Animator spriteAnimator;
+
 
 
     #endregion
