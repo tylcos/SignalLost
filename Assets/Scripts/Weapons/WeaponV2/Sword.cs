@@ -43,7 +43,7 @@ public class Sword : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(owner);
+        print(hitbox);
     }
 
     // for some reason source and damagetodeal don't exist here

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1415160423642752948}
   - component: {fileID: 3353630585451571978}
   m_Layer: 16
-  m_Name: Red Dude Stick
+  m_Name: Red Dude's Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
