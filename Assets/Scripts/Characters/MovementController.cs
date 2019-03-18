@@ -111,6 +111,11 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+
 
     #region damage functions
 
