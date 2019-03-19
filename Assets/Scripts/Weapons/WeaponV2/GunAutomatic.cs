@@ -39,16 +39,4 @@ public class GunAutomatic : Gun
         dad.FillMag();
         Debug.Log("Filled mag");
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -7,7 +7,7 @@ public class Sword : MonoBehaviour
     public Collider2D hitbox;
     private Coroutine atk;
     private EquippedWeapon mom;
-    public MovementController owner;
+    private MovementController owner;
     private float damageToDealThisFrame;
 
     public void Initialize(EquippedWeapon e, int layer, MovementController parent)
@@ -41,23 +41,19 @@ public class Sword : MonoBehaviour
         mom.EndSwing();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        print(hitbox);
-    }
-
     // for some reason source and damagetodeal don't exist here
     // give movement controller a tostring that prints out if its a player or enemy
-    /*void OnTriggerEnter2D(Collider2D collEvent)
+    void OnTriggerEnter2D(Collider2D collEvent)
     {
         if (collEvent.gameObject.GetComponent<MovementController>() != null)
         {
-            MovementController man = collEvent.gameObject.GetComponent<MovementController>();
-            print("Object hit: " + man.ToString());
-            print("This sword's parent: " + owner.ToString());
+            print(mom);
+            /*MovementController man = collEvent.gameObject.GetComponent<MovementController>();
+            print("Object hit: " + man);
+            print("This sword's parent: " + owner);
             print("hit: " + damageToDealThisFrame);
             bool killedCharacterHit = man.OnHitReceived(owner, damageToDealThisFrame);
-            owner.OnHitDealt(man, killedCharacterHit);
+            owner.OnHitDealt(man, killedCharacterHit);*/
         }
-    }*/
+    }
 }
