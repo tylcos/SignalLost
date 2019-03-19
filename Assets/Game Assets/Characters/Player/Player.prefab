@@ -109,6 +109,8 @@ MonoBehaviour:
   movingForAnimation: 0
   spriteRenderer: {fileID: 0}
   animationDirection: 1
+  chargingAttackAnim: 0
+  spriteDirection: {x: 0, y: 0}
   spriteAnimator: {fileID: 723578674}
   reloadFailIndicator: {fileID: 1187906708794232797}
 --- !u!50 &50822498620361568
@@ -632,7 +634,7 @@ MonoBehaviour:
   inventory:
   - {fileID: 11400000, guid: 2108dd756fc225749b2a9ee720afece5, type: 2}
   - {fileID: 11400000, guid: 6e1ccc4120c160f44994e4db9f7ac6ea, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6f29cc7475078b349b2ba8f15b1c240c, type: 2}
   - {fileID: 0}
   bulletLayer: Player Fired
   combatMode: 0

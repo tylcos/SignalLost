@@ -6,7 +6,7 @@ public class EquippedWeapon : Object
     public GameObject weapon;
     public GameObject bullet;
     public Gun gunScript;
-    public Sword swordScript;
+    public CQC swordScript;
     private readonly bool logical = true;
     private readonly float minTimeBetweenAttacks;
     private readonly float speed;
@@ -62,8 +62,8 @@ public class EquippedWeapon : Object
         }
         else if (combatMode == WeaponController.COMBATMODE_MELEE)
         {
-            swordScript = weapon.GetComponent<Sword>();
-            swordScript.Initialize(this, this.layer, character);
+            swordScript = weapon.GetComponent<CQC>();
+            swordScript.Initialize(this, character, this.layer);
             minTimeBetweenAttacks = info.exhaustTime;
             baseDamage = info.meleeDamage;
         }
@@ -76,6 +76,8 @@ public class EquippedWeapon : Object
         weapon.SetActive(state);
         if (combatMode == WeaponController.COMBATMODE_GUN)
             CancelReload();
+        else if (combatMode == WeaponController.COMBATMODE_MELEE)
+            CancelSwing();
         WeaponSwapped(this, combatMode);
     }
 
@@ -111,9 +113,20 @@ public class EquippedWeapon : Object
         else if (combatMode == WeaponController.COMBATMODE_MELEE)
         {
             // swing sword
-            swinging = true;
-            swordScript.Attack(baseDamage);
+            Swing();
         }
+    }
+
+    public void Swing()
+    {
+        swinging = true;
+        swordScript.Attack();
+    }
+
+    public void CancelSwing()
+    {
+        swordScript.CancelAttack();
+        swinging = false;
     }
 
     public void EndSwing()
