@@ -120,7 +120,7 @@ public class EquippedWeapon : Object
     public void Swing()
     {
         swinging = true;
-        swordScript.Attack();
+        swordScript.Attack(baseDamage);
     }
 
     public void CancelSwing()

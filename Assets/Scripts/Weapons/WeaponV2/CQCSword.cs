@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CQCSword : CQC
 {
-    public Collider2D hitter;
-    private EquippedWeapon mom;
-    private MovementController source;
-    private Coroutine atk = null;
+    public Collider2D hitter = null;
+    public EquippedWeapon mom = null;
+    public MovementController source = null;
+    public Coroutine atk = null;
+    public float damage = 0;
 
     public override void Initialize(EquippedWeapon wep, MovementController source, int layer)
     {
@@ -17,9 +18,10 @@ public class CQCSword : CQC
         gameObject.layer = layer;
     }
 
-    public override void Attack()
+    public override void Attack(float damage)
     {
         atk = StartCoroutine(BigStick());
+        this.damage = damage;
     }
 
     private IEnumerator BigStick()
@@ -27,6 +29,7 @@ public class CQCSword : CQC
         hitter.enabled = true;
         yield return new WaitForSeconds(1);
         hitter.enabled = false;
+        mom.EndSwing();
     }
 
     public override void CancelAttack()
@@ -35,14 +38,15 @@ public class CQCSword : CQC
         {
             StopCoroutine(atk);
             hitter.enabled = false;
+            mom.EndSwing();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<MovementController>() != null)
         {
-            bool destroyed = collision.GetComponent<MovementController>().OnHitReceived(source, 10);
+            bool destroyed = collision.GetComponent<MovementController>().OnHitReceived(source, damage);
             source.OnHitDealt(collision.GetComponent<MovementController>(), destroyed);
         }
     }
