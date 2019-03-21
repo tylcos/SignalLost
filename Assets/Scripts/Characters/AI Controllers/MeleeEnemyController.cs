@@ -15,6 +15,8 @@ public class MeleeEnemyController : EnemyController
     [Tooltip("Distance to run away from the player after attacking.")]
     public float postAttackRetreatDistance;
 
+    public WeaponController WC;
+
     #endregion
 
 
@@ -103,7 +105,8 @@ public class MeleeEnemyController : EnemyController
     private IEnumerator SwordAttack(Vector2 vectorToTarget, float chargeTime, float enableLength, float pauseTime, float retreatLength)
     {
         attacking = true;
-        AimWeaponAtTarget(vectorToTarget);
+        //AimWeaponAtTarget(vectorToTarget);
+        WC.AimInDirection(vectorToTarget);
         float startTime = Time.time;
         Coroutine retreat = null;
         bool doing = true;
