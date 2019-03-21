@@ -32,6 +32,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementAccessor: {fileID: 0}
+--- !u!114 &1864651300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197787328414642397}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee040df02977524b879f1bd67f1e13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAccessor: {fileID: 0}
 --- !u!1001 &3199193262799443039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +163,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 536057b46e98f0948b8fbbc9802ba875,
         type: 3}
+    - target: {fileID: 524693820, guid: 5b9e39121264e184181535c15791a84e, type: 3}
+      propertyPath: inventory.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: caefdb24bb655e84b88f3e19ec165d43,
+        type: 2}
     - target: {fileID: 114959292077130018, guid: 5b9e39121264e184181535c15791a84e,
         type: 3}
       propertyPath: parent
