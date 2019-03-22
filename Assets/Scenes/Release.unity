@@ -6170,7 +6170,7 @@ GameObject:
   - component: {fileID: 1262298990}
   - component: {fileID: 1262298989}
   m_Layer: 5
-  m_Name: Fade out
+  m_Name: Blind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14128,6 +14128,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 382178209}
+    - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
+        type: 3}
+      propertyPath: fadeOut
+      value: 
+      objectReference: {fileID: 1262298989}
     - target: {fileID: 2644264972944387957, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -14152,6 +14157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ReferenceResolution.y
       value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644264974080269557, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2644264972495496261, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}

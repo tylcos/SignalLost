@@ -1,5 +1,7 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -80,6 +82,10 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI score;
 
+    [SerializeField]
+    private Image fadeOut;
+    
+
 
     private void OnEnable()
     {
@@ -121,6 +127,34 @@ public class UIController : MonoBehaviour
 
         UpdateAmmo();
         UpdateHealthbar();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FadeBlind(1f, 0f, 2f));
+    }
+
+
+
+    public void StartFadeBlind(float alphaStart, float alphaFinish, float time)
+    {
+        StartCoroutine(FadeBlind(alphaStart, alphaFinish, time));
+    }
+
+    private IEnumerator<WaitForEndOfFrame> FadeBlind(float alphaStart, float alphaFinish, float time)
+    {
+        float elapsedTime = 0;
+
+        Color color = fadeOut.color;
+
+        while (elapsedTime < time)
+        {
+            color.a = Mathf.Lerp(alphaStart, alphaFinish, elapsedTime / time);
+            fadeOut.color = color;
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private void DeathSequence()

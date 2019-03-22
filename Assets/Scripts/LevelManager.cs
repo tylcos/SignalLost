@@ -16,7 +16,7 @@ public static class LevelManager
 
 
 
-    public static long timeAtLevelLoad;
+    private static long timeAtLevelLoad;
 
     private static readonly int baseTimeScore = 500;
     private static readonly int timeExpectedPerRoom = 15;
@@ -35,11 +35,12 @@ public static class LevelManager
 
     public static void LoadNewLevel()
     {
+        GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>().StartFadeBlind(0f, 0f, 2f);
+
         long timeTakenS = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
 
         DungeonGameManager.CurrentScore += ScoreFromTime(timeTakenS);
-
 
 
         ++currentLevel;
