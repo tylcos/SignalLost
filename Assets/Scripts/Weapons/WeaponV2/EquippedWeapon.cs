@@ -107,6 +107,7 @@ public class EquippedWeapon : Object
             bm.lifeTime = lifetime;
             bm.damage = baseDamage;
             bm.source = character;
+            gunScript.Fire(direction);
             timeOfLastShot = Time.time;
             WeaponAmmoChanged();
         }

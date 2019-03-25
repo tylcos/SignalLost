@@ -20,7 +20,7 @@ public class GunAutomatic : Gun
 
     public override void Fire(Vector2 direction)
     {
-        throw new System.NotImplementedException();
+                    
     }
 
     public override void Reload(float time)
