@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: R_AutoAR1
+  m_Name: Wand
   m_EditorClassIdentifier: 
   combatMode: 0
-  weapon: {fileID: 8976151292421940513, guid: 6cc2b42bdc6fa0f4181ad2894bba66c0, type: 3}
+  weapon: {fileID: 8976151292421940513, guid: 719b715c390d2454199b41b963a2e918, type: 3}
   horizontalOffset: 0
   verticalOffset: 0
-  bullet: {fileID: 1599505205951956, guid: be07e490f9b28a749b67fe19c28a1440, type: 3}
+  bullet: {fileID: 1599505205951956, guid: d80a661a2a630b04d8b73922c381b636, type: 3}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
   ricochetVFX: {fileID: 0}
   bulletDamage: 10
-  cycleTime: 0.1
+  cycleTime: 0.5
   clipSize: 30
   reloadTime: 1.7
   muzzleVelocity: 30

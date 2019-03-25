@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 8370e42907b106740bcb9633b2978545
+guid: 97ea1f57b94c5ab44b71511465f4a310
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Super Lightning Wand Static1_0
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -41,12 +40,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,31 +104,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Super Lightning Wand Static1_0
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 21
-        width: 78
-        height: 6
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c789da04e6c18264a9cc4f0b0d8fb616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ac624caf4573eb8449dbc911a8b2aa20
+    spriteID: b85ae8649615f8944b13cc6ff40ae256
     vertices: []
     indices: 
     edges: []

@@ -57,7 +57,8 @@ public class PlayerWeaponController : WeaponController
             {
                 if (swapList[swapListIndex].CanFire())
                 {
-                    swapList[swapListIndex].Fire(shootDir);
+                    swapList[swapListIndex].Fire(shootDir); // Player shoots
+                    
                 }
                 else if (swapList[swapListIndex].reloading)
                 {
