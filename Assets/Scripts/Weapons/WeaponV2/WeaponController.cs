@@ -72,11 +72,16 @@ public class WeaponController : MonoBehaviour
 
     public void Fire(Vector2 shootDirection)
     {
-        swapList[swapListIndex].Fire(shootDirection);
+        GetEquippedWeapon().Fire(shootDirection);
+    }
+
+    public bool IsFiring()
+    {
+        return GetEquippedWeapon().IsFiring();
     }
 
     public bool CanFire()
     { //TECHNINCALLY SPEAKING, ENEMIES HAVE LIMITED AMMO SINCE THEY DONT RELOAD YET SO THIS IS ALWAYS TRUE UNLESS IT JUST FIRED LMAO
-        return swapList[swapListIndex].CanFire();
+        return GetEquippedWeapon().CanFire();
     }
 }

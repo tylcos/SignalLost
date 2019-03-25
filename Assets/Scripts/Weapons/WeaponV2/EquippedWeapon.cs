@@ -117,6 +117,11 @@ public class EquippedWeapon : Object
         }
     }
 
+    public bool IsFiring()
+    {
+        return swinging;
+    }
+
     public void Swing()
     {
         swinging = true;

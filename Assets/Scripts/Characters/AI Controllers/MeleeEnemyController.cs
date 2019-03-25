@@ -80,7 +80,7 @@ public class MeleeEnemyController : EnemyController
                     Move(vectorToTarget);
                     AimWeaponAtTarget(vectorToTarget);
                 }
-                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget) // attack
+                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget && WC.CanFire()) // attack
                 {
                     StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableDuration, postAttackPauseDuration, postAttackRetreatDistance));
                 }
@@ -110,6 +110,7 @@ public class MeleeEnemyController : EnemyController
         float startTime = Time.time;
         Coroutine retreat = null;
         bool doing = true;
+        bool shot = false;
         while (doing)
         {
             Vector3 startingPosition = transform.position;
@@ -119,24 +120,36 @@ public class MeleeEnemyController : EnemyController
                 // do animations here
                 yield return new WaitForSeconds(.05f);
             }
-            else if (Time.time < startTime + chargeTime + enableLength) // ATTACKING
+            else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // ATTACKING
             {
                 attackIndicator.SetActive(false);
-                weapon.GetComponent<Collider2D>().enabled = true;
+                //weapon.GetComponent<Collider2D>().enabled = true;
+                if(!shot)
+                {
+                    WC.Fire(vectorToTarget);
+                    shot = true;
+                } else
+                {
+                    if(WC.IsFiring())
+                    {
+                        startTime += Time.deltaTime;// increment start time to prevent from moving on and waiting until the attack is complete
+                    }
+                }
                 // do animations here
-                yield return new WaitForSeconds(.05f);
+                yield return new WaitForEndOfFrame();
             }
-            else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
+            /*else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
             {
-                weapon.GetComponent<Collider2D>().enabled = false;
+                //weapon.GetComponent<Collider2D>().enabled = false;
                 // do animations here
                 yield return new WaitForSeconds(.05f);
-            }
+            }*/
             else if (Time.time > startTime + chargeTime + enableLength + pauseTime && doing) // RETREATING (jumping backwards)
             {
                 if (retreat == null)
                 {
-                    AimWeaponAtTarget(-vectorToTarget);
+                    //AimWeaponAtTarget(-vectorToTarget);
+                    WC.AimInDirection(-vectorToTarget);
                     retreat = MoveTo(-vectorToTarget.normalized * retreatLength);
                 }
                 else if (!RunningThisRoutine(retreat))
