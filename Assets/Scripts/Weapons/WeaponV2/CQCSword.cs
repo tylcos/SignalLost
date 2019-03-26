@@ -5,10 +5,10 @@ using UnityEngine;
 public class CQCSword : CQC
 {
     public Collider2D hitter = null;
-    public EquippedWeapon mom = null;
-    public MovementController source = null;
-    public Coroutine atk = null;
-    public float damage = 0;
+    private EquippedWeapon mom = null;
+    private MovementController source = null;
+    private Coroutine atk = null;
+    private float damage = 0;
 
     public override void Initialize(EquippedWeapon wep, MovementController source, int layer)
     {

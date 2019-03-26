@@ -425,6 +425,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   animationDirection: 1
   chargingAttackAnim: 0
+  shot: 0
   spriteDirection: {x: 0, y: 0}
   spriteAnimator: {fileID: 0}
   weaponHolder: {fileID: 1735258238636906}
@@ -440,9 +441,9 @@ MonoBehaviour:
   targetTags:
   - Player
   attackChargeTime: 0.3
-  attackColliderEnableDuration: 0.3
   postAttackPauseDuration: 0.3
   postAttackRetreatDistance: 0.3
+  WC: {fileID: 8746641593355120893}
 --- !u!114 &114007684564531466
 MonoBehaviour:
   m_ObjectHideFlags: 0

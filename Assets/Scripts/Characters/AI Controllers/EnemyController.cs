@@ -8,10 +8,10 @@ public class EnemyController : MovementController
     #region events and fields
 
     public const int raycastDepth = 2; // change this to increase the penetration depth of raycasts. Lower numbers wont penetrate walls
-
-    public GameObject weaponHolder;
-    public GameObject weapon;
+    
     public GameObject attackIndicator;
+
+    public WeaponController WC;
 
     [Tooltip("Aggro range.")]
     public float aggroRange;
@@ -127,22 +127,6 @@ public class EnemyController : MovementController
     {
         Collider2D overlap = Physics2D.OverlapCircle(center, radius, layerMask);
         return (overlap == null) ? null : overlap.gameObject;
-    }
-
-    /// <summary>
-    ///     Aims this enemy's weapon towards the vector given by rotating the weapon holder
-    /// </summary>
-    ///     <param name="vectorToTarget">The vector from the center of this gameObject's transform to the target</param>
-    protected void AimWeaponAtTarget(Vector2 vectorToTarget)
-    {
-        var xd = Quaternion.LookRotation(vectorToTarget, Vector3.up);
-        xd.z = xd.x;
-        xd.x = 0;
-        xd.y = 0;
-        weaponHolder.transform.rotation = xd;
-        float angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(vectorToTarget.y, vectorToTarget.x)) - weaponHolder.transform.eulerAngles.z;
-
-        weaponHolder.transform.RotateAround(weaponHolder.transform.position, Vector3.forward, 180 + angleDifference);
     }
 
     #endregion

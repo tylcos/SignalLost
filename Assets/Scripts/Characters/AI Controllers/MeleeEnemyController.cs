@@ -8,14 +8,10 @@ public class MeleeEnemyController : EnemyController
 
     [Tooltip("Time it takes to charge up an attack in seconds.")]
     public float attackChargeTime;
-    [Tooltip("Time to keep the weapon's collider on in attacks.")]
-    public float attackColliderEnableDuration;
     [Tooltip("Time to wait immediately after attacking in seconds.")]
     public float postAttackPauseDuration;
     [Tooltip("Distance to run away from the player after attacking.")]
     public float postAttackRetreatDistance;
-
-    public WeaponController WC;
 
     #endregion
 
@@ -47,7 +43,7 @@ public class MeleeEnemyController : EnemyController
         {
             Vector2 vectorToTarget = Vector2.zero;
             RaycastHit2D[] hits = new RaycastHit2D[raycastDepth];
-            Physics2D.RaycastNonAlloc(weaponHolder.transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
+            Physics2D.RaycastNonAlloc(WC.transform.position, target.transform.position - transform.position, hits, aggroRange, collideLayerMask);
             string hitTag = null;
             bool hitIsTarget = false;
             foreach (RaycastHit2D hit in hits)
@@ -76,13 +72,12 @@ public class MeleeEnemyController : EnemyController
             {
                 if (vectorToTarget.magnitude < aggroRange) // if within aggro range, move and aim weapon towards target
                 {
-                    //MoveTowards(vectorToTarget);
                     Move(vectorToTarget);
-                    AimWeaponAtTarget(vectorToTarget);
+                    WC.AimInDirection(vectorToTarget);
                 }
-                if (/*Time.time - lastAttackTime > attackCooldownLength && */vectorToTarget.magnitude < attackRange && hitIsTarget && WC.CanFire()) // attack
+                if (vectorToTarget.magnitude < attackRange && hitIsTarget && WC.CanFire()) // attack
                 {
-                    StartCoroutine(SwordAttack(-vectorToTarget, attackChargeTime, attackColliderEnableDuration, postAttackPauseDuration, postAttackRetreatDistance));
+                    StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, postAttackPauseDuration, postAttackRetreatDistance));
                 }
             }
         }
@@ -102,10 +97,9 @@ public class MeleeEnemyController : EnemyController
     ///     <param name="enableLength">How long to enable the weapon's collider for</param>
     ///     <param name="pauseTime">The time after turning off the collider this enemy waits before retreating</param>
     ///     <param name="retreatLength">The length of time over which this enemy retreats</param>
-    private IEnumerator SwordAttack(Vector2 vectorToTarget, float chargeTime, float enableLength, float pauseTime, float retreatLength)
+    private IEnumerator SwordAttack(Vector2 vectorToTarget, float chargeTime, float pauseTime, float retreatLength)
     {
         attacking = true;
-        //AimWeaponAtTarget(vectorToTarget);
         WC.AimInDirection(vectorToTarget);
         float startTime = Time.time;
         Coroutine retreat = null;
@@ -120,10 +114,9 @@ public class MeleeEnemyController : EnemyController
                 // do animations here
                 yield return new WaitForSeconds(.05f);
             }
-            else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // ATTACKING
+            else if (Time.time < startTime + chargeTime + pauseTime) // ATTACKING
             {
                 attackIndicator.SetActive(false);
-                //weapon.GetComponent<Collider2D>().enabled = true;
                 if(!shot)
                 {
                     WC.Fire(vectorToTarget);
@@ -138,13 +131,7 @@ public class MeleeEnemyController : EnemyController
                 // do animations here
                 yield return new WaitForEndOfFrame();
             }
-            /*else if (Time.time < startTime + chargeTime + enableLength + pauseTime) // STANDING STILL AFTER ATTACK (window for the player to counter)
-            {
-                //weapon.GetComponent<Collider2D>().enabled = false;
-                // do animations here
-                yield return new WaitForSeconds(.05f);
-            }*/
-            else if (Time.time > startTime + chargeTime + enableLength + pauseTime && doing) // RETREATING (jumping backwards)
+            else if (Time.time > startTime + chargeTime + pauseTime && doing) // RETREATING (jumping backwards)
             {
                 if (retreat == null)
                 {

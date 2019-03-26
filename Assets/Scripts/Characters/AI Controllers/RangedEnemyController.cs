@@ -16,8 +16,6 @@ public class RangedEnemyController : EnemyController {
     public float attackChargeTime;
     [Tooltip("Time to wait immediately after attacking in seconds.")]
     public float postAttackPauseDuration;
-
-    public WeaponController WC;
     
     [HideInInspector]
     public bool shooting = false;
@@ -56,7 +54,6 @@ public class RangedEnemyController : EnemyController {
             foreach (RaycastHit2D hit in hits)
             {
                 // go through hits from closest to farthest
-
                 if (hit.collider != null && hit.fraction != 0)
                 {
                     hitTag = hit.collider.tag;
@@ -82,19 +79,15 @@ public class RangedEnemyController : EnemyController {
                 {
                     if (vectorToTarget.magnitude > attackRange || vectorToTarget.magnitude > tooFarThreshold)
                     {
-                        //MoveTowards(vectorToTarget);
                         Move(vectorToTarget);
-                        //AimWeaponAtTarget(vectorToTarget);
                         WC.AimInDirection(vectorToTarget);
                     } else if (vectorToTarget.magnitude < tooCloseThreshold && hitIsTarget)
                     {
-                        //fleeing = MoveToLocation(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
                         fleeing = MoveTo(vectorToTarget.normalized * -1 * Mathf.Abs(followDistance - vectorToTarget.magnitude));
-                        //AimWeaponAtTarget(-vectorToTarget);
                         WC.AimInDirection(-vectorToTarget);
                     } else if(Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget)
                     {
-                        if (/*weapon.GetComponent<RangedWeapon>().CanFire()*/WC.CanFire())
+                        if (WC.CanFire())
                         {
                             StartCoroutine(ShootAttack(vectorToTarget, attackChargeTime, postAttackPauseDuration));
                         }
@@ -111,7 +104,6 @@ public class RangedEnemyController : EnemyController {
     private IEnumerator ShootAttack(Vector2 vectorToTarget, float chargeTime, float pauseTime)
     {
         attacking = true;
-        //AimWeaponAtTarget(vectorToTarget);
         WC.AimInDirection(vectorToTarget);
         float startTime = Time.time;
         bool shot = false;
@@ -129,11 +121,6 @@ public class RangedEnemyController : EnemyController {
             {
                 attackIndicator.SetActive(false);
                 // shoot gun
-                /*StartCoroutine(weapon.GetComponent<RangedWeapon>().Shoot(vectorToTarget));
-                while (shooting)
-                {
-                    yield return new WaitForSeconds(.05f);
-                }*/
                 WC.Fire(vectorToTarget);
                 shot = true;
                 startTime = Time.time - chargeTime;
