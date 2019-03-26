@@ -4,15 +4,22 @@
 
 public class PlayerWeaponController : WeaponController
 {
+    #region events
+
     public delegate void PWCReloadHandler(bool reloading, float progress);
-    public event PWCReloadHandler ReloadUpdate;
+    public event PWCReloadHandler ReloadUpdate; // Called when ammo changes
     public delegate void PWCFireError();
-    public event PWCFireError FireError;
+    public event PWCFireError FireError; // Called when a reload attempt is made at a time the gun cannot reload
+
+    #endregion
+
+    #region monobehavior
 
     // Update is called once per frame
     void Update()
     {
         // To swap weapons on the arcade, pause the sim and pull up a radial selector and use joysticks to select
+        // This determines what key you selected and whether to swap weapons, reload, and whatnot
         if (Input.GetKeyDown(KeyCode.Alpha1) && swapListIndex != 0)
         {
             swapList[swapListIndex].SetEnabled(false);
@@ -58,7 +65,7 @@ public class PlayerWeaponController : WeaponController
                 if (swapList[swapListIndex].CanFire())
                 {
                     swapList[swapListIndex].Fire(shootDir); // Player shoots
-                    
+
                 }
                 else if (swapList[swapListIndex].reloading)
                 {
@@ -76,4 +83,6 @@ public class PlayerWeaponController : WeaponController
             // use events to do update the UI btw
         }
     }
+
+    #endregion
 }
