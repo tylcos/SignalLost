@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeaponAnimation : PlayerAnimation
+public class RangedWeaponAnimation : MonoBehaviour
 {
     [HideInInspector]
-    public GameObject weapon;
 
-    private PlayerWeaponController pWC;
 
-   
+    private Animator weaponAnimator;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        pWC = this.GetComponentInChildren<PlayerWeaponController>();
+        weaponAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log(pWC);
+        Debug.Log(weaponAnimator);
+
     }
 }

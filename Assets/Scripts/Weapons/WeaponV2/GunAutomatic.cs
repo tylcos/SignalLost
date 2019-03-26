@@ -6,6 +6,7 @@ public class GunAutomatic : Gun
 {
     private Coroutine rel; // active reload routine or null
     private EquippedWeapon dad;
+    public static bool fireForAnim;
 
     /// <summary>
     /// Initialize this gun's values.
@@ -31,7 +32,7 @@ public class GunAutomatic : Gun
     /// <param name="direction">The direction the weapon fired in.</param>
     public override void Fire(Vector2 direction)
     {
-
+        fireForAnim = true;
     }
 
     /// <summary>

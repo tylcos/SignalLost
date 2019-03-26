@@ -234,6 +234,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3222853498611486919, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222853498611486919, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3199193262912824675, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
         type: 3}
       propertyPath: inventory.Array.data[0]
@@ -252,6 +262,10 @@ PrefabInstance:
     - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_Name
       value: Red Dude
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -376,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11999946, y: -0.01, z: -110}
+  m_LocalPosition: {x: -0.11999958, y: -0.01, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1237663205}
@@ -795,6 +809,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1978787554900614018, guid: 74904ff051524d048a5a98912b5aafbe,
+        type: 3}
+      propertyPath: inventory.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0960bbb17081d6940949de794d58b570,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 3}
 --- !u!1 &1237663204
@@ -1051,6 +1071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: shooty shooty man
       objectReference: {fileID: 0}
+    - target: {fileID: 1411719202972802, guid: 5b9e39121264e184181535c15791a84e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4273588013815034, guid: 5b9e39121264e184181535c15791a84e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.54
@@ -1159,7 +1183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814215812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11999946, y: -0.01, z: -110}
+  m_LocalPosition: {x: -0.11999958, y: -0.01, z: -110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347403481}
