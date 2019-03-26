@@ -36,6 +36,9 @@ public class DungeonGameManager : MonoBehaviour
     {
         if (Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
+
+        if (Input.GetKeyDown(KeyCode.O))
+            LevelManager.LoadNewLevel();
     }
 
 

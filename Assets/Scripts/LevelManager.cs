@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +13,12 @@ public static class LevelManager
 
 
     public static int startingRooms = 6;
+    [HideInInspector]
     public static int currentLevel = 0;
 
 
+
+    private static float timeForFade = 2f;
 
     private static long timeAtLevelLoad;
 
@@ -35,7 +39,11 @@ public static class LevelManager
 
     public static void LoadNewLevel()
     {
-        GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>().StartFadeBlind(0f, 0f, 2f);
+        UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
+        ui.StartFadeBlind(0f, 1f, 2f, false);
+        ui.StartCoroutine(LoadNewLevelWait(2.1f));
+
+
 
         long timeTakenS = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
@@ -44,9 +52,15 @@ public static class LevelManager
 
 
         ++currentLevel;
+    }
+
+    private static IEnumerator<WaitForSeconds> LoadNewLevelWait(float time)
+    {
+        yield return new WaitForSeconds(time);
+
         SceneManager.LoadScene(gameSceneName);
         // Spawn rooms with LevelsToSpawn
-        // Remove blind from camera
+        // Remove blind from camera *DONE*
     }
 
     public static void LoadDeathScreen()

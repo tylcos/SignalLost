@@ -131,20 +131,29 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FadeBlind(1f, 0f, 2f));
+        StartFadeBlind(1f, 0f, 2f, true);
     }
 
 
 
-    public void StartFadeBlind(float alphaStart, float alphaFinish, float time)
+    public void StartFadeBlind(float alphaStart, float alphaFinish, float time, bool enableCursor)
     {
-        StartCoroutine(FadeBlind(alphaStart, alphaFinish, time));
+        StartCoroutine(FadeBlind(alphaStart, alphaFinish, time, enableCursor));
     }
 
-    private IEnumerator<WaitForEndOfFrame> FadeBlind(float alphaStart, float alphaFinish, float time)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="alphaStart"></param>
+    /// <param name="alphaFinish"></param>
+    /// <param name="time"></param>
+    /// <param name="enableCursor"></param>
+    /// <returns></returns>
+    private IEnumerator<WaitForEndOfFrame> FadeBlind(float alphaStart, float alphaFinish, float time, bool enableCursor)
     {
+        Cursor.visible = false;
+
         float elapsedTime = 0;
-
         Color color = fadeOut.color;
 
         while (elapsedTime < time)
@@ -155,6 +164,8 @@ public class UIController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        
+        Cursor.visible = enableCursor;
     }
 
     private void DeathSequence()
