@@ -80,9 +80,9 @@ public class MeleeEnemyController : EnemyController
                     Move(vectorToTarget);
                     AimWeaponAtTarget(vectorToTarget);
                 }
-                if (Time.time - lastAttackTime > attackCooldownLength && vectorToTarget.magnitude < attackRange && hitIsTarget && WC.CanFire()) // attack
+                if (/*Time.time - lastAttackTime > attackCooldownLength && */vectorToTarget.magnitude < attackRange && hitIsTarget && WC.CanFire()) // attack
                 {
-                    StartCoroutine(SwordAttack(vectorToTarget, attackChargeTime, attackColliderEnableDuration, postAttackPauseDuration, postAttackRetreatDistance));
+                    StartCoroutine(SwordAttack(-vectorToTarget, attackChargeTime, attackColliderEnableDuration, postAttackPauseDuration, postAttackRetreatDistance));
                 }
             }
         }
