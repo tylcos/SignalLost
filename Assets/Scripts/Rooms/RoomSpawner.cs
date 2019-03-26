@@ -6,47 +6,50 @@ using UnityEngine.Assertions;
 
 
 
-public static class RoomSpawner
+public class RoomSpawner : MonoBehaviour
 {
-    public static int roomsToSpawn = 5;
-    public static int maxConnections = 4;
-    public static bool debug;
+    public readonly int maxConnections = 4;
+    public bool debug;
 
-    public static GameObject[] roomPrefabs;
-    [Tooltip("Starting, zero, Shop, Boss")]
-    public static GameObject[] specialRooms = new GameObject[4];
 
-    public static GameObject gameObject = GameObject.Find("/Scene/Rooms");
-    public static Transform transform;
+
+    public GameObject[] BaseRooms;
+    public GameObject StartingRoom;
+    public GameObject[] ZeroRooms = new GameObject[4]; // Spawned when there is no space to spawn a large room
+    public GameObject[] ShopRooms = new GameObject[4];
+    public GameObject[] BossRooms = new GameObject[4];
+
+    public Transform SpawnTransform = GameObject.Find("/Scene/Rooms").transform;
     
 
 
-    // Eventually change to spawn a specific number of rooms ~~~
-    private static void Start()
+    public void SpawnRooms(int roomsToSpawn)
     {
-        Assert.IsNotNull(gameObject, "No game object '/Scene/Rooms' found");
-        transform = gameObject.transform;
+        Assert.IsNotNull(SpawnTransform, "No game object '/Scene/Rooms' found");
 
 
 
         Room.Initialize(maxConnections, transform);
 
-        foreach (GameObject room in roomPrefabs)
+        foreach (GameObject room in BaseRooms)
         {
-            var script = room.GetComponent<RoomManager>();
-            script.UpdateConnectors();
-            int connections = script.connectors.Sum(s => s.Count);
+            var rm = room.GetComponent<RoomManager>();
+            rm.UpdateConnectors();
+
+            int connectionCount = rm.connectors.Sum(s => s.Count);
+            Room.BaseRooms[connectionCount].Add(new Room(room, rm));
 
             if (debug)
-                Debug.Log("[Adding Rooms] " + connections);
-            for (int rotation = 0; rotation < 4; rotation++)
-                Room.BaseRooms[connections].Add(new Room(room, script, rotation));
+                Debug.Log("[Adding Rooms] " + connectionCount);
         }
 
-        var zeroScript = specialRooms[1].GetComponent<RoomManager>();
-        zeroScript.UpdateConnectors();
         for (int rotation = 0; rotation < 4; rotation++)
-            Room.BaseRooms[0].Add(new Room(specialRooms[1], zeroScript, rotation));
+        {
+            var zeroScript = ZeroRooms[rotation].GetComponent<RoomManager>();
+            zeroScript.UpdateConnectors();
+
+            Room.BaseRooms[0].Add(new Room(ZeroRooms[rotation], zeroScript));
+        }
 
 
 
@@ -55,33 +58,30 @@ public static class RoomSpawner
 
 
 
-        var c = System.Diagnostics.Stopwatch.StartNew();
-        var ss = System.Diagnostics.Stopwatch.StartNew();
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        InstantiateRooms(roomsToSpawn);
+        sw.Stop();
 
-        SpawnRooms();
-
-        c.Stop();
-        ss.Stop();
-        Debug.Log("Finished spawning " + (roomsToSpawn + 1) + " rooms in " + ss.Elapsed.Milliseconds + " ms total with " + c.Elapsed.Milliseconds + " ms of computing");
+        Debug.Log("Finished spawning " + (roomsToSpawn + 1) + " rooms in " + sw.Elapsed.Milliseconds + " ms total");
     }
 
 
 
-    public static void SpawnRooms()
+    private void InstantiateRooms(int roomsToSpawn)
     {
-        Room startRoom = new Room(GameObject.Instantiate(specialRooms[0], transform));
+        Room startRoom = new Room(Instantiate(StartingRoom, transform));
         int remainingRooms = roomsToSpawn;
 
-        List<Room> unconsumedRooms = new List<Room>(8);
-        Queue<Room> queue = new Queue<Room>(8);
+        List<Room> newRooms = new List<Room>(16); // Rooms to spawn on in the next iteration
+        Queue<Room> queue = new Queue<Room>(16);  // Rooms to spawn on in the current iteration
         queue.Enqueue(startRoom);
 
 
 
-        int loop = 0;
+        int loop = 0; 
         while (remainingRooms > 0) // Iteration
         {
-            int totalConnections = queue.Sum(r => r.connectors.Sum(s => s.Count));
+            int totalConnections = queue.Sum(r => r.connections.Sum(s => s.Count));
 
             while (queue.Any())
             {
@@ -96,12 +96,12 @@ public static class RoomSpawner
 
 
                     var roomToSpawnTuple = Room.GetRoom(connections, connection, room);
-                    var roomToSpawn = roomToSpawnTuple.Item1.Clone();
 
-
-                    roomToSpawn.Instantiate(roomToSpawnTuple.Item2);
-                    unconsumedRooms.Add(roomToSpawn);
+                    roomToSpawnTuple.Item1.Instantiate(roomToSpawnTuple.Item2);
+                    newRooms.Add(roomToSpawnTuple.Item1);
                     totalConnections += roomToSpawnTuple.Item3 - 1;
+
+
 
                     --remainingRooms;
                     if (remainingRooms == 0)
@@ -109,10 +109,10 @@ public static class RoomSpawner
                 }
             }
 
-            queue = new Queue<Room>(unconsumedRooms);
-            unconsumedRooms.Clear();
+            queue = new Queue<Room>(newRooms);
+            newRooms.Clear();
 
-            if (loop++ > 50)
+            if (loop++ > 50) // Infinite loop check
                 break;
         }
     }
@@ -125,13 +125,13 @@ public class Room
     public GameObject gameObject;
     public Transform transform;
 
-    public List<int>[] connectors;
+    public List<int>[] connections;
     public Bounds bounds;
-    public byte rotation;
 
 
 
     public static List<Room>[] BaseRooms; // [Connections][Room Index]
+
     public static List<Bounds> spawnedRooms;
 
 
@@ -150,7 +150,7 @@ public class Room
         transform = go.transform;
 
         var rm = go.GetComponent<RoomManager>();
-        connectors = rm.connectors;
+        connections = rm.connectors;
         bounds = rm.bounds;
     }
 
@@ -159,37 +159,28 @@ public class Room
         gameObject = go;
         transform = go.transform;
 
-        connectors = rm.connectors;
+        connections = rm.connectors;
         bounds = rm.bounds;
     }
 
-    public Room(GameObject go, RoomManager rm, int rotation)
-    {
-        gameObject = go;
-        transform = go.transform;
-
-        connectors = rm.connectors;
-        bounds = rm.bounds;
-
-        this.rotation = (byte)rotation;
-        Rotate();
-    }
-
+    /// <summary>
+    /// Used to clone rooms so that the connections can be removed without changing the base rooms
+    /// </summary>
+    /// <returns>Cloned room</returns>
     public Room Clone()
     {
         Room room = new Room
         {
-            connectors = new List<int>[]
+            connections = new List<int>[]
             {
-                new List<int>(connectors[0]),
-                new List<int>(connectors[1]),
-                new List<int>(connectors[2]),
-                new List<int>(connectors[3])
+                new List<int>(connections[0]),
+                new List<int>(connections[1]),
+                new List<int>(connections[2]),
+                new List<int>(connections[3])
             },
 
             gameObject = gameObject,
-            bounds = bounds,
-            rotation = rotation
+            bounds = bounds
         };
 
         return room;
@@ -199,14 +190,17 @@ public class Room
 
     public IEnumerable<Connection> GetConnections()
     {
-        foreach (int s in new [] { 0,2,1,3})
+        foreach (int s in new[] { 0,2,1,3 })
         {
-            var side = connectors[s];
+            var side = connections[s];
             for (int c = 0; c < side.Count; c++)
                 yield return new Connection((byte)s, side[c]);
         }
     }
 
+    /// <summary>
+    /// Returns the offset of where the connection is located at
+    /// </summary>
     public Vector3 GetConnectionOffset(Connection connection)
     {
         Vector3 offset = new Vector3(bounds.extents.x + bounds.min.x, bounds.extents.y + bounds.min.y);
@@ -216,7 +210,7 @@ public class Room
             offset.x += (connection.Direction & 1) > 0 ? bounds.extents.x : -bounds.extents.x;
             offset.y += connection.Position;
         }
-        else
+        else // Vertical connection
         {
             offset.x += connection.Position;
             offset.y += (connection.Direction & 1) > 0 ? bounds.extents.y : -bounds.extents.y;
@@ -225,17 +219,16 @@ public class Room
         return offset;
     }
 
-
-
+    /// <summary>
+    /// Returns the position of where to spawn the room in world space and removes the connection of the room to spawn
+    /// </summary>
     public Vector3 GetSpawnPosition(Connection connection, Room roomToSpawn)
     {
-        var flippedDirection = connection.FlippedDirection;
+        byte flippedDirection = connection.FlippedDirection;
+        var oppositeConnection = new Connection(flippedDirection, roomToSpawn.connections[flippedDirection].Shuffle().First());
+        roomToSpawn.connections[flippedDirection].Remove(connection.Position);
 
-        var c = roomToSpawn.connectors[connection.FlippedDirection];
-        var spawnConnector = new Connection(flippedDirection, roomToSpawn.connectors[flippedDirection].Shuffle().First());
-        roomToSpawn.connectors[flippedDirection].Remove(connection.Position);
-
-        return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(spawnConnector);
+        return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(oppositeConnection);
     }
 
     public bool ValidSpawnPosition(Vector3 position)
@@ -249,31 +242,32 @@ public class Room
         return true;
     }
 
+    /// <summary>
+    /// Returns a valid room that can be spawned from the connection of the current room
+    /// </summary>
+    /// <param name="connections">The number of connections the returned room needs to have</param>
+    /// <param name="connection">The connection the new room is being spawned from</param>
+    /// <param name="currentRoom">The current room that is spawning the new room</param>
+    /// <returns>(Room to spawn, Position to spawn the room, Connections the returned room has) </returns>
     public static (Room, Vector3, int) GetRoom(int connections, Connection connection, Room currentRoom)
     {
         foreach (Room room in RandomHelper.Shuffle(BaseRooms[connections]))
         {
-            if (room.connectors[connection.FlippedDirection].Count > 0)/* &&
+            if (room.connections[connection.FlippedDirection].Count > 0)/* &&
                 room.ValidSpawnPosition((spawnPosition = currentRoom.GetSpawnPosition(connection, room))))*/
-                return (room, currentRoom.GetSpawnPosition(connection, room), connections);
+                return (room.Clone(), currentRoom.GetSpawnPosition(connection, room), connections);
         }
             
-        Debug.Log("bad" + connections);
-        Room capRoom = BaseRooms[0].First(r => r.connectors[connection.FlippedDirection].Count > 0);
-        return (capRoom, currentRoom.GetSpawnPosition(connection, capRoom), 1);
+        Debug.Log("No room found with " + connections + " connections!");
+        Room zeroRoom = BaseRooms[0].First(r => r.connections[connection.FlippedDirection].Count > 0);
+        return (zeroRoom, currentRoom.GetSpawnPosition(connection, zeroRoom), 1);
     }
 
 
 
     public void Instantiate(Vector3 position)
     {
-        var quaternion = new Quaternion
-        {
-            eulerAngles = new Vector3(0, 0, 90f * rotation)
-        };
-
-        gameObject = UnityEngine.Object.Instantiate(gameObject, position, quaternion, roomSpawner);
-        transform = gameObject.transform;
+        gameObject = UnityEngine.Object.Instantiate(gameObject, position, Quaternion.identity, roomSpawner);
 
         var spawnedBounds = new Bounds(bounds.center + position, bounds.size);
         spawnedRooms.Add(spawnedBounds);
@@ -287,62 +281,9 @@ public class Room
 
         BaseRooms = new List<Room>[++maxConnections];
         for (int i = 0; i < maxConnections; i++)
-            BaseRooms[i] = new List<Room>(2);
+            BaseRooms[i] = new List<Room>(8);
 
         spawnedRooms = new List<Bounds>(maxConnections);
-    }
-
-    public void Rotate()
-    {
-        if (rotation == 0)
-            return;
-        
-
-
-        List<int>[] newConnectors = null;
-        var newBounds = new Bounds();
-
-        switch (rotation)
-        {
-            case 1:
-                newBounds.SetMinMax(new Vector3(bounds.min.y, -bounds.max.x), new Vector3(bounds.max.y, -bounds.min.x));
-                newBounds.center = new Vector3(bounds.center.y, -bounds.center.x);
-
-                newConnectors = new List<int>[] {
-                    new List<int>(connectors[3]),
-                    new List<int>(connectors[2]),
-                    new List<int>(connectors[0]),
-                    new List<int>(connectors[1])
-                };
-                break;
-
-            case 2:
-                newBounds.SetMinMax(-bounds.max, -bounds.min);
-                newBounds.center = new Vector3(-bounds.center.x, -bounds.center.y);
-
-                newConnectors = new List<int>[] {
-                    new List<int>(connectors[1]),
-                    new List<int>(connectors[0]),
-                    new List<int>(connectors[3]),
-                    new List<int>(connectors[2])
-                };
-                break;
-
-            case 3:
-                newBounds.SetMinMax(new Vector3(-bounds.max.y, bounds.min.x), new Vector3(-bounds.min.y, -bounds.max.x));
-                newBounds.center = new Vector3(bounds.center.y, -bounds.center.x);
-
-                newConnectors = new List<int>[] {
-                    new List<int>(connectors[2]),
-                    new List<int>(connectors[3]),
-                    new List<int>(connectors[1]),
-                    new List<int>(connectors[0])
-                };
-                break;
-        }
-
-        bounds = newBounds;
-        connectors = newConnectors;
     }
 }
 
@@ -363,12 +304,5 @@ public struct Connection
     {
         Direction = dir;
         Position = pos;
-    }
-
-
-
-    public Connection Flip()
-    {
-        return new Connection(FlippedDirection, Position);
     }
 }
