@@ -13,8 +13,15 @@
 *arcade weapon swapping
 *DON'T UPDATE PREFABS
 *ENEMY WEAPON COMPATIBILITY [MERGE AFTER THIS]
+*UPDATE PREFABS
+*melee weapons
+*melee weapons for enemies
 
-UPDATE PREFABS
+CLEAN UP AN COMMENT CODE
+weapon offsetting or make the ends of all weapons held at a point that the enemy itself can specify on its body
+	so like root the handle to a point on the enemy
+	or zero prefabs at handle and let the enemy offset it weapon holder instead
+		^ do that
 bullet penetration
 bullet ricochets
 bullet spread

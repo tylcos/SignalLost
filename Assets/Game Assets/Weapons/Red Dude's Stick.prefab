@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5801089868725973186}
   - component: {fileID: 5943737512835976380}
+  - component: {fileID: 1902534729921310242}
   - component: {fileID: 5993556215691312681}
-  - component: {fileID: 5797561898409904482}
   - component: {fileID: 3353630585451571978}
   m_Layer: 16
   m_Name: Red Dude's Stick
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804408742316254558}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 0.98, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,6 +82,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &1902534729921310242
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804408742316254558}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.16976745, y: 0.025581382}
+  m_Size: {x: 0.48, y: 0.15}
+  m_Direction: 1
 --- !u!114 &5993556215691312681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,23 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d548dc9df5f874f9b1332445295619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitter: {fileID: 5797561898409904482}
---- !u!70 &5797561898409904482
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5804408742316254558}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.51, y: 0.12}
-  m_Direction: 1
+  hitter: {fileID: 1902534729921310242}
 --- !u!50 &3353630585451571978
 Rigidbody2D:
   serializedVersion: 4
