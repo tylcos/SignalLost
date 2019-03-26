@@ -7,6 +7,8 @@ public class GunAutomatic : Gun
     private Coroutine rel;
     private EquippedWeapon dad;
 
+    public static bool fireForAnim;
+
     public override void Initialize(EquippedWeapon wep)
     {
         dad = wep;
@@ -20,7 +22,7 @@ public class GunAutomatic : Gun
 
     public override void Fire(Vector2 direction)
     {
-                    
+        fireForAnim = true;
     }
 
     public override void Reload(float time)
