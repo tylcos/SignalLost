@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GunAutomatic : Gun
@@ -48,7 +47,7 @@ public class GunAutomatic : Gun
     /// Reloads the gun over time.
     /// </summary>
     /// <param name="duration">How long reloading takes.</param>
-    private IEnumerator Reloading(float duration)
+    private IEnumerator<WaitForEndOfFrame> Reloading(float duration)
     {
         float start = Time.time;
         do
@@ -56,6 +55,7 @@ public class GunAutomatic : Gun
             yield return new WaitForEndOfFrame();
             dad.reloadProgress = (Time.time - start) / duration;
         } while (dad.reloadProgress < duration);
+
         dad.FillMag();
         Debug.Log("Filled mag");
     }

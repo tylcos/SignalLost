@@ -25,7 +25,7 @@ public class FollowMouse : MonoBehaviour
         if (shootDir.sqrMagnitude == 0)
         {
             Vector3 trueMousePos = Input.mousePosition;
-            if(lastMousePosition == new Vector3(0, 0, float.MaxValue) || lastMousePosition != trueMousePos || Input.GetAxis("Fire1") > 0)
+            if (lastMousePosition == new Vector3(0, 0, float.MaxValue) || lastMousePosition != trueMousePos || Input.GetAxis("Fire1") > 0)
             {
                 lastMousePosition = trueMousePos;
                 Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -34,9 +34,7 @@ public class FollowMouse : MonoBehaviour
             }
         }
         else
-        {
             angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(shootDir.y, shootDir.x)) - transform.eulerAngles.z;
-        }
 
         transform.RotateAround(transform.position, Vector3.forward, angleDifference);
     }
