@@ -23,9 +23,11 @@ public class DungeonGameManager : MonoBehaviour
         {
             case "keyboard":
                 InputMethod = InputMethodType.Keyboard;
+                Cursor.visible = true;
                 break;
             case "arcade":
                 InputMethod = InputMethodType.Arcade;
+                Cursor.visible = false;
                 break;
         }
     }
