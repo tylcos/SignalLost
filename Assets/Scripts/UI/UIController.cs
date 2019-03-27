@@ -136,19 +136,18 @@ public class UIController : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Linearly changes the alpha channel over time of the blind over the UI 
+    /// </summary>
+    /// <param name="alphaStart">Starting aplha value</param>
+    /// <param name="alphaFinish">Ending aplha value</param>
+    /// <param name="time">Time taken to transition from the start value to the end value</param>
+    /// <param name="enableCursor">Turns the cursor on or off after the method is done</param>
     public void StartFadeBlind(float alphaStart, float alphaFinish, float time, bool enableCursor)
     {
         StartCoroutine(FadeBlind(alphaStart, alphaFinish, time, enableCursor));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="alphaStart"></param>
-    /// <param name="alphaFinish"></param>
-    /// <param name="time"></param>
-    /// <param name="enableCursor"></param>
-    /// <returns></returns>
     private IEnumerator<WaitForEndOfFrame> FadeBlind(float alphaStart, float alphaFinish, float time, bool enableCursor)
     {
         Cursor.visible = false;
