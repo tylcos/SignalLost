@@ -23,7 +23,7 @@ public static class LeaderboardManager
         if (!File.Exists(savePath))
         {
             leaderboardEntries = new List<LeaderboardEntry>();
-            SaveLeaderboardEntries();
+            return;
         }
 
 
@@ -36,9 +36,7 @@ public static class LeaderboardManager
         catch (Exception)
         {
             Debug.LogError("Error opening leaderboard file at " + savePath);
-
-
-
+            
             if (File.Exists(savePath))
             {
                 string backupPath = savePath + ".bak";
@@ -47,8 +45,6 @@ public static class LeaderboardManager
 
                 File.Move(savePath, backupPath);
             }
-            
-
 
             leaderboardEntries = new List<LeaderboardEntry>();
         }
