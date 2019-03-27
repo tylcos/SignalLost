@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     public const int COMBATMODE_MELEE = 1;
 
     [SerializeField]
-    public WeaponV2Information[] inventory = new WeaponV2Information[INVSIZE];
+    public UWeaponInformation[] inventory = new UWeaponInformation[INVSIZE];
     /// <summary>
     /// The list of all EquippedWeapons that this WeaponController has in its inventory.
     /// </summary>
@@ -45,7 +45,7 @@ public class WeaponController : MonoBehaviour
     private void OnEnable()
     {
         // populates the swaplist
-        foreach (WeaponV2Information wep in inventory)
+        foreach (UWeaponInformation wep in inventory)
         {
             // create a class that stores a reference to the object we 
             if (wep == null)

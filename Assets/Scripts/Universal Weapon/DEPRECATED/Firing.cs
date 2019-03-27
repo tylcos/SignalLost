@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-
+[System.Obsolete("This is kept only for legacy support.", true)]
 public class Firing : MonoBehaviour
 {
 

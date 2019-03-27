@@ -3,8 +3,8 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(fileName = "My new weapon", menuName = "WeaponV2")]
-public class WeaponV2Information : ScriptableObject
+[CreateAssetMenu(fileName = "My new weapon", menuName = "U-Weapon")]
+public class UWeaponInformation : ScriptableObject
 {
     [Dropdown("Mode")]
     public int combatMode;

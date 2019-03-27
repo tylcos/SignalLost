@@ -2,7 +2,8 @@
 
 
 
-[CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
+[CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon (Old)")]
+[System.Obsolete("Use a U-Weapon instead.")]
 public class WeaponInfo : ScriptableObject
 {
     [Tooltip("The ingame name of the weapon.")]

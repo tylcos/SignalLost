@@ -6,6 +6,7 @@ public class EquippedWeapon : Object
 
     /* COMMON FIELDS */
     private readonly bool logical = true; // whether or not this object can do anything
+    private bool sendsEvents; // whether this object should send UI events (i.e. its a player weapon)
     public GameObject weapon;
     private readonly float minTimeBetweenAttacks; // minimum time that must pass after an attack before allowing another attack
     private readonly int layer; // layer for collisions
@@ -66,8 +67,9 @@ public class EquippedWeapon : Object
     /// <param name="layer">The layer to be used for collision.</param>
     /// <param name="parentMoveController">The character who owns this weapon.</param>
     /// <param name="combatMode">The combatmode that this weapon will use. See <see cref="WeaponController"/> for values.</param>
-    public EquippedWeapon(WeaponV2Information info, Transform parent, string layer, MovementController parentMoveController, int combatMode)
+    public EquippedWeapon(UWeaponInformation info, Transform parent, string layer, MovementController parentMoveController, int combatMode)
     {
+        sendsEvents = parentMoveController.gameObject.CompareTag("Player");
         this.combatMode = combatMode;
         weapon = Instantiate(info.weapon, parent);
         character = parentMoveController;
@@ -108,12 +110,14 @@ public class EquippedWeapon : Object
     public void SetEnabled(bool state)
     {
         if (!logical) return;
+
         weapon.SetActive(state);
         if (combatMode == WeaponController.COMBATMODE_GUN)
             CancelReload();
         else if (combatMode == WeaponController.COMBATMODE_MELEE)
             CancelSwing();
-        if (state)
+
+        if (state && sendsEvents)
             WeaponSwapped(this, combatMode);
     }
 
@@ -153,7 +157,8 @@ public class EquippedWeapon : Object
             bm.source = character;
             gunScript.Fire(direction);
             timeOfLastShot = Time.time;
-            WeaponAmmoChanged();
+            if (sendsEvents)
+                WeaponAmmoChanged();
         }
         else if (combatMode == WeaponController.COMBATMODE_MELEE)
         {
@@ -235,7 +240,8 @@ public class EquippedWeapon : Object
         currentAmmo = maxAmmo;
         reloading = false;
         reloadProgress = 1;
-        WeaponAmmoChanged();
+        if (sendsEvents)
+            WeaponAmmoChanged();
     }
     #endregion
 

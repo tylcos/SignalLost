@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete("Use new GunAutomatic instead.", true)]
 public class RangedWeapon : MonoBehaviour {
 
     public RangedEnemyController parentController;

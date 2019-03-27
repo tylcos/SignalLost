@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 
-
+[System.Obsolete("Use a WeaponController instead.", true)]
 public class WeaponManager : MonoBehaviour
 {
     public SpriteRenderer sr;
