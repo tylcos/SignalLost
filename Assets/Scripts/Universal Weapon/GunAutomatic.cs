@@ -5,7 +5,7 @@ public class GunAutomatic : Gun
 {
     private Coroutine rel; // active reload routine or null
     private EquippedWeapon dad;
-    public static bool fireForAnim;
+    public bool fireForAnim;
 
     /// <summary>
     /// Initialize this gun's values.
