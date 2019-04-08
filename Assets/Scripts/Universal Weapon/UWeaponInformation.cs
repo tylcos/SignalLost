@@ -20,15 +20,15 @@ public class UWeaponInformation : ScriptableObject
     [ShowAssetPreview]
     public GameObject weapon;
 
-    [InfoBox("Unimplemented")]
-    [BoxGroup("Prefabs")]
-    [Tooltip("Horizontal offset to place the weapon from the center of the character.")]
-    public float horizontalOffset;
+    //[InfoBox("Unimplemented")]
+    //[BoxGroup("Prefabs")]
+    //[Tooltip("Horizontal offset to place the weapon from the center of the character.")]
+    //public float horizontalOffset;
 
-    [InfoBox("Unimplemented")]
-    [BoxGroup("Prefabs")]
-    [Tooltip("Vertical offset to place the weapon from the center of the character.")]
-    public float verticalOffset;
+    //[InfoBox("Unimplemented")]
+    //[BoxGroup("Prefabs")]
+    //[Tooltip("Vertical offset to place the weapon from the center of the character.")]
+    //public float verticalOffset;
 
     private bool GunMode()
     {
