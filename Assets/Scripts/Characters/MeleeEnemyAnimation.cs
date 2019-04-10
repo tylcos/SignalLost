@@ -15,6 +15,7 @@ public class MeleeEnemyAnimation : MonoBehaviour
     {
         movementAccessor = this.GetComponent<MovementController>();
         meleeAnimator = movementAccessor.GetComponent<MovementController>().spriteAnimator;
+        Debug.Log(movementAccessor);
     }
 
     // Update is called once per frame
@@ -25,7 +26,8 @@ public class MeleeEnemyAnimation : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (movementAccessor.movingForAnimation)
+        Debug.Log(movementAccessor.animationDirection);
+        /*if (movementAccessor.movingForAnimation)
         {
             meleeAnimator.SetBool("Idle", false);
         }
@@ -33,9 +35,10 @@ public class MeleeEnemyAnimation : MonoBehaviour
         {
             meleeAnimator.SetBool("Idle", true);
         }
-        if(movementAccessor.animationDirection == 3) // Checks if sprite is moving east
+        */
+        if(movementAccessor.animationDirection == 2) // Checks if sprite is moving east
         {
-            meleeAnimator.SetInteger("Direction", 1);
+            meleeAnimator.SetInteger("Direction", 2);
         }
         else if(movementAccessor.animationDirection == 4) // Checks if sprite is moving west
         {
