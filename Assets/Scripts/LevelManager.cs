@@ -39,8 +39,9 @@ public static class LevelManager
 
     public static void LoadNewLevel()
     {
+        bool cursor = DungeonGameManager.InputMethod == DungeonGameManager.InputMethodType.Keyboard;
         UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
-        ui.StartFadeBlind(0f, 1f, 2f, false);
+        ui.StartFadeBlind(0f, 1f, 2f, cursor);
         ui.StartCoroutine(LoadNewLevelWait(2.1f));
 
 
