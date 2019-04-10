@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: Wand
+  m_Name: R_Wand
   m_EditorClassIdentifier: 
   combatMode: 0
   weapon: {fileID: 8976151292421940513, guid: 719b715c390d2454199b41b963a2e918, type: 3}

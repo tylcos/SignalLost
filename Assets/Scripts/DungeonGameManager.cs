@@ -12,7 +12,9 @@ public class DungeonGameManager : MonoBehaviour
 
     [HideInInspector]
     public static int CurrentScore;
-    
+
+    public delegate void ScoreChangedHandler();
+    public static event ScoreChangedHandler ScoreChanged;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -45,6 +47,12 @@ public class DungeonGameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O)) // <o/
             LevelManager.LoadNewLevel();
+    }
+
+    public static void AddScore(int amount)
+    {
+        CurrentScore += amount;
+        ScoreChanged();
     }
 
 

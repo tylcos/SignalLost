@@ -58,13 +58,20 @@ public class UIController : MonoBehaviour
 
     private struct ScoreSettings
     {
-        
+        public TMP_Text text;
+        public int score;
+
+        public void Redraw()
+        {
+            text.text = "Score: " + score;
+        }
     }
 
 
 
     private HealthbarSettings _healthbarSettings;
     private AmmoSettings _ammoSettings;
+    private ScoreSettings _scoreSettings;
     [SerializeField]
     private GameObject uiReloadIndicator = null;
     [SerializeField]
@@ -80,11 +87,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject deathMessage = null;
     [SerializeField]
-    private TextMeshProUGUI score;
+    private GameObject score = null;
 
     [SerializeField]
     private Image fadeOut;
-    
+
 
 
     private void OnEnable()
@@ -96,12 +103,12 @@ public class UIController : MonoBehaviour
         }
         catch (UnassignedReferenceException)
         {
-            Debug.LogError("The healthbar was not assigned in the UI canvas! Disabling updates!");
+            Debug.LogError("The healthbar and related objects were not assigned in the UI canvas! Disabling updates!");
         }
 
         try
         {
-            _ammoSettings.text = ammo.gameObject.GetComponent<TMP_Text>();
+            _ammoSettings.text = ammo.GetComponent<TMP_Text>();
             _ammoSettings.wep = PWC.GetEquippedWeapon();
             _ammoSettings.uIndic = uiReloadIndicator;
             _ammoSettings.uFill = uiReloadIndicatorMask.transform;
@@ -113,7 +120,16 @@ public class UIController : MonoBehaviour
         }
         catch (UnassignedReferenceException)
         {
-            Debug.LogError("The ammo counter was not assigned in the UI canvas! Disabling updates!");
+            Debug.LogError("The ammo counter and related objects were not assigned in the UI canvas! Disabling updates!");
+        }
+
+        if (score != null)
+        {
+            _scoreSettings.text = score.GetComponent<TMP_Text>();
+        }
+        else
+        {
+            Debug.LogError("The score was not assigned in the UI canvas! Disabling Updates!");
         }
 
         if (deathMessage != null)
@@ -125,15 +141,18 @@ public class UIController : MonoBehaviour
             Debug.LogError("The death message was not assigned in the UI canvas! Disabling updates!");
         }
 
+        DungeonGameManager.ScoreChanged += OnScoreChanged;
+
         UpdateAmmo();
         UpdateHealthbar();
+        UpdateScore();
+        fadeOut.gameObject.SetActive(true);
     }
 
     private void Start()
     {
         StartFadeBlind(1f, 0f, 2f, true);
     }
-
 
 
     /// <summary>
@@ -163,7 +182,7 @@ public class UIController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
+
         Cursor.visible = enableCursor;
     }
 
@@ -201,8 +220,6 @@ public class UIController : MonoBehaviour
         _ammoSettings.Redraw();
     }
 
-
-
     private void OnWeaponUpdate()
     {
         UpdateAmmo();
@@ -218,5 +235,16 @@ public class UIController : MonoBehaviour
     private void OnReloadUpdate(bool reloading, float progress)
     {
         UpdateAmmo();
+    }
+
+    private void OnScoreChanged()
+    {
+        UpdateScore();
+    }
+
+    private void UpdateScore()
+    {
+        _scoreSettings.score = DungeonGameManager.CurrentScore;
+        _scoreSettings.Redraw();
     }
 }

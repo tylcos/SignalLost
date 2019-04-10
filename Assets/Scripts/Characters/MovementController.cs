@@ -132,7 +132,7 @@ public class MovementController : MonoBehaviour
         if (IsInvincible()) { return false; }
         lastDamageTime = Time.time;
         DamageTaken(damage);
-        if (MaxHitPoints - CurrentHitPoints <= 0)
+        if (CurrentHitPoints <= 0)
         {
             return true;
         }

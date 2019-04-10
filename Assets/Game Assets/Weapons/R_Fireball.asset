@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: Fireball
+  m_Name: R_Fireball
   m_EditorClassIdentifier: 
   combatMode: 0
   weapon: {fileID: 8687319807154478441, guid: 721473cbe8b7e6b4592fb5fc8e62d552, type: 3}
-  horizontalOffset: 0
-  verticalOffset: 0
   bullet: {fileID: 1502395725654502, guid: 602a92ee8a937a04897ef289da4ef3a2, type: 3}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}

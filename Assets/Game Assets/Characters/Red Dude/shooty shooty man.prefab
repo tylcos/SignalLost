@@ -283,10 +283,12 @@ MonoBehaviour:
   movingForAnimation: 0
   spriteRenderer: {fileID: 0}
   animationDirection: 1
+  chargingAttackAnim: 0
+  shot: 0
+  spriteDirection: {x: 0, y: 0}
   spriteAnimator: {fileID: 0}
-  weaponHolder: {fileID: 0}
-  weapon: {fileID: 0}
   attackIndicator: {fileID: 1721720636901802}
+  WC: {fileID: 524693820}
   aggroRange: 15
   damage: 15
   attackRange: 13
@@ -301,7 +303,6 @@ MonoBehaviour:
   tooFarThreshold: 6
   attackChargeTime: 0.5
   postAttackPauseDuration: 0.5
-  WC: {fileID: 524693820}
   shooting: 0
 --- !u!114 &114664005140517220
 MonoBehaviour:

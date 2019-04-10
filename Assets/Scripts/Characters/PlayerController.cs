@@ -78,7 +78,7 @@ public class PlayerController : MovementController
         base.OnHitDealt(opponent, killedOpponent);
         print("player hit an enemy and killed?:" + killedOpponent);
         if (killedOpponent)
-            DungeonGameManager.CurrentScore += 500;
+            DungeonGameManager.AddScore(500);
     }
 
     public override bool OnHitReceived(MovementController opponent, float damageReceived)
