@@ -40,6 +40,7 @@ public static class LevelManager
     public static void LoadNewLevel()
     {
         UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
+        DungeonGameManager.mouseOff = Cursor.visible;
         ui.StartFadeBlind(0f, 1f, 2f, false);
         ui.StartCoroutine(LoadNewLevelWait(2.1f));
 
@@ -47,9 +48,8 @@ public static class LevelManager
 
         long timeTakenS = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
-
+        
         DungeonGameManager.CurrentScore += ScoreFromTime(timeTakenS);
-
 
         ++currentLevel;
     }
@@ -84,7 +84,7 @@ public static class LevelManager
         if (timeTaken <= timeExpected)
             return baseTimeScore;
         else
-            return (int)(baseTimeScore * (double)(timeMax - timeTaken) / (timeMax - timeExpected));
+            return 0; //(int)(baseTimeScore * (double)(timeMax - timeTaken) / (timeMax - timeExpected));
     }
 
     private static int LevelsToSpawn => startingRooms + currentLevel * 2;

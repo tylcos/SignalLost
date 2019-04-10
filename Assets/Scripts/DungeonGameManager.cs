@@ -16,6 +16,10 @@ public class DungeonGameManager : MonoBehaviour
     public delegate void ScoreChangedHandler();
     public static event ScoreChangedHandler ScoreChanged;
 
+    [HideInInspector]
+    public static bool mouseOff = false;
+
+
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod()
@@ -25,7 +29,9 @@ public class DungeonGameManager : MonoBehaviour
         {
             case "keyboard":
                 InputMethod = InputMethodType.Keyboard;
-                Cursor.visible = true;
+
+                if (!mouseOff)
+                    Cursor.visible = true;
                 break;
             case "arcade":
                 InputMethod = InputMethodType.Arcade;
@@ -70,7 +76,7 @@ public class DungeonGameManager : MonoBehaviour
     {
         if (InputMethod == InputMethodType.Keyboard)
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        else if (InputMethod == InputMethodType.Arcade)
+        if (InputMethod == InputMethodType.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalArcade"), Input.GetAxisRaw("VerticalArcade"));
 
         return Vector2.zero;
@@ -80,7 +86,7 @@ public class DungeonGameManager : MonoBehaviour
     {
         if (InputMethod == InputMethodType.Keyboard)
             return new Vector2(Input.GetAxisRaw("HorizontalKeys"), Input.GetAxisRaw("VerticalKeys"));
-        else if (InputMethod == InputMethodType.Arcade)
+        if (InputMethod == InputMethodType.Arcade)
             return new Vector2(Input.GetAxisRaw("HorizontalKeysArcade"), Input.GetAxisRaw("VerticalKeysArcade"));
 
         return Vector2.zero;

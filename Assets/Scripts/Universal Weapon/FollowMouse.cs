@@ -22,7 +22,12 @@ public class FollowMouse : MonoBehaviour
         Vector2 shootDir = DungeonGameManager.GetAimingVector();
 
         float angleDifference = 0;
-        if (shootDir.sqrMagnitude == 0)
+        if (shootDir.sqrMagnitude != 0) // Player is aiming with keyboard
+        {
+            angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(shootDir.y, shootDir.x)) - transform.eulerAngles.z;
+            Cursor.visible = false;
+        }
+        else
         {
             Vector3 trueMousePos = Input.mousePosition;
             if (lastMousePosition == new Vector3(0, 0, float.MaxValue) || lastMousePosition != trueMousePos || Input.GetAxis("Fire1") > 0)
@@ -31,10 +36,9 @@ public class FollowMouse : MonoBehaviour
                 Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 float mouseAngle = Mathf.Rad2Deg * Mathf.Atan2(mousePosRelative.y, mousePosRelative.x);
                 angleDifference = mouseAngle - transform.eulerAngles.z;
+                Cursor.visible = true;
             }
         }
-        else
-            angleDifference = (Mathf.Rad2Deg * Mathf.Atan2(shootDir.y, shootDir.x)) - transform.eulerAngles.z;
 
         transform.RotateAround(transform.position, Vector3.forward, angleDifference);
     }

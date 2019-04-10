@@ -13868,6 +13868,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2644264974080269563, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
+        type: 3}
+      propertyPath: m_Name
+      value: UI Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 3211624266713683957, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: m_IsActive
@@ -13882,11 +13887,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2644264974080269563, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
-        type: 3}
-      propertyPath: m_Name
-      value: UI Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2644264974080269559, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
