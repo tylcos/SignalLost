@@ -31,10 +31,6 @@ public class DungeonGameManager : MonoBehaviour
                 InputMethod = InputMethodType.Arcade;
                 Cursor.visible = false;
                 break;
-            default:
-                InputMethod = InputMethodType.Keyboard;
-                Cursor.visible = true;
-                break;
         }
     }
 
