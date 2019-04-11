@@ -2,13 +2,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Assertions;
 
 
 
 public class RoomSpawner : MonoBehaviour
 {
-    public static int roomsToSpawn = 9;
     public readonly int maxConnections = 4;
     public bool debug;
 
@@ -66,7 +64,7 @@ public class RoomSpawner : MonoBehaviour
     private int InstantiateRooms()
     {
         Room startRoom = new Room(Instantiate(StartingRoom, transform));
-        int remainingRooms = roomsToSpawn;
+        int remainingRooms = LevelManager.RoomsToSpawn;
 
         List<Room> newRooms = new List<Room>(16); // Rooms to spawn on in the next iteration
         Queue<Room> queue = new Queue<Room>(16);  // Rooms to spawn on in the current iteration
@@ -106,11 +104,11 @@ public class RoomSpawner : MonoBehaviour
             queue = new Queue<Room>(newRooms);
             newRooms.Clear();
 
-            if (loop++ > roomsToSpawn) // Infinite loop check
+            if (loop++ > LevelManager.RoomsToSpawn) // Infinite loop check
                 break;
         }
 
-        return roomsToSpawn - remainingRooms;
+        return LevelManager.RoomsToSpawn - remainingRooms;
     }
 }
 

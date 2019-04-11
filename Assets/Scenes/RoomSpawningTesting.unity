@@ -159,7 +159,7 @@ MonoBehaviour:
   StartingRoom: {fileID: 1780979126589535559, guid: e6cced1ba944a3f44b97e33ef220b682,
     type: 3}
   BaseRooms:
-  - {fileID: 1734982991805366, guid: 91994bd4b61a9f64694a29cd798367b6, type: 3}
+  - {fileID: 1734982991805366, guid: 05e84fe40ddf437429dd2f4d3871cfd5, type: 3}
   - {fileID: 1734982991805366, guid: 5a50505875fa57041be463d75b89a9f2, type: 3}
   - {fileID: 1734982991805366, guid: 2985e1a3055a86946ab4cf59fd7347b9, type: 3}
   - {fileID: 1734982991805366, guid: b7c1066181f63cf41a68e9fca116c39a, type: 3}
@@ -167,6 +167,7 @@ MonoBehaviour:
   - {fileID: 1594456382, guid: 980bcb2ce4991a049a7fc952755408ae, type: 3}
   - {fileID: 4070292325365612799, guid: c5969f984486daf408372664f2757fdc, type: 3}
   - {fileID: 8298907241756308718, guid: 6b78e57308532a940ac7e0b011f3b650, type: 3}
+  - {fileID: 1734982991805366, guid: 91994bd4b61a9f64694a29cd798367b6, type: 3}
   ZeroRooms:
   - {fileID: 3170136433769838290, guid: 1490c741aadbece4aadc7cd5b0cb007d, type: 3}
   - {fileID: 3170136433769838290, guid: 615d67c9ef04039478f5cc42a198cb1a, type: 3}

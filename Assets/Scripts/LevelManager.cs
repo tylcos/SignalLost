@@ -12,13 +12,15 @@ public static class LevelManager
 
 
 
-    public static int startingRooms = 6;
+    public static readonly int startingRooms = 6;
+    [HideInInspector]
+    public static readonly int difficultyFactor = 4;
     [HideInInspector]
     public static int currentLevel = 0;
 
 
 
-    private static float timeForFade = 2f;
+    private static readonly float timeForFade = 2f;
 
     private static long timeAtLevelLoad;
 
@@ -39,6 +41,9 @@ public static class LevelManager
 
     public static void LoadNewLevel()
     {
+        if (DungeonGameManager.LoadingNewLevel == true)
+            return;
+
         DungeonGameManager.MouseOn = Cursor.visible;
         DungeonGameManager.LoadingNewLevel = true;
 
@@ -46,11 +51,10 @@ public static class LevelManager
 
         long timeTakenS = (DateTime.UtcNow.Ticks - timeAtLevelLoad) / TimeSpan.TicksPerSecond;
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
-        
+
         DungeonGameManager.CurrentScore += ScoreFromTime(timeTakenS);
 
         ++currentLevel;
-        RoomSpawner.roomsToSpawn += 2;
 
 
 
@@ -83,14 +87,18 @@ public static class LevelManager
 
     private static int ScoreFromTime(long timeTaken)
     {
-        long timeExpected = timeExpectedPerRoom * LevelsToSpawn + timeExpectedPerBoss;
-        long timeMax = timeMaxPerRoom * LevelsToSpawn + timeMaxPerBoss;
-
+        long timeExpected = timeExpectedPerRoom * RoomsToSpawn + timeExpectedPerBoss;
+        long timeMax = timeMaxPerRoom * RoomsToSpawn + timeMaxPerBoss;
+        int scoreGained = baseTimeScore * DifficultyLevel;
+        
         if (timeTaken <= timeExpected)
-            return baseTimeScore;
+            return scoreGained;
+        else if (timeTaken >= timeMax)
+            return 0;
         else
-            return 0; //(int)(baseTimeScore * (double)(timeMax - timeTaken) / (timeMax - timeExpected));
+            return (int)(scoreGained * ((double)(timeMax - timeTaken) / (timeMax - timeExpected)));
     }
 
-    private static int LevelsToSpawn => startingRooms + currentLevel * 2;
+    public static int DifficultyLevel => (currentLevel + 1) * difficultyFactor; // Multiplier for score
+    public static int RoomsToSpawn => startingRooms + DifficultyLevel;
 }
