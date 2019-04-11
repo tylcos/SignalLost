@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public static int roomsToSpawn = 29;
+    public static int roomsToSpawn = 9;
     public readonly int maxConnections = 4;
     public bool debug;
 
@@ -19,14 +19,10 @@ public class RoomSpawner : MonoBehaviour
     public GameObject[] ZeroRooms = new GameObject[4]; // Spawned when there is no space to spawn a large room
     public GameObject[] BossRooms = new GameObject[4];
 
-    public Transform SpawnTransform;
-    
 
 
     void Start()
     {
-        Assert.IsNotNull(SpawnTransform, "No game object '/Scene/Rooms' found");
-        
         Room.Initialize(maxConnections, transform);
 
 

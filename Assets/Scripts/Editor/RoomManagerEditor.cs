@@ -93,11 +93,13 @@ class RoomManagerEditor : Editor
         }
 
         EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("Room Connection String = " + castedTarget);
+
+        EditorGUILayout.Separator();
         if (GUILayout.Button("Save room changes (Hit ctrl-s also)", GUILayout.Width(250)))
             castedTarget.UpdateBoundSize();
 
         EditorGUILayout.Separator();
-        EditorGUILayout.LabelField("The room connection string = " + castedTarget);
     }
 
     private void SaveValues()
