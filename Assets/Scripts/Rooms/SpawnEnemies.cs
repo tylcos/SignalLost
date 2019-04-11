@@ -21,6 +21,7 @@ public class SpawnEnemies : MonoBehaviour
 
     public void SpawnCharacter(GameObject spawnObject, Transform spawnTransform)
     {
-        Instantiate(spawnObject, spawnTransform.position, Quaternion.identity, transform);
+        if (spawnObject != null)
+            Instantiate(spawnObject, spawnTransform.position, Quaternion.identity, transform);
     }
 }

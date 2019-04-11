@@ -16,8 +16,9 @@ public class DungeonGameManager : MonoBehaviour
     public delegate void ScoreChangedHandler();
     public static event ScoreChangedHandler ScoreChanged;
 
-    [HideInInspector]
-    public static bool mouseOff = false;
+    [HideInInspector] 
+    public static bool MouseOn = true;
+    public static bool LoadingNewLevel = false;
 
 
 
@@ -26,21 +27,22 @@ public class DungeonGameManager : MonoBehaviour
     {
         var inputArg = GetArg("-inputMethod");
         switch(inputArg)
-        {
+        { 
             case "keyboard":
                 InputMethod = InputMethodType.Keyboard;
 
-                if (!mouseOff)
-                    Cursor.visible = true;
+                Cursor.visible |= MouseOn; // Only turn on the cursor if it was already on
                 break;
             case "arcade":
                 InputMethod = InputMethodType.Arcade;
                 Cursor.visible = false;
                 break;
         }
+
+        LoadingNewLevel = false;
     }
 
-
+    
 
     void Update()
     {

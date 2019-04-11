@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 class RoomManagerEditor : Editor
 {
-    public List<int>[] connectors = new List<int>[4];
+    public List<int>[] connectors;
     public Bounds bounds;
 
 
@@ -27,10 +27,11 @@ class RoomManagerEditor : Editor
         bounds = serializedObject.FindProperty("bounds").boundsValue;
 
         // Necessary because unity cannot serialize an array of lists
-        connectors[0] = castedTarget.side1;
-        connectors[1] = castedTarget.side2;
-        connectors[2] = castedTarget.side3;
-        connectors[3] = castedTarget.side4;
+        string[] sides = castedTarget.connectorsString.Split('|');
+
+        connectors = new List<int>[4];
+        for (int i = 0; i < 4; i++)
+            connectors[i] = sides[i].Length == 0 ? new List<int>() : sides[i].Split(',').Select(int.Parse).ToList();
     }
 
 
@@ -44,14 +45,14 @@ class RoomManagerEditor : Editor
 
         GUI.skin.button.alignment = TextAnchor.MiddleCenter;
         GUI.skin.button.margin = new RectOffset(5, 5, 0, 0);
-
+        
 
 
         EditorGUILayout.LabelField("Used to place pathways on each side of the current room.");
 
         for (int r = 0; r < 4; r++)
         {
-            var currentRow = connectors[r];
+            List<int> currentRow = connectors[r];
 
             EditorGUILayout.BeginHorizontal();
             
@@ -59,7 +60,7 @@ class RoomManagerEditor : Editor
             {
                 Undo.RecordObject(castedTarget, "Change pathways");
                 currentRow.Add(0);  
-                UpdateValues();
+                SaveValues();
                 PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
             }
                 
@@ -68,7 +69,7 @@ class RoomManagerEditor : Editor
             {
                 Undo.RecordObject(castedTarget, "Change pathways");
                 currentRow.RemoveAt(currentRow.Count - 1);
-                UpdateValues();
+                SaveValues();
                 PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
             }
 
@@ -82,7 +83,7 @@ class RoomManagerEditor : Editor
                 {
                     Undo.RecordObject(castedTarget, "Change pathways");
                     currentRow[c] = changedValue;
-                    UpdateValues();
+                    SaveValues();
                     PrefabUtility.RecordPrefabInstancePropertyModifications(castedTarget);
                 }
             }
@@ -92,13 +93,23 @@ class RoomManagerEditor : Editor
         }
 
         EditorGUILayout.Separator();
-        if (GUILayout.Button("Update room bounds", GUILayout.Width(200)))
+        if (GUILayout.Button("Save room changes (Hit ctrl-s also)", GUILayout.Width(250)))
             castedTarget.UpdateBoundSize();
+
+        EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("The room connection string = " + castedTarget);
     }
 
-    private void UpdateValues()
+    private void SaveValues()
     {
+        string[] connectorsStrings = new string[4];
+        for (int i = 0; i < 4; i++)
+            connectorsStrings[i] = string.Join(",", connectors[i]);
+
+        castedTarget.connectorsString = string.Join("|", connectorsStrings);
+
         castedTarget.UpdateConnectors();
+        
         SceneView.RepaintAll();
     }
 }

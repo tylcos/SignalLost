@@ -36,7 +36,8 @@ public class FollowMouse : MonoBehaviour
                 Vector3 mousePosRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 float mouseAngle = Mathf.Rad2Deg * Mathf.Atan2(mousePosRelative.y, mousePosRelative.x);
                 angleDifference = mouseAngle - transform.eulerAngles.z;
-                Cursor.visible = true;
+
+                Cursor.visible |= DungeonGameManager.MouseOn;
             }
         }
 

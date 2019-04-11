@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Linq;
 
 
 
 [ExecuteInEditMode]
+[System.Serializable]
 public class RoomManager : MonoBehaviour 
 {
     // Necessary because unity cannot serialize an array of lists
+    [HideInInspector]
     public List<int>[] connectors = new List<int>[4];
-    public List<int> side1; public List<int> side2;
-    public List<int> side3; public List<int> side4;
+    [HideInInspector]
+    public string connectorsString = "0|0|0|0";
 
     public Bounds bounds;
 
@@ -38,16 +41,6 @@ public class RoomManager : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        /*
-        Debug.Log("-------------");
-        Debug.Log(transform.position);
-        Debug.Log(bounds.center);
-        Debug.Log(bounds.max.x);
-        Debug.Log(bounds.min.x);
-
-        Debug.Log(center + new Vector3(bounds.max.x - 0.5f, 0, 0));
-        */
-
         foreach (int pos in connectors[0]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.min.y, 0), new Vector3(2f, .2f));
         foreach (int pos in connectors[1]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.max.y, 0), new Vector3(2f, .2f));
         foreach (int pos in connectors[2]) Gizmos.DrawCube(center + new Vector3(bounds.min.x, pos + bounds.center.y, 0), new Vector3(.2f, 2f));
@@ -65,8 +58,8 @@ public class RoomManager : MonoBehaviour
             tilemap.CompressBounds();
             OnEnable();
 
-            Debug.Log("Center: " + bounds.center + "   Extents: " + bounds.extents);
-            Debug.Log("Min: " + bounds.min + "   Max: " + bounds.max);
+            //Debug.Log("Center: " + bounds.center + "   Extents: " + bounds.extents);
+            //Debug.Log("Min: " + bounds.min + "   Max: " + bounds.max);
         }
     }
 
@@ -79,9 +72,17 @@ public class RoomManager : MonoBehaviour
 
     public void UpdateConnectors()
     {
-        connectors[0] = side1;
-        connectors[1] = side2;
-        connectors[2] = side3;
-        connectors[3] = side4;
+        connectors = new List<int>[4];
+        string[] sides = connectorsString.Split('|');
+
+        for (int i = 0; i < 4; i++)
+            connectors[i] = sides[i].Length == 0 ? new List<int>() : sides[i].Split(',').Select(int.Parse).ToList();
+    }
+
+
+
+    public override string ToString()
+    {
+        return connectorsString;
     }
 }

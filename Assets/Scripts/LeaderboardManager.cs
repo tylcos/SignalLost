@@ -12,7 +12,7 @@ public static class LeaderboardManager
 
 
 
-    public static readonly string savePath = Path.Combine(Application.persistentDataPath, "highscores.dat");
+    public static readonly string savePath = Application.persistentDataPath + "/highscores.dat";
     
     private static readonly BinaryFormatter formatter = new BinaryFormatter();
 

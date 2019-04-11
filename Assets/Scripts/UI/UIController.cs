@@ -36,7 +36,7 @@ public class UIController : MonoBehaviour
 
         public void Redraw()
         {
-            if (mode == WeaponController.COMBATMODE_GUN)
+            if (mode == WeaponController.COMBATMODE_GUN && !DungeonGameManager.LoadingNewLevel)
             {
                 cur = wep.CurrentAmmo;
                 max = wep.MaxAmmo;

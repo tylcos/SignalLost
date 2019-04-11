@@ -8,29 +8,30 @@ using UnityEngine.Assertions;
 
 public class RoomSpawner : MonoBehaviour
 {
+    public static int roomsToSpawn = 29;
     public readonly int maxConnections = 4;
     public bool debug;
 
 
 
-    public GameObject[] BaseRooms;
     public GameObject StartingRoom;
+    public GameObject[] BaseRooms;
     public GameObject[] ZeroRooms = new GameObject[4]; // Spawned when there is no space to spawn a large room
-    public GameObject[] ShopRooms = new GameObject[4];
     public GameObject[] BossRooms = new GameObject[4];
 
-    public Transform SpawnTransform = GameObject.Find("/Scene/Rooms").transform;
+    public Transform SpawnTransform;
     
 
 
-    public void SpawnRooms(int roomsToSpawn)
+    void Start()
     {
         Assert.IsNotNull(SpawnTransform, "No game object '/Scene/Rooms' found");
-
-
-
+        
         Room.Initialize(maxConnections, transform);
 
+
+
+        // Setting up all of the base rooms
         foreach (GameObject room in BaseRooms)
         {
             var rm = room.GetComponent<RoomManager>();
@@ -40,9 +41,10 @@ public class RoomSpawner : MonoBehaviour
             Room.BaseRooms[connectionCount].Add(new Room(room, rm));
 
             if (debug)
-                Debug.Log("[Adding Rooms] " + connectionCount);
+                Debug.Log("[Adding Rooms] Room " + room.name + " has "+ connectionCount + " connections");
         }
 
+        // Setting up all of the special rooms
         for (int rotation = 0; rotation < 4; rotation++)
         {
             var zeroScript = ZeroRooms[rotation].GetComponent<RoomManager>();
@@ -51,23 +53,21 @@ public class RoomSpawner : MonoBehaviour
             Room.BaseRooms[0].Add(new Room(ZeroRooms[rotation], zeroScript));
         }
 
-
-
         if (debug)
             Debug.Log("[Total Rooms] " + Room.BaseRooms.Sum(s => s == null ? 0 : s.Count));
 
 
 
         var sw = System.Diagnostics.Stopwatch.StartNew();
-        InstantiateRooms(roomsToSpawn);
+        int spawnedRooms = InstantiateRooms();
         sw.Stop();
 
-        Debug.Log("Finished spawning " + (roomsToSpawn + 1) + " rooms in " + sw.Elapsed.Milliseconds + " ms total");
+        Debug.Log("Finished spawning " + (spawnedRooms + 1) + " rooms in " + sw.Elapsed.Milliseconds + " ms total");
     }
 
 
 
-    private void InstantiateRooms(int roomsToSpawn)
+    private int InstantiateRooms()
     {
         Room startRoom = new Room(Instantiate(StartingRoom, transform));
         int remainingRooms = roomsToSpawn;
@@ -79,7 +79,7 @@ public class RoomSpawner : MonoBehaviour
 
 
         int loop = 0; 
-        while (remainingRooms > 0) // Iteration
+        while (remainingRooms > 0) // Iteration start
         {
             int totalConnections = queue.Sum(r => r.connections.Sum(s => s.Count));
 
@@ -95,26 +95,26 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-                    var roomToSpawnTuple = Room.GetRoom(connections, connection, room);
+                    var roomToSpawnTuple = room.GetRoom(connections, connection);
 
                     roomToSpawnTuple.Item1.Instantiate(roomToSpawnTuple.Item2);
                     newRooms.Add(roomToSpawnTuple.Item1);
-                    totalConnections += roomToSpawnTuple.Item3 - 1;
+                    totalConnections += roomToSpawnTuple.Item3;
 
 
 
                     --remainingRooms;
-                    if (remainingRooms == 0)
-                        return;
                 }
             }
 
             queue = new Queue<Room>(newRooms);
             newRooms.Clear();
 
-            if (loop++ > 50) // Infinite loop check
+            if (loop++ > roomsToSpawn) // Infinite loop check
                 break;
         }
+
+        return roomsToSpawn - remainingRooms;
     }
 }
 
@@ -127,16 +127,17 @@ public class Room
 
     public List<int>[] connections;
     public Bounds bounds;
+    public int index;
 
 
 
     public static List<Room>[] BaseRooms; // [Connections][Room Index]
 
-    public static List<Bounds> spawnedRooms;
+    public static List<Bounds> spawnedRooms; // Used for checking room collisions
 
 
 
-    private static Transform roomSpawner;
+    private static Transform roomSpawner; // Room spawner GameObject
 
 
 
@@ -205,7 +206,7 @@ public class Room
     {
         Vector3 offset = new Vector3(bounds.extents.x + bounds.min.x, bounds.extents.y + bounds.min.y);
 
-        if ((connection.Direction & 2) > 0) // Horizonal connection
+        if ((connection.Direction & 0b10) > 0) // Horizonal connection
         {
             offset.x += (connection.Direction & 1) > 0 ? bounds.extents.x : -bounds.extents.x;
             offset.y += connection.Position;
@@ -222,23 +223,25 @@ public class Room
     /// <summary>
     /// Returns the position of where to spawn the room in world space and removes the connection of the room to spawn
     /// </summary>
-    public Vector3 GetSpawnPosition(Connection connection, Room roomToSpawn)
+    public (Vector3, Connection) GetSpawnTuple(Connection parentConnection, Room roomToSpawn)
     {
-        byte flippedDirection = connection.FlippedDirection;
-        var oppositeConnection = new Connection(flippedDirection, roomToSpawn.connections[flippedDirection].Shuffle().First());
-        roomToSpawn.connections[flippedDirection].Remove(connection.Position);
+        byte newDirection = parentConnection.FlippedDirection;
 
-        return transform.position + GetConnectionOffset(connection) - roomToSpawn.GetConnectionOffset(oppositeConnection);
+        int positionOfNewConnection = roomToSpawn.connections[newDirection].Shuffle().First();
+        Connection newConnection = new Connection(newDirection, positionOfNewConnection);
+
+        return (transform.position + GetConnectionOffset(parentConnection) - roomToSpawn.GetConnectionOffset(newConnection)
+            , newConnection);
     }
 
-    public bool ValidSpawnPosition(Vector3 position)
-    {/*
-        var spawnedBounds = new Bounds(bounds.center + position, bounds.size);
+    public bool ValidSpawnPosition(Vector3 position, int parentIndex)
+    {
+        Bounds spawnedBounds = new Bounds(bounds.center + position, bounds.size + new Vector3(1f, 1f));
 
         for (int r = 0; r < spawnedRooms.Count; r++)
-            if (spawnedRooms[r].Intersects(spawnedBounds))
+            if (spawnedRooms[r].Intersects(spawnedBounds) && r != parentIndex)
                 return false;
-                */
+                
         return true;
     }
 
@@ -247,20 +250,30 @@ public class Room
     /// </summary>
     /// <param name="connections">The number of connections the returned room needs to have</param>
     /// <param name="connection">The connection the new room is being spawned from</param>
-    /// <param name="currentRoom">The current room that is spawning the new room</param>
     /// <returns>(Room to spawn, Position to spawn the room, Connections the returned room has) </returns>
-    public static (Room, Vector3, int) GetRoom(int connections, Connection connection, Room currentRoom)
+    public (Room, Vector3, int) GetRoom(int connections, Connection connection)
     {
-        foreach (Room room in RandomHelper.Shuffle(BaseRooms[connections]))
+        (Vector3, Connection) spawnTuple;
+
+        foreach (Room room in BaseRooms[connections].Shuffle())
         {
-            if (room.connections[connection.FlippedDirection].Count > 0)/* &&
-                room.ValidSpawnPosition((spawnPosition = currentRoom.GetSpawnPosition(connection, room))))*/
-                return (room.Clone(), currentRoom.GetSpawnPosition(connection, room), connections);
+            if (room.connections[connection.FlippedDirection].Count > 0)
+            {
+                spawnTuple = GetSpawnTuple(connection, room);
+
+                if (room.ValidSpawnPosition(spawnTuple.Item1, index))
+                {
+                    Room newRoom = room.Clone();
+                    newRoom.connections[spawnTuple.Item2.Direction].Remove(spawnTuple.Item2.Position);
+                    return (newRoom, spawnTuple.Item1, connections - 1);
+                }
+            }
         }
             
-        Debug.Log("No room found with " + connections + " connections!");
-        Room zeroRoom = BaseRooms[0].First(r => r.connections[connection.FlippedDirection].Count > 0);
-        return (zeroRoom, currentRoom.GetSpawnPosition(connection, zeroRoom), 1);
+        Room zeroRoom = BaseRooms[0].First(r => r.connections[connection.FlippedDirection].Count > 0).Clone();
+        Vector3 newPosition = GetSpawnTuple(connection, zeroRoom).Item1;
+        zeroRoom.connections[connection.FlippedDirection].Clear();
+        return (zeroRoom, newPosition, 0);
     }
 
 
@@ -268,22 +281,25 @@ public class Room
     public void Instantiate(Vector3 position)
     {
         gameObject = UnityEngine.Object.Instantiate(gameObject, position, Quaternion.identity, roomSpawner);
+        transform = gameObject.transform;
 
-        var spawnedBounds = new Bounds(bounds.center + position, bounds.size);
-        spawnedRooms.Add(spawnedBounds);
+        index = spawnedRooms.Count;
+        spawnedRooms.Add(new Bounds(bounds.center + position, bounds.size));
     }
 
 
 
     public static void Initialize(int maxConnections, Transform parent)
     {
+        maxConnections++;
+
         roomSpawner = parent;
 
-        BaseRooms = new List<Room>[++maxConnections];
+        BaseRooms = new List<Room>[maxConnections];
         for (int i = 0; i < maxConnections; i++)
             BaseRooms[i] = new List<Room>(8);
 
-        spawnedRooms = new List<Bounds>(maxConnections);
+        spawnedRooms = new List<Bounds>(16);
     }
 }
 
