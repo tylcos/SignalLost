@@ -19,7 +19,7 @@ MonoBehaviour:
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
   ricochetVFX: {fileID: 0}
-  bulletDamage: 10
+  bulletDamage: 20
   cycleTime: 0.5
   clipSize: 30
   reloadTime: 1.7
