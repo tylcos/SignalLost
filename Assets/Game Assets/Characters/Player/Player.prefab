@@ -633,10 +633,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
-  - {fileID: 11400000, guid: 2108dd756fc225749b2a9ee720afece5, type: 2}
-  - {fileID: 11400000, guid: 6e1ccc4120c160f44994e4db9f7ac6ea, type: 2}
-  - {fileID: 11400000, guid: 6f29cc7475078b349b2ba8f15b1c240c, type: 2}
   - {fileID: 11400000, guid: 0960bbb17081d6940949de794d58b570, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   bulletLayer: Player Fired
   combatMode: 0
 --- !u!114 &5123112155736431875
