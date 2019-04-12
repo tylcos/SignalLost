@@ -428,8 +428,9 @@ MonoBehaviour:
   shot: 0
   spriteDirection: {x: 0, y: 0}
   spriteAnimator: {fileID: 0}
+  weaponHolder: {fileID: 1735258238636906}
+  weapon: {fileID: 0}
   attackIndicator: {fileID: 1227678452590240}
-  WC: {fileID: 8746641593355120893}
   aggroRange: 30
   damage: 15
   attackRange: 1.5
@@ -442,6 +443,7 @@ MonoBehaviour:
   attackChargeTime: 0.3
   postAttackPauseDuration: 0.3
   postAttackRetreatDistance: 0.3
+  WC: {fileID: 8746641593355120893}
 --- !u!114 &114007684564531466
 MonoBehaviour:
   m_ObjectHideFlags: 0
