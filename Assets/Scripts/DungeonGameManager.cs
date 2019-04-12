@@ -19,6 +19,7 @@ public class DungeonGameManager : MonoBehaviour
     [HideInInspector] 
     public static bool MouseOn = true;
     public static bool LoadingNewLevel = false;
+    public static bool ApplicationQuit = false;
 
 
 
@@ -38,15 +39,18 @@ public class DungeonGameManager : MonoBehaviour
                 Cursor.visible = false;
                 break;
         }
+    }
 
+
+
+    void Start()
+    {
         LoadingNewLevel = false;
     }
 
-    
-
     void Update()
     {
-        if (Input.GetAxis("ArcadeExit") > 0)
+        if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
 
         if (Input.GetKeyDown(KeyCode.O)) // <o/
@@ -113,6 +117,8 @@ public class DungeonGameManager : MonoBehaviour
 
     public static void QuitApplication()
     {
+        ApplicationQuit = true;
+
         LeaderboardManager.SaveLeaderboardEntries();
 
         Debug.Log("Exiting Game");

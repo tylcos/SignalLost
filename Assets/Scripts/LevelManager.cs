@@ -59,8 +59,8 @@ public static class LevelManager
 
 
         UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
-        ui.StartFadeBlind(0f, 1f, 2f, false);
-        ui.StartCoroutine(LoadNewLevelWait(2.1f));
+        ui.StartFadeBlind(0f, 1f, timeForFade, false);
+        ui.StartCoroutine(LoadNewLevelWait(timeForFade));
     }
 
     private static IEnumerator<WaitForSeconds> LoadNewLevelWait(float time)

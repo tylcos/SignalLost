@@ -15,7 +15,7 @@ public class RoomSpawner : MonoBehaviour
     public GameObject StartingRoom;
     public GameObject[] BaseRooms;
     public GameObject[] ZeroRooms = new GameObject[4]; // Spawned when there is no space to spawn a large room
-    public GameObject[] BossRooms = new GameObject[4];
+    public GameObject BossRooms;
 
 
 
@@ -63,7 +63,10 @@ public class RoomSpawner : MonoBehaviour
 
     private int InstantiateRooms()
     {
-        Room startRoom = new Room(Instantiate(StartingRoom, transform));
+        Room startRoom = new Room(Instantiate(StartingRoom, transform)) { index = 0 };
+        Room.spawnedRooms.Add(new Bounds(startRoom.bounds.center, startRoom.bounds.size));
+
+
         int remainingRooms = LevelManager.RoomsToSpawn;
 
         List<Room> newRooms = new List<Room>(16); // Rooms to spawn on in the next iteration
@@ -132,6 +135,8 @@ public class Room
 
 
     private static Transform roomSpawner; // Room spawner GameObject
+
+    private static readonly Vector3 roomPadding = new Vector3(2.5f, 2.5f);
 
 
 
@@ -230,10 +235,10 @@ public class Room
 
     public bool ValidSpawnPosition(Vector3 position, int parentIndex)
     {
-        Bounds spawnedBounds = new Bounds(bounds.center + position, bounds.size + new Vector3(1f, 1f));
+        Bounds spawnedBounds = new Bounds(bounds.center + position, bounds.size + roomPadding);
 
         for (int r = 0; r < spawnedRooms.Count; r++)
-            if (spawnedRooms[r].Intersects(spawnedBounds) && r != parentIndex)
+            if (r != parentIndex && spawnedRooms[r].Intersects(spawnedBounds))
                 return false;
                 
         return true;

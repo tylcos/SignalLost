@@ -77,12 +77,17 @@ public static class LeaderboardManager
 
         // Find where to insert current run based on index (Lower index = higher score)
         int i = 0;
-        while (i < leaderboardEntries.Count && leaderboardEntries[i++].Score > DungeonGameManager.CurrentScore);
+        while (i < leaderboardEntries.Count && leaderboardEntries[i].Score > DungeonGameManager.CurrentScore)
+            i++;
 
         if (i < leaderboardEntries.Count)
             leaderboardEntries.Insert(i, new LeaderboardEntry(name, DungeonGameManager.CurrentScore));
         else
             leaderboardEntries.Add(new LeaderboardEntry(name, DungeonGameManager.CurrentScore));
+
+
+
+        SaveLeaderboardEntries();
     }
 }
 
@@ -97,7 +102,7 @@ public readonly struct LeaderboardEntry
 
 
 
-    public static readonly int nameLength = 6;
+    public static readonly int nameLength = 3;
 
 
 

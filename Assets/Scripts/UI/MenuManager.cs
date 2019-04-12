@@ -27,7 +27,7 @@ public class MenuManager : MonoBehaviour
 
 
 
-        leaderboardItems = leaderboardItem.GetComponentsInChildren<TextMeshProUGUI>().Where(t => t.fontSize < 25).ToArray();
+        leaderboardItems = leaderboardItem.GetComponentsInChildren<TextMeshProUGUI>().Where(t => t.fontSize < 30).ToArray();
         LeaderboardManager.LoadLeaderboardEntries();
         // Update some ui thingy that shows leaderboard
         // Possibly subscribe some thingy to call AddCurrentRun when player dies
@@ -62,7 +62,7 @@ public class MenuManager : MonoBehaviour
 
 
 
-        if (Input.GetAxis("Fire1") > 0 || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetAxis("Fire1") > 0 || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             MenuSelect();
     }
 
