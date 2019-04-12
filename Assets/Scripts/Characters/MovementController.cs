@@ -84,7 +84,7 @@ public class MovementController : MonoBehaviour
             {
                 animationDirection = 2;
             }
-            
+
         }
     }
 
@@ -102,15 +102,16 @@ public class MovementController : MonoBehaviour
     {
         if (gameObject.name == "Player")
         {
-            LeaderboardManager.AddCurrentRun("Hi");
-
-            Destroy(gameObject, 1);
-        } else
-        {
-
-            Destroy(gameObject);
-
+            try
+            {
+                LeaderboardManager.AddCurrentRun("Hi");
+            }
+            catch (System.NullReferenceException e)
+            {
+                Debug.LogException(e);
+            }
         }
+        Destroy(gameObject);
     }
 
     protected virtual void OnTakeDamage(float damageReceived)
@@ -239,7 +240,7 @@ public class MovementController : MonoBehaviour
 
     public virtual void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
-        
+
     }
 
     public virtual bool OnHitReceived(MovementController opponent, float damageReceived)

@@ -209,6 +209,7 @@ public class UIController : MonoBehaviour
     // redraw healthbar
     private void UpdateHealthbar()
     {
+        Debug.Log("player's health in updatehealthbar = " + player.CurrentHitPoints);
         _healthbarSettings.maximum = player.MaxHitPoints;
         _healthbarSettings.health = player.CurrentHitPoints;
         _healthbarSettings.Redraw();
