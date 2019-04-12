@@ -19,7 +19,7 @@ public class RoomSpawner : MonoBehaviour
 
 
 
-    void Start()
+    public void InitializeRoomSpawner()
     {
         Room.Initialize(maxConnections, transform);
 
@@ -49,22 +49,22 @@ public class RoomSpawner : MonoBehaviour
 
         if (debug)
             Debug.Log("[Total Rooms] " + Room.BaseRooms.Sum(s => s == null ? 0 : s.Count));
+    }
 
-
-
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-        int spawnedRooms = InstantiateRooms();
-        sw.Stop();
-
-        Debug.Log("Finished spawning " + (spawnedRooms + 1) + " rooms in " + sw.Elapsed.Milliseconds + " ms total");
+    public void Reset()
+    {
+        Room.spawnedRooms.Clear();
     }
 
 
 
-    private int InstantiateRooms()
+    public int SpawnRooms()
     {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+
         Room startRoom = new Room(Instantiate(StartingRoom, transform)) { index = 0 };
         Room.spawnedRooms.Add(new Bounds(startRoom.bounds.center, startRoom.bounds.size));
+
 
 
         int remainingRooms = LevelManager.RoomsToSpawn;
@@ -111,6 +111,8 @@ public class RoomSpawner : MonoBehaviour
                 break;
         }
 
+        sw.Stop();
+        Debug.Log("Finished spawning " + (LevelManager.RoomsToSpawn - remainingRooms + 1) + " rooms in " + sw.Elapsed.Milliseconds + " ms total");
         return LevelManager.RoomsToSpawn - remainingRooms;
     }
 }
