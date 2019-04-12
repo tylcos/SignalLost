@@ -22,6 +22,16 @@ public class PlayerController : MovementController
         master = GameObject.FindGameObjectWithTag("Master").GetComponent<DungeonGameManager>();
         PWC = gameObject.GetComponentInChildren<PlayerWeaponController>();
         PWC.FireError += OnFireError;
+        EquippedWeapon.ReloadStateChanged += OnReloadStateChanged;
+    }
+
+    private void OnReloadStateChanged(bool reloading)
+    {
+        if(!reloading & coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            reloadFailIndicator.SetActive(false);
+        }
     }
 
     private void OnFireError()
@@ -29,6 +39,7 @@ public class PlayerController : MovementController
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
+            //reloadFailIndicator.SetActive(false);
         }
         coroutine = StartCoroutine(ReloadIndicatorThingy());
 
