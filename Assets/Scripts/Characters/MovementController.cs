@@ -115,7 +115,6 @@ public class MovementController : MonoBehaviour
 
     protected virtual void OnTakeDamage(float damageReceived)
     {
-        CurrentHitPoints -= damageReceived;
         if (CurrentHitPoints <= 0)
         {
             Died();
@@ -141,6 +140,7 @@ public class MovementController : MonoBehaviour
     {
         if (IsInvincible()) { return false; }
         lastDamageTime = Time.time;
+        CurrentHitPoints -= damage;
         DamageTaken(damage);
         if (CurrentHitPoints <= 0)
         {
