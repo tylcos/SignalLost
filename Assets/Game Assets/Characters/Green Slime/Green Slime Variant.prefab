@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_Name
-      value: Green Slime
+      value: Green Slime Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_IsActive
@@ -206,6 +206,12 @@ PrefabInstance:
       propertyPath: boundCharacter
       value: 
       objectReference: {fileID: 5407634174786935883}
+    - target: {fileID: 8746641593355120893, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 3}
+      propertyPath: inventory.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a73d7d5f4955b04b96576af7e20ab19,
+        type: 2}
     - target: {fileID: 114232897573413850, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: parent

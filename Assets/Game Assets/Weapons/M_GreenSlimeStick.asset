@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
+  m_Name: M_GreenSlimeStick
+  m_EditorClassIdentifier: 
+  combatMode: 1
+  weapon: {fileID: 5804408742316254558, guid: 09d058eb7b9881947a286dd2306ea100, type: 3}
+  bullet: {fileID: 0}
+  impactVFX: {fileID: 0}
+  muzzleVFX: {fileID: 0}
+  penetrationVFX: {fileID: 0}
+  ricochetVFX: {fileID: 0}
+  bulletDamage: 0
+  cycleTime: 0
+  clipSize: 0
+  reloadTime: 0
+  muzzleVelocity: 0
+  lifetime: 0
+  halfSpreadAngle: 0
+  impacts: 0
+  canRicochet: 0
+  ricochetAngle: 0
+  canPenetrate: 0
+  penetrationStrength: 0
+  impactRadius: 0
+  falloff: 0
+  swingVFX: {fileID: 0}
+  meleeDamage: 15
+  exhaustTime: 0
