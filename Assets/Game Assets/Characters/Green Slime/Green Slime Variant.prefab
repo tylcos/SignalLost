@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &1274818878
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375678944426382037}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec84b46edac073e4a9ef9dff85e1ca69, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1274818879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375678944426382037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2a83be1fbe7684997c2d8447e3c95a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementAccessor: {fileID: 0}
 --- !u!1001 &5376373249092471889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,10 +10,6 @@ PrefabInstance:
     - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_Name
       value: Green Slime Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -91,64 +55,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642751018136888, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212010294477221350, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d7cf3a7ba42adc04ba98d34a80c3b988,
-        type: 3}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.6666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 61395319042165888, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: spriteAnimator
-      value: 
-      objectReference: {fileID: 1274818878}
     - target: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: cc2d
       value: 
       objectReference: {fileID: 5406923198399523483}
+    - target: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 3}
+      propertyPath: spriteAnimator
+      value: 
+      objectReference: {fileID: 5376373250096758127}
     - target: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: attackIndicator
@@ -159,38 +75,6 @@ PrefabInstance:
       propertyPath: WC
       value: 
       objectReference: {fileID: 3746685737715072172}
-    - target: {fileID: 4550503817570454, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550503817570454, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550503817570454, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.31
-      objectReference: {fileID: 0}
     - target: {fileID: 114007684564531466, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: background
@@ -206,12 +90,6 @@ PrefabInstance:
       propertyPath: boundCharacter
       value: 
       objectReference: {fileID: 5407634174786935883}
-    - target: {fileID: 8746641593355120893, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: inventory.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6a73d7d5f4955b04b96576af7e20ab19,
-        type: 2}
     - target: {fileID: 114232897573413850, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: parent
@@ -219,19 +97,13 @@ PrefabInstance:
       objectReference: {fileID: 5406923198399523483}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
---- !u!1 &5375678944426382037 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5376373249092471889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5407634174786935883 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114683862728167450, guid: 78d575f7607164f48b727524d3edcea2,
     type: 3}
   m_PrefabInstance: {fileID: 5376373249092471889}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375678944426382037}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 379613355ff29b24db5a99bfd6e8d961, type: 3}
@@ -243,12 +115,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5376373249092471889}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375678944426382037}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b005891a5d1c45cc8cea8c713a8bfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &5376373250096758127 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1274818878, guid: 78d575f7607164f48b727524d3edcea2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5376373249092471889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3746685737715072172 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8746641593355120893, guid: 78d575f7607164f48b727524d3edcea2,
