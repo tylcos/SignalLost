@@ -70,6 +70,8 @@ public static class LeaderboardManager
 
     public static void AddCurrentRun(string name)
     {
+        LoadLeaderboardEntries();
+
         if (name.Length > LeaderboardEntry.nameLength)
             name = name.Substring(0, LeaderboardEntry.nameLength);
 

@@ -101,16 +101,10 @@ public class MovementController : MonoBehaviour
     protected virtual void OnDeath()
     {
         if (gameObject.name == "Player")
-        {
-            try
-            {
-                LeaderboardManager.AddCurrentRun("Hi");
-            }
-            catch (System.NullReferenceException e)
-            {
-                Debug.LogException(e);
-            }
-        }
+            LeaderboardManager.AddCurrentRun("Hi");
+        else
+            DungeonGameManager.NumberOfEnemies--;
+
         Destroy(gameObject);
     }
 
