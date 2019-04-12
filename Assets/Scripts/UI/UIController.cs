@@ -17,10 +17,6 @@ public class UIController : MonoBehaviour
 
         public void Redraw()
         {
-            if (health < 0)
-            {
-                health = 0;
-            }
             healthbarTransform.localScale = new Vector3(health / maximum, healthbarTransform.localScale.y, healthbarTransform.localScale.z);
         }
     }
@@ -221,7 +217,6 @@ public class UIController : MonoBehaviour
 
     private void UpdateAmmo()
     {
-        _ammoSettings.wep = PWC.GetEquippedWeapon();
         _ammoSettings.Redraw();
     }
 

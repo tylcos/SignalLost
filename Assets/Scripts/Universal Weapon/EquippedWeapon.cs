@@ -6,7 +6,7 @@ public class EquippedWeapon : Object
 
     /* COMMON FIELDS */
     private readonly bool logical = true; // whether or not this object can do anything
-    private readonly bool sendsEvents; // whether this object should send UI events (i.e. its a player weapon)
+    private bool sendsEvents; // whether this object should send UI events (i.e. its a player weapon)
     public GameObject weapon;
     private readonly float minTimeBetweenAttacks; // minimum time that must pass after an attack before allowing another attack
     private readonly int layer; // layer for collisions
@@ -44,9 +44,6 @@ public class EquippedWeapon : Object
 
     public delegate void WeaponSwapHandler(EquippedWeapon wep, int combatMode);
     public static event WeaponSwapHandler WeaponSwapped; // Called when this EquippedObject is swapped to.
-
-    public delegate void WeaponReloadStateHandler(bool reloading);
-    public static event WeaponReloadStateHandler ReloadStateChanged; // Called when this weapon starts or stops reloading
 
     #endregion
 
@@ -213,7 +210,6 @@ public class EquippedWeapon : Object
     {
         gunScript.CancelReload();
         reloading = false;
-        ReloadStateChanged(false);
         reloadProgress = 0;
     }
 
@@ -233,7 +229,6 @@ public class EquippedWeapon : Object
     {
         gunScript.Reload(reloadTime);
         reloading = true;
-        ReloadStateChanged(true);
         reloadProgress = 0;
     }
 
@@ -244,12 +239,9 @@ public class EquippedWeapon : Object
     {
         currentAmmo = maxAmmo;
         reloading = false;
-        ReloadStateChanged(false);
         reloadProgress = 1;
         if (sendsEvents)
-        {
             WeaponAmmoChanged();
-        }
     }
     #endregion
 
