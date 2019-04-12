@@ -5,23 +5,24 @@ using UnityEngine;
 
 public class DungeonGameManager : MonoBehaviour
 {
-    public GameObject[] Enemies;
+    public GameObject[] enemies;
     public static int NumberOfEnemies;
+    
+
+
+    public static GameObject[] Enemies;
 
 
 
-    [HideInInspector]
     public static InputMethodType InputMethod = InputMethodType.Keyboard;
     
 
 
-    [HideInInspector]
     public static int CurrentScore;
 
     public delegate void ScoreChangedHandler();
     public static event ScoreChangedHandler ScoreChanged;
 
-    [HideInInspector] 
     public static bool MouseOn = true;
     public static bool LoadingNewLevel = false;
     public static bool ApplicationQuit = false;
@@ -50,11 +51,14 @@ public class DungeonGameManager : MonoBehaviour
 
     void Start()
     {
+        Enemies = enemies;
         LoadingNewLevel = false;
     }
 
     void Update()
     {
+        Debug.Log(NumberOfEnemies);
+
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
 
