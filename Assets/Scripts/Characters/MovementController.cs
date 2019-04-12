@@ -84,7 +84,7 @@ public class MovementController : MonoBehaviour
             {
                 animationDirection = 2;
             }
-            
+
         }
     }
 
@@ -101,14 +101,21 @@ public class MovementController : MonoBehaviour
     protected virtual void OnDeath()
     {
         if (gameObject.name == "Player")
-            LeaderboardManager.AddCurrentRun("Hi");
-
+        {
+            try
+            {
+                LeaderboardManager.AddCurrentRun("Hi");
+            }
+            catch (System.NullReferenceException e)
+            {
+                Debug.LogException(e);
+            }
+        }
         Destroy(gameObject);
     }
 
     protected virtual void OnTakeDamage(float damageReceived)
     {
-        CurrentHitPoints -= damageReceived;
         if (CurrentHitPoints <= 0)
         {
             Died();
@@ -134,6 +141,7 @@ public class MovementController : MonoBehaviour
     {
         if (IsInvincible()) { return false; }
         lastDamageTime = Time.time;
+        CurrentHitPoints -= damage;
         DamageTaken(damage);
         if (CurrentHitPoints <= 0)
         {
@@ -232,7 +240,7 @@ public class MovementController : MonoBehaviour
 
     public virtual void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
-        
+
     }
 
     public virtual bool OnHitReceived(MovementController opponent, float damageReceived)
