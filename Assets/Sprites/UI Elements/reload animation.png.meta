@@ -97,12 +97,12 @@ TextureImporter:
       name: reload animation_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -117,12 +117,12 @@ TextureImporter:
       name: reload animation_1
       rect:
         serializedVersion: 2
-        x: 46
+        x: 48
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -137,12 +137,12 @@ TextureImporter:
       name: reload animation_2
       rect:
         serializedVersion: 2
-        x: 92
+        x: 94
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,12 +157,12 @@ TextureImporter:
       name: reload animation_3
       rect:
         serializedVersion: 2
-        x: 138
+        x: 140
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -177,12 +177,12 @@ TextureImporter:
       name: reload animation_4
       rect:
         serializedVersion: 2
-        x: 184
+        x: 186
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: reload animation_5
       rect:
         serializedVersion: 2
-        x: 230
+        x: 232
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -217,12 +217,12 @@ TextureImporter:
       name: reload animation_6
       rect:
         serializedVersion: 2
-        x: 276
+        x: 278
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,12 +237,12 @@ TextureImporter:
       name: reload animation_7
       rect:
         serializedVersion: 2
-        x: 322
+        x: 324
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,12 +257,12 @@ TextureImporter:
       name: reload animation_8
       rect:
         serializedVersion: 2
-        x: 368
+        x: 370
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,12 +277,12 @@ TextureImporter:
       name: reload animation_9
       rect:
         serializedVersion: 2
-        x: 414
+        x: 416
         y: 0
-        width: 46
+        width: 42
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

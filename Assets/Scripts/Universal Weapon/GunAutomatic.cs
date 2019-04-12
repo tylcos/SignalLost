@@ -54,7 +54,7 @@ public class GunAutomatic : Gun
         {
             yield return new WaitForEndOfFrame();
             dad.reloadProgress = (Time.time - start) / duration;
-        } while (dad.reloadProgress < duration);
+        } while (dad.reloadProgress < 1);
 
         dad.FillMag();
         Debug.Log("Filled mag");
