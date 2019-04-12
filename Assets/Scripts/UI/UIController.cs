@@ -183,6 +183,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        color.a = alphaFinish;
         Cursor.visible = enableCursor;
     }
 

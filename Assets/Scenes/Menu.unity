@@ -3194,6 +3194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908a4dc52629cb499f9921dc3066998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuScene: 1
+  uiParent: {fileID: 0}
+  roomSpawner: {fileID: 0}
+  player: {fileID: 0}
+  enemies: []
 --- !u!1001 &2018352738
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DungeonGameManager : MonoBehaviour
 {
+    public bool menuScene = false;
     public UIController uiParent;
     public RoomSpawner roomSpawner;
     public Transform player;
@@ -27,7 +28,6 @@ public class DungeonGameManager : MonoBehaviour
     public delegate void ScoreChangedHandler();
     public static event ScoreChangedHandler ScoreChanged;
 
-    public static bool GameStarted = false;
     public static bool LoadingNewLevel = false;
     public static bool ApplicationQuit = false;
 
@@ -54,13 +54,13 @@ public class DungeonGameManager : MonoBehaviour
 
     void Start()
     {
-        if (GameStarted)
+        if (!menuScene)
         {
             Enemies = enemies;
             LoadingNewLevel = false;
 
 
-
+            Debug.Log(2);
             LevelManager.InitializeLevelManager(uiParent, roomSpawner, player);
 
             // Manually spawning the room for the first iteration

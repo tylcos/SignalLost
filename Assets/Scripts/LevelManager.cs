@@ -35,7 +35,7 @@ public static class LevelManager
     private static UIController uiParent;
     private static RoomSpawner roomSpawner;
     private static Transform player;
-    private static MovementController playerMC;
+    private static PlayerController playerPC;
 
 
 
@@ -45,7 +45,7 @@ public static class LevelManager
         LevelManager.roomSpawner = roomSpawner;
         LevelManager.player = player;
 
-        playerMC.GetComponent<MovementController>();
+        playerPC = player.GetComponent<PlayerController>();
 
         roomSpawner.InitializeRoomSpawner();
     }
@@ -54,10 +54,9 @@ public static class LevelManager
 
     public static void LoadStartingLevel()
     {
-        SceneManager.LoadScene(gameSceneName);
-
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
-        DungeonGameManager.GameStarted = true;
+
+        SceneManager.LoadScene(gameSceneName);
     }
 
     public static void LoadNewLevel()
@@ -98,7 +97,7 @@ public static class LevelManager
         roomSpawner.SpawnRooms();
 
         player.position = Vector3.zero;
-        playerMC.CurrentHitPoints = playerMC.MaxHitPoints;
+        playerPC.CurrentHitPoints = playerPC.MaxHitPoints;
         // Alieien reload all gunz plz
 
 
