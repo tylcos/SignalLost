@@ -101,9 +101,16 @@ public class MovementController : MonoBehaviour
     protected virtual void OnDeath()
     {
         if (gameObject.name == "Player")
+        {
             LeaderboardManager.AddCurrentRun("Hi");
 
-        Destroy(gameObject);
+            Destroy(gameObject, 1);
+        } else
+        {
+
+            Destroy(gameObject);
+
+        }
     }
 
     protected virtual void OnTakeDamage(float damageReceived)
