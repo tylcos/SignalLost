@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class DungeonGameManager : MonoBehaviour
 {
+    public GameObject[] Enemies;
+    public static int NumberOfEnemies;
+
+
+
     [HideInInspector]
     public static InputMethodType InputMethod = InputMethodType.Keyboard;
     
@@ -53,7 +58,7 @@ public class DungeonGameManager : MonoBehaviour
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
 
-        if (Input.GetKeyDown(KeyCode.O)) // <o/
+        if (Input.GetKeyDown(KeyCode.O) || NumberOfEnemies == 0) // <o/
             LevelManager.LoadNewLevel();
     }
 

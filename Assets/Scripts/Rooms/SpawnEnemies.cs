@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 
 
@@ -8,12 +9,20 @@ public class SpawnEnemies : MonoBehaviour
 
 
 
+    private DungeonGameManager dgm;
+
+
+
     void Start()
-    {        
+    {
+        dgm = GameObject.Find("DungeonGameManager").GetComponent<DungeonGameManager>();
+
         foreach (int i in RandomHelper.RandomRangeNoRepeat((byte)transform.childCount, (byte)numberToSpawn))
         {
             Transform child = transform.GetChild(i);
-            SpawnCharacter(child.GetComponent<SpawnPoint>().spawnCharacter, child);
+            SpawnCharacter(dgm.Enemies.Shuffle().First(), child);
+
+            DungeonGameManager.NumberOfEnemies++;
         }
     }
 
