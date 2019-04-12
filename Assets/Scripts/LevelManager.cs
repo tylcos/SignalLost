@@ -12,7 +12,7 @@ public static class LevelManager
 
 
 
-    public static readonly int startingRooms = 2;
+    public static readonly int startingRooms = 6;
     [HideInInspector]
     public static readonly int difficultyFactor = 4;
     [HideInInspector]
