@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: DungeonGame
+  companyName: Beme Posse
+  productName: Signal Lost
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.38679248, g: 0.34847814, b: 0.35805672, a: 1}
@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300012, guid: 536057b46e98f0948b8fbbc9802ba875, type: 3}
+  - logo: {fileID: 21300000, guid: 7f34bc3af4a89744facd4cd8efd8de72, type: 3}
     duration: 5
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -115,7 +115,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 0.6
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -258,7 +258,7 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: dce1eea5d01bc544ead19cc7ecdb70c9, type: 3}
+      m_Icon: {fileID: 2800000, guid: 7f34bc3af4a89744facd4cd8efd8de72, type: 3}
       m_Width: 1024
       m_Height: 1024
       m_Kind: 0
@@ -291,6 +291,13 @@ PlayerSettings:
       m_Icon: {fileID: 0}
       m_Width: 16
       m_Height: 16
+      m_Kind: 0
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 7f34bc3af4a89744facd4cd8efd8de72, type: 3}
+      m_Width: 128
+      m_Height: 128
       m_Kind: 0
   m_BuildTargetPlatformIcons: []
   m_BuildTargetBatching: []
