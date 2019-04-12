@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c562fd58ee28ade44bd99eafdaa26de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
@@ -305,7 +305,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 4160192979165522, guid: 74904ff051524d048a5a98912b5aafbe, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -318,8 +317,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-=======
->>>>>>> 98d3c4e4cbce51a5e734fd0a076d18094b898bb3
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74904ff051524d048a5a98912b5aafbe, type: 3}
 --- !u!1 &1237663204
@@ -398,8 +395,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_LookaheadTime: 0.2
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
@@ -439,8 +436,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &1394147747 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1978787554900614018, guid: 74904ff051524d048a5a98912b5aafbe,
@@ -451,8 +448,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e711393a45603da48810bdd2ddff45af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1814215812
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,11 +477,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_ExcludedPropertiesInInspector:
   - m_Script
-  m_LockStageInInspector: 
+  m_LockStageInInspector:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
@@ -550,8 +547,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -569,8 +566,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
@@ -629,8 +626,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34e4cd49f9151d14f8b30b34513858f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   debug: 0
   StartingRoom: {fileID: 1780979126589535559, guid: e6cced1ba944a3f44b97e33ef220b682,
     type: 3}
@@ -781,17 +778,17 @@ PrefabInstance:
     - target: {fileID: 2644264974080269556, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: PWC
-      value: 
+      value:
       objectReference: {fileID: 1394147747}
     - target: {fileID: 2644264974080269558, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
       propertyPath: player
-      value: 
+      value:
       objectReference: {fileID: 382178209}
     - target: {fileID: 2644264972944387957, guid: 8618fccb8d9c21b4bbec545a10e6ccf6,
         type: 3}
@@ -909,25 +906,25 @@ PrefabInstance:
     - target: {fileID: 6224444677054980192, guid: 7606fe1fb435aa24194cf25fbb6deb0b,
         type: 3}
       propertyPath: Enemies.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 3197787328414642397, guid: 3020fa7a6f029704898a8f5cbcc6cad7,
         type: 3}
     - target: {fileID: 6224444677054980192, guid: 7606fe1fb435aa24194cf25fbb6deb0b,
         type: 3}
       propertyPath: Enemies.Array.data[1]
-      value: 
+      value:
       objectReference: {fileID: 431544745, guid: 010de80bb4f44ff4d821b8335ca4c52f,
         type: 3}
     - target: {fileID: 6224444677054980192, guid: 7606fe1fb435aa24194cf25fbb6deb0b,
         type: 3}
       propertyPath: Enemies.Array.data[2]
-      value: 
+      value:
       objectReference: {fileID: 1840001185029764, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
     - target: {fileID: 6224444677054980192, guid: 7606fe1fb435aa24194cf25fbb6deb0b,
         type: 3}
       propertyPath: Enemies.Array.data[3]
-      value: 
+      value:
       objectReference: {fileID: 1411719202972802, guid: 5b9e39121264e184181535c15791a84e,
         type: 3}
     m_RemovedComponents: []
