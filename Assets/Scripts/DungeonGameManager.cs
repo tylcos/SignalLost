@@ -73,8 +73,12 @@ public class DungeonGameManager : MonoBehaviour
     {
         //Debug.Log(NumberOfEnemies);
 
+        if (Input.GetKeyDown(KeyCode.O) || NumberOfEnemies <= 0) // <o/
+            LevelManager.LoadNewLevel();
+
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
+
     }
 
 
