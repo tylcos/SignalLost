@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     public float maxCollisions;
     private float currentPenetration = 0;
     [HideInInspector]
-    public MovementController source = null;
+    public MovementController source;
 
     private float startTime;
 

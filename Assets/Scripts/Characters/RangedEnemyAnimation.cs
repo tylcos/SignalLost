@@ -19,7 +19,7 @@ public class RangedEnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log(movementAccessor.animationDirection);
+        //Debug.Log(movementAccessor.animationDirection);
        /* if (movementAccessor.movingForAnimation)
         {
             rangedAnimator.SetBool("Idle", false);

@@ -57,7 +57,7 @@ public class DungeonGameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(NumberOfEnemies);
+        //Debug.Log(NumberOfEnemies);
 
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
