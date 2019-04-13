@@ -11,6 +11,7 @@ public class SpawnEnemies : MonoBehaviour
 
     void Start()
     {
+        DungeonGameManager.NumberOfEnemies--;
         foreach (int i in RandomHelper.RandomRangeNoRepeat((byte)transform.childCount, (byte)numberToSpawn))
         {
             Transform child = transform.GetChild(i);
