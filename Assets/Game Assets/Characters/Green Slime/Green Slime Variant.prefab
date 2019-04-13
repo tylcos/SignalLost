@@ -75,11 +75,6 @@ PrefabInstance:
       propertyPath: WC
       value: 
       objectReference: {fileID: 3746685737715072172}
-    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 114007684564531466, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: background
@@ -95,11 +90,26 @@ PrefabInstance:
       propertyPath: boundCharacter
       value: 
       objectReference: {fileID: 5407634174786935883}
+    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 58154560056975910, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114232897573413850, guid: 78d575f7607164f48b727524d3edcea2,
         type: 3}
       propertyPath: parent
       value: 
       objectReference: {fileID: 5406923198399523483}
+    - target: {fileID: 114232897573413850, guid: 78d575f7607164f48b727524d3edcea2,
+        type: 3}
+      propertyPath: strength
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d575f7607164f48b727524d3edcea2, type: 3}
 --- !u!114 &5407634174786935883 stripped
