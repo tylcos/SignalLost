@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: C_Wand
+  m_Name: R_AutoPistol1
   m_EditorClassIdentifier: 
   combatMode: 0
-  weapon: {fileID: 8976151292421940513, guid: 2978f83a7dcbfbf409705dd890f7cef6, type: 3}
-  bullet: {fileID: 1599505205951956, guid: b736ef2d2e5a6744d8069c283dd6f330, type: 3}
+  weapon: {fileID: 8520570019915805274, guid: 6e2620b9c2054b347b1bbb5908901bfd, type: 3}
+  bullet: {fileID: 1502395725654502, guid: 541ebde4fee233c4abe7d94f7cb71ab5, type: 3}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
   ricochetVFX: {fileID: 0}
-  bulletDamage: 5
-  cycleTime: 0.05
-  clipSize: 100
-  reloadTime: 2.4
-  muzzleVelocity: 30
+  bulletDamage: 20
+  cycleTime: 0.6
+  clipSize: 8
+  reloadTime: 1.6
+  muzzleVelocity: 20
   lifetime: 5
   halfSpreadAngle: 0
   impacts: 0
@@ -33,6 +33,8 @@ MonoBehaviour:
   penetrationStrength: 0
   impactRadius: 0
   falloff: 0
+  dps: 33.333332
+  realDPS: 25
   swingVFX: {fileID: 0}
   meleeDamage: 0
   exhaustTime: 0

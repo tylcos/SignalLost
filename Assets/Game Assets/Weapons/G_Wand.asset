@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73213a03cd680be4cba76e6e35de2dea, type: 3}
-  m_Name: Chris_Wand
+  m_Name: G_Wand
   m_EditorClassIdentifier: 
   combatMode: 0
-  weapon: {fileID: 8976151292421940513, guid: 5e5b70fd52478394abf58776d02191e1, type: 3}
-  bullet: {fileID: 1599505205951956, guid: 748132e444ae0b2448c40fdadbd6b4fc, type: 3}
+  weapon: {fileID: 8976151292421940513, guid: dfebde464f0bb5e4593a34ce1f18e597, type: 3}
+  bullet: {fileID: 1599505205951956, guid: eea35aeca1ef4864ca8b79df54c3348f, type: 3}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
   ricochetVFX: {fileID: 0}
-  bulletDamage: 120
-  cycleTime: 2
-  clipSize: 5
-  reloadTime: 3
-  muzzleVelocity: 5
-  lifetime: 10
+  bulletDamage: 80
+  cycleTime: 1
+  clipSize: 8
+  reloadTime: 1.7
+  muzzleVelocity: 40
+  lifetime: 5
   halfSpreadAngle: 0
   impacts: 0
   canRicochet: 0
@@ -33,6 +33,8 @@ MonoBehaviour:
   penetrationStrength: 0
   impactRadius: 0
   falloff: 0
+  dps: 80
+  realDPS: 65.979385
   swingVFX: {fileID: 0}
   meleeDamage: 0
   exhaustTime: 0
