@@ -9,7 +9,7 @@ public class UWeaponInformation : ScriptableObject
     [Dropdown("Mode")]
     public int combatMode;
 
-    private DropdownList<int> Mode = new DropdownList<int>()
+    private readonly DropdownList<int> Mode = new DropdownList<int>()
     {
         { "Melee", WeaponController.COMBATMODE_MELEE },
         { "Gun"  , WeaponController.COMBATMODE_GUN }
@@ -146,6 +146,17 @@ public class UWeaponInformation : ScriptableObject
     public bool falloff;
     // change this to select which function fallout is calculated with e.g. linear, square, cubic
 
+
+
+    [ShowIf("GunMode")]
+    [ReadOnly]
+    [Space]
+    public float dps;
+    [ShowIf("GunMode")]
+    [ReadOnly]
+    public float realDPS;
+
+
     #endregion
 
     #region melee
@@ -166,8 +177,19 @@ public class UWeaponInformation : ScriptableObject
     [MinValue(0)]
     public float exhaustTime;
 
-
     #endregion
 
     // below this put rarity variations
+
+    
+    
+    private void OnValidate()
+    {
+        dps = bulletDamage / cycleTime;
+
+        float time = reloadTime + clipSize * cycleTime;
+        float dmg = clipSize * bulletDamage;
+
+        realDPS = dmg / time;
+    }
 }
