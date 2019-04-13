@@ -71,7 +71,7 @@ public class DungeonGameManager : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(NumberOfEnemies);
+        Debug.Log(NumberOfEnemies);
 
         if (Input.GetKeyDown(KeyCode.O) || NumberOfEnemies <= 0) // <o/
             LevelManager.LoadNewLevel();
