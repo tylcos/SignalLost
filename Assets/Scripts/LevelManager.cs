@@ -32,31 +32,11 @@ public static class LevelManager
 
 
 
-    private static UIController uiParent;
-    private static RoomSpawner roomSpawner;
-    private static Transform player;
-    private static PlayerController playerPC;
-
-
-
-    public static void InitializeLevelManager(UIController uiParent, RoomSpawner roomSpawner, Transform player)
-    {
-        LevelManager.uiParent = uiParent;
-        LevelManager.roomSpawner = roomSpawner;
-        LevelManager.player = player;
-
-        playerPC = player.GetComponent<PlayerController>();
-
-        roomSpawner.InitializeRoomSpawner();
-    }
-
-
-
     public static void LoadStartingLevel()
     {
-        timeAtLevelLoad = DateTime.UtcNow.Ticks;
-
         SceneManager.LoadScene(gameSceneName);
+
+        timeAtLevelLoad = DateTime.UtcNow.Ticks;
     }
 
     public static void LoadNewLevel()
@@ -64,9 +44,7 @@ public static class LevelManager
         if (DungeonGameManager.LoadingNewLevel == true)
             return;
 
-
-
-        Cursor.visible = false;
+        DungeonGameManager.MouseOn = Cursor.visible;
         DungeonGameManager.LoadingNewLevel = true;
 
 
@@ -79,37 +57,25 @@ public static class LevelManager
         ++currentLevel;
 
 
-        
-        uiParent.StartCoroutine(ResetLevel(timeForFade)); // Borrowing the ui monobehavior
+
+        UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
+        ui.StartFadeBlind(0f, 1f, timeForFade, false);
+        ui.StartCoroutine(LoadNewLevelWait(timeForFade));
     }
 
-    public static IEnumerator<WaitForSeconds> ResetLevel(float time)
+    private static IEnumerator<WaitForSeconds> LoadNewLevelWait(float time)
     {
-        uiParent.StartFadeBlind(0f, 1f, time, false); // Cover up camera
         yield return new WaitForSeconds(time);
 
-        foreach (Transform child in roomSpawner.transform)
-            UnityEngine.Object.Destroy(child.gameObject);
-
-
-
-        roomSpawner.Reset();
-        roomSpawner.SpawnRooms();
-
-        player.position = Vector3.zero;
-        playerPC.CurrentHitPoints = playerPC.MaxHitPoints;
-        // Alieien reload all gunz plz
-
-
-
-        yield return new WaitForSeconds(1f); // Used to cover up the camera moving across the level
-        uiParent.StartFadeBlind(1f, 0f, time, true); // Uncover camera
-        yield return new WaitForSeconds(time);
-
-        DungeonGameManager.LoadingNewLevel = false;
+        SceneManager.LoadScene(gameSceneName);
+        // Spawn rooms with LevelsToSpawn
+        // Remove blind from camera *DONE*
     }
 
-
+    public static void LoadDeathScreen()
+    {
+        // Load death ui not a scene
+    }
 
     // Selected at death screen
     public static void LoadStartScene()

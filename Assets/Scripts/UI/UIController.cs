@@ -153,6 +153,10 @@ public class UIController : MonoBehaviour
         fadeOut.gameObject.SetActive(true);
     }
 
+    private void Start()
+    {
+        StartFadeBlind(1f, 0f, 2f, true);
+    }
 
 
     /// <summary>
@@ -183,25 +187,17 @@ public class UIController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        color.a = alphaFinish;
         Cursor.visible = enableCursor;
     }
 
-
-
     private void DeathSequence()
     {
-        // Fades in death message and fades out the rest
+        //this should fade in death message and fade out the rest somehow
         deathMessage.SetActive(true);
-
         if (healthbar != null)
             UpdateHealthbar();
         if (ammo != null)
             UpdateAmmo();
-
-
-
-        // TODO: Get user input for name
     }
 
     // called when player takes damage

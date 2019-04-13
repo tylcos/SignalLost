@@ -5,22 +5,17 @@ using UnityEngine;
 
 public class DungeonGameManager : MonoBehaviour
 {
-    public bool menuScene = false;
-    public UIController uiParent;
-    public RoomSpawner roomSpawner;
-    public Transform player;
-
-
-
     public GameObject[] enemies;
-    public static int NumberOfEnemies = 1;
+    public static int NumberOfEnemies;
+    
+
 
     public static GameObject[] Enemies;
 
 
 
     public static InputMethodType InputMethod = InputMethodType.Keyboard;
-
+    
 
 
     public static int CurrentScore;
@@ -28,6 +23,7 @@ public class DungeonGameManager : MonoBehaviour
     public delegate void ScoreChangedHandler();
     public static event ScoreChangedHandler ScoreChanged;
 
+    public static bool MouseOn = true;
     public static bool LoadingNewLevel = false;
     public static bool ApplicationQuit = false;
 
@@ -38,10 +34,11 @@ public class DungeonGameManager : MonoBehaviour
     {
         var inputArg = GetArg("-inputMethod");
         switch(inputArg)
-        {
+        { 
             case "keyboard":
                 InputMethod = InputMethodType.Keyboard;
-                Cursor.visible = true;
+
+                Cursor.visible |= MouseOn; // Only turn on the cursor if it was already on
                 break;
             case "arcade":
                 InputMethod = InputMethodType.Arcade;
@@ -54,19 +51,8 @@ public class DungeonGameManager : MonoBehaviour
 
     void Start()
     {
-        if (!menuScene)
-        {
-            Enemies = enemies;
-            LoadingNewLevel = false;
-
-
-            Debug.Log(2);
-            LevelManager.InitializeLevelManager(uiParent, roomSpawner, player);
-
-            // Manually spawning the room for the first iteration
-            StartCoroutine(LevelManager.ResetLevel(0f));
-            uiParent.StartFadeBlind(1f, 0f, 2f, true);
-        }
+        Enemies = enemies;
+        LoadingNewLevel = false;
     }
 
     void Update()
@@ -75,10 +61,10 @@ public class DungeonGameManager : MonoBehaviour
 
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
+
+        if (Input.GetKeyDown(KeyCode.O) || NumberOfEnemies <= 0) // <o/
+            LevelManager.LoadNewLevel();
     }
-
-
-
 
     public static void AddScore(int amount)
     {

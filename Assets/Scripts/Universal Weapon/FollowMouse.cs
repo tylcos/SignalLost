@@ -37,7 +37,7 @@ public class FollowMouse : MonoBehaviour
                 float mouseAngle = Mathf.Rad2Deg * Mathf.Atan2(mousePosRelative.y, mousePosRelative.x);
                 angleDifference = mouseAngle - transform.eulerAngles.z;
 
-                Cursor.visible = !DungeonGameManager.LoadingNewLevel;
+                Cursor.visible |= DungeonGameManager.MouseOn;
             }
         }
 
