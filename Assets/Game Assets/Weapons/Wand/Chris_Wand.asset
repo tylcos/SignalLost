@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatMode: 0
   weapon: {fileID: 8976151292421940513, guid: 5e5b70fd52478394abf58776d02191e1, type: 3}
-  bullet: {fileID: 1599505205951956, guid: d80a661a2a630b04d8b73922c381b636, type: 3}
+  bullet: {fileID: 1599505205951956, guid: 748132e444ae0b2448c40fdadbd6b4fc, type: 3}
   impactVFX: {fileID: 0}
   muzzleVFX: {fileID: 0}
   penetrationVFX: {fileID: 0}
@@ -23,7 +23,7 @@ MonoBehaviour:
   cycleTime: 2
   clipSize: 5
   reloadTime: 3
-  muzzleVelocity: 10
+  muzzleVelocity: 5
   lifetime: 10
   halfSpreadAngle: 0
   impacts: 0
