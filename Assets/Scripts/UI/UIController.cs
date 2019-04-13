@@ -201,7 +201,8 @@ public class UIController : MonoBehaviour
             UpdateAmmo();
 
 
-        StartCoroutine(LoadMainMenu(5));
+        StartCoroutine(LoadMainMenu(10));
+        LeaderboardManager.AddCurrentRun("RUN");
 
 
         // TODO: Get user input for name
@@ -212,6 +213,8 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("Menu");
     }
+
+
 
     // called when player takes damage
     private void OnTakeDamage(float damageReceived)
