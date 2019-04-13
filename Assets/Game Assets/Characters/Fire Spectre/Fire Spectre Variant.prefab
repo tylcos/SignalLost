@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 58152426757925366, guid: 5b9e39121264e184181535c15791a84e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 114959292077130018, guid: 5b9e39121264e184181535c15791a84e,
         type: 3}
       propertyPath: parent
