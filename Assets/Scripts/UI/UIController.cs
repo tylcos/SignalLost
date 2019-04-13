@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -200,9 +201,20 @@ public class UIController : MonoBehaviour
             UpdateAmmo();
 
 
+        StartCoroutine(LoadMainMenu(10));
+        LeaderboardManager.AddCurrentRun("RUN");
+
 
         // TODO: Get user input for name
     }
+
+    private IEnumerator<WaitForSeconds> LoadMainMenu(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("Menu");
+    }
+
+
 
     // called when player takes damage
     private void OnTakeDamage(float damageReceived)
