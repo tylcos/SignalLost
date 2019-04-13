@@ -13,7 +13,7 @@ public class DungeonGameManager : MonoBehaviour
 
 
     public GameObject[] enemies;
-    public static int NumberOfEnemies = 1;
+    public static int NumberOfEnemies = 0;
 
     public static GameObject[] Enemies;
 
@@ -60,11 +60,10 @@ public class DungeonGameManager : MonoBehaviour
             LoadingNewLevel = false;
 
 
-            Debug.Log(2);
             LevelManager.InitializeLevelManager(uiParent, roomSpawner, player);
 
             // Manually spawning the room for the first iteration
-            StartCoroutine(LevelManager.ResetLevel(0f));
+            roomSpawner.SpawnRooms();
             uiParent.StartFadeBlind(1f, 0f, 2f, true);
         }
     }
@@ -78,7 +77,6 @@ public class DungeonGameManager : MonoBehaviour
 
         if (!ApplicationQuit && Input.GetAxis("ArcadeExit") > 0)
             QuitApplication();
-
     }
 
 
