@@ -32,11 +32,31 @@ public static class LevelManager
 
 
 
+    private static UIController uiParent;
+    private static RoomSpawner roomSpawner;
+    private static Transform player;
+    private static PlayerController playerPC;
+
+
+
+    public static void InitializeLevelManager(UIController uiParent, RoomSpawner roomSpawner, Transform player)
+    {
+        LevelManager.uiParent = uiParent;
+        LevelManager.roomSpawner = roomSpawner;
+        LevelManager.player = player;
+
+        playerPC = player.GetComponent<PlayerController>();
+
+        roomSpawner.InitializeRoomSpawner();
+    }
+
+
+
     public static void LoadStartingLevel()
     {
-        SceneManager.LoadScene(gameSceneName);
-
         timeAtLevelLoad = DateTime.UtcNow.Ticks;
+
+        SceneManager.LoadScene(gameSceneName);
     }
 
     public static void LoadNewLevel()
@@ -44,7 +64,9 @@ public static class LevelManager
         if (DungeonGameManager.LoadingNewLevel == true)
             return;
 
-        DungeonGameManager.MouseOn = Cursor.visible;
+
+
+        Cursor.visible = false;
         DungeonGameManager.LoadingNewLevel = true;
 
 
@@ -57,25 +79,37 @@ public static class LevelManager
         ++currentLevel;
 
 
-
-        UIController ui = GameObject.FindGameObjectWithTag("UI Parent").GetComponent<UIController>();
-        ui.StartFadeBlind(0f, 1f, timeForFade, false);
-        ui.StartCoroutine(LoadNewLevelWait(timeForFade));
+        
+        uiParent.StartCoroutine(ResetLevel(timeForFade)); // Borrowing the ui monobehavior
     }
 
-    private static IEnumerator<WaitForSeconds> LoadNewLevelWait(float time)
+    public static IEnumerator<WaitForSeconds> ResetLevel(float time)
     {
+        uiParent.StartFadeBlind(0f, 1f, time, false); // Cover up camera
         yield return new WaitForSeconds(time);
 
-        SceneManager.LoadScene(gameSceneName);
-        // Spawn rooms with LevelsToSpawn
-        // Remove blind from camera *DONE*
+        foreach (Transform child in roomSpawner.transform)
+            UnityEngine.Object.Destroy(child.gameObject);
+
+
+
+        roomSpawner.Reset();
+        roomSpawner.SpawnRooms();
+
+        player.position = Vector3.zero;
+        playerPC.CurrentHitPoints = playerPC.MaxHitPoints;
+        // Alieien reload all gunz plz
+
+
+
+        yield return new WaitForSeconds(1f); // Used to cover up the camera moving across the level
+        uiParent.StartFadeBlind(1f, 0f, time, true); // Uncover camera
+        yield return new WaitForSeconds(time);
+
+        DungeonGameManager.LoadingNewLevel = false;
     }
 
-    public static void LoadDeathScreen()
-    {
-        // Load death ui not a scene
-    }
+
 
     // Selected at death screen
     public static void LoadStartScene()
