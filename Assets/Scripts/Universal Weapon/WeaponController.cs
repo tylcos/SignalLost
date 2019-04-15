@@ -56,6 +56,10 @@ public class WeaponController : MonoBehaviour
             // so we call commands there when we need to fire or whatnot since that stores everything
         }
 
+    }
+
+    private void Start()
+    {
         GetEquippedWeapon().SetEnabled(true);
     }
 

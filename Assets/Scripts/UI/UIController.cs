@@ -91,7 +91,6 @@ public class UIController : MonoBehaviour
 
     public void InitializeUI()
     {
-        Debug.Log("aww");
         player.OnEnable();
 
         try
