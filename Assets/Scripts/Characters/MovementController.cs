@@ -54,7 +54,7 @@ public class MovementController : MonoBehaviour
         Died += OnDeath;
     }
 
-    protected virtual void OnEnable()
+    public virtual void OnEnable()
     {
         lastDamageTime = invincibilityDuration;
         collideLayerMask = cc2d.platformMask;
@@ -100,10 +100,15 @@ public class MovementController : MonoBehaviour
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
-        if (gameObject.name != "Player")
+        if (gameObject.name == "Player")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
             DungeonGameManager.NumberOfEnemies--;
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnTakeDamage(float damageReceived)

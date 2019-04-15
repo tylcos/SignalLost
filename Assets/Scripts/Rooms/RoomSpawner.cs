@@ -29,9 +29,9 @@ public class RoomSpawner : MonoBehaviour
         foreach (GameObject room in BaseRooms)
         {
             var rm = room.GetComponent<RoomManager>();
-            rm.UpdateConnectors();
+            rm.UpdateConnections();
 
-            int connectionCount = rm.connectors.Sum(s => s.Count);
+            int connectionCount = rm.connections.Sum(s => s.Count);
             Room.BaseRooms[connectionCount].Add(new Room(room, rm));
 
             if (debug)
@@ -42,10 +42,16 @@ public class RoomSpawner : MonoBehaviour
         for (int rotation = 0; rotation < 4; rotation++)
         {
             var zeroScript = ZeroRooms[rotation].GetComponent<RoomManager>();
-            zeroScript.UpdateConnectors();
+            zeroScript.UpdateConnections();
 
             Room.BaseRooms[0].Add(new Room(ZeroRooms[rotation], zeroScript));
         }
+
+        var startingRoomScript = StartingRoom.GetComponent<RoomManager>();
+        startingRoomScript.UpdateConnections();
+        Room.StartRoom = new Room(StartingRoom, startingRoomScript);
+
+
 
         if (debug)
             Debug.Log("[Total Rooms] " + Room.BaseRooms.Sum(s => s == null ? 0 : s.Count));
@@ -53,7 +59,11 @@ public class RoomSpawner : MonoBehaviour
 
     public void Reset()
     {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+
         Room.spawnedRooms.Clear();
+        
     }
 
 
@@ -62,37 +72,36 @@ public class RoomSpawner : MonoBehaviour
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
-        Room startRoom = new Room(Instantiate(StartingRoom, transform)) { index = 0 };
-        Room.spawnedRooms.Add(new Bounds(startRoom.bounds.center, startRoom.bounds.size));
-
 
 
         int remainingRooms = LevelManager.RoomsToSpawn;
 
         List<Room> newRooms = new List<Room>(16); // Rooms to spawn on in the next iteration
         Queue<Room> queue = new Queue<Room>(16);  // Rooms to spawn on in the current iteration
-        queue.Enqueue(startRoom);
+
+        Room.SpawnStartingRoom();
+        queue.Enqueue(Room.StartRoom);
 
 
 
         int loop = 0; 
         while (remainingRooms > 0) // Iteration start
         {
-            int totalConnections = queue.Sum(r => r.connections.Sum(s => s.Count));
+            int totalConnections = queue.Sum(r => r.TotalConnections()); // Total rooms to be spawned on this iteration
 
             while (queue.Any())
             {
-                Room room = queue.Dequeue();
+                Room currentRoom = queue.Dequeue();
 
-                foreach (var connection in room.GetConnections())
+                foreach (var connection in currentRoom.GetConnections())
                 {
                     int deltaRooms = remainingRooms - totalConnections;
-                    int connections = deltaRooms > 0 ? 
-                        UnityEngine.Random.Range(2, Math.Min(deltaRooms + 1, maxConnections) + 1) : 1;
+                    int connectionsToSpawn = deltaRooms > 0 ? 
+                        UnityEngine.Random.Range(2, Math.Min(deltaRooms + 1, maxConnections) + 1) : 1; // Cap connections is enough rooms are spawned
 
 
 
-                    var roomToSpawnTuple = room.GetRoom(connections, connection);
+                    var roomToSpawnTuple = currentRoom.GetRoom(connectionsToSpawn, connection);
 
                     roomToSpawnTuple.Item1.Instantiate(roomToSpawnTuple.Item2);
                     newRooms.Add(roomToSpawnTuple.Item1);
@@ -130,6 +139,7 @@ public class Room
 
 
 
+    public static Room StartRoom;
     public static List<Room>[] BaseRooms; // [Connections][Room Index]
 
     public static List<Bounds> spawnedRooms; // Used for checking room collisions
@@ -139,6 +149,10 @@ public class Room
     private static Transform roomSpawner; // Room spawner GameObject
 
     private static readonly Vector3 roomPadding = new Vector3(2.5f, 2.5f);
+
+
+
+    public int TotalConnections() => connections[0].Count + connections[1].Count + connections[2].Count + connections[3].Count;
 
 
 
@@ -152,7 +166,7 @@ public class Room
         transform = go.transform;
 
         var rm = go.GetComponent<RoomManager>();
-        connections = rm.connectors;
+        connections = rm.connections;
         bounds = rm.bounds;
     }
 
@@ -161,7 +175,7 @@ public class Room
         gameObject = go;
         transform = go.transform;
 
-        connections = rm.connectors;
+        connections = rm.connections;
         bounds = rm.bounds;
     }
 
@@ -186,6 +200,13 @@ public class Room
         };
 
         return room;
+    }
+
+
+
+    public static void SpawnStartingRoom()
+    {
+        StartRoom.Clone().Instantiate(Vector3.zero);
     }
 
 
@@ -242,6 +263,7 @@ public class Room
         for (int r = 0; r < spawnedRooms.Count; r++)
             if (r != parentIndex && spawnedRooms[r].Intersects(spawnedBounds))
                 return false;
+            
                 
         return true;
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1823072944}
   m_Layer: 5
   m_Name: Reload Indicator
-  m_TagString: Untagged
+  m_TagString: UITest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35.25
+  m_fontSize: 69.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1164,7 +1164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4283753021470926379
 RectTransform:
   m_ObjectHideFlags: 0

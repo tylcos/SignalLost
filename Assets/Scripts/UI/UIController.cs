@@ -19,9 +19,8 @@ public class UIController : MonoBehaviour
         public void Redraw()
         {
             if (health < 0)
-            {
                 health = 0;
-            }
+
             healthbarTransform.localScale = new Vector3(health / maximum, healthbarTransform.localScale.y, healthbarTransform.localScale.z);
         }
     }
@@ -74,33 +73,27 @@ public class UIController : MonoBehaviour
 
 
 
-    private HealthbarSettings _healthbarSettings;
-    private AmmoSettings _ammoSettings;
-    private ScoreSettings _scoreSettings;
-    [SerializeField]
-    private GameObject uiReloadIndicator = null;
-    [SerializeField]
-    private GameObject uiReloadIndicatorMask = null;
-    [SerializeField]
-    private PlayerWeaponController PWC = null;
-    [SerializeField]
-    private PlayerController player = null;
-    [SerializeField]
-    private GameObject healthbar = null;
-    [SerializeField]
-    private GameObject ammo = null;
-    [SerializeField]
-    private GameObject deathMessage = null;
-    [SerializeField]
-    private GameObject score = null;
+    private HealthbarSettings _healthbarSettings = new HealthbarSettings();
+    private AmmoSettings _ammoSettings = new AmmoSettings();
+    private ScoreSettings _scoreSettings = new ScoreSettings();
+    public GameObject uiReloadIndicator;
+    public GameObject uiReloadIndicatorMask;
+    public PlayerWeaponController PWC;
+    public PlayerController player;
+    public GameObject healthbar;
+    public GameObject ammo;
+    public GameObject deathMessage;
+    public GameObject score;
 
-    [SerializeField]
-    private Image fadeOut;
+    public Image fadeOut;
 
 
 
-    private void OnEnable()
+    public void InitializeUI()
     {
+        Debug.Log("aww");
+        player.OnEnable();
+
         try
         {
             _healthbarSettings.healthbarTransform = healthbar.GetComponentsInChildren<Transform>()[2];
@@ -114,6 +107,8 @@ public class UIController : MonoBehaviour
         try
         {
             _ammoSettings.text = ammo.GetComponent<TMP_Text>();
+
+            PWC.OnEnable();
             _ammoSettings.wep = PWC.GetEquippedWeapon();
             _ammoSettings.uIndic = uiReloadIndicator;
             _ammoSettings.uFill = uiReloadIndicatorMask.transform;
@@ -147,11 +142,18 @@ public class UIController : MonoBehaviour
         }
 
         DungeonGameManager.ScoreChanged += OnScoreChanged;
-
+            
         UpdateAmmo();
         UpdateHealthbar();
         UpdateScore();
         fadeOut.gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        EquippedWeapon.WeaponAmmoChanged -= OnWeaponUpdate;
+        EquippedWeapon.WeaponSwapped -= OnWeaponSwap;
+        PWC.ReloadUpdate -= OnReloadUpdate;
     }
 
 
@@ -211,7 +213,7 @@ public class UIController : MonoBehaviour
     private IEnumerator<WaitForSeconds> LoadMainMenu(float time)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
 

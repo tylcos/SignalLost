@@ -11,9 +11,9 @@ public class RoomManager : MonoBehaviour
 {
     // Necessary because unity cannot serialize an array of lists
     [HideInInspector]
-    public List<int>[] connectors = new List<int>[4];
+    public List<int>[] connections = new List<int>[4];
     [HideInInspector]
-    public string connectorsString = "0|0|0|0";
+    public string connectionsString = "|||";
 
     public Bounds bounds;
 
@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
         bounds = tilemaps[0].localBounds;
         center = transform.position;
 
-        UpdateConnectors();
+        UpdateConnections();
     }
 
 #if UNITY_EDITOR
@@ -41,10 +41,17 @@ public class RoomManager : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        foreach (int pos in connectors[0]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.min.y, 0), new Vector3(2f, .2f));
-        foreach (int pos in connectors[1]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.max.y, 0), new Vector3(2f, .2f));
-        foreach (int pos in connectors[2]) Gizmos.DrawCube(center + new Vector3(bounds.min.x, pos + bounds.center.y, 0), new Vector3(.2f, 2f));
-        foreach (int pos in connectors[3]) Gizmos.DrawCube(center + new Vector3(bounds.max.x, pos + bounds.center.y, 0), new Vector3(.2f, 2f));
+        try
+        {
+            foreach (int pos in connections[0]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.min.y, 0), new Vector3(2f, .2f));
+            foreach (int pos in connections[1]) Gizmos.DrawCube(center + new Vector3(pos + bounds.center.x, bounds.max.y, 0), new Vector3(2f, .2f));
+            foreach (int pos in connections[2]) Gizmos.DrawCube(center + new Vector3(bounds.min.x, pos + bounds.center.y, 0), new Vector3(.2f, 2f));
+            foreach (int pos in connections[3]) Gizmos.DrawCube(center + new Vector3(bounds.max.x, pos + bounds.center.y, 0), new Vector3(.2f, 2f));
+        }
+        catch
+        {
+
+        }
     }
 #endif
 
@@ -65,24 +72,19 @@ public class RoomManager : MonoBehaviour
 
 
 
-    public void SetState(bool enabled)
+    public void UpdateConnections()
     {
-        gameObject.SetActive(enabled);
-    }
-
-    public void UpdateConnectors()
-    {
-        connectors = new List<int>[4];
-        string[] sides = connectorsString.Split('|');
+        connections = new List<int>[4];
+        string[] sides = connectionsString.Split('|');
 
         for (int i = 0; i < 4; i++)
-            connectors[i] = sides[i].Length == 0 ? new List<int>() : sides[i].Split(',').Select(int.Parse).ToList();
+            connections[i] = sides[i].Length == 0 ? new List<int>() : sides[i].Split(',').Select(int.Parse).ToList();
     }
 
 
 
     public override string ToString()
     {
-        return connectorsString;
+        return connectionsString;
     }
 }

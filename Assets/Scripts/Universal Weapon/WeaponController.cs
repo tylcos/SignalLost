@@ -42,7 +42,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         // populates the swaplist
         foreach (UWeaponInformation wep in inventory)
@@ -55,10 +55,7 @@ public class WeaponController : MonoBehaviour
             // so we have a parallel array that holds the objects, their bullets, and ammo
             // so we call commands there when we need to fire or whatnot since that stores everything
         }
-    }
 
-    private void Start()
-    {
         GetEquippedWeapon().SetEnabled(true);
     }
 

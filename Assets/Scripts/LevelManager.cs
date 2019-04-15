@@ -88,17 +88,14 @@ public static class LevelManager
         uiParent.StartFadeBlind(0f, 1f, time, false); // Cover up camera
         yield return new WaitForSeconds(time);
 
-        foreach (Transform child in roomSpawner.transform)
-            UnityEngine.Object.Destroy(child.gameObject);
-
-
+        
 
         roomSpawner.Reset();
         roomSpawner.SpawnRooms();
 
         player.position = Vector3.zero;
         playerPC.CurrentHitPoints = playerPC.MaxHitPoints;
-        // Alieien reload all gunz plz
+        // Reload all gunz 
 
 
 

@@ -31,9 +31,15 @@ public class BulletController : MonoBehaviour
         {
             //collEvent.gameObject.GetComponent<MovementController>().Damage(damage);
             bool killedCharacterHit = collEvent.gameObject.GetComponent<MovementController>().OnHitReceived(source, damage);
-            source.OnHitDealt(collEvent.gameObject.GetComponent<MovementController>(), killedCharacterHit);
-            print("Object hit: " + collEvent.gameObject.GetComponent<MovementController>().ToString());
-            print("This bullet's parent: " + source.ToString());
+
+            try // Bad bug
+            {
+                source.OnHitDealt(collEvent.gameObject.GetComponent<MovementController>(), killedCharacterHit);
+            }
+            catch
+            {
+
+            }
         }
         currentPenetration++;
         if (currentPenetration >= maxCollisions)

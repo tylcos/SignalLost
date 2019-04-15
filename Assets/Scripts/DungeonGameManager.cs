@@ -8,7 +8,7 @@ public class DungeonGameManager : MonoBehaviour
     public bool menuScene = false;
     public UIController uiParent;
     public RoomSpawner roomSpawner;
-    public Transform player;
+    public GameObject player;
 
 
 
@@ -52,7 +52,7 @@ public class DungeonGameManager : MonoBehaviour
 
 
 
-    void Start()
+    void OnEnable()
     {
         if (!menuScene)
         {
@@ -60,10 +60,11 @@ public class DungeonGameManager : MonoBehaviour
             LoadingNewLevel = false;
 
 
-            LevelManager.InitializeLevelManager(uiParent, roomSpawner, player);
-
-            // Manually spawning the room for the first iteration
+            LevelManager.InitializeLevelManager(uiParent, roomSpawner, player.transform);
             roomSpawner.SpawnRooms();
+
+            uiParent.InitializeUI();
+            
             uiParent.StartFadeBlind(1f, 0f, 2f, true);
         }
     }

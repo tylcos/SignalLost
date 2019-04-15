@@ -29,15 +29,13 @@ public class MenuManager : MonoBehaviour
 
         leaderboardItems = leaderboardItem.GetComponentsInChildren<TextMeshProUGUI>().Where(t => t.fontSize < 30).ToArray();
         LeaderboardManager.LoadLeaderboardEntries();
-        // Update some ui thingy that shows leaderboard
-        // Possibly subscribe some thingy to call AddCurrentRun when player dies
 
 
 
         for (int i = 9; i >= LeaderboardManager.leaderboardEntries.Count; i--)
             leaderboardItems[i].transform.parent.gameObject.SetActive(false);
 
-        for (int i = 0; i < LeaderboardManager.leaderboardEntries.Count; i++)
+        for (int i = 0; i < 10 && i < LeaderboardManager.leaderboardEntries.Count; i++)
             leaderboardItems[i].text = LeaderboardManager.leaderboardEntries[i].ToString();
     }
 

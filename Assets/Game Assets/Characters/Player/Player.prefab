@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298569208637172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4265450863107080}
@@ -634,9 +634,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory:
   - {fileID: 11400000, guid: 0960bbb17081d6940949de794d58b570, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 7e7f87a1b3e80984dbcb95260f8b83cd, type: 2}
+  - {fileID: 11400000, guid: cf2cf1242a9ee284a9d758bb4c557924, type: 2}
+  - {fileID: 11400000, guid: 5486897559176204397722a9ebfb55f0, type: 2}
   bulletLayer: Player Fired
   combatMode: 0
 --- !u!114 &5123112155736431875

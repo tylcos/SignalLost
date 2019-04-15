@@ -12,6 +12,7 @@ TagManager:
   - Pushing
   - UI Parent
   - Master
+  - UITest
   layers:
   - Default
   - TransparentFX

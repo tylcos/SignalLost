@@ -15,7 +15,6 @@ public class MeleeEnemyAnimation : MonoBehaviour
     {
         movementAccessor = this.GetComponent<MovementController>();
         meleeAnimator = movementAccessor.GetComponent<MovementController>().spriteAnimator;
-        Debug.Log(movementAccessor);
     }
 
     // Update is called once per frame

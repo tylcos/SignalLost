@@ -2917,7 +2917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d2bd542d985ca498c043fca40c112c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorsString: '|0||'
+  connectionsString: '|0||'
   bounds:
     m_Center: {x: 0, y: 1, z: 0}
     m_Extent: {x: 6, y: 9, z: 0}

@@ -5904,7 +5904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d2bd542d985ca498c043fca40c112c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectorsString: '|||10,-10'
+  connectionsString: '|||-10,10'
   bounds:
     m_Center: {x: 2.5, y: 2, z: 0}
     m_Extent: {x: 9.5, y: 15, z: 0}

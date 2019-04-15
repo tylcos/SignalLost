@@ -42,13 +42,15 @@ public class EnemyController : MovementController
     public override void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
         base.OnHitDealt(opponent, killedOpponent);
-        print("reached enemy child onhitopponent");
+        //print("reached enemy child onhitopponent");
     }
 
     public override bool OnHitReceived(MovementController opponent, float damageReceived)
     {
         bool targetKilled = base.OnHitReceived(opponent, damageReceived);
-        print("enemy was hit by player and took " + damageReceived + " damage");
+
+        //print("enemy was hit by player and took " + damageReceived + " damage");
+
         return targetKilled;
     }
     #endregion

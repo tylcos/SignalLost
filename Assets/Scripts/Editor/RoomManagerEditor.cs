@@ -27,7 +27,7 @@ class RoomManagerEditor : Editor
         bounds = serializedObject.FindProperty("bounds").boundsValue;
 
         // Necessary because unity cannot serialize an array of lists
-        string[] sides = castedTarget.connectorsString.Split('|');
+        string[] sides = castedTarget.connectionsString.Split('|');
 
         connectors = new List<int>[4];
         for (int i = 0; i < 4; i++)
@@ -108,9 +108,9 @@ class RoomManagerEditor : Editor
         for (int i = 0; i < 4; i++)
             connectorsStrings[i] = string.Join(",", connectors[i]);
 
-        castedTarget.connectorsString = string.Join("|", connectorsStrings);
+        castedTarget.connectionsString = string.Join("|", connectorsStrings);
 
-        castedTarget.UpdateConnectors();
+        castedTarget.UpdateConnections();
         
         SceneView.RepaintAll();
     }

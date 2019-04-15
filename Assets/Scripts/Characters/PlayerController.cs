@@ -4,7 +4,6 @@ using System.Collections;
 
 public class PlayerController : MovementController
 {
-    private DungeonGameManager master;
     private PlayerWeaponController PWC;
     [SerializeField]
     private GameObject reloadFailIndicator = null;
@@ -16,13 +15,18 @@ public class PlayerController : MovementController
         base.Awake();
     }
 
-    protected override void OnEnable()
+    public override void OnEnable()
     {
         base.OnEnable();
-        master = GameObject.FindGameObjectWithTag("Master").GetComponent<DungeonGameManager>();
         PWC = gameObject.GetComponentInChildren<PlayerWeaponController>();
+        PWC.OnEnable();
         PWC.FireError += OnFireError;
         EquippedWeapon.ReloadStateChanged += OnReloadStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        EquippedWeapon.ReloadStateChanged -= OnReloadStateChanged;
     }
 
     private void OnReloadStateChanged(bool reloading)
@@ -87,7 +91,7 @@ public class PlayerController : MovementController
     public override void OnHitDealt(MovementController opponent, bool killedOpponent)
     {
         base.OnHitDealt(opponent, killedOpponent);
-        print("player hit an enemy and killed?:" + killedOpponent);
+        //print("player hit an enemy and killed?:" + killedOpponent);
         if (killedOpponent)
             DungeonGameManager.AddScore(500);
     }
@@ -95,7 +99,7 @@ public class PlayerController : MovementController
     public override bool OnHitReceived(MovementController opponent, float damageReceived)
     {
         bool targetKilled = base.OnHitReceived(opponent, damageReceived);
-        print("player hit by an enemy and took " + damageReceived + " damage");
+        //print("player hit by an enemy and took " + damageReceived + " damage");
         return targetKilled;
     }
 
