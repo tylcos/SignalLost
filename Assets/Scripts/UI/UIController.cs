@@ -203,7 +203,7 @@ public class UIController : MonoBehaviour
 
 
         StartCoroutine(LoadMainMenu(10));
-        LeaderboardManager.AddCurrentRun("RUN");
+        LeaderboardManager.AddCurrentRun("Pla");
 
 
         // TODO: Get user input for name

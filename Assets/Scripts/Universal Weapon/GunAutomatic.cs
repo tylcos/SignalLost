@@ -57,6 +57,6 @@ public class GunAutomatic : Gun
         } while (dad.reloadProgress < 1);
 
         dad.FillMag();
-        Debug.Log("Filled mag");
+        //Debug.Log("Filled mag");
     }
 }

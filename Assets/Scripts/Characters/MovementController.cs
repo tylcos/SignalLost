@@ -100,15 +100,10 @@ public class MovementController : MonoBehaviour
     // Implement later for death animation / loot
     protected virtual void OnDeath()
     {
-        if (gameObject.name == "Player")
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
+        if (gameObject.name != "Player")
             DungeonGameManager.NumberOfEnemies--;
-            Destroy(gameObject);
-        }
+
+        Destroy(gameObject);
     }
 
     protected virtual void OnTakeDamage(float damageReceived)
